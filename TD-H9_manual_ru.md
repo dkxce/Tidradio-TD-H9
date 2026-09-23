@@ -546,7 +546,11 @@
 
 **(8) Фиксированная станция.** При типе Fix Coordinates для расчёта дистанции/пеленга используются заданные координаты.
 
-**(9) Карты/просмотр треков.** Odmaster: https://web.odmaster.net/login. Рекомендуемый картографический сервер APRS: http://aprs.fi/.
+**(9) Карты/просмотр треков.** Odmaster: https://web.odmaster.net/login. 
+Рекомендуемые картографические сервера APRS: 
+  - http://aprs.fi/
+  - http://aprs.co/
+  - https://aprs-map.info/
 
 ---
 
