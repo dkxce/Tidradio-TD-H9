@@ -129,6 +129,9 @@
 | 10K0F1D * | Motorola Widepulse ASTRO, данные симулкаста |
 | 10K0F1D * | Motorola Widepulse ASTRO, канал управления симулкаста |
 | 10K0F1E * | Motorola Widepulse ASTRO, голос симулкаста |
+| **11K0F3D** | **Narrowband FM 12.5 кГц APRS** |
+| **11K0F3E** | **Narrowband FM 12.5 кГц ГОЛОС** |
+| **11K0F3G** | **Narrowband FM 12.5 кГц ГОЛОС + APRS** |
 | 11K2F2D | ЧМ, девиация 2,5 кГц, AFSK в канале 12,5 кГц (пакеты 1,2 кбит/с, FFSK, сирены) |
 | 11K2F3D | ЧМ, девиация 2,5 кГц, DTMF и др. тоновые сигналы (сирены Whelen, Knox-Box®) |
 | 11K2F3E | ЧМ, девиация 2,5 кГц, аналоговый голос, узкополосный 12,5 кГц |
@@ -141,6 +144,9 @@
 | 16K0F1D * | Motorola, транкинговый канал управления 3600 бод |
 | 16K0F2D * | ЧМ, девиация 4 кГц, AFSK (пожарные извещатели 72 МГц) |
 | 16K0F3E * | ЧМ, девиация 4 кГц, аналоговый голос (NPSPAC) |
+| **16K0F3D** | **Wideband FM 25 кГц APRS** |
+| **16K0F3E** | **Wideband FM 25 кГц ГОЛОС** |
+| **16K0F3G** | **Wideband FM 25 кГц ГОЛОС + APRS** |
 | 16K8F1E * | Зашифрованный квантованный голос (Motorola DVP, DES, DES-XL, NPSPAC) |
 | 17K7D7D | Motorola HPD — «Astro 25», HAI, 700/800 МГц, канал 25 кГц |
 | 20K0D1E | TETRA пониж. мощности — PowerTrunk 4/TDMA стац. часть (голос) |
