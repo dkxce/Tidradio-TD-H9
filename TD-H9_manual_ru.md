@@ -492,7 +492,7 @@
 
 ### 7.37 Обновление прошивки
 
-1. Войдите: web.odmaster.net.
+1. Войдите: [web.odmaster.net](https://web.odmaster.net/).
 2. Remote Control Program → Upgrade Firmware.
 3. Следуйте шагам на экране.
 
