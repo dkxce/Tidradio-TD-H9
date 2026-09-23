@@ -548,8 +548,8 @@
 
 **(9) Карты/просмотр треков.** Odmaster: https://web.odmaster.net/login. 
 Рекомендуемые картографические сервера APRS: 
-  - http://aprs.fi/
-  - http://aprs.co/
+  - https://aprs.fi/
+  - https://aprs.to/
   - https://aprs-map.info/
 
 ---
