@@ -60,6 +60,8 @@
     * [7.41 Подробное описание функций APRS](#741-подробное-описание-функций-aprs)
     * [7.42 Удаленное управление репитером APRS](#742-удаленное-управление-репитером-aprs)
     * [7.43 Ретрансляция APRS-пакетов дигипитером](#743-ретрансляция-aprs-пакетов-дигипитером)
+    * [7.44 APRS Worldwide Частоты](#744-aprs-worldwide-частоты)
+    * [7.45 Схожая по функционалу APRS-радиостанция](745-схожая-по-функционалу-aprs-радиостанция)
 * [Приложение A. Поиск и устранение неисправностей](#приложение-a-поиск-и-устранение-неисправностей)
 * [Приложение B. Технические характеристики](#приложение-b-технические-характеристики)
 * [Приложение C. Таблица DCS-кодов](#приложение-c-таблица-dcs-кодов)
@@ -680,7 +682,45 @@ APRS-ретрансляция — это процесс: приём → деко
 
 Благодаря тому, что маяк содержит указанное количество ретрансляций, бесконечной ретрансляции не происходит.
 
+В режиме работе дигипитера радиостанция при приеме APRS-пакета ищет в его PATH имя установленного дигипитера, и если находит, то пересылает далее в эфир этот пакет, декрементируя SSID на единицу, но только в том случае если SSID больше нуля. 
+
 <img src="images/NNNN-Digi-Demo.gif"/>
+
+### 7.44 APRS Worldwide Частоты
+
+| Частота | Описание |
+|---|---|
+| 144.3900 MHz  | North America: United States, Canada, Chili |
+| 144.3900 MHz  | Indonesia, Singapore, Malaysia |
+| 144.3900 MHz  | Thailand (https://www.qsl.net/rast/text/2mbandplan.htm) 
+| 144.3900 MHz  | Mexico, Dominican Republic, Puerto Rico, Trinidad & Tobago, Columbia |
+| 144.8000 MHz  | Europe, UK, Ireland, Iceland, **Россия** |
+| 144.8000 MHz  | South Africa, Azores, Costa Rica, Israel, Lebanon, Senegal |
+| 145.1750 MHz  | Australia, Tasmania |
+| 144.5750 MHz  | New Zealand  |
+| 144.9300 MHz  | Argentina, Uruguay, Paraguay  |
+| 144.6600 MHz  | Japan  |
+| 144.6400 MHz  | China, Hong Kong, Taiwan  |
+| 144.6200 MHz  | South Korea  |
+| 145.5250 MHz  | Thailand (OLD)  |
+| 145.5700 MHz  | Brazil  |
+| 433.8000 MHz  | Europe (Primary)  |
+| 432.5000 MHz  | Europe (Secondary)  |
+| 439.1000 MHz  | Australia  |
+| 430.5125 MHz  | Netherlands  |
+| 432.5750 MHz  | New Zealand  |
+
+> Не используйте вышеперечисленные частоты для передачи голоса!
+
+http://aprs.qrz.ru/freq.php    
+https://www.sigidwiki.com/wiki/Automatic_Packet_Reporting_System_(APRS)    
+https://aprs.fi/   
+
+### 7.45 Схожая по функционалу APRS-радиостанция
+
+**Lanchonlh HG-UV98**:
+* [HG-UV98](https://github.com/dkxce/HG-UV98)
+* [lanchonlh_hg-uv98_ru_manual](https://github.com/dkxce/lanchonlh_hg-uv98_ru_manual)
 
 ---
 
