@@ -609,10 +609,10 @@
 | 1 | APRS Switch | Вкл/выкл APRS. |
 | 2 | Beacon Set | Настройка маяка: |
 | - | .. | **Call Sign** - радиолюбителький позывной (до 6 символов, заглавные латиница+цифры; ▲/▼ выбор символа, confirm — ввод, back — удаление, # — сохранить)| 
-| - | .. | **SSID** (0–15, по умолчанию 11)|
-| - | .. | **SSID Symbol** (/ или \)|
+| - | .. | [**SSID**](http://aprs.ru/index.php/SSID) (0–15, по умолчанию 11)|
+| - | .. | [**SSID Symbol**](https://www.aprs.org/symbols.html) (/ или \\)|
 | - | .. | **Custom Information** - комментарий к APRS-пакету, до 60 англ символов ASCII |
-| - | .. | **Icon Settings**|
+| - | .. | [**Icon Settings**](https://www.aprs.org/symbols.html) согласно [таблице](https://how.aprs.works/aprs-symbols/) (2-ой символ)  |
 | - | .. | **MIC Start** (On/Off)|
 | - | .. | **MIC Type** (MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency)|
 | - | .. | **Route 1**: Используйте кнопки ▲/▼ для выбора символа. Нажмите кнопку подтверждения, чтобы выбрать его. Если вы допустили ошибку, нажмите кнопку возврата для удаления|
