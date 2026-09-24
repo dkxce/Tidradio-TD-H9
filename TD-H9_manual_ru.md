@@ -592,10 +592,40 @@
 | № | Функция | Описание |
 |---|---|---|
 | 1 | APRS Switch | Вкл/выкл APRS. |
-| 2 | Beacon Set | Настройка маяка: Call Sign (до 6 символов, заглавные латиница+цифры; ▲/▼ выбор символа, confirm — ввод, back — удаление, # — сохранить), SSID (0–15, по умолчанию 11), SSID Symbol (/ или \), Custom Information, Icon Settings, MIC Start (On/Off), MIC Type (MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency), Route 1 и Route 1 Count (0–9), Route 2 и Route 2 Count (0–9), Report Voltage (по умолчанию ON), Report Sats (по умолчанию ON), Report Mileage (по умолчанию OFF). |
-| 3 | Beacon Type | PTT Linkage (маяк при каждом нажатии/отпускании PTT; по умолчанию OFF), Timed Beacon (по умолчанию ON), Timing — интервал в секундах, например 0090 = каждые 90 с (ввод цифрами + [#]). |
-| 4 | Relay Set | DIGI Forward CH (A / (B) / AB), DIGI1 Enable (по умолчанию OFF), DIGI1 Name (по умолчанию WIDE1), DIGI2 Enable (по умолчанию OFF), DIGI2 Name (по умолчанию WIDE2), Wait Before Forwarding (0–9), Remote Password (по умолчанию 123456). |
-| 5 | Advanced Set | APRS RX CH (OFF / A / (B)), APRS TX CH (OFF / A / (B)), PTT Priority (Talk / (APRS)), RX Decode Tone (по умолчанию ON), TX Tone (по умолчанию OFF), Beacon Auto Popup (по умолчанию ON). |
+| 2 | Beacon Set | Настройка маяка: |
+| - | .. | **Call Sign** - радиолюбителький позывной (до 6 символов, заглавные латиница+цифры; ▲/▼ выбор символа, confirm — ввод, back — удаление, # — сохранить)| 
+| - | .. | **SSID** (0–15, по умолчанию 11)|
+| - | .. | **SSID Symbol** (/ или \)|
+| - | .. | **Custom Information**|
+| - | .. | **Icon Settings**|
+| - | .. | **MIC Start** (On/Off)|
+| - | .. | **MIC Type** (MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency)|
+| - | .. | **Route 1**: Используйте кнопки ▲/▼ для выбора символа. Нажмите кнопку подтверждения, чтобы выбрать его. Если вы допустили ошибку, нажмите кнопку возврата для удаления|
+| - | .. | **Route 1 Count**: (0–9)|
+| - | .. | **Route 2**: Используйте кнопки ▲/▼ для выбора символа. Нажмите кнопку подтверждения, чтобы выбрать его. Если вы допустили ошибку, нажмите кнопку возврата для удаления|
+| - | .. | **Route 2 Count**: (0–9)|
+| - | .. | **Report Voltage** -отправлять инф-ию о батарее (по умолчанию ON)|
+| - | .. | **Report Sats** -отправлять инф-ию о спутниках (по умолчанию ON)|
+| - | .. | **Report Mileage** -отправлять инф-ию о пробеге (по умолчанию OFF)|
+| 3 | Beacon Type | Настройка передачи маяка: |
+| - | .. | **PTT Linkage** (маяк при каждом нажатии/отпускании PTT; по умолчанию OFF)|
+| - | .. | **Timed Beacon** - отправлять инф-ию с заданной периодичностью (по умолчанию ON)|
+| - | .. | **Timing** — интервал в секундах, например 0090 = каждые 90 с (ввод цифрами + [#]). |
+| 4 | Relay Set | Настройки режима APRS-репитера: |
+| - | .. | **DIGI Forward CH** - на какой канал ретранслировать пакеты (A / (B) / AB)|
+| - | .. | **DIGI1 Enable** (по умолчанию OFF)|
+| - | .. | **DIGI1 Name** (по умолчанию WIDE1)|
+| - | .. | **DIGI2 Enable** (по умолчанию OFF)|
+| - | .. | **DIGI2 Name** (по умолчанию WIDE2)|
+| - | .. | **Wait Before Forwarding** - задержка (0–9)|
+| - | .. | **Remote Password** - пароль удаленного управления (по умолчанию 123456). |
+| 5 | Advanced Set | Расширенные настройки приема/передачи: |
+| - | .. | **APRS RX CH** - на каком канале принимать APRS (OFF / A / (B))|
+| - | .. | **APRS TX CH** - на каком канале передавать APRS (OFF / A / (B))|
+| - | .. | **PTT Priority** - приоритет при одновременной передаче голоса/APRS (Talk / (APRS))|
+| - | .. | **RX Decode Tone** - звуковой сигнал при успешном приеме и декодировании APRS (по умолчанию ON)|
+| - | .. | **TX Tone** - звуковой сигнал при передаче APRS (по умолчанию OFF)|
+| - | .. | **Beacon Auto Popup** (по умолчанию ON). |
 | 6 | Beacon List | Список маяков: до 100 принятых; управление/удаление. |
 | 7 | APRS Reset | Сброс APRS к заводским настройкам. |
 
