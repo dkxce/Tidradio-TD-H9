@@ -573,6 +573,12 @@
 2. Remote Control Program → Upgrade Firmware.
 3. Следуйте шагам на экране.
 
+Либо
+
+1. Откройте [Firmware](Firmware)
+2. Скачайте драйвера и актуальную версию прошивки
+3. Следуйте инструкциям в архиве
+
 ### 7.38 GNSS (GPS)
 
 | № | Функция | Описание |
@@ -757,7 +763,7 @@ https://aprs.fi/
 | Спектроанализатор | Встроенный |
 | CPU / RAM / Flash | 240 МГц / 120 МБ / 16 МБ |
 | Радиочип / МК | Beken BK4819 / PY32F003 |
-| Модуляция FM | 11K0F3E @ 12,5 кГц (Narrow band) / 16K0F3E @ 25 кГц (Wide band) |
+| Модуляция FM | [11K0F3E](emission-types-radionerds-ru.md) @ 12,5 кГц (Narrow band) / [16K0F3E](emission-types-radionerds-ru.md) @ 25 кГц (Wide band) |
 | Мощность соседнего канала | 60 дБ @ 12,5 кГц |
 | Ток передачи | ≤ 1500 мА |
 | Чувствительность приёмника | 0,25 мкВ (12 дБ SINAD) |
