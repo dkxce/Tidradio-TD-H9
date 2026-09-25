@@ -1,0 +1,5 @@
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\bin\TDRadioTool.exe
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\bin\TDRadioTool.dll
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\bin\TDRadioTool.deps.json
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\bin\TDRadioTool.runtimeconfig.json
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\bin\TDRadioTool.pdb

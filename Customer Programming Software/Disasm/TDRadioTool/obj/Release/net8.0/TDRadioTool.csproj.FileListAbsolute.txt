@@ -1,0 +1,14 @@
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\bin\Release\net8.0\TDRadioTool.exe
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\bin\Release\net8.0\TDRadioTool.deps.json
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\bin\Release\net8.0\TDRadioTool.runtimeconfig.json
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\bin\Release\net8.0\TDRadioTool.dll
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\bin\Release\net8.0\TDRadioTool.pdb
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.AssemblyInfoInputs.cache
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.AssemblyInfo.cs
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.csproj.CoreCompileInputs.cache
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.dll
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\refint\TDRadioTool.dll
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.pdb
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\TDRadioTool.genruntimeconfig.cache
+C:\Users\dkxce\Documents\MultiTool\HomeChats\Chat-8\TDRadioTool\obj\Release\net8.0\ref\TDRadioTool.dll
