@@ -4,6 +4,7 @@ Manuals: [Original Manuals](Original%20Manuals)
 Инструкция: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**, [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx), [TD-H9_manual_ru.html](TD-H9_manual_ru.html)    
 Наиболее полное руководство: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**    
 Описание формата .td: [Disasm](Customer%20Programming%20Software/Disasm)    
+Онлайн-редактор каналов: [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)    
 
 <img src="images/TIDRADIO H9 - 001.png"/>     
 <img src="images/TIDRADIO H9 - 002.png"/>     
