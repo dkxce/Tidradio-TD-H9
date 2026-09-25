@@ -1,7 +1,7 @@
 # Tidradio TD-H9 Documentation
 
-Manual: [H9_Ham_Version_User_Manual.pdf](H9_Ham_Version_User_Manual.pdf), [H9_GMRS_Version_User_Manual.pdf](H9_GMRS_Version_User_Manual.pdf)    
-Инструкция: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**, [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx), [H9_Ham_Version_User_Manual_RU_(auto).pdf](H9_Ham_Version_User_Manual_RU_(auto).pdf)        
+Manuals: [Original Manuals](Original%20Manuals)    
+Инструкция: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**, [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx), [TD-H9_manual_ru.html](TD-H9_manual_ru.html)    
 Наиболее полное руководство: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**    
 
 <img src="images/TIDRADIO H9 - 001.png"/>     
