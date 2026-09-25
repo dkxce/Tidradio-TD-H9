@@ -51,7 +51,8 @@
   .dlgcols{overflow:auto;display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin-bottom:12px;padding-right:4px}
   .dlgcols label{color:var(--txt);align-self:center}
   .dlgcols select{background:var(--input);border:1px solid var(--line);color:var(--txt);border-radius:4px;padding:4px 6px;font-size:12px}
-  .dlgbtns{display:flex;gap:8px;justify-content:flex-end}
+  .dlgbtns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+  .dlg .dlgbtns .btn{flex:1 1 auto;min-width:118px;font-size:12px;padding:7px 8px;white-space:normal}
   .foot a{color:var(--acc);text-decoration:none}
   .foot a:hover{text-decoration:underline}
   input[type=text],input[type=number],select{background:var(--input);border:1px solid var(--line);
@@ -124,7 +125,7 @@
 <div id="dlgExp" class="dlgwrap" style="display:none">
   <div class="dlg">
     <h3>Формат экспорта</h3>
-    <p class="msg">CHIRP — совместимый (Duplex/Offset/Tone/DCS). CSP — формат TIDRadio (как в Tidradio_H9(CSP)).
+    <p class="msg">CHIRP/Odmaster — совместимые (Duplex/Offset/Tone/DCS). CSP — формат TIDRadio (как в Tidradio_H9(CSP)).
       «Как есть» — полный родной формат редактора.</p>
     <div id="dlgExpCols"></div>
     <div class="dlgbtns" id="dlgExpBtns"></div>
@@ -451,38 +452,50 @@ function parseTone(t){
   if(m) return {type:"DCS", code:m[1], pol:m[2].toUpperCase()};
   return {type:"CTC", val:t};
 }
+function chirpRow(r){
+  const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
+  let duplex="", offset="";
+  if(rx>0 && tx>0){ const d=tx-rx;
+    if(Math.abs(d)>1e-9){ duplex=d>0?"+":"-"; offset=Math.abs(d).toFixed(6); } }
+  else duplex="off";
+  const prx=parseTone(r.rxtone), ptx=parseTone(r.txtone);
+  let tone="",rt="",ct="",dcs="",pol="",rxdcs="",cross="";
+  if(prx && ptx && prx.type==="CTC" && ptx.type==="CTC" && prx.val===ptx.val){ tone="TSQL"; rt=ct=prx.val; }
+  else if(ptx && ptx.type==="CTC"){ tone="Tone"; ct=ptx.val; }
+  else if(prx && prx.type==="CTC"){ tone="Cross"; rt=prx.val; }
+  else if(prx && ptx && prx.type==="DCS" && ptx.type==="DCS" && prx.code===ptx.code && prx.pol===ptx.pol){
+    tone="DTCS"; dcs=prx.code; pol=(prx.pol==="I"?"RN":"NN"); rxdcs=prx.code; }
+  else if(ptx && ptx.type==="DCS"){ tone="DTCS"; dcs=ptx.code; pol=(ptx.pol==="I"?"RN":"NN"); }
+  else if(prx && prx.type==="DCS"){ tone="DTCS"; dcs=prx.code; pol=(prx.pol==="I"?"RN":"NN"); rxdcs=prx.code; }
+  const skip = r.scan==="No" ? "S" : "";
+  return [r.no,r.name,r.rx,duplex,offset,tone,rt,ct,dcs,pol,rxdcs,cross,r.mode,"5.0",skip,r.power,r.comment].map(csvCell);
+}
 function exportChirp(fname){
   const header=["Location","Name","Frequency","Duplex","Offset","Tone","rToneFreq","cToneFreq",
     "DtcsCode","DtcsPolarity","RxDtcsCode","CrossMode","Mode","TStep","Skip","Power","Comment"];
   const lines=[header.join(",")];
-  for(const r of rows){
-    if(!(r.rx||r.name)) continue;
-    const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
-    let duplex="", offset="";
-    if(rx>0 && tx>0){ const d=tx-rx;
-      if(Math.abs(d)>1e-9){ duplex=d>0?"+":"-"; offset=Math.abs(d).toFixed(6); } }
-    else duplex="off";
-    const prx=parseTone(r.rxtone), ptx=parseTone(r.txtone);
-    let tone="",rt="",ct="",dcs="",pol="",rxdcs="",cross="";
-    if(prx && ptx && prx.type==="CTC" && ptx.type==="CTC" && prx.val===ptx.val){ tone="TSQL"; rt=ct=prx.val; }
-    else if(ptx && ptx.type==="CTC"){ tone="Tone"; ct=ptx.val; }
-    else if(prx && prx.type==="CTC"){ tone="Cross"; rt=prx.val; }
-    else if(prx && ptx && prx.type==="DCS" && ptx.type==="DCS" && prx.code===ptx.code && prx.pol===ptx.pol){
-      tone="DTCS"; dcs=prx.code; pol=(prx.pol==="I"?"RN":"NN"); rxdcs=prx.code; }
-    else if(ptx && ptx.type==="DCS"){ tone="DTCS"; dcs=ptx.code; pol=(ptx.pol==="I"?"RN":"NN"); }
-    else if(prx && prx.type==="DCS"){ tone="DTCS"; dcs=prx.code; pol=(prx.pol==="I"?"RN":"NN"); rxdcs=prx.code; }
-    const skip = r.scan==="No" ? "S" : "";
-    lines.push([r.no,r.name,r.rx,duplex,offset,tone,rt,ct,dcs,pol,rxdcs,cross,r.mode,"5.0",skip,r.power,r.comment].map(csvCell).join(","));
-  }
+  for(const r of rows){ if(!(r.rx||r.name)) continue; lines.push(chirpRow(r).join(",")); }
   const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
   download(blob, (fname||"channels-chirp").replace(/\.csv$/i,"")+".csv");
 }
+/* Формат Odmaster (Web) — заголовок как у Tidradio_H9(WebOdmaster)-*.csv */
+function exportOdmaster(fname){
+  const header=["Location","Name","Frequency","Duplex","Offset","Tone","rToneFreq","cToneFreq",
+    "DtcsCode","DtcsPolarity","RxDtcsCode","CrossMode","Mode","TStep","Skip","Power","Comment",
+    "URCALL","RPT1CALL","RPT2CALL","DVCODE"];
+  const lines=[header.join(",")];
+  for(const r of rows){ if(!(r.rx||r.name)) continue;
+    lines.push(chirpRow(r).concat(["","","",""]).join(",")); }
+  const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  download(blob, (fname||"channels-odmaster").replace(/\.csv$/i,"")+".csv");
+}
 /* Диалог выбора формата экспорта */
-const EXPORT_FORMATS=[["chirp","CHIRP (совместимый)"],["csp","CSP (TIDRadio)"],["raw","Как есть"]];
+const EXPORT_FORMATS=[["chirp","CHIRP (совместимый)"],["odmaster","Odmaster (Web)"],["csp","CSP (TIDRadio)"],["raw","Как есть"]];
 const EXPORT_CFG={
-  chirp:{ def:"channels-chirp", fn:exportChirp },
-  csp:  { def:"channels-cps",   fn:exportCps },
-  raw:  { def:"channels-csv",   fn:exportNative },
+  chirp:   { def:"channels-chirp",   fn:exportChirp },
+  odmaster:{ def:"channels-odmaster",fn:exportOdmaster },
+  csp:     { def:"channels-cps",     fn:exportCps },
+  raw:     { def:"channels-csv",     fn:exportNative },
 };
 function openExportDialog(){
   const cols=document.getElementById("dlgExpCols"); cols.innerHTML="";
