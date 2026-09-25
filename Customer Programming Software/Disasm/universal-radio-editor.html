@@ -44,6 +44,11 @@
   .legend{background:var(--panel);border-top:1px solid var(--line);padding:6px 14px;
        display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--mut);align-items:center}
   .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+  tr.selected{outline:2px solid var(--acc);outline-offset:-2px}
+  .ant{background:var(--panel);border-top:1px solid var(--line);padding:6px 14px;font-size:13px;color:var(--txt)}
+  .ant b{color:var(--acc)}
+  tr.dragging{opacity:.45}
+  tr.drop-target{border-top:3px solid var(--acc)}
   .dlgwrap{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:50}
   .dlg{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;max-width:520px;width:94%;max-height:85vh;display:flex;flex-direction:column}
   .dlg h3{margin:0 0 6px;font-size:14px}
@@ -66,7 +71,7 @@
 <body>
 
 <header>
-  <h1>Универсальный редактор каналов <span class="msg">(CSV)</span></h1>
+  <h1>Универсальный редактор каналов <span class="msg">(CSV)</span> <span class="msg" style="font-size:11px">версия 1.1</span></h1>
   <label class="msg" style="font-size:12px">Рация
     <select id="preset" style="background:var(--input);border:1px solid var(--line);color:var(--txt);padding:5px 8px;border-radius:5px"></select>
   </label>
@@ -87,6 +92,12 @@
 </div>
 
 <div class="bar">
+  <label class="msg">Режим
+    <select id="mode" style="background:var(--input);border:1px solid var(--line);color:var(--txt);padding:5px 8px;border-radius:5px;font-size:12px">
+      <option value="edit">Редактирование</option>
+      <option value="sort">Сортировка</option>
+    </select>
+  </label>
   <input type="search" id="search" placeholder="поиск по имени / номеру / частоте">
   <button class="btn ghost" id="btnScanInv">Инв. Scan</button>
   <button class="btn ghost" id="btnPmr">PMR</button>
@@ -108,6 +119,8 @@
   <span><i class="sw" style="background:rgba(47,179,128,.4)"></i>Scan=Yes</span>
   <span><i class="sw" style="background:rgba(224,83,61,.5)"></i>Scan=No</span>
 </div>
+
+<div class="ant" id="ant">Выберите канал для расчёта антенны</div>
 
 <div id="dlg" class="dlgwrap" style="display:none">
   <div class="dlg">
@@ -171,13 +184,8 @@ const PRESETS = [
   { id:"tdh8",   name:"TIDRADIO TD-H8",         ch:200, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
   { id:"tdh9",   name:"TIDRADIO TD-H9",         ch:199, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog,DMR", frq:"433.075000" },
   { id:"tdh3",   name:"TIDRADIO TD-H3",         ch:200, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
-  { id:"gd77",   name:"Radioddity GD-77/DM-1701",ch:4000, nl:16, md:"FM,NFM,DMR",     pw:"Low,High",     cm:"Analog,DMR", frq:"433.000000" },
-  { id:"md380",  name:"Tytera MD-380/390",      ch:1024,nl:16, md:"FM,DMR",           pw:"Low,High",     cm:"DMR",    frq:"433.000000" },
-  { id:"d878",   name:"AnyTone AT-D878UV",      ch:4000,nl:16, md:"FM,NFM,DMR",       pw:"Low,Mid,High", cm:"Analog,DMR", frq:"433.000000" },
-  { id:"id52",   name:"Icom ID-52A",            ch:1852,nl:16, md:"FM,NFM,AM,DV",    pw:"Low,Mid,High", cm:"Analog,DStar", frq:"145.000000" },
   { id:"ft60",   name:"Yaesu FT-60R",           ch:200, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
   { id:"ft70d",  name:"Yaesu FT-70DR",          ch:135, nl:8,  md:"FM,NFM,C4FM",      pw:"Low,Mid,High", cm:"Analog,Fusion", frq:"145.000000" },
-  { id:"thd74",  name:"Kenwood TH-D74/D75",     ch:1200,nl:8,  md:"FM,NFM,AM,USB,LSB",pw:"Low,Mid,High", cm:"Analog,DStar", frq:"145.000000" },
   { id:"thf6a",  name:"Kenwood TH-F6A",         ch:900, nl:8,  md:"FM,NFM,AM,USB,LSB",pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
   { id:"rb27",   name:"Retevis RB27",           ch:32,  nl:8,  md:"FM",               pw:"Low,High",     cm:"Analog", frq:"433.000000" },
   { id:"any778", name:"Anytone AT-778UV (mobile)", ch:200, nl:8, md:"FM,NFM", pw:"Low,High", cm:"Analog", frq:"145.000000" },
@@ -189,6 +197,8 @@ let S = { count:128, nameLen:8, defFreq:"433.000000",
           mods:["FM","NFM","AM","USB","LSB","WBFM","SSB"],
           powers:["Low","Mid","High"], chmodes:["Analog","DMR"] };
 let rows = [];
+let MODE = "edit";   // "edit" | "sort"
+let dragFrom = null;
 
 function splitList(s){ return (s||"").split(",").map(x=>x.trim()).filter(Boolean); }
 const MOD_PRESETS=["FM","FM,AM","FM,WFM,NFM","FM,NFM","FM,NFM,AM",
@@ -265,6 +275,40 @@ function renderNoCell(td, no, fl){
   if(cnt>0) td.appendChild(document.createTextNode(" "));
   td.appendChild(document.createTextNode(String(no)));
 }
+/* Расчёт антенны по длине волны (скорость света ≈ 299 792 458 м/с) */
+function antennaInfo(mhz){
+  if(!(mhz>0)) return null;
+  const lam = 299.792458/mhz;
+  return { lam, half:lam/2, q:lam/4 };
+}
+function updateAntenna(){
+  const el=document.getElementById("ant"); if(!el) return;
+  const sel=document.querySelector("tr.selected");
+  if(!sel){ el.textContent="Выберите канал для расчёта антенны"; return; }
+  const no=+sel.dataset.no, r=rows[no-1];
+  const a=antennaInfo(parseFloat(r&&r.rx));
+  if(!a){ el.textContent="Канал "+no+": введите RX-частоту"; return; }
+  el.innerHTML="Канал <b>"+no+"</b> · f="+r.rx+" МГц · λ="+a.lam.toFixed(3)+" м · "+
+    "штырь 1/2λ = <b>"+a.half.toFixed(3)+" м</b> ("+(a.half*100).toFixed(0)+" см) · "+
+    "1/4λ = <b>"+a.q.toFixed(3)+" м</b> ("+(a.q*100).toFixed(0)+" см)";
+}
+function selectRow(no){
+  document.querySelectorAll("tr.row").forEach(t=>t.classList.toggle("selected", +t.dataset.no===no));
+  updateAntenna();
+}
+/* Перестановка каналов: извлечь из позиции from и вставить на to, перенумеровать.
+   to — индекс строки-цели (вставка перед ней). После удаления элемента с индексом from
+   все индексы > from смещаются влево на 1, поэтому при движении вниз корректируем to. */
+function moveRow(from, to){
+  if(from==null || to==null || from<0 || to<0){ renderBody(); return; }
+  if(from===to){ renderBody(); return; }
+  if(from < to) to--;                          // движение вниз: удалённый элемент сдвигает цель влево
+  const moved = rows.splice(from,1)[0];
+  rows.splice(to,0,moved);
+  rows.forEach((r,i)=>{ r.no=i+1; });
+  renderBody();
+  selectRow(rows.indexOf(moved)+1);
+}
 function shiftOf(r){
   const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
   if(!(rx>0)) return "";
@@ -340,17 +384,27 @@ function applyRowVisual(tr, r){
   const it=cs[3].querySelector("span"); if(it){ it.textContent=bi.label||""; it.style.color=bi.color||""; }
   const rxi=cs[2].querySelector("input"); if(rxi) rxi.style.color=bi.color||"";
   recomputeShift(r.no);
+  if(tr.classList && tr.classList.contains("selected")) updateAntenna();
 }
-function renderRow(r){
+function renderRow(r, idx){
   const fl=rowFlags(r);
   const tr=document.createElement("tr"); tr.className="row "+((r.scan==="No")?"scan-no":"scan-yes");
   tr.dataset.no=r.no;
+  tr.addEventListener("click",()=>selectRow(r.no));
+  if(MODE==="sort"){
+    tr.draggable=true;
+    tr.addEventListener("dragstart",e=>{ dragFrom=idx; tr.classList.add("dragging"); e.dataTransfer.effectAllowed="move"; try{ e.dataTransfer.setData("text/plain","1"); }catch(_){ } });
+    tr.addEventListener("dragover",e=>{ e.preventDefault(); e.dataTransfer.dropEffect="move"; tr.classList.add("drop-target"); });
+    tr.addEventListener("dragleave",()=>tr.classList.remove("drop-target"));
+    tr.addEventListener("drop",e=>{ e.preventDefault(); tr.classList.remove("drop-target"); moveRow(dragFrom, idx); });
+    tr.addEventListener("dragend",()=>{ tr.classList.remove("dragging","drop-target"); dragFrom=null; });
+  }
   const border = fl.dcs?"var(--dcs)" : fl.ctcss?"var(--ctcss)" : fl.shift?"var(--shift)" : fl.nonFM?"var(--mod)" : "";
   if(border) tr.style.borderLeft="4px solid "+border;
+  let el;
   for(const c of columns()){
     const td=document.createElement("td");
     if(c.type==="lbl"){ renderNoCell(td, r.no, fl); tr.appendChild(td); continue; }
-    let el;
     if(c.type==="sel"){ const optsArr = typeof c.opts==="function" ? c.opts() : c.opts;
         el=elSel(optsArr,()=>{ rows[r.no-1][c.key]=el.value; applyRowVisual(tr, rows[r.no-1]); }); el.value=r[c.key]; }
     else if(c.type==="cb"){ el=document.createElement("input"); el.type="checkbox"; td.className="cb";
@@ -386,6 +440,7 @@ function renderRow(r){
           rr[c.key]= c.key==="name" ? el.value.slice(0,S.nameLen) : el.value;
           if(c.key==="rx"||c.key==="tx") applyRowVisual(tr, rr); }); }
     td.appendChild(el); tr.appendChild(td);
+    if(MODE==="sort" && /^(INPUT|SELECT)$/.test(el.tagName)) el.disabled=true;
   }
   return tr;
 }
@@ -395,9 +450,10 @@ function renderBody(){
   let k=0;
   for(const r of rows){
     if(q && !((r.name||"").toLowerCase().includes(q)||(r.rx||"").includes(q)||(r.tx||"").includes(q)||(r.no+"").includes(q))) continue;
-    tb.appendChild(renderRow(r)); k++;
+    tb.appendChild(renderRow(r,k)); k++;
   }
   document.getElementById("count").textContent="Строк: "+rows.length+" / показано: "+k;
+  updateAntenna();
 }
 /* Применяет изменение настроек к существующей таблице: подстраивает число строк
    и усекает имена до новой длины, не теряя остальные данные. */
@@ -713,6 +769,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.getElementById(id).addEventListener("change",()=>{ readCfg(); renderBody(); });
   });
   document.getElementById("search").addEventListener("input",renderBody);
+  document.getElementById("mode").addEventListener("change",e=>{ MODE=e.target.value; renderBody(); status(MODE==="sort"?"Режим сортировки: перетащите канал на новое место":"Режим редактирования",false); });
   document.getElementById("btnScanInv").addEventListener("click",()=>{
     for(const r of rows) r.scan = (r.scan==="No") ? "Yes" : "No";
     renderBody();
