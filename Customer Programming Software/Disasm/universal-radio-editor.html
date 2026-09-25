@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Универсальный редактор каналов (CSV)</title>
+<style>
+  :root{ --bg:#0f1720; --panel:#17222e; --line:#2a3a4a; --txt:#dce7f1; --mut:#8aa0b5;
+         --acc:#3da9fc; --bad:#e0533d; --input:#1d2b3a; --ok:#2fb380;
+         --shift:#3da9fc; --ctcss:#2fb380; --dcs:#ff9d2e; --mod:#f0c040; }
+  *{box-sizing:border-box}
+  body{margin:0;font:13px/1.4 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+  header{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);
+         padding:10px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;z-index:5}
+  header h1{font-size:15px;margin:0;margin-right:auto}
+  .btn{background:var(--acc);color:#04121f;border:0;border-radius:6px;padding:7px 12px;
+       font-weight:600;cursor:pointer;white-space:nowrap}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .cfg{background:var(--panel);border-bottom:1px solid var(--line);padding:8px 14px;
+       display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;font-size:12px}
+  .cfg label{display:flex;flex-direction:column;gap:3px;color:var(--mut)}
+  .cfg input,.cfg select{background:var(--input);border:1px solid var(--line);color:var(--txt);
+       border-radius:5px;padding:5px 8px}
+  .cfg input.small{width:80px}
+  .cfg input.wide{width:170px}
+  .bar{background:var(--panel);border-bottom:1px solid var(--line);padding:6px 14px;
+       display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:12px}
+  .bar input[type=search]{background:var(--input);border:1px solid var(--line);color:var(--txt);
+       border-radius:5px;padding:5px 8px;min-width:200px}
+  .msg{color:var(--mut)}
+  #status{color:var(--mut);font-size:12px;width:100%;min-height:14px;margin-top:2px}
+  .wrap{overflow:auto;max-height:calc(100vh - 250px)}
+  table{border-collapse:collapse;min-width:1300px;width:100%}
+  th,td{border-bottom:1px solid var(--line);padding:2px 5px;white-space:nowrap}
+  th{position:sticky;top:0;background:var(--panel);text-align:left;font-size:10px;
+     color:var(--mut);text-transform:uppercase;letter-spacing:.03em;z-index:2}
+  td.no{color:var(--mut);text-align:right;padding-right:8px}
+  tr.row:hover{background:#1c2b3c}
+  tr.scan-yes{background:rgba(47,179,128,.10)}
+  tr.scan-no{background:rgba(224,83,61,.16)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-left:3px;vertical-align:middle}
+  .dot.shift{background:var(--shift)} .dot.ct{background:var(--ctcss)}
+  .dot.dc{background:var(--dcs)} .dot.mod{background:var(--mod)}
+  .legend{background:var(--panel);border-top:1px solid var(--line);padding:6px 14px;
+       display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--mut);align-items:center}
+  .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+  .dlgwrap{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:50}
+  .dlg{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;max-width:520px;width:94%;max-height:85vh;display:flex;flex-direction:column}
+  .dlg h3{margin:0 0 6px;font-size:14px}
+  .dlg p{margin:0 0 10px}
+  .dlgcols{overflow:auto;display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin-bottom:12px;padding-right:4px}
+  .dlgcols label{color:var(--txt);align-self:center}
+  .dlgcols select{background:var(--input);border:1px solid var(--line);color:var(--txt);border-radius:4px;padding:4px 6px;font-size:12px}
+  .dlgbtns{display:flex;gap:8px;justify-content:flex-end}
+  .foot a{color:var(--acc);text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+  input[type=text],input[type=number],select{background:var(--input);border:1px solid var(--line);
+       color:var(--txt);border-radius:4px;padding:3px 5px;width:100%;min-width:60px;font-size:12px}
+  td.cb{text-align:center}
+  input[type=checkbox]{width:15px;height:15px;accent-color:var(--acc);cursor:pointer}
+  td.shift{color:var(--ok)}
+  .foot{padding:8px 14px;color:var(--mut);font-size:12px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Универсальный редактор каналов <span class="msg">(CSV)</span></h1>
+  <label class="msg" style="font-size:12px">Рация
+    <select id="preset" style="background:var(--input);border:1px solid var(--line);color:var(--txt);padding:5px 8px;border-radius:5px"></select>
+  </label>
+  <button class="btn" id="btnNew">Новая таблица</button>
+  <span class="fill"><button class="btn ghost" id="btnImport">Импорт CSV</button>
+    <input type="file" id="fileCsv" accept=".csv,text/csv" style="display:none"></span>
+  <button class="btn ghost" id="btnExport">Экспорт CSV</button>
+</header>
+
+<div class="cfg">
+  <label>Каналов (8..65536)<input type="number" id="cfgCount" class="small" value="128" min="8" max="65536"></label>
+  <label>Символов в имени (3..256)<input type="number" id="cfgName" class="small" value="8" min="3" max="256"></label>
+  <label>Частота по умолч., МГц<input type="text" id="cfgDefaultFreq" class="small" value="433.000000"></label>
+  <label>Мощность по умолч.<input type="text" id="cfgDefaultPower" class="small" value="Mid"></label>
+  <label>Модуляции<select id="cfgMods" class="wide"></select></label>
+  <label>Мощности<input type="text" id="cfgPower" class="small" value="Low,Mid,High"></label>
+  <label>Режимы канала<input type="text" id="cfgChMode" class="small" value="Analog,DMR"></label>
+</div>
+
+<div class="bar">
+  <input type="search" id="search" placeholder="поиск по имени / номеру / частоте">
+  <button class="btn ghost" id="btnScanInv">Инв. Scan</button>
+  <button class="btn ghost" id="btnPmr">PMR</button>
+  <button class="btn ghost" id="btnLpd">LPD</button>
+  <button class="btn ghost" id="btnMix">LPD+PMR</button>
+  <span class="msg" id="count"></span>
+  <span id="status"></span>
+</div>
+
+<datalist id="toneDataList"></datalist>
+
+<div class="wrap"><table id="tbl"><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+
+<div class="legend">
+  <span><i class="sw" style="background:var(--shift)"></i>сдвиг TX≠RX</span>
+  <span><i class="sw" style="background:var(--ctcss)"></i>CTCSS</span>
+  <span><i class="sw" style="background:var(--dcs)"></i>DCS</span>
+  <span><i class="sw" style="background:var(--mod)"></i>модул. без FM</span>
+  <span><i class="sw" style="background:rgba(47,179,128,.4)"></i>Scan=Yes</span>
+  <span><i class="sw" style="background:rgba(224,83,61,.5)"></i>Scan=No</span>
+</div>
+
+<div id="dlg" class="dlgwrap" style="display:none">
+  <div class="dlg">
+    <h3>Сопоставление колонок CSV</h3>
+    <p class="msg">Выберите столбец для каждого поля (или «(пропустить)»). Для сдвига: если TX не задан
+      напрямую, укажите Duplex + Offset или Shift.</p>
+    <div class="dlgcols" id="dlgCols"></div>
+    <div class="dlgbtns">
+      <button class="btn" id="dlgOk">Импортировать</button>
+      <button class="btn ghost" id="dlgCancel">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  Автор: <a href="https://github.com/dkxce/Tidradio-TD-H9" target="_blank" rel="noopener">dkxce</a>
+</div>
+
+<script>
+'use strict';
+/* ============================ Тоно-таблицы ============================ */
+const CTCSS = [67.0,69.3,71.9,74.4,77.0,79.7,82.5,85.4,88.5,91.5,94.8,97.4,100.0,103.5,
+  107.2,110.9,114.8,118.8,123.0,127.3,131.8,136.5,141.3,146.2,151.4,156.7,159.8,162.2,
+  165.5,167.9,171.3,173.8,177.3,179.9,183.5,186.2,189.9,192.8,196.6,199.5,203.5,206.5,
+  210.7,218.1,225.7,229.1,233.6,241.8,250.3,254.1];
+const DCS = ["023","025","026","031","032","036","043","047","050","051","053","054","065",
+  "071","072","073","074","114","115","116","122","125","131","132","134","143","152","155",
+  "156","162","165","172","174","205","212","223","225","226","243","244","245","246","251",
+  "252","255","261","263","265","266","271","274","306","311","315","325","331","332","343",
+  "346","351","356","364","365","371","411","412","413","423","431","432","445","446","452",
+  "454","455","462","464","465","466","503","506","516","532","534","546","565","606","612",
+  "624","627","631","632","654","662","664","703","712","723","731","732","734","743","754"];
+function buildToneList(){
+  const tones=["OFF"];
+  for(const t of CTCSS) tones.push(t.toFixed(1));
+  for(const d of DCS){ tones.push("D"+d+"N"); tones.push("D"+d+"I"); }
+  return tones;
+}
+const TONE_LIST = buildToneList();
+
+/* ============================ Пресеты раций ============================ */
+const PRESETS = [
+  { id:"uv5r",   name:"Baofeng UV-5R",          ch:128, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"888s",   name:"Baofeng BF-888S",        ch:16,  nl:8,  md:"FM",               pw:"Low,High",     cm:"Analog", frq:"433.000000" },
+  { id:"uv82",   name:"Baofeng UV-82",          ch:128, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"uv9r",   name:"Baofeng UV-9R pro",      ch:128, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"uv17",   name:"Baofeng UV-17",          ch:128, nl:8,  md:"FM,NFM",           pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"uvk5",   name:"Quansheng UV-K5/K6",     ch:200, nl:8,  md:"FM,NFM,AM,USB,LSB",pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"gv2",    name:"BTECH GMRS-V2",          ch:256, nl:8,  md:"FM,NFM",           pw:"Low,Mid,High", cm:"Analog", frq:"462.562500" },
+  { id:"kg901",  name:"Wouxun KG-UV9D/UV9P",    ch:999, nl:8,  md:"FM,NFM",           pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"tdh8",   name:"TIDRADIO TD-H8",         ch:200, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"tdh9",   name:"TIDRADIO TD-H9",         ch:199, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog,DMR", frq:"433.075000" },
+  { id:"tdh3",   name:"TIDRADIO TD-H3",         ch:200, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"gd77",   name:"Radioddity GD-77/DM-1701",ch:4000, nl:16, md:"FM,NFM,DMR",     pw:"Low,High",     cm:"Analog,DMR", frq:"433.000000" },
+  { id:"md380",  name:"Tytera MD-380/390",      ch:1024,nl:16, md:"FM,DMR",           pw:"Low,High",     cm:"DMR",    frq:"433.000000" },
+  { id:"d878",   name:"AnyTone AT-D878UV",      ch:4000,nl:16, md:"FM,NFM,DMR",       pw:"Low,Mid,High", cm:"Analog,DMR", frq:"433.000000" },
+  { id:"id52",   name:"Icom ID-52A",            ch:1852,nl:16, md:"FM,NFM,AM,DV",    pw:"Low,Mid,High", cm:"Analog,DStar", frq:"145.000000" },
+  { id:"ft60",   name:"Yaesu FT-60R",           ch:200, nl:8,  md:"FM,NFM,AM",        pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"ft70d",  name:"Yaesu FT-70DR",          ch:135, nl:8,  md:"FM,NFM,C4FM",      pw:"Low,Mid,High", cm:"Analog,Fusion", frq:"145.000000" },
+  { id:"thd74",  name:"Kenwood TH-D74/D75",     ch:1200,nl:8,  md:"FM,NFM,AM,USB,LSB",pw:"Low,Mid,High", cm:"Analog,DStar", frq:"145.000000" },
+  { id:"thf6a",  name:"Kenwood TH-F6A",         ch:900, nl:8,  md:"FM,NFM,AM,USB,LSB",pw:"Low,Mid,High", cm:"Analog", frq:"145.000000" },
+  { id:"rb27",   name:"Retevis RB27",           ch:32,  nl:8,  md:"FM",               pw:"Low,High",     cm:"Analog", frq:"433.000000" },
+  { id:"any778", name:"Anytone AT-778UV (mobile)", ch:200, nl:8, md:"FM,NFM", pw:"Low,High", cm:"Analog", frq:"145.000000" },
+  { id:"custom", name:"— Произвольная —",       ch:32,  nl:8,  md:"FM,NFM,AM,USB,LSB,WBFM,SSB", pw:"Low,Mid,High", cm:"Analog,DMR", frq:"433.000000" },
+];
+
+/* ============================ Состояние/настройки ============================ */
+let S = { count:128, nameLen:8, defFreq:"433.000000",
+          mods:["FM","NFM","AM","USB","LSB","WBFM","SSB"],
+          powers:["Low","Mid","High"], chmodes:["Analog","DMR"] };
+let rows = [];
+
+function splitList(s){ return (s||"").split(",").map(x=>x.trim()).filter(Boolean); }
+const MOD_PRESETS=["FM","FM,AM","FM,WFM,NFM","FM,NFM","FM,NFM,AM",
+  "FM,NFM,AM,USB,LSB","FM,NFM,AM,USB,LSB,WBFM,SSB","FM,NFM,AM,DV","FM,NFM,C4FM",
+  "FM,DMR","FM,NFM,DMR","FM,WBFM"];
+function readCfg(){
+  S.count   = Math.min(65536, Math.max(8, parseInt(document.getElementById("cfgCount").value)||8));
+  S.nameLen = Math.min(256, Math.max(3, parseInt(document.getElementById("cfgName").value)||8));
+  S.defFreq = (document.getElementById("cfgDefaultFreq").value||"").trim() || "433.000000";
+  S.mods    = splitList(document.getElementById("cfgMods").value)   || ["FM"];
+  S.powers  = splitList(document.getElementById("cfgPower").value) || ["Low","High"];
+  S.chmodes = splitList(document.getElementById("cfgChMode").value)|| ["Analog"];
+  const dp = (document.getElementById("cfgDefaultPower").value||"").trim();
+  S.defPower = dp && S.powers.indexOf(dp)>=0 ? dp : (S.powers[0]||"Low");
+}
+
+/* ============================ Модель строки ============================ */
+function newRow(no, defFreq){
+  return { no,
+    name:"",
+    rx: defFreq, tx: defFreq,             // независимо; сдвиг вычисляется
+    band:"Wide",                          // Wide/Narrow
+    rxtone:"OFF", txtone:"OFF",           // строго из списка
+    mode:S.mods[0]||"FM", chMode:S.chmodes[0]||"Analog",
+    power:S.defPower||"Low", compander:false, scrambler:"0",
+    scan:"Yes", comment:"" };             // сканировать по умолчанию
+}
+function fmtFreq(v){ return v>0 ? v.toFixed(6) : ""; }
+/* Диапазон по классификации МСЭ (ITU), входящий в частоту МГц */
+function ituBand(mhz){
+  if(!(mhz>0)) return {label:"", color:""};
+  if(mhz<0.03) return {label:"VLF", color:"#6b7f93"};
+  if(mhz<0.3)  return {label:"LF",  color:"#86a0b6"};
+  if(mhz<3)    return {label:"MF",  color:"#9bb386"};
+  if(mhz<30)   return {label:"HF",  color:"#d9b64d"};
+  if(mhz<300)  return {label:"VHF", color:"#3da9fc"};
+  if(mhz<3000) return {label:"UHF", color:"#a86cf5"};
+  if(mhz<30000)return {label:"SHF", color:"#ff6d5a"};
+  return {label:"EHF", color:"#ff9d2e"};
+}
+/* Любительские (HAM) диапазоны */
+function hamBand(mhz){
+  const b=[[1.8,2.0,"160m"],[3.5,4.0,"80m"],[5.28,5.41,"60m"],[7.0,7.3,"40m"],
+    [10.1,10.15,"30m"],[14.0,14.35,"20m"],[18.068,18.168,"17m"],[21.0,21.45,"15m"],
+    [24.89,24.99,"12m"],[28.0,29.7,"10m"],[50.0,54.0,"6m"],[144.0,148.0,"2m"],
+    [222.0,225.0,"1.25m"],[420.0,450.0,"70cm"],[902.0,928.0,"33cm"],[1240.0,1300.0,"23cm"],
+    [2300.0,2450.0,"13cm"]];
+  for(const x of b) if(mhz>=x[0] && mhz<x[1]) return x[2];
+  return "";
+}
+/* Спец-служебные диапазоны */
+function specialBand(mhz){
+  if(mhz>=26.9 && mhz<27.5)   return {label:"CB",   color:"#e0a338"};
+  if(mhz>=108 && mhz<137)     return {label:"Air",  color:"#7ae0ff"};
+  if(mhz>=300 && mhz<340)     return {label:"River",color:"#4fb3d1"};
+  if(mhz>=156 && mhz<162)     return {label:"Sea",  color:"#2fc7b2"};
+  if(mhz>=433.075 && mhz<434.775) return {label:"LPD", color:"#c77ad7"};
+  if(mhz>=446.0 && mhz<446.2) return {label:"PMR",  color:"#ff7ac1"};
+  return {label:"", color:""};
+}
+/* Итоговая метка: МСЭ + спец-диапазон (приоритетнее HAM) или HAM. */
+function bandInfo(mhz){
+  const itu=ituBand(mhz), ham=hamBand(mhz), sp=specialBand(mhz);
+  if(sp.label) return { label: (itu.label? itu.label+"·"+sp.label : sp.label), color: sp.color, ham:ham, special:sp.label };
+  if(ham)      return { label:(itu.label? itu.label+"·"+ham : ham), color:"#6dff8f", ham, special:"" };
+  return { label:itu.label, color:itu.color, ham:"", special:"" };
+}
+function renderNoCell(td, no, fl){
+  td.className="no";
+  while(td.firstChild) td.removeChild(td.firstChild);
+  let cnt=0;
+  const add=cls=>{ const s=document.createElement("span"); s.className="dot "+cls; td.appendChild(s); cnt++; };
+  if(fl.shift) add("shift"); if(fl.ctcss) add("ct"); if(fl.dcs) add("dc"); if(fl.nonFM) add("mod");
+  if(cnt>0) td.appendChild(document.createTextNode(" "));
+  td.appendChild(document.createTextNode(String(no)));
+}
+function shiftOf(r){
+  const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
+  if(!(rx>0)) return "";
+  const d = (tx>0? tx-rx : 0);
+  if(Math.abs(d)<1e-9) return "0";
+  return (d>0?"+":"")+d.toFixed(6);
+}
+
+/* ============================ Таблица ============================ */
+const BAND = ["Wide","Narrow"];
+const SCAN = ["Yes","No"];
+function columns(){
+  return [
+    {key:"no",    label:"№",        type:"lbl"},
+    {key:"name",  label:"Имя",      type:"text"},
+    {key:"rx",    label:"RX, МГц",  type:"text"},
+    {key:"itu",   label:"МСЭ",      type:"band"},
+    {key:"tx",    label:"TX, МГц",  type:"text"},
+    {key:"shift", label:"Сдвиг, МГц",type:"shift"},
+    {key:"band",  label:"Полоса",   type:"sel", opts:()=>BAND},
+    {key:"rxtone",label:"RX Тон",   type:"tone"},
+    {key:"txtone",label:"TX Тон",   type:"tone"},
+    {key:"mode",  label:"Модул.",   type:"sel", opts:()=>S.mods},
+    {key:"chMode",label:"Режим",    type:"sel", opts:()=>S.chmodes},
+    {key:"power", label:"Мощн.",    type:"sel", opts:()=>S.powers},
+    {key:"compander",label:"Comp",  type:"cb"},
+    {key:"scrambler",label:"Скр.",  type:"num"},
+    {key:"scan",  label:"Scan",     type:"sel", opts:()=>SCAN},
+    {key:"comment",label:"Комментарий",type:"text"},
+  ];
+}
+function buildRows(count, fresh, withDefault){
+  const def = withDefault===false ? "" : S.defFreq;
+  const old = fresh ? null : new Map(rows.map(r=>[r.no, r]));
+  rows=[];
+  for(let no=1;no<=count;no++) rows.push(old && old.has(no) ? old.get(no) : newRow(no, def));
+}
+function renderHead(){
+  const t0=document.getElementById("thead"); t0.innerHTML="";
+  const tr=document.createElement("tr");
+  for(const c of columns()){ const th=document.createElement("th"); th.textContent=c.label; tr.appendChild(th); }
+  t0.appendChild(tr);
+}
+function elSel(opts, cb){
+  const el=document.createElement("select");
+  for(const o of opts){ const op=document.createElement("option"); op.value=o; op.textContent=o||"\u00A0"; el.appendChild(op); }
+  el.addEventListener("change",cb);
+  return el;
+}
+function recomputeShift(no){
+  const tr=document.querySelector('tr[data-no="'+no+'"]'); if(!tr) return;
+  const cs=tr.querySelectorAll("td"); if(cs.length<6) return;
+  const inp=cs[5].querySelector("input"); if(inp) inp.value=shiftOf(rows[no-1]);
+}
+function rowFlags(r){
+  const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
+  const hasShift = rx>0 && tx>0 && Math.abs(tx-rx)>1e-9;
+  const ct = t=>!!t && t!=="OFF" && !/^D/i.test(t);
+  const dc = t=>!!t && /^D/i.test(t);
+  return { shift:hasShift, ctcss:ct(r.rxtone)||ct(r.txtone),
+           dcs:dc(r.rxtone)||dc(r.txtone),
+           nonFM: !(r.mode||"").toUpperCase().includes("FM") };
+}
+/* Перерисовывает подсветку строки без её полной перестройки (панели/точки/диапазон/сдвиг). */
+function applyRowVisual(tr, r){
+  const fl=rowFlags(r);
+  tr.className="row "+(r.scan==="No"?"scan-no":"scan-yes");
+  const border = fl.dcs?"var(--dcs)" : fl.ctcss?"var(--ctcss)" : fl.shift?"var(--shift)" : fl.nonFM?"var(--mod)" : "";
+  tr.style.borderLeft = border ? "4px solid "+border : "";
+  const cs=tr.querySelectorAll("td"); if(cs.length<9) return;
+  renderNoCell(cs[0], r.no, fl);
+  const bi=bandInfo(parseFloat(r.rx));
+  const it=cs[3].querySelector("span"); if(it){ it.textContent=bi.label||""; it.style.color=bi.color||""; }
+  const rxi=cs[2].querySelector("input"); if(rxi) rxi.style.color=bi.color||"";
+  recomputeShift(r.no);
+}
+function renderRow(r){
+  const fl=rowFlags(r);
+  const tr=document.createElement("tr"); tr.className="row "+((r.scan==="No")?"scan-no":"scan-yes");
+  tr.dataset.no=r.no;
+  const border = fl.dcs?"var(--dcs)" : fl.ctcss?"var(--ctcss)" : fl.shift?"var(--shift)" : fl.nonFM?"var(--mod)" : "";
+  if(border) tr.style.borderLeft="4px solid "+border;
+  for(const c of columns()){
+    const td=document.createElement("td");
+    if(c.type==="lbl"){ renderNoCell(td, r.no, fl); tr.appendChild(td); continue; }
+    let el;
+    if(c.type==="sel"){ const optsArr = typeof c.opts==="function" ? c.opts() : c.opts;
+        el=elSel(optsArr,()=>{ rows[r.no-1][c.key]=el.value; applyRowVisual(tr, rows[r.no-1]); }); el.value=r[c.key]; }
+    else if(c.type==="cb"){ el=document.createElement("input"); el.type="checkbox"; td.className="cb";
+        el.checked=!!r[c.key]; el.addEventListener("change",()=>{ rows[r.no-1][c.key]=el.checked; applyRowVisual(tr, rows[r.no-1]); }); }
+    else if(c.type==="num"){ el=document.createElement("input"); el.type="number"; el.min=0; el.max=16;
+        el.value=r[c.key]; el.addEventListener("input",()=>{ rows[r.no-1][c.key]=el.value; applyRowVisual(tr, rows[r.no-1]); }); }
+    else if(c.type==="tone"){
+      el=document.createElement("input"); el.type="text";
+      el.setAttribute("list","toneDataList"); el.placeholder="поиск…";
+      el.value=r[c.key];
+      el.addEventListener("input",()=>{ rows[r.no-1][c.key]=el.value; applyRowVisual(tr, rows[r.no-1]); });
+      el.addEventListener("change",()=>{ const v=el.value.trim().toUpperCase();
+        if(TONE_LIST.indexOf(v)>=0){ if(el.value!==v){ el.value=v; rows[r.no-1][c.key]=v; } }
+        else { el.value="OFF"; rows[r.no-1][c.key]="OFF"; } applyRowVisual(tr, rows[r.no-1]); });
+    }
+    else if(c.type==="band"){ const bi=bandInfo(parseFloat(r.rx)); td.className="msg";
+      el=document.createElement("span"); el.textContent=bi.label||""; el.style.color=bi.color||"var(--mut)"; }
+    else if(c.type==="shift"){ el=document.createElement("input"); el.type="text"; td.className="shift";
+        el.value=shiftOf(r);
+        el.addEventListener("change",()=>{
+          const sh=parseFloat((el.value||"").replace(",",".")); const rx=parseFloat(rows[r.no-1].rx);
+          if(!isNaN(sh) && rx>0){
+            rows[r.no-1].tx=fmtFreq(rx+sh);
+            const cs=tr.querySelectorAll("td"); const txInp=cs[4].querySelector("input"); if(txInp) txInp.value=rows[r.no-1].tx;
+          }
+          el.value=shiftOf(rows[r.no-1]);
+        }); }
+    else { el=document.createElement("input"); el.type="text";
+        if(c.key==="name"){ el.maxLength=S.nameLen; el.style.minWidth="120px"; }
+        if(c.key==="rx"){ const bi=bandInfo(parseFloat(r.rx)); if(bi.color) el.style.color=bi.color; }
+        el.value=r[c.key];
+        el.addEventListener("input",()=>{ const rr=rows[r.no-1];
+          rr[c.key]= c.key==="name" ? el.value.slice(0,S.nameLen) : el.value;
+          if(c.key==="rx"||c.key==="tx") applyRowVisual(tr, rr); }); }
+    td.appendChild(el); tr.appendChild(td);
+  }
+  return tr;
+}
+function renderBody(){
+  const tb=document.getElementById("tbody"); tb.innerHTML="";
+  const q=(document.getElementById("search").value||"").toLowerCase().trim();
+  let k=0;
+  for(const r of rows){
+    if(q && !((r.name||"").toLowerCase().includes(q)||(r.rx||"").includes(q)||(r.tx||"").includes(q)||(r.no+"").includes(q))) continue;
+    tb.appendChild(renderRow(r)); k++;
+  }
+  document.getElementById("count").textContent="Строк: "+rows.length+" / показано: "+k;
+}
+/* Применяет изменение настроек к существующей таблице: подстраивает число строк
+   и усекает имена до новой длины, не теряя остальные данные. */
+function reapplyRows(){
+  readCfg();
+  buildRows(S.count, false);
+  for(const r of rows){ if(r.name.length>S.nameLen) r.name=r.name.slice(0,S.nameLen); }
+  renderHead(); renderBody();
+}
+
+/* ============================ CSV ============================ */
+const CSV_HEADER=["Location","Name","Frequency","TXFreq","Shift","Band","RXTone","TXTone",
+  "Mode","ChMode","Power","Compander","Scrambler","Scan","Comment"];
+function csvCell(v){ v=(v==null?"":String(v));
+  return /[",\n\r]/.test(v)? '"'+v.replace(/"/g,'""')+'"' : v; }
+function exportCsv(){
+  const lines=[CSV_HEADER.join(",")];
+  for(const r of rows){
+    if(!(r.rx||r.name)) continue;
+    lines.push([r.no,r.name,r.rx,r.tx,shiftOf(r),r.band,r.rxtone,r.txtone,r.mode,r.chMode,r.power,
+      r.compander?"On":"Off",r.scrambler,r.scan,r.comment].map(csvCell).join(","));
+  }
+  const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  download(blob,(prompt("Имя файла","channels.csv")||"channels.csv").replace(/\.csv$/i,"")+".csv");
+}
+function splitCsv(line){
+  let out=[],sb="",q=false;
+  for(let i=0;i<line.length;i++){ const ch=line[i];
+    if(q){ if(ch==='"'){ if(line[i+1]==='"'){sb+='"';i++;}else q=false; } else sb+=ch; }
+    else { if(ch==='"')q=true; else if(ch===','){out.push(sb);sb="";} else sb+=ch; } }
+  out.push(sb); return out;
+}
+/* Некоторые CHIRP-экспорты содержат лишнюю пустую колонку (строк длиннее заголовка).
+   Первые 8 полей (Location..cToneFreq) при этом совпадают, далее значения смещены на +1.
+   Удаляем первую пустую ячейку после 8-го поля, чтобы выровнять ряд по заголовку. */
+function fitRow(f, H){
+  if(f.length <= H) return f;
+  const aligned = f.slice(0,8);
+  const rest = f.slice(8);
+  for(let i=0;i<rest.length;i++){ if(rest[i]===""){ rest.splice(i,1); break; } }
+  const out = aligned.concat(rest); while(out.length<H) out.push(""); return out.slice(0,H);
+}
+function makeFind(header){
+  return (...keys)=>{ for(let e=1;e>=0;e--){ for(let k of keys){ const key=k.toLowerCase();
+      for(let i=0;i<header.length;i++){ const h=header[i].trim().toLowerCase();
+        if(e? h===key : h.includes(key)) return i; } } } return -1; };
+}
+function buildAutoMap(header){
+  const find=makeFind(header);
+  return {
+    no:  find("location","channel no","channel","#"),
+    name:find("name","channel name","display","shortcut"),
+    rx:  find("frequency","rx freq","rx frequency","rx"),
+    tx:  find("txfreq","tx freq","tx frequency","transmit frequency"),
+    shift:find("shift","offset"),
+    band:find("band","bandwidth","wide","narrow"),
+    rxtone:find("rx tone","rx ctcss","rxtone","rx subaudio"),
+    txtone:find("tx tone","tx ctcss","txtone","tx subaudio"),
+    duplex:find("duplex"), offset:find("offset"),
+    tmode:find("tone","tmode"), rtone:find("rtonefreq"), ctone:find("ctonefreq"),
+    dtcs:find("dtcscode","dtcs"), pol:find("dtcspolarity"), rxdcs:find("rxdtcscode"),
+    cross:find("crossmode","cross"), mode:find("mode","modulation","rx model","rxmod","rx modulation"),
+    power:find("power","lmh","rf power"), comment:find("comment","comment1"),
+    chmode:find("chmode","ch mode","channel mode","mode type"),
+    comp:find("compander","comp"), scr:find("scrambler","scramble"),
+    scan:find("scan","skip"),
+  };
+}
+const IMPORT_FIELDS=[
+  ["no","Канал №"],["name","Имя"],["rx","RX частота"],["tx","TX частота"],
+  ["band","Полоса"],["rxtone","RX тон"],["txtone","TX тон"],["mode","Модуляция"],
+  ["chmode","Режим канала"],["power","Мощность"],["comp","Compander"],["scr","Скремблер"],
+  ["scan","Scan"],["comment","Комментарий"],["duplex","Duplex"],["offset","Offset"],
+  ["tmode","Tone (режим)"],["rtone","rToneFreq"],["ctone","cToneFreq"],["dtcs","DtcsCode"],
+  ["pol","DtcsPolarity"],["rxdcs","RxDtcsCode"],["cross","CrossMode"],
+];
+function importCsv(text, map){
+  const lines=text.split(/\r?\n/).filter(l=>l.trim());
+  if(!lines.length) throw new Error("Пустой CSV");
+  const header=splitCsv(lines[0]);
+  const m = map || buildAutoMap(header);
+  if(m.rx<0) throw new Error("Нет колонки 'Frequency' (RX).");
+  readCfg(); buildRows(S.count, true, false);
+  let count=0, n=1;
+  const useDirectTones = m.rxtone>=0 || m.txtone>=0;
+  for(let L=1;L<lines.length;L++){
+    const f=fitRow(splitCsv(lines[L]), header.length);
+    let no = m.no>=0 && f[m.no]? parseInt(f[m.no]) : n++;
+    if(!(no>=1 && no<=S.count)){ n++; continue; }
+    const rx=parseFloat((f[m.rx]||"").replace(",","."));
+    if(!(rx>0)){ n++; continue; }
+    const r=rows[no-1];
+    r.rx=rx.toFixed(6);
+    if(m.tx>=0){ const tx=parseFloat((f[m.tx]||"").replace(",",".")); r.tx=tx>0?tx.toFixed(6):""; }
+    else if(m.shift>=0){ const sh=parseFloat((f[m.shift]||"").replace(",","."));
+      r.tx= !isNaN(sh)? fmtFreq(rx+sh) : fmtFreq(rx); }
+    else r.tx = computeTx(rx, f, m);
+    if(m.band>=0){ const b=(f[m.band]||"").toLowerCase(); r.band= b.startsWith("nar")?"Narrow":"Wide"; }
+    if(useDirectTones){
+      if(m.rxtone>=0) r.rxtone=normTone(f[m.rxtone]);
+      if(m.txtone>=0) r.txtone=normTone(f[m.txtone]);
+    } else { const tr=decodeChirpTone(f,m); r.rxtone=normTone(tr.rx); r.txtone=normTone(tr.tx); }
+    if(m.mode>=0){ const mo=(f[m.mode]||"").trim(); if(mo){ if(S.mods.indexOf(mo)<0) S.mods.push(mo); r.mode=mo; } }
+    if(m.chmode>=0){ const cm=(f[m.chmode]||"").trim(); if(cm){ if(S.chmodes.indexOf(cm)<0) S.chmodes.push(cm); r.chMode=cm; } }
+    if(m.power>=0){ const p=(f[m.power]||"").trim();
+      const hit=S.powers.find(x=>x.toLowerCase()===p.toLowerCase());
+      r.power = hit ? hit : S.defPower; }
+    if(m.comp>=0) r.compander=isOn(f[m.comp]);
+    if(m.scr>=0){ const sc=parseInt(f[m.scr]); r.scrambler=(sc>=0&&sc<=16)?String(sc):"0"; }
+    if(m.scan>=0){ const s=(f[m.scan]||"").trim().toLowerCase();
+      r.scan = (s===""||s==="y"||s==="yes"||s==="on") ? "Yes" : "No"; }
+    if(m.comment>=0) r.comment=(f[m.comment]||"").trim();
+    r.name=((m.name>=0)?(f[m.name]||"").trim():"").slice(0,S.nameLen);
+    count++;
+  }
+  return count;
+}
+function normTone(v){
+  const s=(v||"").trim(); if(!s||/^(off|null|none)$/i.test(s)) return "OFF";
+  const u=s.toUpperCase();
+  return TONE_LIST.indexOf(u)>=0 ? u : "OFF"; // строгий список
+}
+function computeTx(rx, f, m){
+  const dup=(f[m.duplex]||"").trim().toLowerCase(), off=parseFloat((f[m.offset]||"").replace(",","."))||0;
+  let tx=rx;
+  if(dup==="+") tx=rx+off; else if(dup==="-") tx=rx-off; else if(dup==="split") tx=off>0?off:rx;
+  return tx>0? tx.toFixed(6):"";
+}
+function decodeChirpTone(f, m){
+  const tmode=(f[m.tmode]||"").trim().toLowerCase();
+  const rt=(f[m.rtone]||"").trim(), ct=(f[m.ctone]||"").trim();
+  const digits=reDigits(m.dtcs>=0? f[m.dtcs] : f[m.rxdcs]);
+  if(tmode==="tone"){ const v=rt||ct||""; return {rx:"",tx:v}; }
+  if(tmode==="tsql"){ const v=rt||ct||""; return {rx:v,tx:v}; }
+  if(tmode==="dtcs"){ if(digits.length>=3){ const d="D"+digits+polOf(f,m); return {rx:d,tx:d}; } return {rx:"",tx:""}; }
+  if(tmode==="cross"){ return {rx:ct||"",tx:rt||""}; }
+  return {rx:"",tx:""};
+}
+function polOf(f,m){ return (m.pol>=0 && (f[m.pol]||"").toUpperCase().startsWith("I")) ? "I":"N"; }
+function reDigits(s){ return ((s||"").match(/\d/g)||[]).join("").slice(0,8); }
+function isOn(s){ return ["on","yes","1","true","y","enabled"].indexOf((s||"").trim().toLowerCase())>=0; }
+
+/* ============================ Пресеты каналов PMR/LPD ============================ */
+const PMR16=[446.00625,446.01875,446.03125,446.04375,446.05625,446.06875,446.08125,446.09375,
+  446.10625,446.11875,446.13125,446.14375,446.15625,446.16875,446.18125,446.19375];
+const LPD69=(()=>{ const a=[]; for(let i=0;i<69;i++) a.push(433.075+i*0.025); return a; })();
+function fillSet(prefix, freqs, band, start){
+  readCfg();
+  if(rows.length!==S.count) buildRows(S.count,false);
+  start = start||0;
+  const end = Math.min(start+freqs.length, S.count);
+  for(let i=start;i<end;i++){
+    const f=freqs[i-start], r=rows[i];
+    r.rx=f.toFixed(6); r.tx=f.toFixed(6);
+    r.name=prefix+(i-start+1); r.rxtone="OFF"; r.txtone="OFF"; r.mode="FM"; r.band=band;
+    r.scan="Yes"; r.power=S.defPower; r.compander=false; r.scrambler="0";
+  }
+}
+
+/* ============================ Диалог импорта ============================ */
+let importText="";
+function openImportDialog(txt){
+  importText=txt;
+  const lines=txt.split(/\r?\n/).filter(l=>l.trim()); if(!lines.length){ status("Пустой CSV",true); return; }
+  const header=splitCsv(lines[0]);
+  const m=buildAutoMap(header);
+  const cols=document.getElementById("dlgCols"); cols.innerHTML="";
+  for(const [key,label] of IMPORT_FIELDS){
+    const lab=document.createElement("label"); lab.textContent=label;
+    const sel=document.createElement("select");
+    const opSkip=document.createElement("option"); opSkip.value="-1"; opSkip.textContent="(пропустить)"; sel.appendChild(opSkip);
+    header.forEach((h,i)=>{ const op=document.createElement("option"); op.value=i; op.textContent="["+(i+1)+"] "+h; sel.appendChild(op); });
+    sel.value = (m[key]!==undefined && m[key]>=0) ? String(m[key]) : "-1";
+    cols.appendChild(lab); cols.appendChild(sel);
+  }
+  document.getElementById("dlg").style.display="flex";
+}
+function closeDialog(){ document.getElementById("dlg").style.display="none"; }
+function confirmImport(){
+  const sel=document.querySelectorAll("#dlgCols select");
+  const map={};
+  IMPORT_FIELDS.forEach((f,i)=>{ map[f[0]]=parseInt(sel[i].value,10); });
+  closeDialog();
+  try{ const n=importCsv(importText, map); renderHead(); renderBody(); status("Импортировано каналов: "+n,false); }
+  catch(err){ status("Ошибка CSV: "+(err.message||err),true); }
+}
+
+/* ============================ Утилиты ============================ */
+function download(blob,name){ const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},200); }
+function status(msg,isErr){ const el=document.getElementById("status");
+  el.textContent=msg; el.style.color=isErr?"var(--bad)":"var(--mut)"; }
+
+/* ============================ Инициализация ============================ */
+function applyPreset(sel){
+  const p = PRESETS.find(x=>x.id===sel.value); if(!p) return;
+  document.getElementById("cfgCount").value=p.ch;
+  document.getElementById("cfgName").value=p.nl;
+  const modSel=document.getElementById("cfgMods");
+  let opt=Array.from(modSel.options).find(o=>o.value===p.md);
+  if(!opt){ opt=document.createElement("option"); opt.value=p.md; opt.textContent=p.md; modSel.appendChild(opt); }
+  modSel.value=p.md;
+  document.getElementById("cfgPower").value=p.pw;
+  document.getElementById("cfgChMode").value=p.cm;
+  document.getElementById("cfgDefaultFreq").value=p.frq;
+  readCfg(); buildRows(S.count, true); renderHead(); renderBody();
+  status("Пресет: "+p.name+" — каналов "+S.count, false);
+}
+document.addEventListener("DOMContentLoaded",()=>{
+  const pre=document.getElementById("preset");
+  for(const p of PRESETS){ const op=document.createElement("option"); op.value=p.id; op.textContent=p.name; pre.appendChild(op); }
+  const modSel=document.getElementById("cfgMods");
+  for(const v of MOD_PRESETS){ const op=document.createElement("option"); op.value=v; op.textContent=v; modSel.appendChild(op); }
+  const toneDl=document.getElementById("toneDataList");
+  for(const t of TONE_LIST){ const op=document.createElement("option"); op.value=t; toneDl.appendChild(op); }
+  pre.value="tdh9"; applyPreset(pre);
+
+  ["cfgCount","cfgName"].forEach(id=>{
+    document.getElementById(id).addEventListener("change",reapplyRows);
+  });
+  ["cfgDefaultFreq","cfgDefaultPower","cfgMods","cfgPower","cfgChMode"].forEach(id=>{
+    document.getElementById(id).addEventListener("change",()=>{ readCfg(); renderBody(); });
+  });
+  document.getElementById("search").addEventListener("input",renderBody);
+  document.getElementById("btnScanInv").addEventListener("click",()=>{
+    for(const r of rows) r.scan = (r.scan==="No") ? "Yes" : "No";
+    renderBody();
+    status("Scan инвертирован во всех каналах", false);
+  });
+  document.getElementById("btnPmr").addEventListener("click",()=>{ fillSet("PMR",PMR16,"Narrow",0); renderBody(); status("Каналы PMR заполнены ("+Math.min(PMR16.length,S.count)+")",false); });
+  document.getElementById("btnLpd").addEventListener("click",()=>{ fillSet("LPD",LPD69,"Wide",0); renderBody(); status("Каналы LPD заполнены ("+Math.min(LPD69.length,S.count)+")",false); });
+  document.getElementById("btnMix").addEventListener("click",()=>{ fillSet("LPD",LPD69,"Wide",0); fillSet("PMR",PMR16,"Narrow",69); renderBody(); status("Каналы LPD+PMR заполнены",false); });
+  document.getElementById("preset").addEventListener("change",()=>applyPreset(pre));
+  document.getElementById("btnNew").addEventListener("click",()=>{
+    readCfg(); buildRows(S.count, true); renderHead(); renderBody();
+    status("Новая таблица: "+rows.length+" каналов, частота "+S.defFreq+" МГц", false);
+  });
+  document.getElementById("btnImport").addEventListener("click",()=>document.getElementById("fileCsv").click());
+  document.getElementById("fileCsv").addEventListener("change",e=>{
+    const f=e.target.files[0]; if(!f)return;
+    f.arrayBuffer().then(b=>{ const txt=new TextDecoder("utf-8").decode(b);
+      try{ openImportDialog(txt); } catch(err){ status("Ошибка CSV: "+(err.message||err),true); }
+      e.target.value=""; });
+  });
+  document.getElementById("dlgOk").addEventListener("click",confirmImport);
+  document.getElementById("dlgCancel").addEventListener("click",closeDialog);
+  document.getElementById("btnExport").addEventListener("click",exportCsv);
+});
+</script>
+</body>
+</html>
