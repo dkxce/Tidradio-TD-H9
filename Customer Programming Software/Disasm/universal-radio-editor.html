@@ -121,6 +121,16 @@
   </div>
 </div>
 
+<div id="dlgExp" class="dlgwrap" style="display:none">
+  <div class="dlg">
+    <h3>Формат экспорта</h3>
+    <p class="msg">CHIRP — совместимый (Duplex/Offset/Tone/DCS). CSP — формат TIDRadio (как в Tidradio_H9(CSP)).
+      «Как есть» — полный родной формат редактора.</p>
+    <div id="dlgExpCols"></div>
+    <div class="dlgbtns" id="dlgExpBtns"></div>
+  </div>
+</div>
+
 <div class="foot">
   Автор: <a href="https://github.com/dkxce/Tidradio-TD-H9" target="_blank" rel="noopener">dkxce</a>
 </div>
@@ -402,7 +412,7 @@ const CSV_HEADER=["Location","Name","Frequency","TXFreq","Shift","Band","RXTone"
   "Mode","ChMode","Power","Compander","Scrambler","Scan","Comment"];
 function csvCell(v){ v=(v==null?"":String(v));
   return /[",\n\r]/.test(v)? '"'+v.replace(/"/g,'""')+'"' : v; }
-function exportCsv(){
+function exportNative(fname){
   const lines=[CSV_HEADER.join(",")];
   for(const r of rows){
     if(!(r.rx||r.name)) continue;
@@ -410,8 +420,86 @@ function exportCsv(){
       r.compander?"On":"Off",r.scrambler,r.scan,r.comment].map(csvCell).join(","));
   }
   const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
-  download(blob,(prompt("Имя файла","channels.csv")||"channels.csv").replace(/\.csv$/i,"")+".csv");
+  download(blob, (fname||"channels").replace(/\.csv$/i,"")+".csv");
 }
+/* Экспорт в формат TIDRadio CPS (как в Tidradio_H9(CSP)-*.csv). Все строки 1..S.count,
+   пустые каналы — шаблоном как в эталонном файле. */
+function exportCps(fname){
+  const header=["Channel No","RX Freq [MHz]","TX Freq [MHz]","RX CTCSS/DCS","TX CTCSS/DCS",
+    "Power","Bandwidth","Scrambler","PTT ID","Freq Hop","Busy Lock","Scan","Rx Model","Name"];
+  const lines=[header.join(",")];
+  for(let no=1; no<=S.count; no++){
+    const r=rows[no-1];
+    const used = r && (r.rx || r.name);
+    let row;
+    if(used){
+      const rx = r.rx ? parseFloat(r.rx).toFixed(5) : "";
+      const tx = r.tx ? parseFloat(r.tx).toFixed(5) : "";
+      row=[no, rx, tx, r.rxtone, r.txtone, r.power, r.band, r.scrambler,
+        "Off","OFF","OFF", (r.scan==="Yes"?"ON":"OFF"), r.mode, r.name];
+    } else {
+      row=[no, "", "", "OFF","OFF","Low","Wide","0","Off","OFF","OFF","OFF","FM",""];
+    }
+    lines.push(row.map(csvCell).join(","));
+  }
+  const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  download(blob,(fname||"channels-cps").replace(/\.csv$/i,"")+".csv");
+}
+function parseTone(t){
+  if(!t || t==="OFF") return null;
+  const m=/^D([0-9]+)([NI])$/i.exec(t);
+  if(m) return {type:"DCS", code:m[1], pol:m[2].toUpperCase()};
+  return {type:"CTC", val:t};
+}
+function exportChirp(fname){
+  const header=["Location","Name","Frequency","Duplex","Offset","Tone","rToneFreq","cToneFreq",
+    "DtcsCode","DtcsPolarity","RxDtcsCode","CrossMode","Mode","TStep","Skip","Power","Comment"];
+  const lines=[header.join(",")];
+  for(const r of rows){
+    if(!(r.rx||r.name)) continue;
+    const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
+    let duplex="", offset="";
+    if(rx>0 && tx>0){ const d=tx-rx;
+      if(Math.abs(d)>1e-9){ duplex=d>0?"+":"-"; offset=Math.abs(d).toFixed(6); } }
+    else duplex="off";
+    const prx=parseTone(r.rxtone), ptx=parseTone(r.txtone);
+    let tone="",rt="",ct="",dcs="",pol="",rxdcs="",cross="";
+    if(prx && ptx && prx.type==="CTC" && ptx.type==="CTC" && prx.val===ptx.val){ tone="TSQL"; rt=ct=prx.val; }
+    else if(ptx && ptx.type==="CTC"){ tone="Tone"; ct=ptx.val; }
+    else if(prx && prx.type==="CTC"){ tone="Cross"; rt=prx.val; }
+    else if(prx && ptx && prx.type==="DCS" && ptx.type==="DCS" && prx.code===ptx.code && prx.pol===ptx.pol){
+      tone="DTCS"; dcs=prx.code; pol=(prx.pol==="I"?"RN":"NN"); rxdcs=prx.code; }
+    else if(ptx && ptx.type==="DCS"){ tone="DTCS"; dcs=ptx.code; pol=(ptx.pol==="I"?"RN":"NN"); }
+    else if(prx && prx.type==="DCS"){ tone="DTCS"; dcs=prx.code; pol=(prx.pol==="I"?"RN":"NN"); rxdcs=prx.code; }
+    const skip = r.scan==="No" ? "S" : "";
+    lines.push([r.no,r.name,r.rx,duplex,offset,tone,rt,ct,dcs,pol,rxdcs,cross,r.mode,"5.0",skip,r.power,r.comment].map(csvCell).join(","));
+  }
+  const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  download(blob, (fname||"channels-chirp").replace(/\.csv$/i,"")+".csv");
+}
+/* Диалог выбора формата экспорта */
+const EXPORT_FORMATS=[["chirp","CHIRP (совместимый)"],["csp","CSP (TIDRadio)"],["raw","Как есть"]];
+const EXPORT_CFG={
+  chirp:{ def:"channels-chirp", fn:exportChirp },
+  csp:  { def:"channels-cps",   fn:exportCps },
+  raw:  { def:"channels-csv",   fn:exportNative },
+};
+function openExportDialog(){
+  const cols=document.getElementById("dlgExpCols"); cols.innerHTML="";
+  const wrap=document.getElementById("dlgExp");
+  const btns=wrap.querySelector(".dlgbtns");
+  if(btns) btns.innerHTML="";
+  for(const [id,label] of EXPORT_FORMATS){
+    const b=document.createElement("button"); b.className="btn"; b.textContent=label;
+    b.addEventListener("click",()=>{ closeExp(); const cfg=EXPORT_CFG[id];
+      const fn=prompt("Имя файла", cfg.def)||cfg.def; cfg.fn(fn); });
+    btns.appendChild(b);
+  }
+  const cancel=document.createElement("button"); cancel.className="btn ghost"; cancel.textContent="Отмена";
+  cancel.addEventListener("click",closeExp); btns.appendChild(cancel);
+  wrap.style.display="flex";
+}
+function closeExp(){ document.getElementById("dlgExp").style.display="none"; }
 function splitCsv(line){
   let out=[],sb="",q=false;
   for(let i=0;i<line.length;i++){ const ch=line[i];
@@ -634,7 +722,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
   document.getElementById("dlgOk").addEventListener("click",confirmImport);
   document.getElementById("dlgCancel").addEventListener("click",closeDialog);
-  document.getElementById("btnExport").addEventListener("click",exportCsv);
+  document.getElementById("btnExport").addEventListener("click",openExportDialog);
 });
 </script>
 </body>
