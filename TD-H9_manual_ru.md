@@ -959,6 +959,7 @@ https://aprs.fi/
 | Настройка рации на ПК | [TIDRadioCPS](Customer%20Programming%20Software) |
 | Настройка рации на Android | [Odmaster](https://play.google.com/store/apps/details?id=com.tid.walkie) |
 | Софт и прошивки | [Firmware](Firmware) |
+| Онлайн-редактор каналов | [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) |
 | Прочий софт (APRS) | [github.com/dkxce](https://github.com/dkxce?tab=repositories&q=aprs) |
 
 ## Приложение F. Каналы и пресеты
