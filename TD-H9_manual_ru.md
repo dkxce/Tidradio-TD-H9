@@ -955,7 +955,8 @@ https://aprs.fi/
 
 | Софт | Ссылка |
 |---|---|
-| Настройка рации на ПК | [TIDRadioCPS_20260429.zip](TIDRadioCPS_20260429.zip) |
+| Драйвера | [Drivers](Drivers) |
+| Настройка рации на ПК | [TIDRadioCPS](Customer%20Programming%20Software) |
 | Настройка рации на Android | [Odmaster](https://play.google.com/store/apps/details?id=com.tid.walkie) |
 | Софт и прошивки | [Firmware](Firmware) |
 | Прочий софт (APRS) | [github.com/dkxce](https://github.com/dkxce?tab=repositories&q=aprs) |
