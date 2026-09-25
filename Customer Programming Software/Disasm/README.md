@@ -456,3 +456,4 @@ num2 = HasGNSS() ? (HasAPRS()   ? 12564     // APRS-модели
 ## 15. Пример реализации
 
 1. [**TDRadioCodeplug**](TDRadioCodeplug.cs) - класс для работы с .td файлом.
+2. [**TidRadioTool**](TDRadioTool/bin) - консольная утилита
