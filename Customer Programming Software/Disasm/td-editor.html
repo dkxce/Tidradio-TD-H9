@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редактор каналов TIDRadio .td</title>
+<style>
+  :root{ --bg:#0f1720; --panel:#17222e; --line:#2a3a4a; --txt:#dce7f1; --mut:#8aa0b5;
+         --acc:#3da9fc; --ok:#2fb380; --warn:#e0a338; --bad:#e0533d; --input:#1d2b3a; }
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.4 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+  header{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);
+         padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:5}
+  header h1{font-size:16px;margin:0;margin-right:auto;font-weight:600}
+  .btn{background:var(--acc);color:#04121f;border:0;border-radius:6px;padding:8px 14px;
+       font-weight:600;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn.warn{background:var(--bad)}
+  .fill{position:relative}
+  input[type=file].hidden{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+  .bar{background:var(--panel);border-bottom:1px solid var(--line);padding:8px 16px;
+       display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:13px}
+  .bar label{cursor:pointer}
+  .bar input[type=search],.bar input[type=text]{background:var(--input);border:1px solid var(--line);
+       color:var(--txt);border-radius:5px;padding:5px 8px}
+  .msg{font-size:12px;color:var(--mut)}
+  #status{display:block;width:100%;min-height:16px;margin-top:4px}
+  .wrap{overflow:auto;max-height:calc(100vh - 200px)}
+  table{border-collapse:collapse;min-width:1500px;width:100%}
+  th,td{border-bottom:1px solid var(--line);padding:3px 6px;white-space:nowrap}
+  th{position:sticky;top:0;background:var(--panel);text-align:left;font-size:11px;
+     color:var(--mut);text-transform:uppercase;letter-spacing:.04em;z-index:2}
+  td.no{color:var(--mut);text-align:right;padding-right:10px}
+  tr.ch:hover{background:#1c2b3c}
+  tr.rowhidden{display:none}
+  input[type=text],input[type=number],select{background:var(--input);border:1px solid var(--line);
+       color:var(--txt);border-radius:4px;padding:3px 6px;width:100%;min-width:64px}
+  input.bad{border-color:var(--bad);background:#3a1c16}
+  input[type=checkbox]{width:16px;height:16px;accent-color:var(--acc);cursor:pointer}
+  td.cbx{text-align:center}
+  .note{font-size:12px;color:var(--mut)}
+  .foot{padding:8px 16px;color:var(--mut);font-size:12px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Редактор каналов TIDRadio <small class="note">(.td)</small></h1>
+  <span class="fill"><button class="btn" id="btnLoad">Загрузить .td</button>
+    <input type="file" id="fileTd" class="hidden" accept=".td"></span>
+  <span class="fill"><button class="btn ghost" id="btnImport">Импорт CSV</button>
+    <input type="file" id="fileCsv" class="hidden" accept=".csv,text/csv"></span>
+  <button class="btn ghost" id="btnExport" disabled>Экспорт CSV</button>
+  <button class="btn" id="btnSave" disabled>Сохранить .td</button>
+</header>
+
+<div class="bar">
+  <label><input type="checkbox" id="onlyValid" checked> только рабочие</label>
+  <input type="search" id="search" placeholder="поиск по имени / номеру" style="min-width:220px">
+  <span class="msg" id="count"></span>
+  <span id="status"></span>
+</div>
+
+<div class="wrap">
+<table id="tbl">
+  <thead>
+    <tr>
+      <th>№</th><th>RX, МГц</th><th>TX, МГц</th><th>RX тон</th><th>TX тон</th>
+      <th>Мощ.</th><th>Полоса</th><th>Скр.</th><th>PTT ID</th><th>FreqHop</th>
+      <th>BusyLock</th><th>Scan</th><th>Модул.</th><th>Имя</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+</div>
+
+<div class="foot">
+  Формат: сырой образ EEPROM 65536 байт, каналы со смещения 16 (199×16), имена с 3392 (8 байт),
+  бит-карты валидности (6400) и сканирования (6432). Тон: <code>OFF</code>, <code>88.5</code> (CTCSS) или <code>D023N/D023I</code>.
+  Имена — однобайтовые символы (ASCII/Latin-1). Работа целиком локально, без интернета.
+</div>
+
+<script>
+'use strict';
+/* ============================ Константы ============================ */
+const EEROM = 0x10000;
+const CH_START = 16, CH_COUNT = 199, CH_SIZE = 16;
+const NM_START = 3392, NM_SIZE = 8;
+const CI_START = 6400, SC_START = 6432;
+const MODEL = [0x4D,0x44,0x2D,0x37,0x36,0x30,0x50,0xFF]; // "MD-760P"
+
+const CSV_HEADER = ["Channel No","RX Freq [MHz]","TX Freq [MHz]","RX CTCSS/DCS","TX CTCSS/DCS",
+  "Power","Bandwidth","Scrambler","PTT ID","Freq Hop","Busy Lock","Scan","Rx Modulation","Channel Name"];
+
+/* ============================ Состояние ============================ */
+let data = null;              // Uint8Array 65536
+let channels = [];            // 199 объектов
+let csvFile = null;
+
+/* ========================== Кодирование ============================ */
+function freqFromBytes(b){
+  let empty=true; for(let i=0;i<4;i++) if(b[i]!==0 && b[i]!==0xFF){empty=false;break;}
+  if(empty) return 0;
+  let val=0,mul=1;
+  for(let i=0;i<4;i++){ let hi=b[i]>>4,lo=b[i]&15; if(hi>9||lo>9) return 0; val+=(hi*10+lo)*mul; mul*=100; }
+  return val/100000;
+}
+function freqToBytes(mhz){
+  let v=Math.round(mhz*100000);
+  if(!(v>0 && v<=99999999)) return null;
+  let b=[0,0,0,0];
+  for(let i=0;i<4;i++){ let p=v%100; v=Math.floor(v/100); b[i]=(Math.floor(p/10)<<4)|(p%10); }
+  return b;
+}
+function toneFromBytes(b){
+  let b0=b[0],b1=b[1];
+  if(b0===0 || b0===0xFF || b1===0 || b1===0xFF) return "OFF";
+  let pol=b1>>4;
+  if(pol>=8){ let h=b1&15,t=b0>>4,u=b0&15; return "D"+h+t+u+((pol===12)?"I":"N"); }
+  let hex=b1.toString(16).padStart(2,"0")+b0.toString(16).padStart(2,"0");
+  if(!/^[0-9]{4}$/.test(hex)) return "OFF";
+  return (parseInt(hex,10)/10).toFixed(1);
+}
+function toneToBytes(s){
+  s=(s||"").trim().toUpperCase();
+  if(!s || s==="OFF") return [0xFF,0xFF];
+  if(s[0]==="D"){
+    let d=s.replace(/\D/g,""); if(d.length!==3) return null;
+    let h=+d[0],t=+d[1],u=+d[2]; if(h>7||t>7||u>7) return null;
+    let inv=s.endsWith("I");
+    return [(t<<4)|u, ((inv?0xC:0x8)<<4)|h];
+  }
+  let code=Math.round(parseFloat(s)*10);
+  if(!(code>=670 && code<=2541)) return null;
+  let p=String(code).padStart(4,"0");
+  return [parseInt(p.slice(2,4),16), parseInt(p.slice(0,2),16)];
+}
+function nameFromBytes(off){
+  let out="";
+  for(let i=0;i<NM_SIZE;i++){ let c=data[off+i]; if(c===0x00||c===0xFF) break; out+=String.fromCharCode(c); }
+  return out;
+}
+function nameToBytes(name, off){
+  let s=(name||"").slice(0,NM_SIZE);
+  for(let i=0;i<NM_SIZE;i++) data[off+i]= i<s.length ? (s.charCodeAt(i)&0xFF) : 0xFF;
+}
+function bitGet(off,idx){ return (data[off + (idx>>3)] & (1 << (idx&7))) !== 0; }
+function bitSet(off,idx,on){ let n=off+(idx>>3),m=1<<(idx&7);
+  if(on) data[n]|=m; else data[n]&=~m; }
+
+/* ========================= Декодирование .td ====================== */
+function parseChannel(i){
+  let b=CH_START+i*CH_SIZE;
+  let rxf=Math.round(freqFromBytes(data.subarray(b,b+4))*100000)/100000;
+  let txf=Math.round(freqFromBytes(data.subarray(b+4,b+8))*100000)/100000;
+  let f1=data[b+13], f2=data[b+14], rs=data[b+15];
+  let ch={
+    no:i+1,
+    rx: rxf>0 ? rxf.toFixed(5) : "",
+    tx: txf>0 ? txf.toFixed(5) : "",
+    rt:toneFromBytes(data.subarray(b+8,b+10)),
+    tt:toneFromBytes(data.subarray(b+10,b+12)),
+    scr:String(data[b+12]),
+    pw:["Low","Mid","High"][(f2>>4)&3] || "Low",
+    band:(f2&8)?"Narrow":"Wide",
+    ptt:["Off","Begin","End","Both"][(f1>>6)&3] || "Off",
+    hop:!!(f1&0x20),
+    busy:!!(f1&0x04),
+    scan:bitGet(SC_START,i),
+    mod:["FM","AM"][rs&3] || "FM",
+    name: nameFromBytes(NM_START+i*NM_SIZE),
+  };
+  return ch;
+}
+function loadTd(src){
+  if (src instanceof ArrayBuffer) src = new Uint8Array(src);
+  if (!src || src.length !== EEROM){ status("Ошибка: размер файла "+src.length+" (нужно 65536)",true); return; }
+  data = src;
+  let first8=Array.from(data.subarray(0,8));
+  let allFF=first8.every(x=>x===0xFF);
+  let marker=first8.every((x,i)=>x===MODEL[i]);
+  if(!allFF && !marker){ status("Ошибка: маркер модели в первых 8 байтах не совпадает (пусто / MD-760P).",true); return; }
+  channels=[];
+  for(let i=0;i<CH_COUNT;i++) channels.push(parseChannel(i));
+  enable(true);
+  renderTable();
+  status("Загружено: "+channels.filter(c=>c.rx).length+" рабочих каналов. Маркер: "
+        +(allFF?"пусто (0xFF)":"MD-760P \\xFF"), false);
+}
+
+/* ======================== Кодирование .td ========================= */
+function writeChannel(c){
+  let i=c.no-1, b=CH_START+i*CH_SIZE;
+  let rb=freqToBytes(parseFloat(c.rx));
+  let tb=c.tx ? freqToBytes(parseFloat(c.tx)) : null;
+  if(rb) data.set(rb,b); else data.set([0xFF,0xFF,0xFF,0xFF],b);
+  if(tb) data.set(tb,b+4); else data.set([0xFF,0xFF,0xFF,0xFF],b+4);
+  let rtt=toneToBytes(c.rt), ttt=toneToBytes(c.tt);
+  data.set(rtt?rtt:[0xFF,0xFF],b+8);
+  data.set(ttt?ttt:[0xFF,0xFF],b+10);
+  data[b+12]=Math.max(0,Math.min(16,parseInt(c.scr)||0));
+  data[b+13]=((["Off","Begin","End","Both"].indexOf(c.ptt)&3)<<6) | (c.hop?0x20:0) | (c.busy?0x04:0);
+  data[b+14]=((["Low","Mid","High"].indexOf(c.pw)&3)<<4) | ((c.band==="Narrow")?0x08:0);
+  data[b+15]=(c.mod==="AM"?1:0)&3;
+  nameToBytes(c.name,NM_START+i*NM_SIZE);
+  bitSet(CI_START,i, !!c.rx);
+  bitSet(SC_START,i, c.scan);
+}
+
+/* ============================ Таблица ============================== */
+let onlyValid, searchBox;
+let shownCount=0;
+
+function cell(html){ let td=document.createElement("td"); td.innerHTML=html; return td; }
+function makeInput(kind,val,attrs){
+  const sel = kind === "select";
+  let el = sel ? document.createElement("select") : document.createElement("input");
+  if (!sel) el.type = kind;               // "text" | "number" | "checkbox"
+  if (kind === "number"){ el.min = 0; el.max = 16; }
+  if (attrs.opts){
+    for (const o of attrs.opts){
+      const op = document.createElement("option");
+      op.textContent = o; op.value = o;
+      el.appendChild(op);
+    }
+  }
+  for (const k in attrs){ if (k === "opts") continue; el.setAttribute(k, attrs[k]); }
+  el.value = val;
+  return el;
+}
+
+function renderRow(c){
+  let tr=document.createElement("tr"); tr.className="ch"; tr.dataset.no=c.no;
+  // №
+  let tdNo=document.createElement("td"); tdNo.className="no"; tdNo.textContent=c.no; tr.appendChild(tdNo);
+  const cols=[
+    ["rx","text",c.rx,{}],
+    ["tx","text",c.tx,{}],
+    ["rt","text",c.rt,{}],
+    ["tt","text",c.tt,{}],
+    ["pw","select",c.pw,{opts:["Low","Mid","High"]}],
+    ["band","select",c.band,{opts:["Wide","Narrow"]}],
+    ["scr","number",c.scr,{}],
+    ["ptt","select",c.ptt,{opts:["Off","Begin","End","Both"]}],
+  ];
+  for(const [f,kind,val,a] of cols){
+    let td=document.createElement("td");
+    let el=makeInput(kind,val,a);
+    attachChange(el,f,c.no); td.appendChild(el); tr.appendChild(td);
+  }
+  // чекбоксы
+  for(const [f] of [["hop"],["busy"],["scan"]]){
+    let td=document.createElement("td"); td.className="cbx";
+    let el=makeInput("checkbox",c[f]?"on":"",{});
+    el.checked=c[f]; attachChange(el,f,c.no); td.appendChild(el); tr.appendChild(td);
+  }
+  // модуляция
+  { let td=document.createElement("td"); let el=makeInput("select",c.mod,{opts:["FM","AM"]});
+    attachChange(el,"mod",c.no); td.appendChild(el); tr.appendChild(td); }
+  // имя
+  { let td=document.createElement("td"); let el=makeInput("text",c.name,{maxlength:"8"});
+    el.style.minWidth="140px"; attachChange(el,"name",c.no); td.appendChild(el); tr.appendChild(td); }
+  return tr;
+}
+
+function attachChange(el,f,no){
+  let upd=()=>{ channels[no-1][f] = ((el.tagName==="SELECT")? el.value : (el.type==="checkbox"? el.checked : el.value)); };
+  el.addEventListener("input",upd);
+  el.addEventListener("change",upd);
+}
+
+function renderTable(){
+  const tbody=document.getElementById("tbody");
+  tbody.innerHTML="";
+  const q=(searchBox.value||"").toLowerCase().trim();
+  shownCount=0;
+  for(let i=0;i<CH_COUNT;i++){
+    let c=channels[i];
+    if(onlyValid.checked && !c.rx) continue;
+    if(q && !((c.name||"").toLowerCase().includes(q)) && !(String(c.no).includes(q))) continue;
+    tbody.appendChild(renderRow(c));
+    shownCount++;
+  }
+  document.getElementById("count").textContent="Показано: "+shownCount+" / "+channels.length;
+}
+
+/* ============================ CSV ================================= */
+function csvCell(v){
+  v=(v==null?"":String(v));
+  return /[",\n\r]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v;
+}
+function exportCsv(){
+  let rows=[CSV_HEADER.join(",")];
+  for(let c of channels){
+    if(!c.rx) continue;
+    rows.push([c.no,c.rx,c.tx,c.rt,c.tt,c.pw,c.band,c.scr,c.ptt,
+               c.hop?"On":"Off",c.busy?"On":"Off",c.scan?"Yes":"No",c.mod,c.name].map(csvCell).join(","));
+  }
+  let blob=new Blob(["\uFEFF"+rows.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  download(blob,(prompt("Имя файла","channels.csv")||"channels.csv").replace(/\.csv$/i,"")+".csv");
+}
+function parseCsvImport(text){
+  let lines=text.split(/\r?\n/).filter(l=>l.trim());
+  if(!lines.length) throw "Пустой CSV";
+  let header=splitCsv(lines[0]);
+  const find=(...keys)=>{ for(let e=0;e<2;e++){ for(let k of keys){ const key=k.toLowerCase();
+      for(let i=0;i<header.length;i++){ let h=header[i].trim().toLowerCase();
+        if(e? h===key : h.includes(key)) return i; } } } return -1; };
+  let mNo=find("channel no","channel","#"), mRx=find("rx freq","rx","rx frequency"),
+      mTx=find("tx freq","tx","tx frequency"), mRt=find("rx ctcss","rx tone"),
+      mTt=find("tx ctcss","tx tone"), mPw=find("power","lmh"),
+      mBw=find("bandwidth","band"), mSc=find("scrambler"), mPt=find("ptt id","ptt"),
+      mHp=find("freq hop","hop"), mBl=find("busy lock","busy"), mSn=find("scan"),
+      mMd=find("rx modulation","rx model","modulation","rx mode"),
+      mNm=find("channel name","name","display","shortcut");
+  if(mRx<0) throw "Не найдена колонка RX-частоты.";
+  let count=0, n=1;
+  for(let L=1;L<lines.length;L++){
+    let f=splitCsv(lines[L]);
+    let no = mNo>=0 && f[mNo]? parseInt(f[mNo]) : n++;
+    if(!(no>=1 && no<=CH_COUNT)){ n++; continue; }
+    let rx=parseFloat((f[mRx]||"").replace(",","."));
+    if(!(rx>0)){ n++; continue; }
+    let c=channels[no-1];
+    c.rx=rx.toFixed(5);
+    let tv=(f[mTx]||"").trim(); c.tx= tv? parseFloat(tv.replace(",",".")).toFixed(5): "";
+    c.rt=(f[mRt]||"").trim()||"OFF"; c.tt=(f[mTt]||"").trim()||"OFF";
+    if(mPw>=0){ let p=(f[mPw]||"").toLowerCase(); c.pw= p.includes("low")?"Low": p.includes("mid")?"Mid":"High"; }
+    if(mBw>=0) c.band=(f[mBw]||"").trim()==="Narrow"?"Narrow":"Wide";
+    if(mSc>=0) c.scr=(f[mSc]||"").trim()||"0";
+    if(mPt>=0){ let p=(f[mPt]||"").toLowerCase(); c.ptt= ({begin:"Begin",end:"End",both:"Both"}[p]||"Off"); }
+    if(mHp>=0) c.hop=(f[mHp]||"").toLowerCase()==="on";
+    if(mBl>=0) c.busy=(f[mBl]||"").toLowerCase()==="on";
+    if(mSn>=0) c.scan=!(f[mSn]||"").toLowerCase().includes("no");
+    if(mMd>=0) c.mod=(f[mMd]||"").trim()==="AM"?"AM":"FM";
+    if(mNm>=0) c.name=(f[mNm]||"").trim().slice(0,8);
+    count++;
+  }
+  return count;
+}
+function splitCsv(line){
+  let out=[],sb="",q=false;
+  for(let i=0;i<line.length;i++){ let ch=line[i];
+    if(q){ if(ch==='"'){ if(line[i+1]==='"'){sb+='"';i++;}else q=false; } else sb+=ch; }
+    else { if(ch==='"')q=true; else if(ch===','){out.push(sb);sb="";} else sb+=ch; } }
+  out.push(sb); return out;
+}
+
+/* =========================== Утилиты ============================== */
+function download(blob,name){ let a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},200); }
+function enable(on){
+  document.getElementById("btnSave").disabled=!on;
+  document.getElementById("btnExport").disabled=!on;
+}
+function status(msg,isErr){
+  let el=document.getElementById("status");
+  el.textContent=msg; el.style.color=isErr?"var(--bad)":"var(--mut)";
+}
+
+/* ============================ Инициализация ======================= */
+document.addEventListener("DOMContentLoaded",()=>{
+  onlyValid=document.getElementById("onlyValid");
+  searchBox=document.getElementById("search");
+  onlyValid.addEventListener("change",()=>channels.length&&renderTable());
+  searchBox.addEventListener("input",()=>channels.length&&renderTable());
+
+  document.getElementById("btnLoad").addEventListener("click",()=>document.getElementById("fileTd").click());
+  document.getElementById("fileTd").addEventListener("change",e=>{
+    let f=e.target.files[0]; if(!f)return;
+    f.arrayBuffer().then(buf=>{ loadTd(buf); e.target.value=""; });
+  });
+
+  document.getElementById("btnImport").addEventListener("click",()=>document.getElementById("fileCsv").click());
+  document.getElementById("fileCsv").addEventListener("change",e=>{
+    let f=e.target.files[0]; if(!f)return;
+    f.arrayBuffer().then(b=>{ let txt=new TextDecoder("utf-8").decode(b);
+      try{ let n=parseCsvImport(txt); renderTable(); status("Импортировано каналов: "+n,false);}
+      catch(err){ status("Ошибка CSV: "+err.message,true); } e.target.value=""; });
+  });
+
+  document.getElementById("btnSave").addEventListener("click",()=>{
+    if(!data)return;
+    let bad=[];
+    for(let c of channels){ if(c.rx && !freqToBytes(parseFloat(c.rx))) bad.push(c.no+" RX");
+      if((c.rt&&c.rt!=="OFF"&&!toneToBytes(c.rt))||(c.tt&&c.tt!=="OFF"&&!toneToBytes(c.tt))) bad.push(c.no+" тон");
+      writeChannel(c); }
+    let blob=new Blob([data],{type:"application/octet-stream"});
+    download(blob,(prompt("Имя файла","edit.td")||"edit.td").replace(/\.td$/i,"")+".td");
+    status(bad.length? ("Сохранено (невалидные значения: "+bad.join(", ")+" записаны как их обработка, проверьте).") : "Файл .td сохранён.", bad.length>0);
+  });
+
+  document.getElementById("btnExport").addEventListener("click",exportCsv);
+});
+</script>
+</body>
+</html>
