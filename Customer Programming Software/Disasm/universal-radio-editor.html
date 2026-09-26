@@ -71,7 +71,7 @@
 <body>
 
 <header>
-  <h1>Универсальный редактор каналов <span class="msg">(CSV)</span> <span class="msg" style="font-size:11px">версия 1.1</span></h1>
+  <h1>Универсальный редактор каналов <span class="msg">(CSV)</span> <span class="msg" style="font-size:11px">версия 1.2</span></h1>
   <label class="msg" style="font-size:12px">Рация
     <select id="preset" style="background:var(--input);border:1px solid var(--line);color:var(--txt);padding:5px 8px;border-radius:5px"></select>
   </label>
@@ -100,9 +100,12 @@
   </label>
   <input type="search" id="search" placeholder="поиск по имени / номеру / частоте">
   <button class="btn ghost" id="btnScanInv">Инв. Scan</button>
+  <button class="btn ghost" id="btnSwap" title="Поменять RX и TX выбранного канала">RX&lt;-&gt;TX</button>
   <button class="btn ghost" id="btnPmr">PMR</button>
   <button class="btn ghost" id="btnLpd">LPD</button>
   <button class="btn ghost" id="btnMix">LPD+PMR</button>
+  <button class="btn ghost sortonly" id="btnDel">Удалить канал</button>
+  <button class="btn ghost sortonly" id="btnIns">Вставить канал</button>
   <span class="msg" id="count"></span>
   <span id="status"></span>
 </div>
@@ -224,7 +227,7 @@ function newRow(no, defFreq){
     rxtone:"OFF", txtone:"OFF",           // строго из списка
     mode:S.mods[0]||"FM", chMode:S.chmodes[0]||"Analog",
     power:S.defPower||"Low", compander:false, scrambler:"0",
-    scan:"Yes", comment:"" };             // сканировать по умолчанию
+    scan:"Yes", comment:"", txLinked:true };   // TX «связан» с RX, пока его не меняли вручную
 }
 function fmtFreq(v){ return v>0 ? v.toFixed(6) : ""; }
 /* Диапазон по классификации МСЭ (ITU), входящий в частоту МГц */
@@ -308,6 +311,43 @@ function moveRow(from, to){
   rows.forEach((r,i)=>{ r.no=i+1; });
   renderBody();
   selectRow(rows.indexOf(moved)+1);
+}
+/* Удалить выбранный канал: последующие сдвигаются вверх. */
+function deleteSelected(){
+  const sel=document.querySelector("tr.selected");
+  if(!sel){ status("Выберите канал (кликом) в режиме «Сортировка»",true); return; }
+  const no=+sel.dataset.no;
+  if(!(no>=1 && no<=rows.length)){ renderBody(); return; }
+  rows.splice(no-1,1);
+  rows.forEach((r,i)=>r.no=i+1);
+  S.count=rows.length; document.getElementById("cfgCount").value=rows.length;
+  renderBody();
+  status("Канал "+no+" удалён; следующие сдвинуты вверх", false);
+}
+/* Вставить пустой канал перед выбранным (или в конец): последующие сдвигаются вниз. */
+function insertSelected(){
+  const sel=document.querySelector("tr.selected");
+  let pos = sel ? (+sel.dataset.no) : rows.length+1;
+  const nr=newRow(pos, "");
+  rows.splice(Math.min(pos-1, rows.length),0,nr);
+  rows.forEach((r,i)=>r.no=i+1);
+  S.count=rows.length; document.getElementById("cfgCount").value=rows.length;
+  renderBody();
+  selectRow(pos);
+  status("Вставлен пустой канал на место "+pos+"; следующие сдвинуты вниз", false);
+}
+function syncSortUI(){
+  document.querySelectorAll(".sortonly").forEach(b=>b.style.display = MODE==="sort" ? "inline-block" : "none");
+}
+/* Обменять RX и TX выбранного канала */
+function swapSelected(){
+  const sel=document.querySelector("tr.selected");
+  if(!sel){ status("Выберите канал (кликом) для обмена RX/TX",true); return; }
+  const r=rows[+sel.dataset.no-1]; if(!r) return;
+  const t=r.rx; r.rx=r.tx; r.tx=t;
+  r.txLinked=false;                         // TX теперь задан явно
+  renderBody(); selectRow(r.no);
+  status("Канал "+r.no+": RX и TX обменяны", false);
 }
 function shiftOf(r){
   const rx=parseFloat(r.rx), tx=parseFloat(r.tx);
@@ -401,10 +441,11 @@ function renderRow(r, idx){
   }
   const border = fl.dcs?"var(--dcs)" : fl.ctcss?"var(--ctcss)" : fl.shift?"var(--shift)" : fl.nonFM?"var(--mod)" : "";
   if(border) tr.style.borderLeft="4px solid "+border;
-  let el;
+  let txEl=null;
   for(const c of columns()){
     const td=document.createElement("td");
     if(c.type==="lbl"){ renderNoCell(td, r.no, fl); tr.appendChild(td); continue; }
+    let el;
     if(c.type==="sel"){ const optsArr = typeof c.opts==="function" ? c.opts() : c.opts;
         el=elSel(optsArr,()=>{ rows[r.no-1][c.key]=el.value; applyRowVisual(tr, rows[r.no-1]); }); el.value=r[c.key]; }
     else if(c.type==="cb"){ el=document.createElement("input"); el.type="checkbox"; td.className="cb";
@@ -427,18 +468,41 @@ function renderRow(r, idx){
         el.addEventListener("change",()=>{
           const sh=parseFloat((el.value||"").replace(",",".")); const rx=parseFloat(rows[r.no-1].rx);
           if(!isNaN(sh) && rx>0){
-            rows[r.no-1].tx=fmtFreq(rx+sh);
-            const cs=tr.querySelectorAll("td"); const txInp=cs[4].querySelector("input"); if(txInp) txInp.value=rows[r.no-1].tx;
+            const rr=rows[r.no-1]; rr.tx=fmtFreq(rx+sh); rr.txLinked=false;
+            const cs=tr.querySelectorAll("td"); const txInp=cs[4].querySelector("input"); if(txInp) txInp.value=rr.tx;
           }
           el.value=shiftOf(rows[r.no-1]);
         }); }
+    else if(c.key==="tx"){
+      el=document.createElement("input"); el.type="text";
+      txEl=el;                              // запоминаем TX-инпут для авто-синхронизации
+      el.value=r.tx;
+      el.addEventListener("input",()=>{ const rr=rows[r.no-1];
+        rr.tx=el.value; rr.txLinked=false;   // вручную задан TX — больше не «связан»
+        applyRowVisual(tr, rr); });
+    }
+    else if(c.key==="rx"){
+      el=document.createElement("input"); el.type="text";
+      const bi=bandInfo(parseFloat(r.rx)); if(bi.color) el.style.color=bi.color;
+      el.value=r.rx;
+      el.addEventListener("input",()=>{ const rr=rows[r.no-1];
+        const v=parseFloat(el.value);
+        if(rr.txLinked || !rr.tx || (r.rx && rr.tx===r.rx)){   // «связан», пока TX не разделён вручную
+          if(!isNaN(v) && v>0){ rr.tx=v.toFixed(6); if(txEl) txEl.value=rr.tx; }
+        }
+        rr.rx=el.value; applyRowVisual(tr, rr); });
+      el.addEventListener("change",()=>{ const rr=rows[r.no-1];
+        const v=parseFloat(el.value);
+        if(rr.txLinked || !rr.tx){
+          if(!isNaN(v) && v>0){ rr.tx=v.toFixed(6); if(txEl) txEl.value=rr.tx; }
+        }
+        rr.rx=el.value; applyRowVisual(tr, rr); });
+    }
     else { el=document.createElement("input"); el.type="text";
         if(c.key==="name"){ el.maxLength=S.nameLen; el.style.minWidth="120px"; }
-        if(c.key==="rx"){ const bi=bandInfo(parseFloat(r.rx)); if(bi.color) el.style.color=bi.color; }
         el.value=r[c.key];
         el.addEventListener("input",()=>{ const rr=rows[r.no-1];
-          rr[c.key]= c.key==="name" ? el.value.slice(0,S.nameLen) : el.value;
-          if(c.key==="rx"||c.key==="tx") applyRowVisual(tr, rr); }); }
+          rr[c.key]= c.key==="name" ? el.value.slice(0,S.nameLen) : el.value; }); }
     td.appendChild(el); tr.appendChild(td);
     if(MODE==="sort" && /^(INPUT|SELECT)$/.test(el.tagName)) el.disabled=true;
   }
@@ -641,6 +705,7 @@ function importCsv(text, map){
     else if(m.shift>=0){ const sh=parseFloat((f[m.shift]||"").replace(",","."));
       r.tx= !isNaN(sh)? fmtFreq(rx+sh) : fmtFreq(rx); }
     else r.tx = computeTx(rx, f, m);
+    r.txLinked = !(r.tx && r.rx && r.tx!==r.rx);   // связан, если TX пуст или равен RX
     if(m.band>=0){ const b=(f[m.band]||"").toLowerCase(); r.band= b.startsWith("nar")?"Narrow":"Wide"; }
     if(useDirectTones){
       if(m.rxtone>=0) r.rxtone=normTone(f[m.rxtone]);
@@ -760,7 +825,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   for(const v of MOD_PRESETS){ const op=document.createElement("option"); op.value=v; op.textContent=v; modSel.appendChild(op); }
   const toneDl=document.getElementById("toneDataList");
   for(const t of TONE_LIST){ const op=document.createElement("option"); op.value=t; toneDl.appendChild(op); }
-  pre.value="tdh9"; applyPreset(pre);
 
   ["cfgCount","cfgName"].forEach(id=>{
     document.getElementById(id).addEventListener("change",reapplyRows);
@@ -769,7 +833,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.getElementById(id).addEventListener("change",()=>{ readCfg(); renderBody(); });
   });
   document.getElementById("search").addEventListener("input",renderBody);
-  document.getElementById("mode").addEventListener("change",e=>{ MODE=e.target.value; renderBody(); status(MODE==="sort"?"Режим сортировки: перетащите канал на новое место":"Режим редактирования",false); });
+  document.getElementById("mode").addEventListener("change",e=>{ MODE=e.target.value; syncSortUI(); renderBody();
+    status(MODE==="sort"?"Режим сортировки: перетащите канал, удалите/вставьте через кнопки":"Режим редактирования",false); });
+  document.getElementById("btnDel").addEventListener("click",deleteSelected);
+  document.getElementById("btnIns").addEventListener("click",insertSelected);
+  document.getElementById("btnSwap").addEventListener("click",swapSelected);
   document.getElementById("btnScanInv").addEventListener("click",()=>{
     for(const r of rows) r.scan = (r.scan==="No") ? "Yes" : "No";
     renderBody();
@@ -793,6 +861,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("dlgOk").addEventListener("click",confirmImport);
   document.getElementById("dlgCancel").addEventListener("click",closeDialog);
   document.getElementById("btnExport").addEventListener("click",openExportDialog);
+  syncSortUI();
+  try{ pre.value="tdh9"; applyPreset(pre); }
+  catch(err){ status("Ошибка инициализации: "+(err.message||err), true); }
 });
 </script>
 </body>
