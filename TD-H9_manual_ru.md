@@ -777,6 +777,8 @@ https://aprs.fi/
 * [HG-UV98](https://github.com/dkxce/HG-UV98)
 * [lanchonlh_hg-uv98_ru_manual](https://github.com/dkxce/lanchonlh_hg-uv98_ru_manual)
 
+> Для корректного взаимодействия с **Lanchonlh HG-UV98** необходимо настроить **APRS RX Level** на UV98.
+
 ### 7.46 SMS
 
 > При работе с SMS необходимо отключить режим Dual Watch (TDR) и желательно убрать режим энергосбережения
