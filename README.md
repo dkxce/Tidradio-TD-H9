@@ -1,4 +1,6 @@
-# Tidradio TD-H9 Documentation
+# Tidradio TD-H9 Documentation, Specification, Manual, Disasm, APRS
+
+> tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps
 
 Manuals: [Original Manuals](Original%20Manuals)    
 Инструкция: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**, [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx), [TD-H9_manual_ru.html](TD-H9_manual_ru.html)    
