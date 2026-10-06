@@ -123,11 +123,12 @@
 | 12292 | 0x3004 | расширенные функции/регион (ext func) | 58 |
 | 12390 | 0x3066 | GNSS-конфигурация | 21 |
 | 12411 | 0x307B | GNSS-station type | 1 |
-| 12412 | 0x307C | APRS-конфигурация | 152 |
+| 12412 | 0x307C | **APRS-конфигурация** | 152 |
 | 12412 | 0x307C | флаг APRS вкл. | 1 |
-| 12413 | 0x307D | позывной | 6 |
-| 12419 | 0x3083 | SSID | 1 |
-| 12420 | 0x3084 | Icon SSID/Table Primary/Secondary Symbol `/` `\` | 1 |
+| 12413 | 0x307D | callsign (позывной) без SSID | 6 |
+| 12419 | 0x3083 | callsign [SSID](http://aprs.ru/index.php/SSID) (0–15) | 1 |
+| 12420 | 0x3084 | Icon Table Primary/Secondary Symbol `/` `\` (таблица символов) | 1 |
+| 12437 | 0x3095 | комментарий к Beacon-пакету, до 40 символов | 40 |
 | 12502 | 0x30D6 | Icon Main Symbol согласно [таблице](APRS_symbols.md), нумерация от нуля | 1 |
 | 12505 | 0x30D9 | путь, digi №1: имя | 8 |
 | 12513 | 0x30E1 | путь, digi №1: SSID | 1 |
