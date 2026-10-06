@@ -128,7 +128,7 @@
 | 12413 | 0x307D | позывной | 6 |
 | 12419 | 0x3083 | SSID | 1 |
 | 12420 | 0x3084 | Icon SSID/Table Symbol / \\ | 1 |
-| 12502 | 0x30D6 | Icon Main Symbol согласно [таблице](https://how.aprs.works/aprs-symbols/), нумерация от нуля | 1 |
+| 12502 | 0x30D6 | Icon Main Symbol согласно [таблице](APRS_symbols.md), нумерация от нуля | 1 |
 | 12505 | 0x30D9 | путь, digi №1: имя | 8 |
 | 12513 | 0x30E1 | путь, digi №1: SSID | 1 |
 | 12514 | 0x30E2 | путь, digi №2: имя | 8 |
