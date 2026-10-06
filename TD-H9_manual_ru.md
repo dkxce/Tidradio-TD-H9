@@ -647,9 +647,9 @@ GPS координаты - когда удалось определить мес
 | 2 | Beacon Set | Настройка маяка: |
 | - | .. | **Call Sign** - радиолюбителький позывной (до 6 символов, заглавные латиница+цифры; ▲/▼ выбор символа, confirm — ввод, back — удаление, # — сохранить)| 
 | - | .. | [**SSID**](http://aprs.ru/index.php/SSID) (0–15, по умолчанию 11)|
-| - | .. | [**SSID Symbol**](https://www.aprs.org/symbols.html) (/ или \\) согласно [таблице](https://how.aprs.works/aprs-symbols/) |
+| - | .. | [**SSID Symbol**](https://www.aprs.org/symbols.html) (`/` или `\`) согласно [таблице](Customer%20Programming%20Software/Disasm/APRS_symbols.md) |
 | - | .. | **Custom Information** - комментарий к APRS-пакету, до 60 англ символов ASCII |
-| - | .. | [**Icon Settings**](https://www.aprs.org/symbols.html) - просматриваемый справочник согласно [таблице](https://how.aprs.works/aprs-symbols/).  Используйте его, чтобы найти нужный символ, затем введите код в SSID Symbol. |
+| - | .. | [**Icon Settings**](Customer%20Programming%20Software/Disasm/APRS_symbols.md) - просматриваемый справочник согласно [таблице](Customer%20Programming%20Software/Disasm/APRS_symbols.md).  Используйте его, чтобы найти нужный символ, затем введите код в SSID Symbol. |
 | - | .. | **MIC Start** (On/Off)|
 | - | .. | **MIC Type** (MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency)|
 | - | .. | [**Route 1**](Docs/APRS_Digipeater_ru.md): Используйте кнопки ▲/▼ для выбора символа. Нажмите кнопку подтверждения, чтобы выбрать его. Если вы допустили ошибку, нажмите кнопку возврата для удаления|
