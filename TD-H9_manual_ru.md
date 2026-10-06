@@ -768,7 +768,12 @@ https://aprs.fi/
 
 ### 7.45 Схожая по функционалу APRS-радиостанция
 
-**Lanchonlh HG-UV98**:
+**Существенные минусы реализации APRS на H9**:
+* Отсутствие возможности назначения отправки beacon нажатием боковой клавиши (Send Beacon)
+* Отсутствие возможности заглушить звук на APRS-канале (Mute A/B)
+* Отсутствие возможности работать с APRSDroid, только ODMaster
+
+Схожая по функционалу APRS-радиостанция - **Lanchonlh HG-UV98**:
 * [HG-UV98](https://github.com/dkxce/HG-UV98)
 * [lanchonlh_hg-uv98_ru_manual](https://github.com/dkxce/lanchonlh_hg-uv98_ru_manual)
 
