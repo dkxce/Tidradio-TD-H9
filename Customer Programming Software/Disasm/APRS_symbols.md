@@ -1,8 +1,8 @@
 # Таблица иконок APRS (символы)
 
-Источник: https://how.aprs.works/aprs-symbols/
+<img src="aprs_icons/all.png"/>     
 
-Нумерация — **от 0** и совпадает со значением байта иконки в .td (например `0x1B=27` = Motorcycle).
+> Нумерация — **от 0** и совпадает со значением байта иконки в .td (например `0x1B=27` = Motorcycle).
 
 ## Primary Symbol Table
 
@@ -103,7 +103,7 @@
 | 92 | `/}` | 93 |  | <img src="aprs_icons/primary_092.png"/> |
 | 93 | `/~` | 94 |  | <img src="aprs_icons/primary_093.png"/> |
 
-## Alternate Symbol Table
+## Secondary Symbol Table
 
 | № (0-based) | Символ | GPS Cnn | Описание | Иконка |
 |---|---|---|---|---|
