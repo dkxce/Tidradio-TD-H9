@@ -7,6 +7,7 @@ Manuals: [Original Manuals](Original%20Manuals)
 Наиболее полное руководство: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**    
 Описание формата .td: [Disasm](Customer%20Programming%20Software/Disasm)    
 Онлайн-редактор каналов для H9: [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)    
+Онлайн-редактор каналов для H9 с APRS настройками: [**TD APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)    
 Онлайн-редактор каналов CSV: [**UVEditor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html)    
 
 <img src="images/TIDRADIO H9 - 001.png"/>     
