@@ -122,18 +122,37 @@
 | 7983 | 0x1F2F | scanHangTime | 1 |
 | 12292 | 0x3004 | расширенные функции/регион (ext func) | 58 |
 | 12390 | 0x3066 | GNSS-конфигурация | 21 |
-| 12411 | 0x307B | GNSS-station type | 1 |
+| 12411 | 0x307B | GNSS-station type (0 - Fix, 1 - GPS) | 1 |
 | 12412 | 0x307C | **APRS-конфигурация** | 152 |
-| 12412 | 0x307C | флаг APRS вкл. | 1 |
-| 12413 | 0x307D | callsign (позывной) без SSID | 6 |
-| 12419 | 0x3083 | callsign [SSID](http://aprs.ru/index.php/SSID) (0–15) | 1 |
+| 12412 | 0x307C | APRS Switch (0 - Off, 1 - On) | 1 |
+| 12413 | 0x307D | Callsign (позывной) без SSID | 6 |
+| 12419 | 0x3083 | Callsign [SSID](http://aprs.ru/index.php/SSID) (0–15) | 1 |
 | 12420 | 0x3084 | Icon Table Primary/Secondary Symbol `/` `\` (таблица символов) | 1 |
-| 12437 | 0x3095 | комментарий к Beacon-пакету, до 40 символов | 40 |
+| 12437 | 0x3095 | Комментарий к Beacon-пакету, до 40 символов | 40 |
 | 12502 | 0x30D6 | Icon Main Symbol согласно [таблице](APRS_symbols.md), нумерация от нуля | 1 |
-| 12505 | 0x30D9 | путь, digi №1: имя | 8 |
-| 12513 | 0x30E1 | путь, digi №1: SSID | 1 |
-| 12514 | 0x30E2 | путь, digi №2: имя | 8 |
-| 12522 | 0x30EA | путь, digi №2: SSID | 1 |
+| 12503 | 0x30D7 | MIC-E Start (0 - Off, 1 - On)  | 1 |
+| 12504 | 0x30D8 | MIC-E Type (0..7)  | 1 |
+| 12505 | 0x30D9 | Route-1: Name (WIDE1) | 8 |
+| 12513 | 0x30E1 | Route-1 Count | 1 |
+| 12514 | 0x30E2 | Route-2: Name (WIDE2) | 8 |
+| 12522 | 0x30EA | Route-2 Count | 1 |
+| 12523 | 0x30EB | Report Voltage (0 - Off, 1 - On) | 1 |
+| 12524 | 0x30EC | Report Sats (0 - Off, 1 - On) | 1 |
+| 12525 | 0x30ED | Report Mileage (0 - Off, 1 - On) | 1 |
+| 12526 | 0x30EE | PTT Linkage (0 - Off, 1 - On) | 1 |
+| 12527 | 0x30EF | Timed Beacon (0 - Off, 1 - On) | 1 |
+| 12528 | 0x30F0 | Time Interval (Uint16 Little-Endian) | 2 |
+| 12530 | 0x30F2 | APRS-Relay DIGI Forward Channel (0 - Channel A, 1 - Channel B, 2 - A+B) | 1 |
+| 12531 | 0x30F3 | APRS-Relay DIGI1 Enabled (0 - Off, 1 - On) | 1 |
+| 12532 | 0x30F4 | APRS-Relay DIGI1 Name (WIDE1) | 8 |
+| 12540 | 0x30FC | APRS-Relay DIGI2 Enable (0 - Off, 1 - On) | 1 |
+| 12541 | 0x30FD | APRS-Relay DIGI2 Name (WIDE2) | 8 |
+| 12549 | 0x3105 | Wait Before Forward (0..9) | 1 |
+| 12550 | 0x3106 | APRS-Relay Remote Password (ASCII Digits 0-9) | 8 |
+| 12558 | 0x310E | APRS RX Channel (0 - Off, 1 - A, 2 - B) | 1 |
+| 12559 | 0x310F | APRS TX Channel (0 - A-Lock, 1 - B-Lock, 2 - A-Auto, 3 - B-Auto, 4 - A+B) | 1 |
+| 12560 | 0x3110 | APRS PTT Priority (0 - Call, 1 - APRS) | 1 |
+| 12563 | 0x3113 | APRS RX Auto Popup (0 - Off, 1 - On) | 1 |
 | 12564 | 0x3114 | `CPS_FULL_BUFFER_SIZE` — конец реальных данных | |
 | 32768 | 0x8000 | расширенные каналы (`CPS_EXT_CHANNEL_START…0xCB8D`) | |
 
