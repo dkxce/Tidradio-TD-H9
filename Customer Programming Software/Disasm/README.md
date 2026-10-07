@@ -137,7 +137,6 @@
 | 12406 | 0x3076 | Fixed Altitude (BigEndian Int32, value*1e-6) | 4 |
 | 12410 | 0x307A | *RESERVED* | 1 |
 | 12411 | 0x307B | GNSS-station type (0 - Fix, 1 - GPS) | 1 |
-| 12412 | 0x307C | 
 | 12412 | 0x307C | [**APRS-конфигурация**](aprs.md) | 152 |
 | 12412 | 0x307C | APRS Switch (0 - Off, 1 - On) | 1 |
 | 12413 | 0x307D | Callsign (позывной) без SSID | 6 |
