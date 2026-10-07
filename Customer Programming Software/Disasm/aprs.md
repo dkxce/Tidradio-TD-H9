@@ -30,7 +30,7 @@
 | `0x3085` | `0x0009` | 12421 | 16 | — | *резерв / неизвестно* |
 | `0x3095` | `0x0019` | 12437 | 40 | ASCII | **Комментарий** Beacon-пакета (до 40 симв.; набор: англ. буквы, цифры, пробел, `: . , - ? ! @`) |
 | `0x30BD` | `0x0041` | 12477 | 25 | — | *резерв / неизвестно* |
-| `0x30D6` | `0x005A` | 12502 | 1 | uint8 | **Icon Main Symbol** — индекс 0..93 (см. `APRS_symbols.md`) |
+| `0x30D6` | `0x005A` | 12502 | 1 | uint8 | **Icon Main Symbol** — индекс 0..93 (см. [`APRS_symbols.md`](APRS_symbols.md)) |
 | `0x30D7` | `0x005B` | 12503 | 1 | bit | **MIC-E Start** (0 – Off, 1 – On) |
 | `0x30D8` | `0x005C` | 12504 | 1 | uint8 | **MIC-E Type** (0..7): 0 Off Duty, 1 En Route, 2 In Service, 3 Returning, 4 Committed, 5 Special, 6 Priority, 7 Emergency |
 | `0x30D9` | `0x005D` | 12505 | 8 | ASCII | **Route-1: Name** (например `WIDE1`) |
