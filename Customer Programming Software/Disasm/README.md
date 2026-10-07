@@ -490,3 +490,4 @@ num2 = HasGNSS() ? (HasAPRS()   ? 12564     // APRS-модели
 1. [**TDRadioCodeplug**](TDRadioCodeplug.cs) - класс для работы с .td файлом.
 2. [**TidRadioTool**](TDRadioTool/bin) - консольная утилита
 3. [**TD-Editor**](td-editor.html) - html-редактор каналов [онлайн](https://dkxce.github.io/temporary/td-h9/td-editor.html)
+4. [**TD-APRS-Editor**](td-editor-aprs.html) - aprs-html-редактор каналов [онлайн](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)
