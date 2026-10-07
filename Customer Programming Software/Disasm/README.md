@@ -130,7 +130,14 @@
 | 12393 | 0x3069 | Speed Unit (0 - Km/h, 1 - Knot, 2 - m/s) | 1 |
 | 12394 | 0x306A | Dist Unit (0 - Km/h, 1 - Sea mile, 2 - Mile) | 1 |
 | 12395 | 0x306B | Alt Unit (0 - Meters, 1 - Ft) | 1 |
+| 12396 | 0x306C | Fixed Longitude (BigEndian UInt32 1e-6) | 4 |
+| 12400 | 0x3070 | Fixed Longitude E/W (ASCII) | 1 |
+| 12401 | 0x3071 | Fixed Latitude (BigEndian UInt32 1e-6) | 4 |
+| 12405 | 0x3075 | Fixed Latitude N/S (ASCII) | 1 |
+| 12406 | 0x3076 | Fixed Altitude (BigEndian Int32 1e-6 | 4 |
+| 12410 | 0x307A | *RESERVED* | 1 |
 | 12411 | 0x307B | GNSS-station type (0 - Fix, 1 - GPS) | 1 |
+| 12412 | 0x307C | 
 | 12412 | 0x307C | [**APRS-конфигурация**](aprs.md) | 152 |
 | 12412 | 0x307C | APRS Switch (0 - Off, 1 - On) | 1 |
 | 12413 | 0x307D | Callsign (позывной) без SSID | 6 |
