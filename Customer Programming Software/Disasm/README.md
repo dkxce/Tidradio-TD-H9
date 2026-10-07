@@ -128,7 +128,9 @@
 | 12413 | 0x307D | Callsign (позывной) без SSID | 6 |
 | 12419 | 0x3083 | Callsign [SSID](http://aprs.ru/index.php/SSID) (0–15) | 1 |
 | 12420 | 0x3084 | Icon Table Primary/Secondary Symbol `/` `\` (таблица символов) | 1 |
+| 12421 | 0x3085 | *RESERVED* | 16 |
 | 12437 | 0x3095 | Комментарий к Beacon-пакету, до 40 символов | 40 |
+| 12477 | 0x30BD | *RESERVED* | 25 |
 | 12502 | 0x30D6 | Icon Main Symbol согласно [таблице](APRS_symbols.md), нумерация от нуля | 1 |
 | 12503 | 0x30D7 | MIC-E Start (0 - Off, 1 - On)  | 1 |
 | 12504 | 0x30D8 | MIC-E Type (0..7)  | 1 |
@@ -152,6 +154,7 @@
 | 12558 | 0x310E | APRS RX Channel (0 - Off, 1 - A, 2 - B) | 1 |
 | 12559 | 0x310F | APRS TX Channel (0 - A-Lock, 1 - B-Lock, 2 - A-Auto, 3 - B-Auto, 4 - A+B) | 1 |
 | 12560 | 0x3110 | APRS PTT Priority (0 - Call, 1 - APRS) | 1 |
+| 12561 | 0x3111 | *RESERVED* | 2 |
 | 12563 | 0x3113 | APRS RX Auto Popup (0 - Off, 1 - On) | 1 |
 | 12564 | 0x3114 | `CPS_FULL_BUFFER_SIZE` — конец реальных данных | |
 | 32768 | 0x8000 | расширенные каналы (`CPS_EXT_CHANNEL_START…0xCB8D`) | |
