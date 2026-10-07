@@ -76,3 +76,9 @@
 - «Неизвестные» области (`0x3085–0x3094`, `0x30BD–0x30D5`, `0x3111–0x3112`) в протестированных файлах заполнены нулями — вероятно, зарезервированы.
 - `Report Volt/Sats/Mile` — одиночные биты; остальные биты соответствующих байтов не трогаются.
 - `Time Interval` — 16-bit little-endian.
+
+
+
+## Пример реализации
+
+1. [**TD-APRS-Editor**](td-editor-aprs.html) - aprs-html-редактор каналов [онлайн](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)
