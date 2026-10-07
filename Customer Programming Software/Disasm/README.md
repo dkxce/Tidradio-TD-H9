@@ -123,7 +123,13 @@
 | 7981 | 0x1F2D | vfoScanLowerLimit | 2 |
 | 7983 | 0x1F2F | scanHangTime | 1 |
 | 12292 | 0x3004 | расширенные функции/регион (ext func) | 58 |
-| 12390 | 0x3066 | GNSS-конфигурация | 21 |
+| 12390 | 0x3066 | **GNSS-конфигурация** | 21 |
+| 12390 | 0x3066 | GPS On/Off (0 - Off, 1 - On) | 1 |
+| 12391 | 0x3067 | GPS Position Type (0 - Deg, 1 - Deg.min, 2 - Deg.min.sec) | 1 |
+| 12392 | 0x3068 | GPS Time Zone (0(UTC-12)..24(UTC+12)) | 1 |
+| 12393 | 0x3069 | Speed Unit (0 - Km/h, 1 - Knot, 2 - m/s) | 1 |
+| 12394 | 0x306A | Dist Unit (0 - Km/h, 1 - Sea mile, 2 - Mile) | 1 |
+| 12395 | 0x306B | Alt Unit (0 - Meters, 1 - Ft) | 1 |
 | 12411 | 0x307B | GNSS-station type (0 - Fix, 1 - GPS) | 1 |
 | 12412 | 0x307C | [**APRS-конфигурация**](aprs.md) | 152 |
 | 12412 | 0x307C | APRS Switch (0 - Off, 1 - On) | 1 |
