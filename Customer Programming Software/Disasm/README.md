@@ -123,7 +123,7 @@
 | 12292 | 0x3004 | расширенные функции/регион (ext func) | 58 |
 | 12390 | 0x3066 | GNSS-конфигурация | 21 |
 | 12411 | 0x307B | GNSS-station type (0 - Fix, 1 - GPS) | 1 |
-| 12412 | 0x307C | **APRS-конфигурация** | 152 |
+| 12412 | 0x307C | [**APRS-конфигурация**](aprs.md) | 152 |
 | 12412 | 0x307C | APRS Switch (0 - Off, 1 - On) | 1 |
 | 12413 | 0x307D | Callsign (позывной) без SSID | 6 |
 | 12419 | 0x3083 | Callsign [SSID](http://aprs.ru/index.php/SSID) (0–15) | 1 |
