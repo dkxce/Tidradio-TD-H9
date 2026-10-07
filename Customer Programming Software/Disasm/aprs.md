@@ -17,6 +17,7 @@
   | identity | резерв | beacon | иконка | путь | relay | chan |
 ```
 
+[APRS Меню](../../TD-H9_manual_ru.md#740-aprs)
 | Abs | Rel | Dec | Длина | Тип | Поле |
 |---|---|---|---|---|---|
 | `0x307C` | `0x0000` | 12412 | 1 | bit | **APRS Switch** (0 – Off, 1 – On) |
