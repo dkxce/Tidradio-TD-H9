@@ -88,10 +88,27 @@ def pack(src_path: str, out_fw: str, out_bin: str) -> dict:
 
 
 def find_stock_fw(src_path: str):
-    """Locate a stock .fw template: next to the script or input.
+    """Locate a stock .fw template for rebuild.
+
+    Priority:
+      1) if src_path is a .zip produced by fw_unpack_gui.py → use its 'original.fw'.
+      2) a .fw with the same stem next to the input.
+      3) a stock .fw sitting next to this script.
 
     Returns the raw bytes of the .fw, or None.
     """
+    if Path(src_path).suffix.lower() == ".zip":
+        try:
+            with zipfile.ZipFile(src_path) as z:
+                if "original.fw" in z.namelist():
+                    d = z.read("original.fw")
+                    try:
+                        U.parse_ufw_header(d); U.get_flash_inner(d)
+                        return d
+                    except Exception:
+                        pass
+        except Exception:
+            pass
     candidates = [
         HERE / "TD-H9-V1.0.33.fw",
         Path(src_path).parent / "TD-H9-V1.0.33.fw",

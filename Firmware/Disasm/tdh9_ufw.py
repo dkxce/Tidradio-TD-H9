@@ -60,19 +60,34 @@ def decrypt_app_area(inner: bytes) -> bytes:
 
 
 def parse_ufw_header(fw: bytes):
-    """Parse the UFW header. Returns (plain_header_bytes, num_entries).
-    The returned header has both the fixed part and the entry block decrypted."""
+    """Parse the UFW header + full entry list.
+
+    Returns (plain_header_bytes, num_entries). The returned header has the fixed
+    part decrypted; the entry blocks are decrypted in place within the returned
+    (possibly larger) bytearray.
+
+    The header block on disk is usually 0x200 bytes, but for firmware with more
+    entries the entry list may extend beyond 0x200; we therefore enlarge the
+    buffer to cover all entries.
+    """
     if len(fw) < 0x200:
         raise ValueError("file smaller than 0x200 bytes - not an UFW image")
-    hdr = bytearray(fw[:0x200])
-    _jl_enc(hdr, 0, 0x40, UFW_KEY)              # decrypt fixed header part
-    hdr_crc, list_crc, image_size, n, unk, hsize, chip = struct.unpack_from("<HHIHHI48s", hdr, 0)
+    _enc = _jl_enc
+    # decrypt the fixed 0x40-byte part to read num_entries
+    tmp = bytearray(fw[:0x40])
+    _enc(tmp, 0, 0x40, UFW_KEY)
+    _hdr_crc, _list_crc, _image_size, n, _unk, hsize, _chip = struct.unpack_from("<HHIHHI48s", tmp, 0)
     if hsize != 0x200:
         raise ValueError(f"unexpected header size 0x{hsize:X}")
-    if n <= 0 or 0x40 + n * 0x50 > len(hdr):
+    if n <= 0 or 0x40 + n * 0x50 > len(fw):
         raise ValueError(f"invalid entry count n={n}")
+
+    # take the whole header + all entry records
+    end = max(0x200, 0x40 + n * 0x50)
+    hdr = bytearray(fw[:end])
+    _enc(hdr, 0, 0x40, UFW_KEY)                     # decrypt fixed part
     for off in range(0x40, 0x40 + n * 0x50, 0x50):
-        _jl_enc(hdr, off, 0x50, UFW_KEY)        # decrypt entry block
+        _enc(hdr, off, 0x50, UFW_KEY)               # decrypt each entry
     return hdr, n
 
 
@@ -275,7 +290,9 @@ def build_ufw(inner_flash: bytes, orig_fw: bytes) -> bytes:
     for off in range(0x40, 0x40 + n * 0x50, 0x50):
         _jl_enc(hdr, off, 0x50, UFW_KEY)
     _jl_enc(hdr, 0, 0x40, UFW_KEY)
-    fw[:0x200] = hdr
+    # write back the fixed header part AND the (possibly extended) entry list
+    fw[0x40: 0x40 + n * 0x50] = hdr[0x40: 0x40 + n * 0x50]
+    fw[:0x40] = hdr[:0x40]
     return bytes(fw)
 
 

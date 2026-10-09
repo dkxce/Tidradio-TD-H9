@@ -76,10 +76,12 @@ def unpack_file(path: str, out_zip: str) -> dict:
         z.writestr("info.txt", render_info(info))
         z.writestr("app.bin", app)
         z.writestr("app_dec_full.bin", dec_full)      # whole decrypted app area
+        if ext == ".fw":
+            z.writestr("original.fw", data)           # full source .fw as a rebuild template
+            hdr, _ = U.parse_ufw_header(data)
+            z.writestr("header_ufw.bin", hdr)
         for k, v in payload.items():
             z.writestr(k, v)
-        if ext == ".fw":
-            z.writestr("header_ufw.bin", hdr)
     return info
 
 
