@@ -795,7 +795,7 @@ https://aprs.fi/
 | 3 | Inbox | Входящие сообщения |
 | 4 | Outbox | Исходящие сообщения |
 | 5 | Draft | Шаблоны сообщений |
-| 6 | SMS Mode | Режим SMS |
+| 6 | SMS Mode | Режим SMS (RF / [APRS](https://www.aprs.org/aprs-messaging.html)) |
 | 7 | RX Filter | Фильтр приема сообщений |
 | 8 | Statisctics | Статистика сообщений (использование памяти) |
 
