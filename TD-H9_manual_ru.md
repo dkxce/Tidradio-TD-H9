@@ -782,6 +782,8 @@ https://aprs.fi/
 * [HG-UV98](https://github.com/dkxce/HG-UV98)
 * [lanchonlh_hg-uv98_ru_manual](https://github.com/dkxce/lanchonlh_hg-uv98_ru_manual)
 
+> У HG-UV98 диапазонные полосовые фильтры (BPF) лучше, чем у H9. У H9 лучше избирательность APRS-сигнала.
+
 > Для корректного взаимодействия с **Lanchonlh HG-UV98** необходимо настроить **APRS RX Level** на UV98.
 
 ### 7.46 SMS
