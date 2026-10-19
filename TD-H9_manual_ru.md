@@ -1,6 +1,6 @@
 # TIDRADIO TD-H9 — Руководство пользователя
 
-Перевод официального руководства пользователя ([Ham Version, 71 стр.](Original%20Manuals/H9_Ham_Version_User_Manual.pdf)), измененное и дополненное (v3).
+**Firmware 1.0.33** - Перевод официального руководства пользователя ([Ham Version, 71 стр.](Original%20Manuals/H9_Ham_Version_User_Manual.pdf)), измененное и дополненное (v4).     
 
 ![Рация TIDRADIO TD-H9](pdf_images/p001_IM8_633x452.jpg)
 
