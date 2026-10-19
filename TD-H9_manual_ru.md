@@ -613,11 +613,11 @@
    
 <img src="pdf_images/TID-MIC.png" width="700"/>  
 
-При работе с [**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth) ощущается существенная задержка порядка *1~2.5* секунды при нажатии тангенты на передачу и около *1~1.5* секунды при приеме сигнала. При нажатии тангенты сперва открывается аудио bluetooth-канал, только после этого открывается радиочастотный тракт на передачу. Это следует учитывать.       
+При работе с [**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth) ощущается существенная задержка порядка *1~2.5* секунды при нажатии тангенты на передачу и около *1~1.5* секунды при приеме сигнала. При нажатии тангенты сперва открывается аудио bluetooth-канал, только после этого открывается радиочастотный тракт на передачу и загорается красный индикатор. Это следует учитывать.       
 
 <img src="pdf_images/TID-PTT.png" width="400"/>    
 
-При работе с [**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button) задежрка существенно ниже чем с **TID-MIC** и составляет *0.5~1.5* секунды, т.е. рация открывается на передачу быстрее. При подключении TID-PTT к смартфону **ODmaster** работает с устройством <img src="pdf_images/Bluetooth.png" width="16"/>**TID-PTTxxxxxx-A** (скорость *38400* baud), при сопряжении через Bluetooth-меню андроида сопрягаться с этим устройством не рекомендуется - **ODMaster** может его не увидеть. Вместо этого существует устройство <img src="pdf_images/Headset.png" width="16"/>**TID-PTTxxxxxx-B**.           
+При работе с [**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button) задежрка существенно ниже чем с **TID-MIC** и составляет *0.2~1* секунды, т.е. рация открывается на передачу быстрее. При подключении TID-PTT к смартфону **ODmaster** работает с устройством <img src="pdf_images/Bluetooth.png" width="16"/>**TID-PTTxxxxxx-A** (скорость *38400* baud), при сопряжении через Bluetooth-меню андроида сопрягаться с этим устройством не рекомендуется - **ODMaster** может его не увидеть. Вместо этого существует устройство <img src="pdf_images/Headset.png" width="16"/>**TID-PTTxxxxxx-B**.           
 
 ### 7.37 Обновление прошивки
 
