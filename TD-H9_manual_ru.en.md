@@ -1,4 +1,4 @@
-<!-- markdown-translator:5b611641ac3c3839df9f67cf27a12c1dc0f58151bd843599179133e1454e2d8b -->
+<!-- markdown-translator:955c86b9caca2d51da262b39ace07c643e9f997f9b343c61df23b8b22aecc4f7 -->
 # TIDRADIO TD-H9 - User Manual
 
 **Firmware 1.0.33**- Translation of the official user manual ([Ham Version, 71 p.](Original%20Manuals/H9_Ham_Version_User_Manual.pdf)), modified and expanded (v4).
@@ -101,7 +101,7 @@ Your walkie-talkie contains a low-power transmitter. When you press the PTT (tal
 
 **Complies with RF exposure standards.**&#x54;his device complies with: FCC 47 CFR § 1.1307, 1.1310 and 2.1093; ANSI/IEEE C95.1:2005; Canada RSS102 Issue 5 (March 2015); IEEE C95.1:2005 Edition.
 
-**RF Exposure Information.**&#x44;o not allow children to use the radio without adult supervision. Use only the supplied or approved antenna; A damaged antenna may cause a minor burn if it comes into contact with skin. When working head-to-face, keep the radio 1 inch (2.5 cm) away from your face. To wear on the body, use the included belt clip.
+**RF Exposure Information.**&#x44;o not allow children to use the radio without adult supervision. Use only the supplied or approved antenna; A damaged antenna may cause a minor burn if it comes into contact with skin. When operating head-to-face, keep the radio 1 inch (2.5 cm) away from your face. To wear on the body, use the included belt clip.
 
 ### 1.2 Main features
 
@@ -165,7 +165,7 @@ Use only original memory. Do not short-circuit the battery contacts, do not thro
 ### 2.4 How to charge
 
 1. Connect the adapter to a power outlet, then to the DC connector on the back of the charger (the indicator blinks orange).
-2. Install the battery or radio into the charger (red indicator - charging in progress).
+2. Install the battery or walkie-talkie in the charger (red indicator - charging in progress).
 3. Full charge ≈ 2–5 hours; When the green light turns on, charging is complete. Remove the device.
 
 When charging the radio**on**The green indicator does not light up - the radio needs to be turned off.
@@ -193,7 +193,7 @@ When charging the radio**on**The green indicator does not light up - the radio n
 
 ## 3. Installation of accessories
 
-* **Antenna:**&#x73;crew clockwise, remove counterclockwise (by the base).
+* **Antenna:**&#x73;crew clockwise, remove counterclockwise (at the base).
 * **Belt clip:**&#x74;wo screws on the back side above the battery - unscrew, thread the clamp, screw back.
 * **Battery:**&#x74;he radio is turned off; Align the guides and slide them up until they click. Removal - release button on the bottom of the battery.
 * **Garnish:**&#x6F;pen the rubber plug and insert the plug into the double MIC/SP connector.
@@ -359,7 +359,7 @@ Turn the knob clockwise/counterclockwise.
 
 ### 5.3 Channel selection
 
-Two modes:**VFO (frequency)**— for experimentation and quick programming “in the field”;**MR (channel)**- for everyday use of pre-programmed channels. Switching with ▲/▼ keys or encoder.
+Two modes:**VFO (frequency)**— for experimentation and quick programming “in the field”;**MR (channel)**- for everyday use of pre-programmed channels. Switching with the ▲/▼ keys or the encoder.
 
 ### 5.4 Challenge
 
@@ -709,7 +709,7 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 2.10 | .. |[**Route 2**](Docs/APRS_Digipeater_ru.md): Use the ▲/▼ buttons to select a character. Click the confirm button to select it. If you made a mistake, please click the back button to delete|
 | 2.11 | .. |[**Route 2 Count**](Docs/APRS_Digipeater_ru.md): (0–9)|
 | 2.12 | .. |**Report Voltage**-send battery information (default ON)|
-| 2.13 | .. |**Report Sats**-send information about satellites (ON by default)|
+| 2.13 | .. |**Report Sats**-send information about satellites (ON by default) |
 | 2.14 | .. |**Report Mileage**-send mileage information (default OFF)|
 | 3 | Beacon Type | Setting up beacon transmission: |
 | 3.1 | .. |**PTT Linkage**(beacon each time PTT is pressed/released; default is OFF)|
@@ -724,7 +724,7 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 4.6 | .. |**Wait Before Forwarding**- delay before retransmission (0–9c). If there are several repeaters, it allows you to spread the transmission time and avoid collisions of beacons on the air |
 | 4.7 | .. |**Remote Password**- password for remote control of the repeater via KISS (TNC) (default 123456). |
 | 5 | Advanced Set | Advanced reception/transmission settings: |
-| 5.1 | .. |**APRS RX CH**- on which channel to receive APRS (OFF / A / (B)) |
+| 5.1 | .. |**APRS RX CH**- on which channel to receive APRS (OFF / A / (B))|
 | 5.2 | .. |**APRS TX CH**- on which channel to transmit APRS (OFF / A / (B)) |
 | 5.3 | .. |**PTT Priority**- priority for simultaneous voice/APRS transmission (Talk / (APRS))|
 | - | .. |**RX Decode Tone**- sound signal upon successful reception and decoding of APRS (default ON)|
@@ -1052,6 +1052,8 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | Drivers |[Drivers](Drivers)|
 | Setting up a walkie-talkie on a PC |[TIDRadioCPS](Customer%20Programming%20Software)|
 | Setting up a walkie-talkie on Android |[Odmaster](https://play.google.com/store/apps/details?id=com.tid.walkie)|
+| Alternative APRSDroid |[APRSDroid 9M2PJU Mod](https://aprsdroid.hamradio.my/)|
+| Android javAPRSSrvr IGate |[jawaparsarvar gate](https://www.ae5pl.net/javAPRSSrvrIGate.aspx)|
 | Software and firmware |[Firmware](Firmware)|
 | Online channel editor |[**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)|
 | Other software (APRS) |[github.com/dkxce](https://github.com/dkxce?tab=repositories\&q=aprs)|
