@@ -1,9 +1,14 @@
-<!-- markdown-translator:e63b41d61fcc1e8edc922b7cb8949abe4553a3b950a7f0ba643a93efa26bc008 -->
+<!-- markdown-translator:5b611641ac3c3839df9f67cf27a12c1dc0f58151bd843599179133e1454e2d8b -->
 # TIDRADIO TD-H9 - User Manual
 
 **Firmware 1.0.33**- Translation of the official user manual ([Ham Version, 71 p.](Original%20Manuals/H9_Ham_Version_User_Manual.pdf)), modified and expanded (v4).
 
 ![Рация TIDRADIO TD-H9](pdf_images/p001_IM8_633x452.jpg)
+
+## Current links to the manual
+
+.md:[**RU**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.html)  [**IN**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.en.html)\
+.docx[**RU**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.docx)  [**IN**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.en.docx)
 
 ## Content
 
@@ -96,7 +101,7 @@ Your walkie-talkie contains a low-power transmitter. When you press the PTT (tal
 
 **Complies with RF exposure standards.**&#x54;his device complies with: FCC 47 CFR § 1.1307, 1.1310 and 2.1093; ANSI/IEEE C95.1:2005; Canada RSS102 Issue 5 (March 2015); IEEE C95.1:2005 Edition.
 
-**RF Exposure Information.**&#x44;o not allow children to use the radio without adult supervision. Use only the supplied or approved antenna; A damaged antenna may cause a minor burn if it comes into contact with skin. When operating head-to-face, keep the radio 1 inch (2.5 cm) away from your face. To wear on the body, use the included belt clip.
+**RF Exposure Information.**&#x44;o not allow children to use the radio without adult supervision. Use only the supplied or approved antenna; A damaged antenna may cause a minor burn if it comes into contact with skin. When working head-to-face, keep the radio 1 inch (2.5 cm) away from your face. To wear on the body, use the included belt clip.
 
 ### 1.2 Main features
 
@@ -124,7 +129,7 @@ Your walkie-talkie contains a low-power transmitter. When you press the PTT (tal
 * Keypad lock, Roger Beep.
 * Display when turned on, charging and programming via USB-C, Kenwood 2-pin connector.
 * Antenna connector on the SMA-Male radio, on the SMA-Female antenna.
-* Support for receiving NOAA weather (USA and Canada).
+* Supports NOAA weather reception (USA and Canada).
 * GPS, Bluetooth (setup via Odmaster, headsets), APRS.
 * CPU 240 MGc, RAM 120 MB, flash 16 MB, radio chip Beken BK4819, MK PY32F003.
 * Dimensions: 140×53×32 mm, weight 190 g.
@@ -664,7 +669,7 @@ There are two ways to connect the radio to your computer for programming and fir
 | No. | Function | Description |
 |---|---|---|
 | 1 | GPS ON/OFF | On/off GPS. |
-| 2 | GPS Information | Antenna, longitude, latitude, date, time, altitude, course, speed, satellites. |
+| 2 | GPS Information | Antenna, longitude, latitude, date, time, altitude, heading, speed, satellites. |
 | 3 | Position | Coordinate format: (D) / DM / DMS - Deg, Deg.min, Deg.min.s. |
 | 4 | Time Zone | Time zone UTC-12…UTC+12 (default +3). |
 | 5 | Speed ​​Unit | Speed ​​units: (Kmph) / Knot / Mpt. |
@@ -704,7 +709,7 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 2.10 | .. |[**Route 2**](Docs/APRS_Digipeater_ru.md): Use the ▲/▼ buttons to select a character. Click the confirm button to select it. If you made a mistake, please click the back button to delete|
 | 2.11 | .. |[**Route 2 Count**](Docs/APRS_Digipeater_ru.md): (0–9)|
 | 2.12 | .. |**Report Voltage**-send battery information (default ON)|
-| 2.13 | .. |**Report Sats**-send information about satellites (ON by default) |
+| 2.13 | .. |**Report Sats**-send information about satellites (ON by default)|
 | 2.14 | .. |**Report Mileage**-send mileage information (default OFF)|
 | 3 | Beacon Type | Setting up beacon transmission: |
 | 3.1 | .. |**PTT Linkage**(beacon each time PTT is pressed/released; default is OFF)|
