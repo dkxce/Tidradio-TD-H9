@@ -5,7 +5,7 @@
 Manuals: [Original Manuals](Original%20Manuals)    
 Инструкция: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**, [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx), [TD-H9_manual_ru.html](TD-H9_manual_ru.html)    
 Наиболее полное руководство: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**    
-English auto translate manual: **[TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md)**
+English auto translate manual: **[TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md)**      
 Описание формата .td: [Disasm](Customer%20Programming%20Software/Disasm)    
 Онлайн-редактор каналов для H9: [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)    
 Онлайн-редактор каналов для H9 с APRS настройками: [**TD APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)    
