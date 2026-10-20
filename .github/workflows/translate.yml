@@ -14,12 +14,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Auto Translate Markdown
-        uses: gaurav-nelson/github-action-markdown-translator@v1.1.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          source: 'TD-H9_manual_ru.md'
-          target: 'TD-H9_manual_en.md'  # Создается файл с этим именем
-          to: 'en'
+          node-version: 20.x
+
+      - name: Auto Translate Markdown
+        uses: ikhsan3adi/markdown-translator@master
+        with:
+          LANG: en
+          FILES: TD-H9_manual_ru.md
+
+      - name: Rename translated file
+        run: |
+          # Экшен создает файл с суффиксом языка перед расширением (например, TD-H9_manual_ru.en.md)
+          # Переименовываем его в нужный вам вид TD-H9_manual_en.md
+          if [ -f "TD-H9_manual_ru.en.md" ]; then
+            mv TD-H9_manual_ru.en.md TD-H9_manual_en.md
+          fi
 
       - name: Commit and Push Changes
         run: |
