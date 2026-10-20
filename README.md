@@ -3,14 +3,24 @@
 
 > tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps
 
-Manuals: [Original Manuals](Original%20Manuals)    
-Инструкция: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**, [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx), [TD-H9_manual_ru.html](TD-H9_manual_ru.html)    
-Наиболее полное руководство: **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)**    
-English auto translate manual: **[TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md)**      
-Описание формата .td: [Disasm](Customer%20Programming%20Software/Disasm)    
-Онлайн-редактор каналов для H9: [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)    
-Онлайн-редактор каналов для H9 с APRS настройками: [**TD APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)    
-Онлайн-редактор каналов CSV: [**UVEditor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) (Универсальный редактор каналов)    
+#### Manuals
+
+| Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) |
+|---|---|---|---|
+| Original | EN | PDF | [Original Manuals](Original%20Manuals) |
+| Custom (dkxce) | EN | .md | **[TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md)** |
+| Custom (dkxce) | EN | .docx | [TD-H9_manual_ru.en.docx](TD-H9_manual_ru.en.docx) |
+| Custom (dkxce) | RU | .md | **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)** |
+| Custom (dkxce) | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) |
+| Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  |
+
+#### Онлайн-редактор каналов
+
+- [**H9 TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)
+- [**H9 APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)
+- [**CSV Editor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) (Универсальный редактор каналов)   
+
+---
 
 <img src="images/TIDRADIO H9 - 001.png"/>     
 <img src="images/TIDRADIO H9 - 002.png"/>     
