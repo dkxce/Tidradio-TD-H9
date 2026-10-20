@@ -22,27 +22,8 @@
 
 - [**H9 TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) (Channels)
 - [**H9 APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html) (Channels + GNSS + APRS)
-- [**CSV Editor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) (Универсальный редактор каналов)   
+- [**CSV Editor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) (Универсальный редактор каналов)
 
----
+#### Media
 
-<img src="images/TIDRADIO H9 - 001.png"/>     
-<img src="images/TIDRADIO H9 - 002.png"/>     
-<img src="images/TIDRADIO H9 - 003.png"/>     
-<img src="images/TIDRADIO H9 - 004.png"/>     
-<img src="images/TIDRADIO H9 - 005.png"/>     
-<img src="images/TIDRADIO H9 - 006.png"/>     
-<img src="images/TIDRADIO H9 - 007.png"/>     
-<img src="images/TIDRADIO H9 - 008.png"/>     
-<img src="images/TIDRADIO H9 - 009.jpg"/>     
-<img src="images/TIDRADIO H9 - 010.jpg"/>     
-<img src="images/TIDRADIO H9 - 011.jpg"/>     
-<img src="images/TIDRADIO H9 - 012.jpg"/>     
-<img src="images/TIDRADIO H9 - 013.jpg"/>     
-<img src="images/TIDRADIO H9 - 014.jpg"/>     
-<img src="images/TIDRADIO H9 - 015.jpg"/>     
-<img src="images/TIDRADIO H9 - 0167 Antenna.png"/>     
-<img src="images/TIDRADIO H9 - 017.png"/>     
-<img src="images/TIDRADIO H9 - 018.png"/>     
-<img src="images/TIDRADIO H9 - 019.png"/>     
-<img src="images/TIDRADIO H9 - 020.png"/>      
+- [**Tidradio TD-H9 Images**](radio_images.md)
