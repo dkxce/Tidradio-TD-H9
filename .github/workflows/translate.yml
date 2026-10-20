@@ -1,4 +1,4 @@
-name: Auto Translate README
+name: Auto Translate and Convert to DOCX
 
 on:
   push:
@@ -8,34 +8,44 @@ on:
       - 'TD-H9_manual_ru.md'
 
 jobs:
-  translate:
+  translate_and_convert:
     runs-on: ubuntu-latest
     steps:
+      # 1. Скачиваем код репозитория
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 2. Настраиваем Node.js для работы переводчика
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
 
+      # 3. Переводим русский Markdown на английский
       - name: Auto Translate Markdown
         uses: ikhsan3adi/markdown-translator@master
         with:
           LANG: en
           FILES: TD-H9_manual_ru.md
 
-      - name: Rename translated file
+      # 4. Устанавливаем Pandoc для конвертации документов
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      # 5. Конвертируем оба файла в формат .docx
+      - name: Convert Markdown to DOCX
         run: |
-          # Экшен создает файл с суффиксом языка перед расширением (например, TD-H9_manual_ru.en.md)
-          # Переименовываем его в нужный вам вид TD-H9_manual_en.md
+          pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
           if [ -f "TD-H9_manual_ru.en.md" ]; then
-            mv TD-H9_manual_ru.en.md TD-H9_manual_en.md
+            pandoc TD-H9_manual_ru.en.md -o TD-H9_manual_ru.en.docx
           fi
 
+      # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add TD-H9_manual_en.md
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-update translation" && git push)
+          
+          git add TD-H9_manual_ru.en.md TD-H9_manual_ru.docx TD-H9_manual_ru.en.docx
+          
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate and convert to docx" && git push)
