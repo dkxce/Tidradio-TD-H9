@@ -1,0 +1,29 @@
+name: Auto Translate README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'TD-H9_manual_ru.md'
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Auto Translate Markdown
+        uses: gaurav-nelson/github-action-markdown-translator@v1.1.0
+        with:
+          source: 'TD-H9_manual_ru.md'
+          target: 'TD-H9_manual_en.md'  # Создается файл с этим именем
+          to: 'en'
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add TD-H9_manual_en.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-update translation" && git push)
