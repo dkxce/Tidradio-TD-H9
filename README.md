@@ -1,23 +1,27 @@
 # Tidradio TD-H9 Documentation, Specification, Manual, Disasm, APRS
-### [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/)    
 
-> tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps
+|---|**Resources (Ресурсы)**|
+|---|---|
+| **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) |
+| **Repo** | [github.com/dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
 
-#### Manuals
+> tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
 
-| Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) |
-|---|---|---|---|
-| Original | EN | PDF | [Original Manuals](Original%20Manuals) |
-| Custom (dkxce) | EN | .md | **[TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md)** |
-| Custom (dkxce) | EN | .docx | [TD-H9_manual_ru.en.docx](TD-H9_manual_ru.en.docx) |
-| Custom (dkxce) | RU | .md | **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)** |
-| Custom (dkxce) | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) |
-| Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  |
+#### Manuals (Инструкции)
+
+| Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) | Description (Описание) |
+|---|---|---|---|---|
+| Original | EN | PDF | [Original Manuals](Original%20Manuals) | *origin vendor manual* |
+| Custom (dkxce) | EN | .md | **[TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md)** | *auto translate* |
+| Custom (dkxce) | EN | .docx | [TD-H9_manual_ru.en.docx](TD-H9_manual_ru.en.docx) | *auto translate & convert* |
+| Custom (dkxce) | RU | .md | **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)** | **source** (*based on firmware **1.0.33***) |
+| Custom (dkxce) | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) | *auto convert* |
+| Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
 
 #### Онлайн-редактор каналов
 
-- [**H9 TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html)
-- [**H9 APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)
+- [**H9 TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) (Channels)
+- [**H9 APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html) (Channels + GNSS + APRS)
 - [**CSV Editor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) (Универсальный редактор каналов)   
 
 ---
