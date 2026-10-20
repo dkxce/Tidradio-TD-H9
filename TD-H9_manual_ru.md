@@ -1046,6 +1046,8 @@ https://aprs.fi/
 | Драйвера | [Drivers](Drivers) |
 | Настройка рации на ПК | [TIDRadioCPS](Customer%20Programming%20Software) |
 | Настройка рации на Android | [Odmaster](https://play.google.com/store/apps/details?id=com.tid.walkie) |
+| Альтернативный APRSDroid | [APRSDroid 9M2PJU Mod](https://aprsdroid.hamradio.my/) |
+| Android javAPRSSrvr IGate | [javAPRSSrvr IGate](https://www.ae5pl.net/javAPRSSrvrIGate.aspx) |
 | Софт и прошивки | [Firmware](Firmware) |
 | Онлайн-редактор каналов | [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) |
 | Прочий софт (APRS) | [github.com/dkxce](https://github.com/dkxce?tab=repositories&q=aprs) |
