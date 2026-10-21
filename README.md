@@ -1,13 +1,13 @@
 # Tidradio TD-H9 Documentation, Specification, Manual, Disasm, APRS
 
-|---|**Resources (Ресурсы)**|
+|Resources (Ресурсы)|Link (Ссылка)|
 |---|---|
 | **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) |
 | **Repo** | [github.com/dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
 
 > tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
 
-#### Manuals (Инструкции)
+### Manuals (Инструкции)
 
 | Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) | Description (Описание) |
 |---|---|---|---|---|
@@ -27,3 +27,11 @@
 #### Media
 
 - [**Tidradio TD-H9 Images**](radio_images.md)
+
+---
+
+### Alternative Resources
+|Resources (Ресурсы)|Link (Ссылка)|Author (Автор)|
+|---|---|---|
+| teedubyeah TD-H9 Files | [teedubyeah/TDH9](https://github.com/teedubyeah/TDH9) | [teedubyeah](https://github.com/teedubyeah) |
+| CUstom firmware by mjwgeek | [Experimental Firmware](https://github.com/mjwgeek/TIDRADIO_TD-H9) | [mjwgeek](https://github.com/mjwgeek) |
