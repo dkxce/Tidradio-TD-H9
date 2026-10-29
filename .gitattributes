@@ -1,0 +1,4 @@
+# 
+# Шифровать прошивки (@dkxce)
+*(@dkxce)*.* filter=git-crypt diff=git-crypt 
+#
