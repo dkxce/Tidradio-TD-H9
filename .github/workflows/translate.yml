@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'TD-H9_manual_ru.md'
+      - 'TDH9KISS/README.md'
 
 jobs:
   translate_and_convert:
@@ -26,13 +27,15 @@ jobs:
         uses: ikhsan3adi/markdown-translator@master
         with:
           LANG: en
-          FILES: TD-H9_manual_ru.md
+          FILES: |
+            TD-H9_manual_ru.md
+            TDH9KISS/README.md
 
       # 4. Устанавливаем Pandoc для конвертации документов
       - name: Install Pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
 
-      # 5. Конвертируем оба файла в формат .docx
+      # 5. Конвертируем только руководство в формат .docx
       - name: Convert Markdown to DOCX
         run: |
           pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
@@ -43,9 +46,11 @@ jobs:
       # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
+          # Добавляем DOCX и перевод для руководства + только перевод для README
           git add TD-H9_manual_ru.en.md TD-H9_manual_ru.docx TD-H9_manual_ru.en.docx
+          git add TDH9KISS/README.en.md
           
           git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate and convert to docx" && git push)
