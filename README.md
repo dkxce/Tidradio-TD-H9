@@ -4,6 +4,7 @@
 |---|---|
 | **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) |
 | **Repo** | [github.com/dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
+| **TDH9KISS** | [TDH9KISS Bridge BLE KISS ⇄ TCP/IP, AGW(PE) ,APRS-IS](TDH9KISS) |
 
 > tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
 
