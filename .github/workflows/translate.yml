@@ -7,6 +7,7 @@ on:
     paths:
       - 'TD-H9_manual_ru.md'
       - 'TDH9KISS/README.md'
+  workflow_dispatch: # Позволит безопасно перезапускать перевод вручную из вкладки Actions
 
 jobs:
   translate_and_convert:
@@ -24,12 +25,13 @@ jobs:
 
       # 3. Переводим русский Markdown на английский
       - name: Auto Translate Markdown
-        uses: ikhsan3adi/markdown-translator@master
+        uses: ikhsan3adi/markdown-translator@v3 # Переключено на стабильную v3
         with:
           LANG: en
           FILES: |
             TD-H9_manual_ru.md
             TDH9KISS/README.md
+          INCREMENTAL: true # Критично: переводить только измененные строки, чтобы избежать HTTPError
 
       # 4. Устанавливаем Pandoc для конвертации документов
       - name: Install Pandoc
@@ -46,11 +48,13 @@ jobs:
       # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@://github.com"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Добавляем DOCX и перевод для руководства + только перевод для README
-          git add TD-H9_manual_ru.en.md TD-H9_manual_ru.docx TD-H9_manual_ru.en.docx
-          git add TDH9KISS/README.en.md
+          # Проверяем наличие файлов перед добавлением, чтобы избежать ошибок Git
+          [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
+          [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
+          [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
+          [ -f "TDH9KISS/README.en.md" ] && git add TDH9KISS/README.en.md
           
           git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate and convert to docx" && git push)
