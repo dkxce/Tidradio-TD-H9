@@ -1,6 +1,6 @@
 # TIDRadio TD-H9 · APRS KISS TNC BLE
 
-[RU](README.md) | [EN](README.en.md)
+[RU](README.md) | [EN](README.en.md) | [RELEASES](https://github.com/dkxce/Tidradio-TD-H9/releases)
 
 Программа превращает рацию **TIDRadio TD-H9** (и совместимые прошивки с BLE-сервисом
 Odmaster) в **KISS-TNC-модем над Bluetooth Low Energy**. Рация выступает как
