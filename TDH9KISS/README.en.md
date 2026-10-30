@@ -1,7 +1,7 @@
-<!-- markdown-translator:328a782b7a3521d3ac09222f3882ed56ba1a8ce4c928a2c963fd6d4b4984fffd -->
+<!-- markdown-translator:af3f80970e968b54a6453e1e90a3bff2035c190fb9d45a40a62262ce187c14fc -->
 # TIDRadio TD-H9 · APRS KISS TNC BLE
 
-[RU](README.md)|[IN](README.en.md)
+[RU](README.md)|[IN](README.en.md)|[RELEASES](https://github.com/dkxce/Tidradio-TD-H9/releases)
 
 The program turns the walkie-talkie**TIDRadio TD-H9**(and compatible firmware with BLE service
 Odmaster) in**KISS-TNC-modem over Bluetooth Low Energy**. The walkie-talkie acts as
@@ -227,7 +227,7 @@ a wide range of desktop APRS applications.
 > **Short:**&#x41;ll listed programs are connected externally via TCP.
 > If they can**AGWPE**- use the mode`AGW (AGWPE)`(port 8000);
 > if they are expecting**KISS-TNC по TCP**- mode`Binary KISS`(port 8023);
-> and any APRS-IS-compatible - mode`APRS-IS`(port 14580).
+> and any APRS-IS-compatible mode`APRS-IS`(port 14580).
 
 ***
 
