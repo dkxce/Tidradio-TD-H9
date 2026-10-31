@@ -69,7 +69,6 @@ KISS-фрейм: [0xC0][port:cmd][escape(AX.25)][0xC0]
 
 ```bash
 pip install bleak
-cd tidradio_kiss
 python main.py
 ```
 
