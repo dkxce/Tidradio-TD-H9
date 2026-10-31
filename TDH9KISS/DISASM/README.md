@@ -336,7 +336,7 @@ user <APRSIS_CLIENT> pass <PASSCODE> vers TDH9KissIGate v1.0 filter <FILTER>
 `settings_getter` (`_igate_live_settings`), поэтому переключение чекбоксов
 (Require TCPIP / Reject qAR / Reject qAO) применяется мгновенно, без перезапуска.
 
-**`settings.json`** хранится в папке модуля `tidradio_kiss/settings.json`. Содержит
+**`settings.json`** хранится в папке модуля `settings.json`. Содержит
 `aprsis_client`, `igate_name`, `passcode`, `server`, `port`, `filter`, `enabled`,
 `check_tcpip`, `check_no_qar`, `check_no_qao`. Сохраняется автоматически при
 нажатии **Start** и при закрытии окна (кнопки Save больше нет).
