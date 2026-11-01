@@ -1,4 +1,4 @@
-<!-- markdown-translator:af3f80970e968b54a6453e1e90a3bff2035c190fb9d45a40a62262ce187c14fc -->
+<!-- markdown-translator:8e068f9e31fa854c548600f1c221f8c117921a9a1b1b26d0e57cdf873ee37d03 -->
 # TIDRadio TD-H9 · APRS KISS TNC BLE
 
 [RU](README.md)|[IN](README.en.md)|[RELEASES](https://github.com/dkxce/Tidradio-TD-H9/releases)
@@ -70,7 +70,6 @@ KISS-фрейм: [0xC0][port:cmd][escape(AX.25)][0xC0]
 
 ```bash
 pip install bleak
-cd tidradio_kiss
 python main.py
 ```
 
@@ -227,7 +226,7 @@ a wide range of desktop APRS applications.
 > **Short:**&#x41;ll listed programs are connected externally via TCP.
 > If they can**AGWPE**- use the mode`AGW (AGWPE)`(port 8000);
 > if they are expecting**KISS-TNC по TCP**- mode`Binary KISS`(port 8023);
-> and any APRS-IS-compatible mode`APRS-IS`(port 14580).
+> and any APRS-IS-compatible - mode`APRS-IS`(port 14580).
 
 ***
 
@@ -264,3 +263,10 @@ a wide range of desktop APRS applications.
 
 Program -**author's project dkxce**(c) https://github.com/dkxce.\
 Written for compatibility with TIDRadio TD-H9.
+
+***
+
+## 13. Screenshots
+
+<img src="images/screen1.png"/>    
+<img src="images/screen2.png"/>    
