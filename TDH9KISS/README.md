@@ -270,3 +270,10 @@ python main.py
 
 Программа — **авторский проект dkxce** (с) https://github.com/dkxce.       
 Написана для совместимости с TIDRadio TD-H9.
+
+---
+
+## 13. Скриншоты
+
+<img src="images/screen1.png"/>    
+<img src="images/screen2.png"/>    
