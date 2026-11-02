@@ -1,10 +1,16 @@
 # Tidradio TD-H9 Documentation, Specification, Manual, Disasm, APRS
 
-|Resources (Ресурсы)|Link (Ссылка)|
-|---|---|
-| **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) |
-| **Repo** | [github.com/dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
-| **TDH9KISS** PC TNC Software | --- |
+|Resources (Ресурсы)|Link (Ссылка)|More (Прочее) ...|
+|---|---|---|
+| **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) | ... |
+| **Repo** (Manuals) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) | ... |
+| **CPS** (PC Channels Software) | [CPS](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Customer%20Programming%20Software) | ... |
+| **Firmwares** | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) | ... |
+| **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
+| **TDH9RadioBridge** (Android TNC Software) | --- | ... |
+| **H9 TD Editor** (Online Software) | [H9 TD Editor](https://dkxce.github.io/temporary/td-h9/td-editor.html) | (Channels) |
+| **H9 APRS Editor** (Online Software) | [H9 APRS Editor](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html) | (Channels + GNSS + APRS) |
+| **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) | (Универсальный редактор каналов) | 
 
 > tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
 
@@ -19,12 +25,6 @@
 | Руководство пользователя | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) | *auto convert* |
 | Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
 
-#### Онлайн-редактор каналов
-
-- [**H9 TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) (Channels)
-- [**H9 APRS Editor**](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html) (Channels + GNSS + APRS)
-- [**CSV Editor**](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) (Универсальный редактор каналов)
-
 #### Media
 
 - [**Tidradio TD-H9 Images**](radio_images.md)
@@ -35,4 +35,4 @@
 |Resources (Ресурсы)|Link (Ссылка)|Author (Автор)|
 |---|---|---|
 | teedubyeah TD-H9 Files | [teedubyeah/TDH9](https://github.com/teedubyeah/TDH9) | [teedubyeah](https://github.com/teedubyeah) |
-| CUstom firmware by mjwgeek | [Experimental Firmware](https://github.com/mjwgeek/TIDRADIO_TD-H9) | [mjwgeek](https://github.com/mjwgeek) |
+| Custom firmware by mjwgeek | [Experimental Firmware](https://github.com/mjwgeek/TIDRADIO_TD-H9) | [mjwgeek](https://github.com/mjwgeek) |
