@@ -7,10 +7,15 @@
 | **Repositiry** (Репозиторий) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
 | **Media** (Изображения) | [Tidradio TD-H9 Images](radio_images.md) |
 
-## Firmwares (Прошивки)
-|...|...|
-|---|---|
-| **Firmwares** (Прошивки) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) |
+### Manuals (Инструкции)
+| Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) | Description (Описание) |
+|---|---|---|---|---|
+| Original | EN | PDF | [Original Manuals](Original%20Manuals) | *origin vendor manual* |
+| Custom | EN | .md | [TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md) | *auto translate* |
+| Custom | EN | .docx | [TD-H9_manual_ru.en.docx](TD-H9_manual_ru.en.docx) | *auto translate & convert* |
+| Руководство пользователя | RU | .md | **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)** | **source** (*based on firmware **1.0.33***) |
+| Руководство пользователя | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) | *auto convert* |
+| Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
 
 ## Channel Software (Настройка каналов)
 |...|...|...|
@@ -26,19 +31,10 @@
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
 | **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) |
 
-
-### Manuals (Инструкции)
-
-| Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) | Description (Описание) |
-|---|---|---|---|---|
-| Original | EN | PDF | [Original Manuals](Original%20Manuals) | *origin vendor manual* |
-| Custom | EN | .md | [TD-H9_manual_ru.en.md](TD-H9_manual_ru.en.md) | *auto translate* |
-| Custom | EN | .docx | [TD-H9_manual_ru.en.docx](TD-H9_manual_ru.en.docx) | *auto translate & convert* |
-| Руководство пользователя | RU | .md | **[TD-H9_manual_ru.md](TD-H9_manual_ru.md)** | **source** (*based on firmware **1.0.33***) |
-| Руководство пользователя | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) | *auto convert* |
-| Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
-
----
+## Firmwares (Прошивки)
+|...|...|
+|---|---|
+| **Firmwares** (Прошивки) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) |
 
 ### Alternative Resources
 |Resources (Ресурсы)|Link (Ссылка)|Author (Автор)|
