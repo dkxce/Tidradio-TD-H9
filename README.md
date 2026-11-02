@@ -8,9 +8,9 @@
 | **CPS** (PC Channels Software) | [CPS](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Customer%20Programming%20Software) | ... |
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
 | **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) |
-| **H9 TD Editor** (Online Software) | [H9 TD Editor](https://dkxce.github.io/temporary/td-h9/td-editor.html) | (Channels) |
-| **H9 APRS Editor** (Online Software) | [H9 APRS Editor](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html) | (Channels + GNSS + APRS) |
-| **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) | (Универсальный редактор каналов) | 
+| **H9 TD Editor** (Online Software) | [H9 TD Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/td-editor.html) | (Channels) |
+| **H9 APRS Editor** (Online Software) | [H9 APRS Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/td-editor-aprs.html) | (Channels + GNSS + APRS) |
+| **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/universal-radio-editor.html) | (Универсальный редактор каналов) | 
 
 > tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
 
