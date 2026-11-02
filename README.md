@@ -4,10 +4,10 @@
 |---|---|---|
 | **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) | ... |
 | **Repo** (Manuals) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) | ... |
+| **Firmwares** (Update Software) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) | ... |
 | **CPS** (PC Channels Software) | [CPS](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Customer%20Programming%20Software) | ... |
-| **Firmwares** | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) | ... |
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
-| **TDH9RadioBridge** (Android TNC Software) | --- | ... |
+| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) |
 | **H9 TD Editor** (Online Software) | [H9 TD Editor](https://dkxce.github.io/temporary/td-h9/td-editor.html) | (Channels) |
 | **H9 APRS Editor** (Online Software) | [H9 APRS Editor](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html) | (Channels + GNSS + APRS) |
 | **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/temporary/td-h9/universal-radio-editor.html) | (Универсальный редактор каналов) | 
