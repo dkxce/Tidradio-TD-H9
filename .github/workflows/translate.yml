@@ -6,8 +6,10 @@ on:
       - main
     paths:
       - 'TD-H9_manual_ru.md'
-      - 'TDH9KISS/README.md'
   workflow_dispatch: # Позволит безопасно перезапускать перевод вручную из вкладки Actions
+
+permissions:
+  contents: write
 
 jobs:
   translate_and_convert:
@@ -17,27 +19,46 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Настраиваем Node.js для работы переводчика
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
+      # 2. Устанавливаем полностью офлайновую библиотеку перевода
+      - name: Install Argos Translate
+        run: |
+          pip install argostranslate
 
-      # 3. Переводим русский Markdown на английский
-      - name: Auto Translate Markdown
-        uses: ikhsan3adi/markdown-translator@v3 # Переключено на стабильную v3
-        with:
-          LANG: en
-          FILES: |
-            TD-H9_manual_ru.md
-            TDH9KISS/README.md
-          INCREMENTAL: true # Критично: переводить только измененные строки, чтобы избежать HTTPError
+      # 3. Скачиваем языковую модель RU -> EN и выполняем перевод локально
+      - name: Auto Translate Markdown via Argos
+        run: |
+          python -c "
+          import argostranslate.package
+          import argostranslate.translate
+
+          # Обновляем индекс пакетов и скачиваем модель с русского на английский
+          argostranslate.package.update_package_index()
+          available_packages = argostranslate.package.get_available_packages()
+          package_to_install = next(
+              filter(
+                  lambda x: x.from_code == 'ru' and x.to_code == 'en',
+                  available_packages
+              )
+          )
+          argostranslate.package.install_from_path(package_to_install.download())
+
+          # Считываем русский файл руководства
+          with open('TD-H9_manual_ru.md', 'r', encoding='utf-8') as f:
+              text = f.read()
+
+          # Локально переводим весь текст
+          translated_text = argostranslate.translate.translate(text, 'ru', 'en')
+
+          # Записываем английскую версию руководства
+          with open('TD-H9_manual_ru.en.md', 'w', encoding='utf-8') as f:
+              f.write(translated_text)
+          "
 
       # 4. Устанавливаем Pandoc для конвертации документов
       - name: Install Pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
 
-      # 5. Конвертируем только руководство в формат .docx
+      # 5. Конвертируем оба Markdown-файла в формат .docx
       - name: Convert Markdown to DOCX
         run: |
           pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
@@ -48,13 +69,12 @@ jobs:
       # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
           # Проверяем наличие файлов перед добавлением, чтобы избежать ошибок Git
           [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
-          [ -f "TDH9KISS/README.en.md" ] && git add TDH9KISS/README.en.md
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate and convert to docx" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate via Argos and convert to docx" && git push)
