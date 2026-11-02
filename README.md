@@ -3,7 +3,6 @@
 ## Resources (Основные ресурсы)
 |...|...|
 |---|---|
-| **Web Site** (Сайт) | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) |
 | **Repositiry** (Репозиторий) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
 | **Media** (Изображения) | [Tidradio TD-H9 Images](radio_images.md) |
 
