@@ -25,10 +25,10 @@
 | **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/universal-radio-editor.html) | (Универсальный редактор каналов) | 
 
 ## APRS Software (ПО APRS)
-|...|...|...|
-|---|---|---|
-| **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
-| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) |
+|...|...|...|...|
+|---|---|---|---|
+| **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
+| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) | Binary KISS / AGW(PE) / APRS-IS |
 
 ## Firmwares (Прошивки)
 |...|...|
