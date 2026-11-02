@@ -1,18 +1,31 @@
 # Tidradio TD-H9 Documentation, Specification, Manual, Disasm, APRS
 
-|Resources (Ресурсы)|Link (Ссылка)|More (Прочее) ...|
+## Resources (Основные ресурсы)
+|...|...|
+|---|---|
+| **Web Site** (Сайт) | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) |
+| **Repositiry** (Репозиторий) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
+| **Media** (Изображения) | [Tidradio TD-H9 Images](radio_images.md) |
+
+## Firmwares (Прошивки)
+|...|...|
+|---|---|
+| **Firmwares** (Прошивки) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) |
+
+## Channel Software (Настройка каналов)
+|...|...|...|
 |---|---|---|
-| **Web Site** | [dkxce.github.io/Tidradio-TD-H9](https://dkxce.github.io/Tidradio-TD-H9/) | ... |
-| **Repo** (Manuals) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) | ... |
-| **Firmwares** (Update Software) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) | ... |
-| **CPS** (PC Channels Software) | [CPS](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Customer%20Programming%20Software) | ... |
-| **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
-| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) |
+| **CPS** (PC Channels Software) | [CPS](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Customer%20Programming%20Software) | Customer Programming Software |
 | **H9 TD Editor** (Online Software) | [H9 TD Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/td-editor.html) | (Channels) |
 | **H9 APRS Editor** (Online Software) | [H9 APRS Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/td-editor-aprs.html) | (Channels + GNSS + APRS) |
 | **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/universal-radio-editor.html) | (Универсальный редактор каналов) | 
 
-> tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
+## APRS Software (ПО APRS)
+|...|...|...|
+|---|---|---|
+| **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) |
+| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) |
+
 
 ### Manuals (Инструкции)
 
@@ -25,10 +38,6 @@
 | Руководство пользователя | RU | .docx | [TD-H9_manual_ru.docx](TD-H9_manual_ru.docx) | *auto convert* |
 | Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
 
-#### Media
-
-- [**Tidradio TD-H9 Images**](radio_images.md)
-
 ---
 
 ### Alternative Resources
@@ -36,3 +45,7 @@
 |---|---|---|
 | teedubyeah TD-H9 Files | [teedubyeah/TDH9](https://github.com/teedubyeah/TDH9) | [teedubyeah](https://github.com/teedubyeah) |
 | Custom firmware by mjwgeek | [Experimental Firmware](https://github.com/mjwgeek/TIDRADIO_TD-H9) | [mjwgeek](https://github.com/mjwgeek) |
+
+---
+
+> tags: tidradio td-hr 10W aprs manual, menu, how to, setup, disasm, cps, tidradio td-h9 инструкция руководство на русском
