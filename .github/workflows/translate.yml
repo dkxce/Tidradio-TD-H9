@@ -22,189 +22,167 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и устанавливаем Argos Translate
-      - name: Set up Python and Install Argos
+      # 3. Настраиваем Python и устанавливаем необходимые библиотеки
+      - name: Set up Python and Packages
         run: |
-          pip install argostranslate
-          
-          # Скрипт скачивания языковой модели RU -> EN
+          pip install argostranslate beautifulsoup4 markdownify mistletoe transliterate markdown
+
+      # 4. Скачиваем языковую модель Argos Translate (RU -> EN)
+      - name: Install Argos Model
+        run: |
           python -c "
           import argostranslate.package
-          import argostranslate.translate
-
           print('Обновление индекса пакетов Argos...')
           argostranslate.package.update_package_index()
-          
           available_packages = argostranslate.package.get_available_packages()
-          package_to_install = next(
-              filter(
-                  lambda x: x.from_code == 'ru' and x.to_code == 'en', available_packages
-              )
-          )
-          
+          package_to_install = next(filter(lambda x: x.from_code == 'ru' and x.to_code == 'en', available_packages))
           print(f'Скачивание и установка модели: {package_to_install}')
           argostranslate.package.install_from_path(package_to_install.download())
           print('Модель Argos успешно установлена!')
           "
 
-      # 4. Безопасный перевод Markdown через Argos Translate (без зависаний и поломки структуры)
-      - name: Safe Translate Markdown via Argos
+      # 5. Перевод массива файлов через HTML-дерево (BeautifulSoup)
+      - name: HTML Tree Translate and Markdown Reconstruction
         env:
-          # Жесткое ограничение потоков для предотвращения дедлоков внутри контейнера
+          # Жесткое ограничение потоков CTranslate2 во избежание зависания контейнера
           OMP_NUM_THREADS: "1"
           MKL_NUM_THREADS: "1"
           OPENBLAS_NUM_THREADS: "1"
-          VECLIB_MAXIMUM_THREADS: "1"
-          NUMEXPR_NUM_THREADS: "1"
         run: |
-          cat << 'EOF' > translate_md.py
+          cat << 'EOF' > translate_html_tree.py
+          import os
           import re
           import sys
-          import os
-          from argostranslate import translate
+          import markdown
+          from bs4 import BeautifulSoup, NavigableString
+          from markdownify import markdownify as mdify
+          from transliterate import slugify
+          import argostranslate.translate
 
-          print("Инициализация переводчика Argos...")
+          # =========================================================================
+          # МАССИВ ФАЙЛОВ ДЛЯ ОБРАБОТКИ
+          # Сюда можно дописывать любые новые .md файлы для автоматического перевода
+          # =========================================================================
+          files_to_translate = [
+              "TD-H9_manual_ru.md"
+          ]
+
           def translate_text(text):
-              if not text.strip():
+              """Безопасный локальный перевод строки через Argos"""
+              clean_text = text.strip()
+              if not clean_text or clean_text.isdigit() or len(clean_text) < 2:
                   return text
               try:
-                  return translate.translate(text, "ru", "en")
-              except Exception as e:
-                  print(f"Ошибка перевода строки: {e}")
+                  return argostranslate.translate.translate(clean_text, "ru", "en")
+              except Exception:
                   return text
 
-          print("Чтение файла документа...")
-          with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
-              full_text = f.read()
+          def make_slug(text):
+              """Создает безопасный латинский ID (slug) для заголовков"""
+              slug = slugify(text.lower())
+              if not slug:
+                  slug = text.lower().replace(" ", "-")
+              slug = re.sub(r'[^a-z0-9-_]', '', slug)
+              return slug
 
-          paragraphs = full_text.split("\n\n")
-          structure = []
-          payloads = []
-          in_code_block = False
-
-          # Шаг 1: Разбираем сложную структуру разметки Markdown
-          for p in paragraphs:
-              if p.strip().startswith("```"):
-                  code_markers = p.count("```")
-                  if code_markers % 2 != 0:
-                      in_code_block = not in_code_block
-                  structure.append(('keep', p))
-                  continue
-              if in_code_block:
-                  if "```" in p:
-                      in_code_block = False
-                  structure.append(('keep', p))
+          # Основной цикл обработки массива файлов
+          for input_path in files_to_translate:
+              if not os.path.exists(input_path):
+                  print(f"Предупреждение: Файл {input_path} не найден, пропускаем.")
                   continue
 
-              # Разбор таблиц (переводим ячейки, не трогая разделители '|')
-              if p.strip().startswith("|") or p.strip().startswith("---"):
-                  lines = p.split("\n")
-                  table_meta = []
-                  for line in lines:
-                      if line.strip().startswith("|") or line.strip().startswith("---"):
-                          parts = line.split("|")
-                          line_meta = []
-                          for part in parts:
-                              if part.strip() and not set(part.strip()).issubset({'-', ':', ' '}):
-                                  payloads.append(part.strip())
-                                  line_meta.append(('trans', len(payloads) - 1))
-                              else:
-                                  line_meta.append(('keep', part))
-                          table_meta.append(('row', line_meta))
-                      else:
-                          payloads.append(line)
-                          table_meta.append(('text', len(payloads) - 1))
-                  structure.append(('table', table_meta))
-                  continue
+              # Генерация имени выходного файла (заменяет _ru.md на _en.md или добавляет .en.md)
+              if "_ru.md" in input_path:
+                  output_path = input_path.replace("_ru.md", ".en.md")
+              else:
+                  output_path = input_path.replace(".md", ".en.md")
 
-              # Разбор ссылок [текст](url) (переводим только описание внутри [ ])
-              links = re.findall(r'(\[[^\]]+\]\([^)]+\))', p)
-              if links:
-                  link_meta = []
-                  for l_idx, link in enumerate(links):
-                      text_match = re.search(r'\[([^\]]+)\]', link)
-                      url_match = re.search(r'\(([^)]+)\)', link)
-                      if text_match and url_match:
-                          payloads.append(text_match.group(1))
-                          link_meta.append({
-                              'placeholder': f"__LN_PH_{l_idx}__",
-                              'url': url_match.group(1),
-                              'payload_idx': len(payloads) - 1
-                          })
-                          p = p.replace(link, f"__LN_PH_{l_idx}__")
+              print(f"\n Начинаем обработку файла: {input_path} -> {output_path}")
+              
+              # Карта для сопоставления старых русских якорей и новых латинских slug-якорей
+              anchor_mapping = {}
+
+              with open(input_path, "r", encoding="utf-8") as f:
+                  md_content = f.read()
+
+              # Конвертация в HTML дерево с поддержкой таблиц и блоков кода
+              html_content = markdown.markdown(md_content, extensions=['tables', 'fenced_code'])
+              soup = BeautifulSoup(html_content, "html.parser")
+
+              print(f"[{input_path}] Шаг 1: Разбор заголовков и создание карты якорей...")
+              for heading in soup.find_all(re.compile(r'^h[1-6]$')):
+                  orig_text = heading.get_text()
+                  orig_slug = orig_text.lower().replace(" ", "-")
+                  orig_slug = re.sub(r'[^a-z0-9-_]', '', orig_slug)
                   
-                  payloads.append(p)
-                  structure.append(('link_line', (p, link_meta, len(payloads) - 1)))
-                  continue
+                  for string in heading.find_all(string=True):
+                      if isinstance(string, NavigableString):
+                          string.replace_with(translate_text(string))
+                  
+                  trans_text = heading.get_text()
+                  new_slug = make_slug(trans_text)
+                  anchor_mapping[f"#{orig_slug}"] = f"#{new_slug}"
+                  
+                  anchor_tag = soup.new_tag("a", attrs={"name": new_slug})
+                  heading.append(anchor_tag)
 
-              # Обычный абзац текста
-              payloads.append(p)
-              structure.append(('text', len(payloads) - 1))
+              print(f"[{input_path}] Шаг 2: Перевод контента, таблиц и обновление внутренних ссылок...")
+              for tag in soup.find_all(True):
+                  if tag.name in ['code', 'pre']:
+                      continue  # Изолируем код
+                  
+                  if tag.name == 'a' and tag.has_attr('href'):
+                      href = tag['href'].lower()
+                      if href.startswith('#') and href in anchor_mapping:
+                          tag['href'] = anchor_mapping[href]
 
-          print(f"Извлечено {len(payloads)} текстовых элементов. Начинаем перевод...")
-          
-          # Шаг 2: Поочередно переводим изолированный чистый текст
-          translated_parts = []
-          for idx, item in enumerate(payloads):
-              translated_parts.append(translate_text(item))
-              if (idx + 1) % 50 == 0 or (idx + 1) == len(payloads):
-                  print(f"Прогресс перевода Argos: {idx + 1}/{len(payloads)}...")
+                  for child in tag.children:
+                      if isinstance(child, NavigableString) and child.strip():
+                          if tag.name not in ['code', 'pre'] and child.parent.name not in ['code', 'pre']:
+                              child.replace_with(translate_text(child))
 
-          # Шаг 3: Собираем Markdown файл обратно
-          print("Реконструкция структуры Markdown документа...")
-          final_paragraphs = []
-          for item_type, data in structure:
-              if item_type == 'keep':
-                  final_paragraphs.append(data)
-              elif item_type == 'text':
-                  final_paragraphs.append(translated_parts[data])
-              elif item_type == 'table':
-                  table_lines = []
-                  for row_type, row_data in data:
-                      if row_type == 'text':
-                          table_lines.append(translated_parts[row_data])
-                      elif row_type == 'row':
-                          row_parts = []
-                          for cell_type, cell_data in row_data:
-                              if cell_type == 'trans':
-                                  row_parts.append(f" {translated_parts[cell_data]} ")
-                              else:
-                                  row_parts.append(cell_data)
-                          table_lines.append("|".join(row_parts))
-                  table_lines_clean = [l for l in table_lines if l.strip()]
-                  final_paragraphs.append("\n".join(table_lines_clean))
-              elif item_type == 'link_line':
-                  p_template, link_meta, line_payload_idx = data
-                  translated_p = translated_parts[line_payload_idx]
-                  for lm in link_meta:
-                      trans_link_text = translated_parts[lm['payload_idx']]
-                      full_link = f"[{trans_link_text}]({lm['url']})"
-                      translated_p = translated_p.replace(lm['placeholder'], full_link)
-                  final_paragraphs.append(translated_p)
+              print(f"[{input_path}] Шаг 3: Конвертация HTML обратно в Markdown...")
+              translated_html = str(soup)
+              translated_md = mdify(
+                  translated_html,
+                  heading_style="ATX",
+                  strip=['script', 'style']
+              )
+              translated_md = re.sub(r'\n{3,}', '\n\n', translated_md)
 
-          with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
-              f.write("\n\n".join(final_paragraphs))
+              with open(output_path, "w", encoding="utf-8") as f:
+                  f.write(translated_md)
 
-          print("Перевод и сборка успешно завершены!")
+              print(f"Успешно завершен перевод файла: {output_path}")
+
+          print("\nВсе файлы из массива успешно обработаны!")
           EOF
-          python translate_md.py
+          python translate_html_tree.py
 
-      # 5. Конвертируем оба файла в формат .docx via Pandoc
+      # 6. Динамическая конвертация всех Markdown-файлов в DOCX через Pandoc
       - name: Convert Markdown to DOCX via Pandoc
         run: |
-          pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
-          if [ -f "TD-H9_manual_ru.en.md" ]; then
-            pandoc TD-H9_manual_ru.en.md -o TD-H9_manual_ru.en.docx
-          fi
+          # Конвертируем все русские файлы разметки, которые есть в репозитории
+          for f in *manual_ru.md; do
+            if [ -f "$f" ]; then
+              pandoc "$f" -o "${f%.md}.docx"
+            fi
+          done
+          
+          # Конвертируем все созданные английские переводы
+          for f in *.en.md; do
+            if [ -f "$f" ]; then
+              pandoc "$f" -o "${f%.md}.docx"
+            fi
+          done
 
-      # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
+      # 7. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
-          [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
-          [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
-          [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
+          # Индексируем любые измененные или новые .md и .docx файлы
+          git add *.en.md *.docx 2>/dev/null || true
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: crashproof local argos translate" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: array-based html translate with working anchors" && git push)
