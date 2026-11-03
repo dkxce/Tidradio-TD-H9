@@ -30,7 +30,7 @@ jobs:
       # 4. Профессиональный перевод через Gemini API (сохраняет разметку, обходит блокировки IP)
       - name: Translate Markdown via Gemini API
         env:
-          GEMINI_API_KEY: \${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           cat << 'EOF' > translate_md.py
           import os
