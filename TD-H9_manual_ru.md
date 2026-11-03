@@ -642,7 +642,11 @@
 
 <img src="pdf_images/TID-PTT.png" width="400"/>    
 
-При работе с [**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button) задежрка существенно ниже чем с **TID-MIC** и составляет *0.2~1* секунды, т.е. рация открывается на передачу быстрее. При подключении TID-PTT к смартфону **ODmaster** работает с устройством <img src="pdf_images/Bluetooth.png" width="16"/>**TID-PTTxxxxxx-A** (скорость *38400* baud), при сопряжении через Bluetooth-меню андроида сопрягаться с этим устройством не рекомендуется - **ODMaster** может его не увидеть. Вместо этого существует устройство <img src="pdf_images/Headset.png" width="16"/>**TID-PTTxxxxxx-B**.           
+При работе с [**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button) задежрка существенно ниже чем с **TID-MIC** и составляет *0.2~1* секунды, т.е. рация открывается на передачу быстрее. При подключении TID-PTT к смартфону **ODmaster** работает с устройством <img src="pdf_images/Bluetooth.png" width="16"/>**TID-PTTxxxxxx-A** (скорость *38400* baud), при сопряжении через Bluetooth-меню андроида сопрягаться с этим устройством не рекомендуется - **ODMaster** может его не увидеть. Вместо этого существует устройство <img src="pdf_images/Headset.png" width="16"/> **TID-PTTxxxxxx-B**.       
+
+![QL2](pdf_images/QL2.png)
+
+При работе с [**QL-2**](https://tidradio.com/products/td-q2l-bluetooth-noise-cancelling-magnetic-mic-for-td-h3-plus-td-h9) ...
 
 ### 7.37 Обновление прошивки
 
@@ -1050,6 +1054,8 @@ https://aprs.fi/
 | Android javAPRSSrvr IGate | [javAPRSSrvr IGate](https://www.ae5pl.net/javAPRSSrvrIGate.aspx) |
 | Софт и прошивки | [Firmware](Firmware) |
 | Онлайн-редактор каналов | [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) |
+| APRS софт для ПК | [**Desktop BLE-TCP Bridge Software**](https://github.com/dkxce/tdh9desktop) |
+| APRS софт для Android | [**Android BLE-TCP Bridge Software**](https://github.com/dkxce/tdh9android) |
 | Прочий софт (APRS) | [github.com/dkxce](https://github.com/dkxce?tab=repositories&q=aprs) |
 | Описание формата .td | [DISAMS](Customer%20Programming%20Software/Disasm)|
 
