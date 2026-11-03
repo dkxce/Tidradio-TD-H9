@@ -93,6 +93,8 @@ jobs:
               # Вычисляем имя выходного файла
               if "_ru.md" in file_name:
                   out_name = file_name.replace("_ru.md", ".en.md")
+              elif ".ru.md" in file_name:
+                  out_name = file_name.replace(".ru.md", ".en.md")
               else:
                   out_name = file_name.replace(".md", ".en.md")
 
@@ -157,7 +159,7 @@ jobs:
       - name: Convert Markdown to DOCX via Pandoc
         run: |
           # find находит файлы в любых подпапках и запускает pandoc прямо внутри их родных директорий
-          find . -type f -name "*manual_ru.md" | while read -r f; do
+          find . -type f -name "*.ru.md" | while read -r f; do
               pandoc "$f" -o "${f%.md}.docx"
           done
           
