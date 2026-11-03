@@ -10,10 +10,10 @@
 | Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) | Description (Описание) |
 |---|---|---|---|---|
 | Original | EN | PDF | [Original Manuals](Original%20Manuals) | *origin vendor manual* |
-| Custom | EN | .md | [TD-H9_manual.en.md](TD-H9_manual.en.md) | *auto translate* |
-| Custom | EN | .docx | [TD-H9_manual.en.docx](TD-H9_manual.en.docx) | *auto translate & convert* |
-| Руководство пользователя | RU | .md | **[TD-H9_manual.ru.md](TD-H9_manual.ru.md)** | **source** (*based on firmware **1.0.33***) |
-| Руководство пользователя | RU | .docx | [TD-H9_manual.ru.docx](TD-H9_manual.ru.docx) | *auto convert* |
+| TD-H9 Users Manual | EN | .md | [TD-H9_manual.en.md](TD-H9_manual.en.md) | *auto translate* |
+| TD-H9 Users Manual | EN | .docx | [TD-H9_manual.en.docx](TD-H9_manual.en.docx) | *auto translate & convert* |
+| TD-H9 Руководство пользователя (инструкция) | RU | .md | **[TD-H9_manual.ru.md](TD-H9_manual.ru.md)** | **source** (*based on firmware **1.0.33***) |
+| TD-H9 Руководство пользователя (инструкция) | RU | .docx | [TD-H9_manual.ru.docx](TD-H9_manual.ru.docx) | *auto convert* |
 | Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
 
 ## Channel Software (Настройка каналов)
