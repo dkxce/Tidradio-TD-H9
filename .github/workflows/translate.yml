@@ -22,47 +22,54 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и ставим отказоустойчивую библиотеку переводчиков
-      - name: Set up Python and Dependencies
+      # 3. Настраиваем Python и ставим локальный ИИ-переводчик (PyTorch + Transformers)
+      - name: Set up Python and Local AI
         run: |
-          pip install translators
+          pip install torch transformers sentencepiece
 
-      # 4. Поабзацный перевод через стабильный зеркальный движок (без лимитов и ключей)
-      - name: Safe Paragraph Translate
+      # 4. Локальный нейросетевой перевод (Без интернета, без лимитов, без зависаний)
+      - name: Local AI Paragraph Translate
         run: |
           cat << 'EOF' > translate_md.py
           import re
-          import time
-          import translators as ts
+          import sys
+          from transformers import pipeline
+
+          print("Инициализация локальной нейросети перевода RU -> EN...")
+          try:
+              # Загружаем проверенную и легкую модель перевода от Helsinki-NLP
+              translator = pipeline("translation_ru_to_en", model="Helsinki-NLP/opus-mt-ru-en")
+          except Exception as e:
+              print(f"Ошибка загрузки модели: {e}")
+              sys.exit(1)
 
           def translate_block(text_block):
               if not text_block.strip():
                   return text_block
               try:
-                  # Используем стабильное зеркало bing/google без жестких суточных лимитов
-                  return ts.translate_text(text_block, translator='bing', from_language='ru', to_language='en')
+                  # Локальный перевод без сетевых запросов
+                  result = translator(text_block, max_length=512)
+                  return result[0]['translation_text']
               except Exception as e:
-                  print(f"Запасной сдвиг из-за мини-паузы: {e}")
-                  try:
-                      time.sleep(2)
-                      return ts.translate_text(text_block, translator='google', from_language='ru', to_language='en')
-                  except:
-                      return text_block
+                  print(f"Пропущена строка из-за ошибки модели: {e}")
+                  return text_block
 
+          print("Чтение файла документа...")
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
               full_text = f.read()
 
-          # Разделяем на абзацы. Это сохраняет контекст и не ломает Markdown
           paragraphs = full_text.split("\n\n")
           translated_paragraphs = []
           in_code_block = False
 
-          print(f"Обнаружено {len(paragraphs)} абзацев для обработки.")
+          print(f"Начало перевода. Всего абзацев: {len(paragraphs)}")
 
           for idx, p in enumerate(paragraphs):
+              if idx % 10 == 0 and idx > 0:
+                  print(f"Обработано абзацев: {idx}/{len(paragraphs)}...")
+
               # Защита блоков кода
               if p.strip().startswith("```"):
-                  # Считаем количество вхождений ``` в абзаце, чтобы отслеживать состояние триггера
                   code_markers = p.count("```")
                   if code_markers % 2 != 0:
                       in_code_block = not in_code_block
@@ -115,12 +122,11 @@ jobs:
 
               # Обычный абзац текста
               translated_paragraphs.append(translate_block(p))
-              time.sleep(0.6) # Легкая задержка для полной стабильности сетевого потока
 
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
               f.write("\n\n".join(translated_paragraphs))
 
-          print("Документ успешно переведен без использования API-ключей!")
+          print("Локальный перевод успешно завершен!")
           EOF
           python translate_md.py
 
@@ -142,4 +148,4 @@ jobs:
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: hybrid automated translation and docx update" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: local AI translate and docx convert" && git push)
