@@ -27,18 +27,21 @@ jobs:
         run: |
           pip install torch transformers sentencepiece
 
-      # 4. Локальный нейросетевой перевод (Без интернета, без лимитов, без зависаний)
+      # 4. Локальный нейросетевой перевод (Совместим с Transformers v5, без лимитов и интернета)
       - name: Local AI Paragraph Translate
         run: |
           cat << 'EOF' > translate_md.py
           import re
           import sys
-          from transformers import pipeline
+          import torch
+          from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-          print("Инициализация локальной нейросети перевода RU -> EN...")
+          print("Инициализация локальной нейросети перевода (Совместимо с v5)...")
+          model_name = "Helsinki-NLP/opus-mt-ru-en"
           try:
-              # Загружаем проверенную и легкую модель перевода от Helsinki-NLP
-              translator = pipeline("translation_ru_to_en", model="Helsinki-NLP/opus-mt-ru-en")
+              # Загружаем модель напрямую через классы Seq2Seq вместо удаленного pipeline task
+              tokenizer = AutoTokenizer.from_pretrained(model_name)
+              model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
           except Exception as e:
               print(f"Ошибка загрузки модели: {e}")
               sys.exit(1)
@@ -47,9 +50,12 @@ jobs:
               if not text_block.strip():
                   return text_block
               try:
-                  # Локальный перевод без сетевых запросов
-                  result = translator(text_block, max_length=512)
-                  return result[0]['translation_text']
+                  # Прямой перевод тензорами локально на процессоре
+                  inputs = tokenizer(text_block, return_tensors="pt", padding=True, truncation=True, max_length=512)
+                  with torch.no_grad():
+                      translated_tokens = model.generate(**inputs)
+                  result = tokenizer.decode(translated_tokens[0], skip_special_tokens=True)
+                  return result.strip()
               except Exception as e:
                   print(f"Пропущена строка из-за ошибки модели: {e}")
                   return text_block
@@ -141,11 +147,11 @@ jobs:
       # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@://github.com"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
           [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: local AI translate and docx convert" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: local AI v5 translate and docx convert" && git push)
