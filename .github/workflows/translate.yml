@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'TD-H9_manual.ru.md'
+      - 'Docs/APRS_Digipeater_ru.md'
+      - 'Docs/VSWR-antennas.md'
+      - 'Docs/emission-types-radionerds-ru.md'
   workflow_dispatch:
 
 jobs:
@@ -63,6 +66,9 @@ jobs:
           # ===========================
           files_to_translate = [
               "TD-H9_manual.ru.md"
+              "Docs/APRS_Digipeater_ru.md"
+              "Docs/VSWR-antennas.md"
+              "Docs/emission-types-radionerds-ru.md"
           ]
 
           def translate_text(text):
@@ -93,6 +99,8 @@ jobs:
               # Вычисляем имя выходного файла
               if "_ru.md" in file_name:
                   out_name = file_name.replace("_ru.md", ".en.md")
+              elif ".ru.md" in file_name:
+                  out_name = file_name.replace("-ru.md", ".en.md")
               elif ".ru.md" in file_name:
                   out_name = file_name.replace(".ru.md", ".en.md")
               else:
@@ -176,4 +184,4 @@ jobs:
           # Находим и индексируем новые файлы по всему дереву репозитория
           git add "**.en.md" "**.docx" 2>/dev/null || true
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: tree-based translate preserving directory paths" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: autotranslate" && git push)
