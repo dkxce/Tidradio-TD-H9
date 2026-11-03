@@ -6,8 +6,8 @@
 
 ## Актуальные ссылки на руководство
 
-**.md**: | [**RU**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.html) | [**EN**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.en.html)    
-**.docx**: | [**RU**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.docx) | [**EN**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.en.docx) 
+**.md**: | [**RU**](TD-H9_manual.ru.md) | [**EN**](TD-H9_manual.en.md)    
+**.docx**: | [**RU**](TD-H9_manual.ru.docx) | [**EN**](TD-H9_manual.en.docx) 
 
 ## Содержание
 * [Предисловие](#предисловие)
