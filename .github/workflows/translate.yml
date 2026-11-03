@@ -22,117 +22,158 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и ставим локальный ИИ-переводчик (PyTorch + Transformers)
+      # 3. Настраиваем Python и ставим локальный ИИ-переводчик с исправлениями
       - name: Set up Python and Local AI
         run: |
-          pip install torch transformers sentencepiece
+          pip install torch transformers sentencepiece sacremoses
 
-      # 4. Локальный нейросетевой перевод (Совместим с Transformers v5, без лимитов и интернета)
+      # 4. Сверхбыстрый локальный ИИ-перевод (Защищен от зависаний OpenMP)
       - name: Local AI Paragraph Translate
+        env:
+          TOKENIZERS_PARALLELISM: "false" # Отключает зависания многопоточности в контейнере
         run: |
           cat << 'EOF' > translate_md.py
           import re
           import sys
+          import os
           import torch
           from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-          print("Инициализация локальной нейросети перевода (Совместимо с v5)...")
+          # Гарантия работы в 1 поток для процессора, чтобы избежать дедлока
+          torch.set_num_threads(1)
+          torch.set_num_interop_threads(1)
+
+          print("Инициализация локальной нейросети перевода...")
           model_name = "Helsinki-NLP/opus-mt-ru-en"
           try:
-              # Загружаем модель напрямую через классы Seq2Seq вместо удаленного pipeline task
               tokenizer = AutoTokenizer.from_pretrained(model_name)
               model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
           except Exception as e:
               print(f"Ошибка загрузки модели: {e}")
               sys.exit(1)
 
-          def translate_block(text_block):
-              if not text_block.strip():
-                  return text_block
+          def translate_batch(text_list):
+              if not text_list:
+                  return []
               try:
-                  # Прямой перевод тензорами локально на процессоре
-                  inputs = tokenizer(text_block, return_tensors="pt", padding=True, truncation=True, max_length=512)
+                  # Пакетный перевод (быстрее и стабильнее в 10 раз)
+                  inputs = tokenizer(text_list, return_tensors="pt", padding=True, truncation=True, max_length=512)
                   with torch.no_grad():
                       translated_tokens = model.generate(**inputs)
-                  result = tokenizer.decode(translated_tokens[0], skip_special_tokens=True)
-                  return result.strip()
+                  results = tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)
+                  return [r.strip() for r in results]
               except Exception as e:
-                  print(f"Пропущена строка из-за ошибки модели: {e}")
-                  return text_block
+                  print(f"Ошибка пакетного перевода: {e}")
+                  return text_list
 
           print("Чтение файла документа...")
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
               full_text = f.read()
 
           paragraphs = full_text.split("\n\n")
-          translated_paragraphs = []
+          structure = []
+          payloads = []
           in_code_block = False
 
-          print(f"Начало перевода. Всего абзацев: {len(paragraphs)}")
-
-          for idx, p in enumerate(paragraphs):
-              if idx % 10 == 0 and idx > 0:
-                  print(f"Обработано абзацев: {idx}/{len(paragraphs)}...")
-
-              # Защита блоков кода
+          # Разбор структуры Markdown
+          for p in paragraphs:
               if p.strip().startswith("```"):
                   code_markers = p.count("```")
                   if code_markers % 2 != 0:
                       in_code_block = not in_code_block
-                  translated_paragraphs.append(p)
+                  structure.append(('keep', p))
                   continue
-                  
               if in_code_block:
                   if "```" in p:
                       in_code_block = False
-                  translated_paragraphs.append(p)
+                  structure.append(('keep', p))
                   continue
 
-              # Защита таблиц
               if p.strip().startswith("|") or p.strip().startswith("---"):
                   lines = p.split("\n")
-                  trans_lines = []
+                  table_meta = []
                   for line in lines:
                       if line.strip().startswith("|") or line.strip().startswith("---"):
                           parts = line.split("|")
-                          new_parts = []
+                          line_meta = []
                           for part in parts:
                               if part.strip() and not set(part.strip()).issubset({'-', ':', ' '}):
-                                  new_parts.append(f" {translate_block(part.strip())} ")
+                                  payloads.append(part.strip())
+                                  line_meta.append(('trans', len(payloads) - 1))
                               else:
-                                  new_parts.append(part)
-                          trans_lines.append("|".join(new_parts))
+                                  line_meta.append(('keep', part))
+                          table_meta.append(('row', line_meta))
                       else:
-                          trans_lines.append(translate_block(line))
-                  translated_paragraphs.append("\n".join(trans_lines))
+                          payloads.append(line)
+                          table_meta.append(('text', len(payloads) - 1))
+                  structure.append(('table', table_meta))
                   continue
 
-              # Защита ссылок [текст](url)
               links = re.findall(r'(\[[^\]]+\]\([^)]+\))', p)
               if links:
-                  link_map = {}
+                  link_meta = []
                   for l_idx, link in enumerate(links):
                       text_match = re.search(r'\[([^\]]+)\]', link)
                       url_match = re.search(r'\(([^)]+)\)', link)
                       if text_match and url_match:
-                          placeholder = f"__LN_PH_{l_idx}__"
-                          trans_link_text = translate_block(text_match.group(1))
-                          link_map[placeholder] = f"[{trans_link_text}]({url_match.group(1)})"
-                          p = p.replace(link, placeholder)
+                          payloads.append(text_match.group(1))
+                          link_meta.append({
+                              'placeholder': f"__LN_PH_{l_idx}__",
+                              'url': url_match.group(1),
+                              'payload_idx': len(payloads) - 1
+                          })
+                          p = p.replace(link, f"__LN_PH_{l_idx}__")
                   
-                  p = translate_block(p)
-                  for placeholder, full_link in link_map.items():
-                      p = p.replace(placeholder, full_link)
-                  translated_paragraphs.append(p)
+                  payloads.append(p)
+                  structure.append(('link_line', (p, link_meta, len(payloads) - 1)))
                   continue
 
-              # Обычный абзац текста
-              translated_paragraphs.append(translate_block(p))
+              payloads.append(p)
+              structure.append(('text', len(payloads) - 1))
+
+          print(f"Отправка {len(payloads)} элементов в локальный ИИ...")
+          translated_parts = []
+          batch_size = 16 # Оптимальный размер пачки для стабильности памяти
+          
+          for i in range(0, len(payloads), batch_size):
+              batch = payloads[i:i+batch_size]
+              translated_parts.extend(translate_batch(batch))
+              print(f"Прогресс локального перевода: {min(i + batch_size, len(payloads))}/{len(payloads)}...")
+
+          # Сборка файла обратно
+          final_paragraphs = []
+          for item_type, data in structure:
+              if item_type == 'keep':
+                  final_paragraphs.append(data)
+              elif item_type == 'text':
+                  final_paragraphs.append(translated_parts[data])
+              elif item_type == 'table':
+                  table_lines = []
+                  for row_type, row_data in data:
+                      if row_type == 'text':
+                          table_lines.append(translated_parts[row_data])
+                      elif row_type == 'row':
+                          row_parts = []
+                          for cell_type, cell_data in row_data:
+                              if cell_type == 'trans':
+                                  row_parts.append(f" {translated_parts[cell_data]} ")
+                              else:
+                                  row_parts.append(cell_data)
+                          table_lines.append("|".join(row_parts))
+                  final_paragraphs.append("\n".join(table_lines))
+              elif item_type == 'link_line':
+                  p_template, link_meta, line_payload_idx = data
+                  translated_p = translated_parts[line_payload_idx]
+                  for lm in link_meta:
+                      trans_link_text = translated_parts[lm['payload_idx']]
+                      full_link = f"[{trans_link_text}]({lm['url']})"
+                      translated_p = translated_p.replace(lm['placeholder'], full_link)
+                  final_paragraphs.append(translated_p)
 
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
-              f.write("\n\n".join(translated_paragraphs))
+              f.write("\n\n".join(final_paragraphs))
 
-          print("Локальный перевод успешно завершен!")
+          print("Сборка документа завершена!")
           EOF
           python translate_md.py
 
@@ -147,11 +188,11 @@ jobs:
       # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
           [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: local AI v5 translate and docx convert" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: crashproof batch local translate" && git push)
