@@ -6,146 +6,168 @@ on:
       - main
     paths:
       - 'TD-H9_manual_ru.md'
-  workflow_dispatch: # Позволяет запускать перевод вручную из вкладки Actions
+  workflow_dispatch:
 
 jobs:
   translate_and_convert:
     runs-on: ubuntu-latest
     steps:
-      # 1. Скачиваем код репозитория
+      # 1. Скачиваем репозиторий
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем Pandoc для конвертации документов
+      # 2. Устанавливаем Pandoc
       - name: Install Pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и устанавливаем Argos Translate
-      - name: Set up Python and Install Argos
+      # 3. Устанавливаем современную библиотеку перевода
+      - name: Set up Python and Translator
         run: |
-          pip install argostranslate
-          
-          # Скрипт инициализации и скачивания языковой модели RU -> EN
-          python -c "
-          import argostranslate.package
-          import argostranslate.translate
+          pip install deep-translator
 
-          print('Обновление индекса пакетов Argos...')
-          argostranslate.package.update_package_index()
-          
-          available_packages = argostranslate.package.get_available_packages()
-          package_to_install = next(
-              filter(
-                  lambda x: x.from_code == 'ru' and x.to_code == 'en', available_packages
-              )
-          )
-          
-          print(f'Скачивание и установка модели: {package_to_install}')
-          argostranslate.package.install_from_path(package_to_install.download())
-          print('Модель успешно установлена!')
-          "
-
-      # 4. Безопасный перевод Markdown через Argos Translate (без поломки структуры)
-      - name: Safe Translate Markdown via Argos
+      # 4. Профессиональный перевод через Google (1 запрос на весь файл, разметка защищена)
+      - name: Safe Megabatch Translate via Google
         run: |
           cat << 'EOF' > translate_md.py
           import re
-          from argostranslate import translate
+          from deep_translator import GoogleTranslator
 
-          def translate_text(text):
-              if not text.strip():
-                  return text
+          def translate_large_block(text_to_translate):
+              if not text_to_translate.strip():
+                  return text_to_translate
               try:
-                  # Локальный перевод без сетевых запросов и ошибок HTTPError
-                  return translate.translate(text, "ru", "en")
+                  # Переводим весь блок за один единственный сетевой запрос
+                  return GoogleTranslator(source='ru', target='en').translate(text_to_translate)
               except Exception as e:
-                  print(f"Ошибка перевода строки: {e}")
-                  return text
+                  print(f"Ошибка при запросе к Google: {e}")
+                  return text_to_translate
 
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
               lines = f.readlines()
 
-          translated_lines = []
           in_code_block = False
+          translatable_parts = []
+          structure = []
 
+          # Шаг 1: Разбираем документ и отделяем то, что нужно переводить
           for line in lines:
-              # 1. Полностью пропускаем блоки кода ```
+              # Игнорируем блоки кода ```
               if line.strip().startswith("```"):
                   in_code_block = not in_code_block
-                  translated_lines.append(line)
+                  structure.append(('keep', line))
                   continue
-              
               if in_code_block:
-                  translated_lines.append(line)
+                  structure.append(('keep', line))
                   continue
 
-              # 2. Не переводим пустые строки
+              # Игнорируем пустые строки
               if not line.strip():
-                  translated_lines.append(line)
+                  structure.append(('keep', line))
                   continue
 
-              # 3. Перевод таблиц (парсим ячейки, не трогая разделители '|')
+              # Разметка таблиц
               if line.strip().startswith("|") or line.strip().startswith("---"):
                   parts = line.split("|")
-                  new_parts = []
-                  for part in parts:
-                      # Игнорируем технические разделители синтаксиса таблиц (например, :---:)
+                  cell_meta = []
+                  for p_idx, part in enumerate(parts):
                       if part.strip() and not set(part.strip()).issubset({'-', ':', ' '}):
-                          new_parts.append(f" {translate_text(part.strip())} ")
-                      else:
-                          new_parts.append(part)
-                  translated_lines.append("|".join(new_parts))
+                          translatable_parts.append(part.strip())
+                          cell_meta.append((p_idx, len(translatable_parts) - 1))
+                  structure.append(('table', (parts, cell_meta)))
                   continue
 
-              # 4. Защита Markdown ссылок [текст](url) от искажения
+              # Разметка ссылок [текст](url)
               links = re.findall(r'(\[[^\]]+\]\([^)]+\))', line)
               if links:
-                  # Временные плейсхолдеры, чтобы Argos не ломал URL-адреса
-                  for i, link in enumerate(links):
-                      line = line.replace(link, f"__LINK_PLACEHOLDER_{i}__")
-                  
-                  line = translate_text(line)
-                  
-                  # Возвращаем ссылки назад, переводя только текст внутри квадратных скобок
-                  for i, link in enumerate(links):
+                  link_meta = []
+                  for l_idx, link in enumerate(links):
                       text_match = re.search(r'\[([^\]]+)\]', link)
                       url_match = re.search(r'\(([^)]+)\)', link)
                       if text_match and url_match:
-                          translated_link_text = translate_text(text_match.group(1))
-                          full_link = f"[{translated_link_text}]({url_match.group(1)})"
-                          line = line.replace(f"__LINK_PLACEHOLDER_{i}__", full_link)
-                  translated_lines.append(line + "\n")
-              else:
-                  # Обычный текст
-                  translated_lines.append(translate_text(line) + "\n")
+                          trans_text = text_match.group(1)
+                          translatable_parts.append(trans_text)
+                          link_meta.append({
+                              'placeholder': f"__LINK_PH_{l_idx}__",
+                              'url': url_match.group(1),
+                              'payload_idx': len(translatable_parts) - 1
+                          })
+                          line = line.replace(link, f"__LINK_PH_{l_idx}__")
+                  
+                  translatable_parts.append(line.rstrip('\n'))
+                  structure.append(('link_line', (line.rstrip('\n'), link_meta, len(translatable_parts) - 1)))
+                  continue
+
+              # Обычная строка текста
+              translatable_parts.append(line.rstrip('\n'))
+              structure.append(('text', len(translatable_parts) - 1))
+
+          # Шаг 2: Склеиваем весь переводимый текст в супер-строку через уникальный разделитель
+          # Это заставит Google перевести всё за 1 запрос и спасет от блокировок
+          delimiter = " [br_ph] "
+          megastring = delimiter.join(translatable_parts)
+
+          print(f"Отправка текста в Google Translate единым запросом...")
+          translated_megastring = translate_large_block(megastring)
+          
+          # Разбираем переведенную супер-строку обратно в массив
+          translated_parts = translated_megastring.split(delimiter)
+
+          # Если Google случайно удалил пробелы вокруг разделителя, подстрахуемся:
+          if len(translated_parts) != len(translatable_parts):
+              translated_parts = re.split(r'\s*\[br_ph\]\s*', translated_megastring)
+
+          # Если структуры всё равно разъехались, откатываемся на безопасный поштучный массив
+          if len(translated_parts) != len(translatable_parts):
+              print("Предупреждение: Разделители сместились. Перевод в безопасном режиме...")
+              translated_parts = []
+              for part in translatable_parts:
+                  translated_parts.append(translate_large_block(part))
+
+          # Шаг 3: Собираем файл обратно
+          final_lines = []
+          for item_type, data in structure:
+              if item_type == 'keep':
+                  final_lines.append(data)
+              elif item_type == 'text':
+                  final_lines.append(translated_parts[data] + "\n")
+              elif item_type == 'table':
+                  parts, cell_meta = data
+                  for p_idx, payload_idx in cell_meta:
+                      parts[p_idx] = f" {translated_parts[payload_idx]} "
+                  final_lines.append("|".join(parts))
+              elif item_type == 'link_line':
+                  line_template, link_meta, line_payload_idx = data
+                  translated_line = translated_parts[line_payload_idx]
+                  for lm in link_meta:
+                      trans_link_text = translated_parts[lm['payload_idx']]
+                      full_link = f"[{trans_link_text}]({lm['url']})"
+                      translated_line = translated_line.replace(lm['placeholder'], full_link)
+                  final_lines.append(translated_line + "\n")
 
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
-              f.writelines(translated_lines)
-          print("Локальный перевод через Argos завершен успешно!")
+              f.writelines(final_lines)
+          print("Перевод с оригинальным качеством Google завершен!")
           EOF
           python translate_md.py
 
-      # 5. Конвертируем оба файла в формат .docx
+      # 5. Конвертируем в формат .docx
       - name: Convert Markdown to DOCX via Pandoc
         run: |
           pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
           if [ -f "TD-H9_manual_ru.en.md" ]; then
             pandoc TD-H9_manual_ru.en.md -o TD-H9_manual_ru.en.docx
-          else
-            echo "Английский MD-файл не найден, конвертация отменена"
           fi
 
-      # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
+      # 6. Делаем коммит изменений
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Проверяем наличие файлов перед добавлением, чтобы избежать ошибок Git
           [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate via argos and convert to docx" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: perfect google translate with save formatting" && git push)
