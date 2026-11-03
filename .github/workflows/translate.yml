@@ -1,4 +1,4 @@
-name: Auto Translate and Convert to DOCX
+name: Auto Translate Markdown
 
 on:
   push:
@@ -15,188 +15,32 @@ on:
       - 'Customer Programming Software/Disasm/gnss.md'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  translate_and_convert:
+  translate:
     runs-on: ubuntu-latest
     steps:
-      # 1. Скачиваем код репозитория
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      # 2. Устанавливаем Pandoc
-      - name: Install Pandoc
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc
-
-      # 3. Настраиваем Python и устанавливаем необходимые библиотеки
-      - name: Set up Python and Packages
-        run: |
-          pip install argostranslate beautifulsoup4 markdownify mistletoe transliterate markdown
-
-      # 4. Скачиваем языковую модель Argos Translate (RU -> EN)
-      - name: Install Argos Model
-        run: |
-          python -c "
-          import argostranslate.package
-          print('Обновление индекса пакетов Argos...')
-          argostranslate.package.update_package_index()
-          available_packages = argostranslate.package.get_available_packages()
-          package_to_install = next(filter(lambda x: x.from_code == 'ru' and x.to_code == 'en', available_packages))
-          print(f'Скачивание и установка модели: {package_to_install}')
-          argostranslate.package.install_from_path(package_to_install.download())
-          print('Модель Argos успешно установлена!')
-          "
-
-      # 5. Перевод массива файлов через HTML-дерево с сохранением путей директорий
-      - name: HTML Tree Translate and Markdown Reconstruction
-        env:
-          OMP_NUM_THREADS: "1"
-          MKL_NUM_THREADS: "1"
-          OPENBLAS_NUM_THREADS: "1"
-        run: |
-          cat << 'EOF' > translate_html_tree.py
-          import os
-          import re
-          import sys
-          import markdown
-          from bs4 import BeautifulSoup, NavigableString
-          from markdownify import markdownify as mdify
-          from transliterate import slugify
-          import argostranslate.translate
-
-          # ===========================
-          # МАССИВ ФАЙЛОВ ДЛЯ ОБРАБОТКИ
-          # ===========================
-          files_to_translate = [
-              "TD-H9_manual.ru.md",
-              "Docs/APRS_Digipeater_ru.md",
-              "Docs/VSWR-antennas.md",
-              "Docs/emission-types-radionerds-ru.md",
-              "Customer Programming Software/Disasm/APRS_symbols.md",
-              "Customer Programming Software/Disasm/README.md",
-              "Customer Programming Software/Disasm/aprs.md",
-              "Customer Programming Software/Disasm/gnss.md"
-          ]
-
-          def translate_text(text):
-              clean_text = text.strip()
-              if not clean_text or clean_text.isdigit() or len(clean_text) < 2:
-                  return text
-              try:
-                  return argostranslate.translate.translate(clean_text, "ru", "en")
-              except Exception:
-                  return text
-
-          def make_slug(text):
-              slug = slugify(text.lower())
-              if not slug:
-                  slug = text.lower().replace(" ", "-")
-              slug = re.sub(r'[^a-z0-9-_]', '', slug)
-              return slug
-
-          for input_path in files_to_translate:
-              if not os.path.exists(input_path):
-                  print(f"Предупреждение: Файл {input_path} не найден, пропускаем.")
-                  continue
-
-              # Разделяем путь на директорию и имя файла
-              file_dir = os.path.dirname(input_path)
-              file_name = os.path.basename(input_path)
-
-              # Вычисляем имя выходного файла
-              if "_ru.md" in file_name:
-                  out_name = file_name.replace("_ru.md", ".en.md")
-              elif "-ru.md" in file_name:
-                  out_name = file_name.replace("-ru.md", ".en.md")
-              elif ".ru.md" in file_name:
-                  out_name = file_name.replace(".ru.md", ".en.md")
-              else:
-                  out_name = file_name.replace(".md", ".en.md")
-
-              # Собираем полный выходной путь, сохраняя исходную папку
-              output_path = os.path.join(file_dir, out_name) if file_dir else out_name
-
-              print(f"\n Обработка: {input_path} -> {output_path}")
-              anchor_mapping = {}
-
-              with open(input_path, "r", encoding="utf-8") as f:
-                  md_content = f.read()
-
-              html_content = markdown.markdown(md_content, extensions=['tables', 'fenced_code'])
-              soup = BeautifulSoup(html_content, "html.parser")
-
-              # Шаг 1: Якоря
-              for heading in soup.find_all(re.compile(r'^h[1-6]$')):
-                  orig_text = heading.get_text()
-                  orig_slug = orig_text.lower().replace(" ", "-")
-                  orig_slug = re.sub(r'[^a-z0-9-_]', '', orig_slug)
-                  
-                  for string in heading.find_all(string=True):
-                      if isinstance(string, NavigableString):
-                          string.replace_with(translate_text(string))
-                  
-                  trans_text = heading.get_text()
-                  new_slug = make_slug(trans_text)
-                  anchor_mapping[f"#{orig_slug}"] = f"#{new_slug}"
-                  
-                  anchor_tag = soup.new_tag("a", attrs={"name": new_slug})
-                  heading.append(anchor_tag)
-
-              # Шаг 2: Контент
-              for tag in soup.find_all(True):
-                  if tag.name in ['code', 'pre']:
-                      continue
-                  if tag.name == 'a' and tag.has_attr('href'):
-                      href = tag['href'].lower()
-                      if href.startswith('#') and href in anchor_mapping:
-                          tag['href'] = anchor_mapping[href]
-
-                  for child in tag.children:
-                      if isinstance(child, NavigableString) and child.strip():
-                          if tag.name not in ['code', 'pre'] and child.parent.name not in ['code', 'pre']:
-                              child.replace_with(translate_text(child))
-
-              # Шаг 3: Сборка
-              translated_html = str(soup)
-              translated_md = mdify(translated_html, heading_style="ATX", strip=['script', 'style'])
-              translated_md = re.sub(r'\n{3,}', '\n\n', translated_md)
-
-              with open(output_path, "w", encoding="utf-8") as f:
-                  f.write(translated_md)
-
-              print(f"Успешно сохранен в ту же папку: {output_path}")
-
-          print("\nВсе файлы из массива успешно обработаны!")
-          EOF
-          python translate_html_tree.py
-
-      # 6. Динамическая конвертация всех Markdown-файлов в DOCX (с поиском во всех подпапках)
-      - name: Convert Markdown to DOCX via Pandoc
-        run: |
-          # Конвертируем все русские мануалы
-          find . -type f -name "*_ru.md" -o -name "*.ru.md" -o -name "*-ru.md" | while read -r f; do
-              pandoc "$f" -o "${f%.md}.docx"
-          done
-          
-          # Конвертируем также одиночный файл без суффикса языка
-          if [ -f "Docs/VSWR-antennas.md" ]; then
-              pandoc Docs/VSWR-antennas.md -o Docs/VSWR-antennas.docx
-          fi
-          
-          # Конвертируем все созданные переводы .en.md в их родных папках
-          find . -type f -name "*.en.md" | while read -r f; do
-              pandoc "$f" -o "${f%.md}.docx"
-          done
-
-      # 7. Фиксируем изменения и отправляем файлы обратно в репозиторий
-      - name: Commit and Push Changes
-        run: |
-          # Исправлен почтовый адрес бота для прохождения валидации со стороны Git
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          
-          # Находим и индексируем новые файлы по всему дереву репозитория рекурсивно
-          git add "**.en.md" "**.docx" 2>/dev/null || True
-          
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: autotranslate array and preserve paths" && git push)
+      - uses: actions/checkout@v4
+      - name: Run Translator
+        uses: dkxce/md-auto-translator@main
+        with:
+          translate_paths: |
+            TD-H9_manual.ru.md
+            Docs/APRS_Digipeater_ru.md
+            Docs/VSWR-antennas.md
+            Docs/emission-types-radionerds-ru.md
+            Customer Programming Software/Disasm/APRS_symbols.md
+            Customer Programming Software/Disasm/README.md
+            Customer Programming Software/Disasm/aprs.md
+            Customer Programming Software/Disasm/gnss.md'
+          convert_paths: |
+            TD-H9_manual.ru.md
+            Docs/APRS_Digipeater_ru.md
+            Docs/VSWR-antennas.md
+            Docs/emission-types-radionerds-ru.md
+            Customer Programming Software/Disasm/APRS_symbols.md
+            Customer Programming Software/Disasm/README.md
+            Customer Programming Software/Disasm/aprs.md
+            Customer Programming Software/Disasm/gnss.md
