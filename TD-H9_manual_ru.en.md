@@ -1,800 +1,801 @@
-# TIDRADIO TD-H9 — Руководство пользователя
+TIDRADIO TD-H9 - User Guide
 
-**Firmware 1.0.33** - Перевод официального руководства пользователя ([Ham Version, 71 стр.](Original%20Manuals/H9_Ham_Version_User_Manual.pdf)), измененное и дополненное (v5).     
+**Firmware 1.0.33** - Translation of the official user manual (  LN PH 0 ), modified and supplemented (v5).
 
-![Рация TIDRADIO TD-H9](pdf_images/p001_IM8_633x452.jpg) 
+ LN PH 0    
 
-## Актуальные ссылки на руководство
+## Current references to the guide
 
-**.md**: | [**RU**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.html) | [**EN**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.en.html)    
-**.docx**: | [**RU**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.docx) | [**EN**](https://dkxce.github.io/Tidradio-TD-H9/TD-H9_manual_ru.en.docx) 
+**.md**: |   LN PH 0   |   LN PH   1st    
+**.docx**: |   LN PH 2  |   LN PH 3    
 
-## Содержание
-* [Предисловие](#предисловие)
-    * [1.1 Информация по безопасности для любительских раций](#11-информация-по-безопасности-для-любительских-раций)
-    * [1.2 Основные возможности](#12-основные-возможности)
-    * [1.3 Обслуживание (кратко)](кратко)
-* [2. Аккумуляторная батарея](#2-аккумуляторная-батарея)
-    * [2.1 Зарядка](#21-зарядка)
-    * [2.2–2.3 Зарядное устройство и меры предосторожности](#2223-зарядное-устройство-и-меры-предосторожности)
-    * [2.4 Как заряжать](#24-как-заряжать)
-    * [2.5 Светодиодный индикатор ЗУ](#25-светодиодный-индикатор-зу)
-    * [2.6 Хранение аккумулятора](#26-хранение-аккумулятора)
-    * [2.7 Зарядка через USB-C](#27-зарядка-через-usb-c)
-* [3. Установка аксессуаров](#3-установка-аксессуаров)
-* [4. Обзор радиостанции](#4-обзор-радиостанции)
-    * [4.1 Кнопки и органы управления](#41-кнопки-и-органы-управления)
-    * [4.2 ЖК-дисплей. Значки](#42-жк-дисплей-значки)
-    * [4.3 Светодиодные индикаторы](#43-светодиодные-индикаторы)
-    * [4.4 Основные клавиши управления](#44-основные-клавиши-управления)
-    * [4.5 Дополнительные комбинации клавиш и включения](#45-дополнительные-комбинации-клавиш-и-включения)
-    * [4.6 Цифровая клавиатура](#46-цифровая-клавиатура)
-* [5. Базовые операции](#5-базовые-операции)
-    * [5.1 Включение](#51-включение)
-    * [5.2 Громкость](#52-громкость)
-    * [5.3 Выбор канала](#53-выбор-канала)
-    * [5.4 Вызов](#54-вызов)
-    * [5.5 Частотный режим (VFO)](VFO)
-    * [5.6 Канальный режим (MR)](MR)
-* [6. Дополнительные функции](#6-дополнительные-функции)
-    * [6.1 Сканирование частот](#61-сканирование-частот)
-    * [6.2 Сканирование каналов](#62-сканирование-каналов)
-    * [6.3 Сканирование CTCSS/DCS](#63-сканирование-ctcssdcs)
-    * [6.4 Программирование каналов вручную](#64-программирование-каналов-вручную)
-    * [6.5 Аварийный сигнал (Emergency Alert)](Emergency Alert)
-    * [6.6 FM-радио](#66-fm-радио)
-    * [6.7 NOAA-погода](#67-noaa-погода)
-    * [6.8 Тон репитера (1000 / 1450 / 1750 / 2100 Гц)](1000 / 1450 / 1750 / 2100 Гц)
-    * [6.9 Функция вызова (Bluetooth-звонки)](Bluetooth-звонки)
-    * [6.10 Функция «Аудио» (музыка через рацию)](музыка через рацию)
-    * [6.11 OD PTT (Odmaster PTT)](Odmaster PTT)
-    * [6.12 Программирование по Bluetooth](#612-программирование-по-bluetooth)
-* [7. Работа с меню](#7-работа-с-меню)
-    * [7.1 Основное использование](#71-основное-использование)
-    * [7.2 Короткие команды (шорткаты)](шорткаты)
-    * [7.31 Radio Setting (Настройки радио)](Настройки радио)
-    * [7.32 Program Channel (Программирование канала)](Программирование канала)
-    * [7.33 Analog Set](#733-analog-set)
-    * [7.34 Radio Information](#734-radio-information)
-    * [7.35 Scan (Сканирование)](Сканирование)
-    * [7.36 Bluetooth](#736-bluetooth)
-    * [7.37 Обновление прошивки](#737-обновление-прошивки)
-    * [7.38 GNSS (GPS)](GPS)
-    * [7.39 Site Type (Тип позиции)](Тип позиции)
-    * [7.40 APRS](#740-aprs)
-    * [7.41 Подробное описание функций APRS](#741-подробное-описание-функций-aprs)
-    * [7.42 Удаленное управление репитером APRS](#742-удаленное-управление-репитером-aprs)
-    * [7.43 Ретрансляция APRS-пакетов дигипитером](#743-ретрансляция-aprs-пакетов-дигипитером)
-    * [7.44 APRS Worldwide Частоты](#744-aprs-worldwide-частоты)
-    * [7.45 Схожая по функционалу APRS-радиостанция](#745-схожая-по-функционалу-aprs-радиостанция)
-    * [7.46 SMS](#746-sms)
-    * [7.47 Spectrum](#747-spectrum)
-    * [7.48 Morse](#748-morse)
-* [Приложение A. Поиск и устранение неисправностей](#приложение-a-поиск-и-устранение-неисправностей)
-* [Приложение B. Технические характеристики](#приложение-b-технические-характеристики)
-* [Приложение C. Таблица DCS-кодов](#приложение-c-таблица-dcs-кодов)
-* [Приложение D. Таблица CTCSS-тонов](#приложение-d-таблица-ctcss-тонов)
-* [Приложение E. Программное обеспечение](#приложение-E-программное-обеспечение)
-* [Приложение F. Каналы и пресеты](#приложение-F-каналы-и-пресеты)
-
----
-
-## Предисловие
-
-Благодарим за покупку рации TD-H9. Это многофункциональная любительская (ham) радиостанция, сочетающая новейшие технологии радиосвязи с прочной механической конструкцией. TD-H9 — идеальное и эффективное решение для профессионалов, которым необходимо поддерживать связь с рабочей командой (стройплощадки, здания, выставки, отели и т. п.), а также для пользователей, которым связь нужна для отдыха и семьи.
-
-**Важное уведомление.** Чтобы защитить себя от травм и порчи имущества, которые могут возникнуть при неправильной эксплуатации, внимательно прочитайте руководство перед использованием. Оно содержит инструкции по безопасному использованию, а также информацию об осознанности и контроле воздействия радиочастотной энергии.
-
-### 1.1 Информация по безопасности для любительских раций
-
-Ваша портативная радиостанция содержит маломощный передатчик. При нажатии тангенты (кнопки разговора) он излучает радиочастотные сигналы. Устройство рассчитано на работу с коэффициентом заполнения не более 50 %. В августе 1996 года FCC приняла рекомендации по воздействию радиочастотного излучения с уровнями безопасности для портативных беспроводных устройств.
-
-**Предупреждение FCC (Part 15.21).** Изготовитель не несёт ответственности за любые изменения или модификации, явно не одобренные стороной, ответственной за соответствие. Такие изменения могут аннулировать право пользователя на эксплуатацию данного оборудования.
-
-**Соответствие требованиям FCC (Part 15).** Данное оборудование проверено и признано соответствующим ограничениям для цифровых устройств класса B согласно части 15 правил FCC. Эти ограничения призваны обеспечить разумную защиту от вредных помех в жилых помещениях. Оборудование генерирует и может излучать радиочастотную энергию. Нет гарантии, что помехи не возникнут в конкретной установке. Проверка помех производится выключением и включением устройства (см. перечень мер: изменить ориентацию/место антенны, увеличить расстояние между устройствами, подключить устройство в другую розетку, обратиться к продавцу или специалисту).
-
-**ПРЕДУПРЕЖДЕНИЕ!** Модификация устройства для приёма сигналов сотовых радиотелефонов ЗАПРЕЩЕНА правилами FCC и федеральным законом.
-
-**Соответствие ЕС.** Продукт соответствует требованиям директивы 2014/53/EU. ВНИМАНИЕ: европейские пользователи должны иметь действующую любительскую лицензию для передачи на частотах и уровнях мощности данного устройства. Несоблюдение может быть незаконным и повлечь преследование.
-
-**Соответствие стандартам РЧ-воздействия.** Устройство соответствует: FCC 47 CFR § 1.1307, 1.1310 и 2.1093; ANSI/IEEE C95.1:2005; Canada RSS102 Issue 5 (март 2015); IEEE C95.1:2005 Edition.
-
-**Информация о РЧ-воздействии.** Не позволяйте детям пользоваться рацией без присмотра взрослых. Используйте только комплектную или одобренную антенну; повреждённая антенна при контакте с кожей может вызвать небольшой ожог. При работе голова к лицу держите рацию на расстоянии 1 дюйма (2,5 см) от лица. Для ношения на теле используйте комплектный поясной зажим.
-
-### 1.2 Основные возможности
-
-- Выходная мощность: до 10 Вт (три уровня: высокая, средняя, низкая).
-- Диапазоны (TX/RX): 136–174 (VHF), 174–245 (SatCom), 240–260, 290–350 (River), 350–400, 400–470 (UHF), 470–520, 520–600 МГц. Приём: 50–76, 65–108 (FM-радио), 108–136 (AM/FM, авиа).
-- 199 каналов памяти.
-- 50 тонов CTCSS и 105 кодов DCS.
-- Шумоподавитель с 9 уровнями.
-- Шаг частоты: 0,5 / 2,5 / 5,0 / 6,25 / 10,0 / 12,5 / 25,0 / 50,0 кГц.
-- VOX (передача голосом).
-- TOT (таймер ограничения передачи).
-- Двойное наблюдение / двойной приём / двухдиапазонная рация.
-- Энергосбережение.
-- Функция аварийного сигнала (Alarm).
-- Функция DTMF, тон 1750 Гц для репитеров.
-- Программируемый офсет репитера.
-- Настраиваемые функции боковых клавиш (PF1/PF2).
-- 1,77-дюймовый цветной ЖК-экран, 3 режима отображения, 18 цветов меню.
-- Усиление микрофона, скачкообразная перестройка частоты (FHSS), скремблер.
-- Функция сканирования, спектроанализатор, LED-фонарик.
-- BCL (блокировка при занятом канале).
-- Задание и хранение имён каналов.
-- VOICE — голосовое озвучивание выбранной функции.
-- Выбор режима канал/частота.
-- Блокировка клавиатуры, Roger Beep.
-- Отображение при включении, зарядка и программирование через USB-C, разъём Kenwood 2-pin.
-- Антенный разъём на рации SMA-Male, на антенне SMA-Female.
-- Поддержка приёма NOAA-погоды (США и Канада).
-- GPS, Bluetooth (настройка через Odmaster, гарнитуры), APRS.
-- CPU 240 МГц, RAM 120 МБ, flash 16 МБ, радичип Beken BK4819, МК PY32F003.
-- Габариты: 140×53×32 мм, вес 190 г.
-
-### 1.3 Обслуживание (кратко)
-
-- Не вскрывайте рацию — это аннулирует гарантию.
-- Не храните под солнцем и в жарких местах, в пыли и грязи.
-- Не допускайте попадания влаги.
-- При запахе/дыме немедленно выключите питание и снимите аккумулятор.
-- Не передавайте без антенны.
+## Content
+*   LN PH 0    
+ LN PH   1st    
+ LN PH  2    
+*   LN PH 3    
+*   LN PH 4    
+*   LN PH 5    
+ LN PH 6.    
+*   LN PH 7    
+ LN PH 8.    
+ LN PH  9    
+ LN PH 10.    
+ LN PH 11.    
+ LN PH 12.    
+ LN PH 13.    
+ LN PH  14    
+ LN PH 15.    
+ LN PH  16    
+ LN PH 17.    
+ LN PH 18.    
+ LN PH  19    
+ LN PH 20.    
+ LN PH 21.    
+ LN PH 22.    
+ LN PH 23.    
+ LN PH  24    
+ LN PH 25.    
+ LN PH  26    
+ LN PH 27.    
+ LN PH 28.    
+ LN PH  29    
+ LN PH  30    
+ LN PH 31    
+ LN PH  32    
+ LN PH 33.    
+*   LN PH 34    
+*   LN PH 35    
+ LN PH 36.    
+*   LN PH 37    
+ LN PH  38    
+ LN PH  39    
+*   LN PH 40    
+ LN PH 41    
+*   LN PH 42    
+ LN PH 43.    
+*   LN PH 44    
+*   LN PH 45    
+ LN PH  46    
+*   LN PH 47    
+ LN PH 48.    
+ LN PH  49    
+ LN PH 50.    
+ LN PH 51    
+*   LN PH 52    
+ LN PH 53.    
+*   LN PH 54    
+*   LN PH 55    
+* LN PH 56    
+*   LN PH 57    
+ LN PH 58.    
+ LN PH 59.    
+ LN PH  60    
+ LN PH 61    
+ LN PH 62    
+ LN PH 63.    
+*   LN PH 64    
+ LN PH 65.    
 
 ---
 
-## 2. Аккумуляторная батарея
+## Preface
+
+Thank you for purchasing the TD-H9 radio. It is a multifunctional amateur (ham) radio station, combining the latest radio technology with a strong mechanical design. The TD-H9 is an ideal and effective solution for professionals who need to keep in touch with the work team (construction sites, buildings, exhibitions, hotels, etc.), as well as for users who need communication for leisure and family.
+
+**Important notice. ** To protect yourself from injuries and damage to property that may occur if misused, read the manual carefully before use. It contains instructions for safe use, as well as information on awareness and control of exposure to radiofrequency energy.
+
+###1.1 Safety Information for Amateur Radios
+
+Your portable radio station contains a low-power transmitter. When you press tangents (talk buttons), it emits radio frequency signals. The device is designed to work with a filling factor of not more than 50%. In August 1996, the FCC adopted recommendations on exposure to RF radiation with safety levels for portable wireless devices.
+
+**FCC Warning (Part 15.21).** The manufacturer is not responsible for any changes or modifications not expressly approved by the party responsible for conformity. Such changes may nullify the user's right to operate the equipment.
+
+** FCC Compliance (Part 15).** This equipment has been tested and found to comply with the Class B digital device restrictions under Part 15 of the FCC Regulations. These restrictions are intended to provide reasonable protection against harmful interference in living quarters. The equipment generates and can emit radio frequency energy. There is no guarantee that interference will not occur in a particular installation. Check interference is made by turning off and on the device (see the list of measures: change the orientation / location of the antenna, increase the distance between the devices, connect the device to another outlet, contact the seller or specialist).
+
+**WARNING!** Modification of the device for receiving signals of cellular radio phones is prohibited by FCC regulations and federal law.
+
+** EU compliance.** The product complies with Directive 2014/53/EU. NOTE: European users must have a valid amateur license to transmit at frequencies and power levels. Non-compliance may be illegal and may result in prosecution.
+
+** Compliance with RF standards.** The device complies with: FCC 47 CFR §§ 1.1307, 1.1310 and 2.1093; ANSI/IEEE C95.1:2005; Canada RSS102 Issue 5 (March 2015); IEEE C95.1:2005 Edition.
+
+**Information about RF exposure.** Do not allow children to use radios without adult supervision. Use only a complete or approved antenna; a damaged antenna may cause a slight burn when in contact with the skin. When working head-to-face, keep the radio 1 inch (2.5 cm) away from your face. For wearing on the body, use a complete waist clip.
+
+##1.2 Major opportunities
+
+Power output: up to 10 W (three levels: high, medium, low).
+Ranges (TX/RX): 136–174 (VHF), 174–245 (SatCom), 240–260, 290–350 (River), 350–400, 400–470 (UHF), 470–520, 520–600 MHz. Reception: 50–76, 65–108 (FM radio), 108–136 (AM/FM, air).
+- 199 memory channels.
+50 tones of CTCSS and 105 DCS codes.
+- Noise suppressor with 9 levels.
+- Frequency step: 0.5 / 2.5 / 5.0 / 6.25 / 10.0 / 12.5 / 25.0 / 50.0 kHz.
+- VOX (voice transmission).
+- TOT (Transmission Limitation Timer).
+- Double surveillance / double reception / dual-band radio.
+- Energy saving.
+The alarm function (Alarm).
+DTMF function, 1750 Hz tone for repeaters.
+- Programmable offset of the repeater.
+Configurable side key functions (PF1/PF2).
+1.77-inch color LCD screen, 3 display modes, 18 menu colors.
+- Microphone amplification, frequency hopping (FHSS), scrambler.
+- Scan function, spectroanalyzer, LED flashlight.
+BCL (Blocking with a busy channel).
+- Setting and storing channel names.
+VOICE is the voice sounding of the selected function.
+- Channel/frequency selection.
+- Keyboard lock, Roger Beep.
+Display when enabled, charging and programming via USB-C, Kenwood 2-pin connector.
+- Antenna connector on the SMA-Male radio, on the SMA-Female antenna.
+Support for NOAA weather reception (US and Canada).
+- GPS, Bluetooth (configuration via Odmaster, headsets), APRS.
+- CPU 240 MHz, RAM 120 MB, flash 16 MB, Beken BK4819, MK PY32F003.
+Dimensions: 140×53×32 mm, weight 190 g
+
+### 1.3 Service (briefly)
+
+- Do not open the radio - it will void the warranty.
+Do not store under the sun and in hot places, in dust and dirt.
+- Don't let any moisture get in.
+If you smell or smoke, turn off the power immediately and remove the battery.
+- Don't pass without an antenna.
+
+---
+
+##2. Battery battery
 
 > BP-9 7.4V DC Li-ion 2400 mAh 17.76 Wh
 
-<img src="images/TIDRADIO H9 - 008.png" width="400"/>
+<img src="images/TIDRADIO H9 - 008.png" width="400"/ >>
 
-> Зарядное устройство: 5V 1A
+> Charger: 5V 1A
 
-<img src="images/TIDRADIO H9 - 015.jpg" width="400"/>
+<img src="images/TIDRADIO H9 - 015.jpg" width="400"/ >>
 
-### 2.1 Зарядка
+###2.1 Charging
 
-Литий-ионный аккумулятор не заряжен с завода — зарядите его перед использованием. Для выхода на полную ёмкость первые 2–3 цикла разряд/заряд, возможно, не дадут полной ёмкости.
+The lithium-ion battery is not charged from the factory – charge it before use. To reach full capacity, the first 2-3 cycles of discharge / charge may not give full capacity.
 
-### 2.2–2.3 Зарядное устройство и меры предосторожности
+## 2.2-2.3 Charger and precautions
 
-Используйте только фирменное ЗУ. Не замыкайте контакты батареи, не бросайте её в огонь, не снимайте корпус. Заряжайте при температуре 5–40 °C. Перед зарядкой выключайте рацию. Не заряжайте полностью заряженный аккумулятор.
+Only use the brand name. Do not close the contacts of the battery, do not throw it into the fire, do not remove the case. Charge at a temperature of 5–40 °C. Turn off the radio before charging. Do not charge a fully charged battery.
 
-### 2.4 Как заряжать
+###2.4 How to charge
 
-1. Подключите адаптер к розетке, затем к разъёму DC на задней стороне ЗУ (индикатор мигает оранжевым).
-2. Установите аккумулятор или рацию в ЗУ (индикатор красный — идёт зарядка).
-3. Полная зарядка ≈ 2–5 часов; когда загорится зелёный — зарядка завершена. Снимите устройство.
+1. Connect the adapter to the socket, then to the DC connector on the back of the ROM (the indicator flashes orange).
+2. Install the battery or walkie-talkie in the ZU (the indicator is red - charging is underway).
+3. Full charging is 2-5 hours; when the green lights up, the charging is completed. Remove the device.
 
-При зарядке рации **во включённом состоянии** зелёный индикатор не загорится — рацию нужно выключить.
+When charging the radio **in the on state ** the green indicator will not light up - the radio must be turned off.
 
-### 2.5 Светодиодный индикатор ЗУ
+### 2.5 LED indicator ZU
 
-| Состояние | Индикатор | Цвет |
+| Status. | Indicator | Colour |
 |---|---|---|
-| Нет батареи | Зелёный и красный поочерёдно | 🔴🟢 |
-| Обычная зарядка | Красный | 🔴 |
-| Полная зарядка | Зелёный | 🟢 |
+| No battery. | Green and red alternately |  |
+| Regular charging. | Red. |  |
+| Full charge. | Green. |  |
 
-### 2.6 Хранение аккумулятора
+###2.6 Battery storage
 
-- Храните при ~80 % разряда. В сухом прохладном месте, вдали от нагрева и прямого солнца.
+- Keep it at ~80% discharge. In a dry cool place, away from heat and direct sun.
 
-### 2.7 Зарядка через USB-C
+###2.7 Charging via USB-C
 
-1. Выключите рацию.
-2. Подключите USB-C кабель в разъём на аккумуляторе, второй конец — к сетевому ЗУ.
-3. Полная зарядка пустого аккумулятора ≈ 4 часа; индикатор батареи на экране показывает процесс.
-4. Рекомендуется заряжать при выключенной рации. Снимайте рацию с зарядки в течение 6 часов после зарядки; не храните подключённой к ЗУ.
+1. Turn off the radio.
+2. Connect the USB-C cable to the battery connector, the second end to the network ROM.
+3. Full charge of the empty battery is 4 hours; the battery indicator on the screen shows the process.
+4. It is recommended to charge when the radio is turned off. Remove the radio from charging within 6 hours after charging; do not store connected to the RAM.
 
 ---
 
-## 3. Установка аксессуаров
+##3. Installation of accessories
 
-- **Антенна:** вкручивать по часовой стрелке, снимать против часовой (за основание).
-- **Поясной зажим:** два винта на задней стороне над аккумулятором — открутить, продеть зажим, закрутить обратно.
-- **Аккумулятор:** рация выключена; совместить направляющие, сдвинуть вверх до щелчка. Снятие — кнопка фиксатора снизу батареи.
-- **Гарнитура:** открыть резиновую заглушку и вставить штекер в двойной разъём MIC/SP.
-
----
-
-## 4. Обзор радиостанции
-
-![Расположение кнопок и элементов управления](pdf_images/p016_IM75_2821x1375.jpg)
-
-### 4.1 Кнопки и органы управления
-
-> Номера соответствуют цифрам на схеме выше.
-
-| # | Описание |
-|---|---|
-| 1. | **Антенна.** |
-| 2. | **Ручка питания / громкости** — поворот вкл/выкл и регулировка громкости. |
-| 3. | **ЖК-экран 1,77".** |
-| 4. | **VFO/MR** — переключение «Канальный режим» / «Частотный режим». |
-| 5. | **BACK** — назад/выход. |
-| 6. | **Клавиша Bluetooth** — долгое нажатие вкл/выкл Bluetooth. |
-| 7. | **MENU** — короткое нажатие вход в меню. |
-| 8. | **A/B** — переключение диапазонов A/B. |
-| 9. | **Динамик.** |
-| 10. | **Микрофон.** |
-| 11. | **DTMF / блокировка клавиатуры** — долгое нажатие вкл/выкл блокировки клавиатуры. |
-| 12. | **PTT** — тангента: удерживать, чтобы говорить; отпустить — приём. |
-| 13. | **PF1 — настраиваемая боковая клавиша 1.**: |
-|--- | - Короткое нажатие: MENU → Radio Setting → пункт 27 (варианты: NONE, FM Radio, Lamp, TONE, Alarm, Weather, PTT2, OD PTT). |
-|--- | - Долгое нажатие: MENU → Radio Setting → пункт 28 (NONE, FM Radio, Lamp, Cancel Sq, TONE, Alarm, Weather). |
-| 14. | **PF2 — настраиваемая боковая клавиша 2.**: |
-|--- | - Короткое нажатие: MENU → Radio Setting → пункт 29. |
-|--- | - Долгое нажатие: MENU → Radio Setting → пункт 30. |
-| 15. | **Разъём MIC/SP** — внешняя гарнитура. |
-| 16. | **USB-C порт** — программирование. |
-| 17. | **Индикатор:** красный — передача; зелёный — приём. |
-| 18. | **Оранжевая клавиша Weather** — вход в режим NOAA-погоды. |
-| 19. | **USB-C разъём зарядки** на аккумуляторе. |
-
-### 4.2 ЖК-дисплей. Значки
-
-<img src="pdf_images/p018_IM80_1280x1228.jpg" width="200"/>
-
-Значки в порядке таблицы из руководства:
-| # | Символ | Описание |
-|---|---|---|
-| 1. | ![иконка](pdf_images/p018_IM81_30x23.jpg) | Индикатор силы сигнала (4 уровня). |
-| 2. | ![иконка](pdf_images/p018_IM82_11x19.jpg) | Высокая мощность передачи / ![иконка](pdf_images/p018_IM83_4x7.jpg) низкая мощность передачи. |
-| 3. | ![иконка](pdf_images/p018_IM84_15x19.jpg) | Звук голоса/клавиш (не показывается, если оба выключены). |
-| 4. | ![иконка](pdf_images/p018_IM85_39x18.jpg) | Текущий тон: DCS или ![иконка](pdf_images/p018_IM86_16x7.jpg) CTCSS. |
-| 5. | ![иконка](pdf_images/p019_IM89_13x14.jpg) | Офсет «вверх» (TX выше RX) — доступ к репитеру в режиме VFO. |
-| 6. | ![иконка](pdf_images/p019_IM90_20x5.jpg) | Офсет «вниз» (TX ниже RX). |
-| 7. | ![иконка](pdf_images/p019_IM91_48x38.jpg) | Двойное наблюдение (dual watch) включено. |
-| 8. | ![иконка](pdf_images/p019_IM93_19x19.jpg) | Клавиатура заблокирована; удерживайте ![иконка](pdf_images/p019_IM99_38x19.jpg) для разблокировки. |
-| 9. | [S] | Энергосбережение включено. |
-| 10. | [N] | Канал в узкополосном режиме. |
-| 11. | [W] | Канал в широкополосном режиме. |
-| 12. | ![иконка](pdf_images/p019_IM101_16x10.jpg) | Уровень заряда батареи; при разрядке ![иконка](pdf_images/p019_IM102_16x10.jpg) рамка значка мигает <img src="pdf_images/p019_IM103_53x84.jpg" height="32"/> (передача невозможна). |
-| 13. | ![иконка](pdf_images/p019_IM104_13x13.jpg) | Значок OD-передачи. |
-| 14. | ![иконка](pdf_images/p019_IM105_13x13.jpg) | Значок OD-приёма. |
-| 15. | ![иконка](pdf_images/p019_IM106_7x12.jpg) | Bluetooth включён, не подключён (белый значок). |
-| 16. | ![иконка](pdf_images/p019_IM107_7x12.jpg) | Bluetooth подключён (синий значок). |
-| 17. | ![иконка](pdf_images/p019_IM108_235x80.jpg) | Индикатор громкости. |
-
-### 4.3 Светодиодные индикаторы
-
-| Цвет | Индикатор | Состояние рации |
-|---|---|---|
-| 🔴 | Постоянно красный | Передача |
-| 🟢 | Постоянно зелёный | Приём |
-
-### 4.4 Основные клавиши управления
-
-| Клавиша | Описание |
-|---|---|
-| **BT** | долгое нажатие: вкл/выкл Bluetooth. |
-| **MENU** | вход в меню, выбор пункта, подтверждение параметра. |
-| **▲** | нажатие: шаг вверх по каналу/частоте; удержание более 2 с: быстрое перемещение вверх; в режиме сканирования: перемещение сканирования вверх. |
-| **▼** | нажатие: шаг вниз по каналу/частоте; удержание более 2 с: быстрое перемещение вниз; в режиме сканирования: перемещение сканирования вниз. |
-| **VFO/MR** | переключение между частотным (VFO) и канальным (MR) режимами. Сохранение частот в память возможно только в режиме VFO. |
-| **BACK** | выход из меню и функций. |
-| **A/B** | переключение между верхним (A) и нижним (B) дисплеем; выбранный становится активным для приёма и передачи. Сохранение в память работает с дисплея A. |
-| **Цифровая клавиатура** | ввод информации/выборов; при передаче цифровые клавиши отправляют соответствующие DTMF-коды. |
-| **# (DTMF/блокировка)** | короткое нажатие: активация DTMF-набора; удержание более 2 с: блокировка/разблокировка клавиатуры. |
-
-### 4.5 Дополнительные комбинации клавиш и включения
-
-**Комбинации при включении питания (Power On):**
-
-| Комбинация | Функция |
-|---|---|
-| PTT + * + Включение | Переключение режима: GMRS / HAM / Normal |
-| PTT + 1 + Включение | Прошивка через K-кабель |
-| PTT + 3 + Включение | Прошивка через USB |
-| PTT + 7 + Включение | Обновление APRS |
-| PF2 + Включение | Wireless Copy (Режим копирования данных по воздуху между аналогичными радиостанциями) |
-
-**Клавиши в режиме ожидания:**
-
-| Действие | Функция |
-|---|---|
-| Удержание 0 | Погода |
-| Удержание 1 | Детектор (счётчик) частоты |
-| Удержание 3 | Сканер |
-| Удержание 5 | Вкл/Выкл Reverse-режима на каналахс частотным сдвигом приема-передачи |
-| Удержание 7 | Спектроанализатор |
-| Удержание 8 | Прошивка через USB |
-| Удержание * | Блокировка клавиатуры (Keylock) |
-| Удержание # | Изменение DTMF группы (1..8) |
-| Удержание Back | Переключение между режимами: радио/GNSS |
-
-**Быстрый доступ из основного меню:**
-
-| Действие | Функция |
-|---|---|
-| Меню, 1 | Squelch Level - уровень шумоподовителя |
-| Меню, 2 | Power - мощность передачи |
-| Меню, 3 | Scan Mode - режим сканирования |
-| Меню, 4 | Freq Step - шаг настройки частоты |
-| Меню, 5 | Backlight - настройка подсветки дисплея |
-| Меню, 6 | Voice prompt - голосовое подтверждение команд |
-| Меню, 7 | VOX |
-| Меню, 8 | Broadcast Radio - FM-радиостанции |
-| Меню, 9 | Dual Watch (TDR) - режим двойного прослушивания |
-| Меню, 0 | Bandwidth - ширина полосы пропускания |
-
-<img src="pdf_images/shortcuts001.png" width="300"/>     
-
-**Режим гарнитуры (Bluetooth-звонки):**
-
-| Действие | Функция |
-|---|---|
-| 1 | Ответ на звонок телефона |
-| Удержание 4 | Перезвонить |
-| 3 / PTT | Повесить трубку |
-
-**Режим колонки (Bluetooth-аудио):**
-
-| Действие | Функция |
-|---|---|
-| 1 | Предыдущий музыкальный трек |
-| 2 | Проигрывание / пауза |
-| 3 | Следующий музыкальный трек |
-
-### 4.6 Цифровая клавиатура
-
-С помощью этих клавиш можно вводить информацию или выбирать настройки на радиостанции.   
-В режиме передачи (TX) нажмите цифровые клавиши для отправки соответствующего DTMF-кода.   
-<img src="pdf_images/p021_IM118_2412x550.jpg"/>    
-
-Нажмите <img src="pdf_images/p021_IM119_45x27.jpg"/>, чтобы активировать функцию тонового набора (DTMF).    
-Нажатие и удержание <img src="pdf_images/p021_IM119_45x27.jpg"/> более 2 секунд позволяет заблокировать или разблокировать клавиатуру.
-
-## 5. Базовые операции
-
-### 5.1 Включение
-
-Поверните ручку питания/громкости по часовой стрелке до щелчка. Через ~1 сек двойной звуковой сигнал, отображение сообщения/заставки, затем частота или канал. При включённых голосовых подсказках будет объявлен режим. Выключение — против часовой стрелки до щелчка.
-
-### 5.2 Громкость
-
-Поворот ручки по/против часовой стрелки.
-
-### 5.3 Выбор канала
-
-Два режима: **VFO (частотный)** — для эксперимента и быстрого программирования «в поле»; **MR (канальный)** — для повседневного использования заранее запрограммированных каналов. Переключение клавишами ▲/▼ или энкодером.
-
-### 5.4 Вызов
-
-- **Канальный режим:** выберите канал, удерживайте [PTT] и говорите (красный индикатор). Приём — автоматически при отпускании PTT (зелёный индикатор).
-- **Частотный режим:** нажмите [V/M], введите частоту (в пределах диапазона), удерживайте [PTT].
-- Держите микрофон на расстоянии 2,5–5 см от рта.
-
-### 5.5 Частотный режим (VFO)
-
-Перемещение по частоте клавишами ▲/▼ (с шагом, заданным в настройках) или прямой ввод частоты с цифровой клавиатуры с точностью до килогерц.
-
-Пример: ввод частоты 432,56250 МГц на дисплее A:
-1. В режиме ожидания переключитесь в частотный режим (VFO).
-2. Введите на клавиатуре: [4] [3] [2] [5] [6] [2] [5] [0].
-
-> В режиме VFO отображается иконка VFO. Передача на запрещённых частотах незаконна; слушать, как правило, разрешено. Уточняйте требования у местного регулятора.
-
-### 5.6 Канальный режим (MR)
-
-Зависит от запрограммированных каналов. Навигация — клавишами ▲/▼ или энкодером. В режиме MR отображается номер канала CH-XXX.
+- **Antenna:** screw clockwise, shoot counterclockwise (behind the base).
+**Girl clamping: * Two screws on the back side above the battery - unscrew, clamp, twist back.
+- ** Battery:** The radio is off; combine the guides, move up to click. Removal - the lock button at the bottom of the battery.
+** Headset:** Open the rubber plug and insert the plug into the dual MIC/SP connector.
 
 ---
 
-## 6. Дополнительные функции
+##4. Radio station review
 
-### 6.1 Сканирование частот
+ LN PH 0    
 
-1. В частотном режиме удерживайте клавишу **[3 SCAN]** более 2 секунд — начнётся сканирование с заданным шагом.
-2. Остановка — клавиша **[V/M]**.
-3. Настройки: MENU → Scan → №1.
+### 4.1 Buttons and controls
 
-### 6.2 Сканирование каналов
+> The numbers correspond to the figures in the diagram above.
 
-1. В канальном режиме удерживайте **[3 SCAN]** более 2 секунд.
-2. Направление — клавиши ▲/▼.
-3. Остановка — **[V/M]**.
+| # | Description |
+|---|---|
+| 1. | Antenna. ** |
+| 2. | **Power handle/volume** – turn on/off and volume control. |
+| 3. | ** LCD screen 1.77."" ** |
+| 4. | **VFO/MR** - Switching Channel Mode / Frequent Mode. |
+| 5. | **BACK** - back/out. |
+| 6. | **Bluetooth key** – long press on/off Bluetooth. |
+| 7. | **MENU** is a short entry to the menu. |
+| 8. | **A/B** - Switching ranges A/B. |
+| 9. | - Dynamic. |
+| 10. | - Microphone. |
+| 11. | **DTMF/keyboard lock** – long press on/off keyboard lock. |
+| 12. | **PTT **Tangent: Hold to talk, let go, take. |
+| 13. | **PF1 is a customizable side key 1.**: |
+|--- | - Short press: MENU → Radio Setting → item 27 (options: NONE, FM Radio, Lamp, TONE, Alarm, Weather, PTT2, OD PTT). |
+|--- | - Long press: MENU → Radio Setting → item 28 (NONE, FM Radio, Lamp, Cancel Sq, TONE, Alarm, Weather). |
+| 14. | **PF2 is a customizable side key 2.**: |
+|--- | - Short press: MENU → Radio Setting → item 29. |
+|--- | Long press: MENU → Radio Setting → item 30. |
+| 15. | **The MIC/SP connector is an external headset. |
+| 16. | **USB-C port** - programming. |
+| 17. | **Indicator:** Red is transmission; green is reception. |
+| 18. | **Weather Orange Key * Enter NOAA Weather Mode. |
+| 19. | **USB-C charging connector** on battery. |
 
-### 6.3 Сканирование CTCSS/DCS
+### 4.2 LCD display. Badges
 
-В режиме ожидания: MENU → Scan → «SEEK DCS» — выбор сканирования CTCSS или DCS. Функция недоступна в канальном режиме; сканирование начнётся только при обнаружении сигнала.
+<img src="pdf images/p018 IM80 1280x1228.jpg" width="200"/ >>
 
-### 6.4 Программирование каналов вручную
+Badges in order of table from the manual:
+| # | Symbol | Description
+|---|---|---|
+|1. |! LN PH 0   | Signal strength indicator (4 levels). |
+|2. |! LN PH 1   | High transmission power / ! LN PH 2  low transmission power. |
+|3. |! LN PH 3  | Voice/keyboard sound (not shown if both are off). |
+|4. |! LN PH 4   | Current tone: DCS or ! LN PH 5  CTCSS. |
+|5. |! LN PH 6   |Ofset "up" (TX above RX) - access to the repeater in VFO mode. |
+|6. |! LN PH 7   | Offset "down" (TX below RX). |
+|7. |! LN PH 8   | Dual watch is on. |
+|8. |! LN PH 9   | Keyboard locked; hold! LN PH 10  to unlock. |
+|9. |[S] |Energy saving included. |
+|10. |[N] | Channel in narrowband mode. |
+|11. |[W] | Broadband channel. |
+|12. |! LN PH 11   | Battery level; when you discharge! LN PH 12  , the icon frame flashes <img src="pdf images/p019 IM103 53x84.jpg" height="32"/> (transmission impossible). |
+|13. |! LN PH 13    | OD-transmission sign. |
+|14. |! LN PH 14   | OD-reception sign. |
+|15. |! LN PH 15   |Bluetooth on, not connected (white icon). |
+|16. |! LN PH 16   |Bluetooth connected (blue icon). |
+|17. |! LN PH 17   | Volume indicator. |
 
-199 каналов памяти, каждый хранит: частоту приёма, групповой сигнал (тоны), ширину канала, ANI/PTT-ID, шестисимвольное имя канала. Сохранение: MENU → Program Channel → пункт 12 (Memory CHL).
+### 4.3 LED indicators
 
-**Режимы:** VFO — частота; MR — каналы. Для сохранения — переключиться в VFO клавишей VFO/MR.
+| Colour | Indicator | Radio status |
+|---|---|---|
+|  | Always red | Transfer |
+|  | Always green | Reception. |
 
-**Пример 1. Канал 31 с тоном CTCSS 123,0 Гц (RX 432,55000 МГц):**
-1. Нажмите [VFO/MR] — режим VFO.
-2. [Menu] → Program Channel → [1] [3] [Menu] — удалить прежние данные канала (например, 31) → OK.
-3. [Back] → [2] [Menu] → ALTER → CTCSS → 123,0 [Menu] [Back] — выбрать TX-тон.
-4. Введите RX-частоту (43255000).
-5. [Menu] → Program Channel → [1] [2] — введите номер канала (31) → [Back] — RX добавлен.
-6. Нажмите [VFO/MR] — возврат в MR-режим.
+### 4.4 Main control keys
 
-**Пример 2. Поиск частоты сканированием (запись канала 31):**
-1. Нажмите [V/M] — режим MR (значок CH-XXX).
-2. Удерживайте **[3 SCAN]** — сканирование.
-3. При активности на 432,55000 МГц нажмите [PTT] — остановка.
+| keyboard | Description |
+|---|---|
+| **BT** | Long press: On/off Bluetooth. |
+| **MENU** | Enter the menu, select an item, confirm the parameter. |
+| ** ** | Pressing: step up the channel/frequency; hold more than 2 seconds: fast moving up; in scan mode: moving the scan up. |
+| ******** | Pressing: step down the channel/frequency; hold more than 2 seconds: rapid downward movement; in scan mode: moving the scan down. |
+| **VFO/MR** | switching between frequency (VFO) and channel (MR) modes. Frequency storage is possible only in VFO mode. |
+| **BACK** | exit from menus and functions. |
+| **A/B** | switching between the top (A) and bottom (B) display; the selected one becomes active for reception and transmission. Memory storage works from display A. |
+| ** Digital keyboard** | input of information/choices; when transferring digital keys send the corresponding DTMF codes. |
+| **# (DTMF/locking)** | Short press: activation of the DTMF set; retention of more than 2 seconds: lock/unlock the keyboard. |
 
-### 6.5 Аварийный сигнал (Emergency Alert)
+### 4.5 Additional key combinations and inclusions
 
-Заранее назначьте на боковую клавишу [PF1] или [PF2] функцию Alarm, затем нажмите эту клавишу — рация издаст громкий сигнал, а фонарик замигает. Выход — нажать [PTT].
-**ВНИМАНИЕ:** использовать только в реальной чрезвычайной ситуации.
+**Power On (Power On):**
 
-### 6.6 FM-радио
+| Combination | Function |
+|---|---|
+| PTT + * + Inclusion | Mode Switching: GMRS/HAM/Normal |
+| PTT + 1 + Inclusion | Firmware through K-cable |
+| PTT + 3 + Inclusion | Firmware via USB |
+| PTT + 7 + Inclusion | APRS Update |
+| PF2 + Inclusion | Wireless Copy (Data Copy Mode between Similar Radio Stations) |
 
-> При включении режима прослушивания FM-радио bluetooth модуль отключается.
+**Keys standby:**
 
-Заранее назначьте на [PF1]/[PF2] функцию FM Radio. Диапазон 87–108 МГц.
-1. Нажмите [PF1]/[PF2] — включение радио (или Меню, затем 8).
-2. Выбор частоты — клавишами ▲/▼ или вводом.
-3. Повторное нажатие — выход.
-   
-Примечание: при пропадании сигнала рация автоматически возвращается в FM-режим; при звонке переключается в режим приёма (настраивается через меню - FM Interrupt).
+| Action. | Function |
+|---|---|
+| Retention 0 | Weather. |
+| Retention 1 | Frequency detector |
+| Retention 3 | Scanner. |
+| Retention 5 | On/off Reverse mode on channels with frequency shift of reception-transmission |
+| Retention 7 | Spectroanalyzer |
+| Retention 8 | Firmware via USB |
+| Retention * | Locking the keyboard (Keylock) |
+| Holding # | Change of DTMF Group (1.8) |
+| Holding Back | Switching between modes: radio/GNSS |
 
-### 6.7 NOAA-погода
+** Quick access from the main menu:**
 
-11 каналов NOAA. Клавиша: оранжевая **Weather**.
-1. Нажмите оранжевую клавишу — вход в режим NOAA.
-2. Выбор канала — ▲/▼.
-3. Повторное нажатие — выход.
+| Action. | Function |
+|---|---|
+| Menu, 1 | Squelch Level - The noise level |
+| Menu, 2. | Power - transmission power |
+| Menu, 3. | Scan Mode - Scan Mode |
+| Menu, 4 | Freq Step - the step of setting the frequency |
+| Menu, 5. | Backlight - setting up the display backlight |
+| Menu, 6 | Voice prompt - voice confirmation of commands |
+| Menu, 7. | VOX |
+| Menu, 8 | Broadcast Radio - FM radio stations |
+| Menu, 9 | Dual Watch (TDR) - Double listening mode |
+| Menu, 0 | Bandwidth - bandwidth |
 
-Каналы: Wx-01…Wx-11 (162,5500; 162,400; 162,475; 162,425; 162,450; 162,500; 162,525; 161,650; 161,775; 161,750; 162,000 МГц). Только приём, передача невозможна.
+<img src="pdf images/shortcuts001.png" width="300"/ >>
 
-### 6.8 Тон репитера (1000 / 1450 / 1750 / 2100 Гц)
+** Headset mode (Bluetooth calls):**
 
-Заранее назначьте на [PF1]/[PF2] функцию TONE, выберите частоту тона в пункте 24 Radio Setting. Нажмите [PF1]/[PF2] — будет отправлен тон репитера. Работает даже при заблокированной клавиатуре.
+| Action. | Function |
+|---|---|
+| 1st | Answering the phone |
+| Retention 4 | Call me back. |
+| 3/PTT | Hang up. |
 
-### 6.9 Функция вызова (Bluetooth-звонки)
+** Column mode (Bluetooth audio):**
 
-1. Включите Bluetooth: MENU → Bluetooth → BT ON/OFF (или длинным нажатием MENU).
-2. Подключите телефон (имя: MENU → Bluetooth → BT Name — TD-H9xxxx).
-3. Входящий звонок — короткое нажатие клавиши **1** — ответить.
-4. В режиме ожидания длинное нажатие клавиши **4** — перезвонить.
-5. Во время разговора короткое нажатие **3** или **PTT** — завершить.
+| Action. | Function |
+|---|---|
+| 1st | Previous music track |
+| 2. | Losing/pausing |
+| 3 | The next music track |
 
-### 6.10 Функция «Аудио» (музыка через рацию)
+### 4.6 Digital keyboard
 
-1. Включите Bluetooth, подключите телефон.
-2. Клавиша **1** — предыдущий трек; **3** — следующий трек; **2** — длинное/короткое нажатие — пауза/воспроизведение.
+With these keys, you can enter information or select the settings on the radio.
+In Transfer Mode (TX), press the digital keys to send the corresponding DTMF code.
+<img src="pdf images/p021 IM118 2412x550.jpg"/ >>
 
-### 6.11 OD PTT (Odmaster PTT)
+Press <img src="pdf images/p021 IM119 45x27.jpg"/> to activate the tone dial function (DTMF).
+Pressing and holding <img src="pdf images/p021 IM119 45x27.jpg"/> for more than 2 seconds allows you to lock or unlock the keyboard.
 
-1. Включите Bluetooth (MENU → Bluetooth → BT ON/OFF или длинное нажатие [MENU]).
-2. Подключите телефон.
-3. После подключения боковая клавиша PF1 автоматически становится OD PTT и вернёт прежнюю функцию после отключения.
-4. Убедитесь, что режим «Receiver» (MENU → Bluetooth → BT Mode).
-5. Задайте OD PTT: OD (только OD) или OD+Analog (OD и одновременно аналогичные рации на той же частоте).
-6. Откройте приложение Odmaster, войдите в группу.
-7. Нажмите OD PTT для разговора.
+##5. Basic operations
 
-**Пошаговые иллюстрации настройки и работы OD PTT (страницы из руководства):**
+### 5.1 Inclusion
 
-![Шаг 1](pdf_images/p029_IM141_1495x946.jpg)
-![Шаг 2](pdf_images/p030_IM144_1495x961.jpg)
-![Шаг 3](pdf_images/p031_IM147_1495x965.jpg)
-![Шаг 4](pdf_images/p032_IM150_1495x951.jpg)
-![Шаг 5](pdf_images/p033_IM153_1495x964.jpg)
-![Шаг 6](pdf_images/p034_IM156_1495x959.jpg)
-![Шаг 7](pdf_images/p035_IM159_1495x959.jpg)
+Turn the power/volume handle clockwise before clicking. After ~1 sec, a double beep, a message/savers display, then a frequency or channel. When the voice prompts are turned on, a mode will be announced. Turn off - counterclockwise before the click.
 
-### 6.12 Программирование по Bluetooth
+### 5.2 Volume
 
-(Раздел с пошаговыми иллюстрациями; см. оригинал мануала — программирование рации через Bluetooth-соединение с ПО.) Подключите рацию по Bluetooth и используйте ПО программирования.
+Turn the handle clockwise.
 
-![Иллюстрация 1](pdf_images/p036_IM162_1011x606.jpg)
-![Иллюстрация 2](pdf_images/p037_IM165_1011x606.jpg)
-![Иллюстрация 3](pdf_images/p038_IM168_1073x710.jpg)
-![Иллюстрация 4](pdf_images/p039_IM171_880x679.jpg)
-![Иллюстрация 5](pdf_images/p040_IM174_1156x239.jpg)
-![Иллюстрация 6](pdf_images/p040_IM175_1035x634.jpg)
+###5.3 Choice of channel
+
+Two modes: **VFO (frequency)** - for experimentation and fast programming "in the field"; **MR (channel)** - for everyday use of preprogrammed channels. Switching keys  /  or encoder.
+
+###5.4 Challenge
+
+*Channel mode: * Select a channel, hold [PTT] and speak (red indicator). Reception - automatically when releasing PTT (green indicator).
+**Private mode:** Press [V/M], enter frequency (within range), hold [PTT].
+Keep the microphone at a distance of 2.5-5 cm from the mouth.
+
+###5.5 Frequency mode (VFO)
+
+Moving in frequency with keys ках / ках (with a step specified in the settings) or direct frequency input from the digital keyboard with an accuracy of kilohertz.
+
+Example: 432,56250 MHz input on display A:
+1. In standby mode, switch to frequency mode (VFO).
+2. Enter on the keyboard: [4] [3] [2] [5] [6] [2] [5] [0].
+
+>> In VFO mode, the VFO icon is displayed. Transmission on prohibited frequencies is illegal; listening is generally permitted. Check the requirements with the local regulator.
+
+###5.6 Channel Mode (MR)
+
+It depends on the programmed channels. Navigation - keys   /   or encoder. In MR mode, the channel number CH-XXX is displayed.
 
 ---
 
-## 7. Работа с меню
+##6. Additional functions
 
-> В канальном режиме недоступны: тоны CTCSS/DCS, ширина канала, PTT-ID, BCL, редактирование имени канала.
+### 6.1 Frequency scanning
 
-### 7.1 Основное использование
+1. In frequency mode, hold the key **[3 SCAN]** for more than 2 seconds - the scan will begin with a given step.
+2. Stop - key **[V/M]**.
+3. Settings: MENU → Scan → No. 1.
 
-1. Нажмите [MENU] — вход в меню.
-2. ▲/▼ — перемещение по пунктам.
-3. [MENU] — выбор пункта.
-4. ▲/▼ — выбор параметра.
-5. [MENU] — подтвердить и вернуться в меню; [BACK] — отменить и выйти из меню.
-6. [BACK] — выход из меню в любой момент.
+### 6.2 Channel scanning
 
-### 7.2 Короткие команды (шорткаты)
+1. In channel mode, hold **[3 SCAN]** for more than 2 seconds.
+2. The direction is the ./. keys.
+3. Stop - **[V/M]**.
 
-1. Нажмите [MENU].
-2. Введите номер пункта цифровой клавиатурой.
-3. [MENU] — войти в пункт.
-4. Параметр: ▲/▼ или числовой шорткод.
-5. [MENU] — сохранить; [BACK] — отменить.
-6. [BACK] — выход.
+### 6.3 CTCSS/DCS scan
 
-### 7.31 Radio Setting (Настройки радио)
+Standby: MENU → Scan → “SEEK DCS” – the choice of CTCSS or DCS scanning. The function is not available in channel mode; scanning will begin only when a signal is detected.
 
-| № | Функция | Описание |
+###6.4 Manual channel programming
+
+199 memory channels, each stores: frequency of reception, group signal (tones), channel width, ANI/PTT-ID, six-character channel name. Conservation: MENU → Program Channel → item 12 (Memory CHL).
+
+** Modes: ** VFO = frequency; MR = channels. To save, switch to VFO with VFO/MR keys.
+
+** Example 1. Channel 31 with a CTCSS tone of 123.0 Hz (RX 432.55000 MHz):**
+1. Press [VFO/MR] - VFO mode.
+2. [Menu] → Program Channel → [1] [3] [Menu] – delete previous channel data (e.g. 31) → OK.
+3. [Back] → [2] [Menu] → ALTER → CTCSS → 123.0 [Menu] [Back] – choose TX tone.
+4. Enter the RX frequency (43255000).
+5. [Menu] → Program Channel → [1] [2] – Enter channel number (31) → [Back] – RX added.
+6. Press [VFO/MR] - Return to MR mode.
+
+** Example 2. Frequency scanning (channel 31 recording):**
+1. Press [V/M] - MR mode (CH-XXX icon).
+2. Hold **[3 SCAN]** - Scan.
+3. At 432.55,000 MHz, press [PTT] – stop.
+
+### 6.5 Emergency Alert
+
+Assign the Alarm function to the side key [PF1] or [PF2] in advance, then press this key – the radio will emit a loud signal and the flashlight will blink. The exit is press [PTT].
+**WARNING: * Use only in a real emergency.
+
+###6.6 FM radio
+
+>> When you turn on the listening mode of FM radio bluetooth module is turned off.
+
+Assign FM Radio to [PF1]/[PF2] in advance. The range is 87-108 MHz.
+1. Press [PF1]/[PF2] to turn on the radio (or menu, then 8).
+2. The choice of frequency - keys . / . or input.
+3. Pressing again is the exit.
+
+Note: when the signal disappears, the radio automatically returns to FM mode; when the call is switched to reception mode (configured via the menu - FM Interrupt).
+
+###6.7 NOAA weather
+
+11 NOAA channels. Key: orange **Weather**.
+1. Press the orange key to enter NOAA mode.
+2. Channel selection - ./►
+3. Pressing again is the exit.
+
+Channels: Wx-01...Wx-11 (162.5500; 162,400; 162,475; 162,425; 162,450; 162,500; 162,525; 161,650; 161,775; 161,750; 162,000 MHz). Only reception, transmission is impossible.
+
+### 6.8 Repiter tone (1000 / 1450 / 1750 / 2100 Hz)
+
+Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency at 24 Radio Setting. Press [PF1]/[PF2] and the repeater tone will be sent. It works even with a locked keyboard.
+
+### 6.9 Call function (Bluetooth calls)
+
+1. Turn on Bluetooth: MENU → Bluetooth → BT ON/OFF (or long press MENU).
+2. Connect the phone (name: MENU → Bluetooth → BT Name – TD-H9xxxx).
+3. Incoming call - a short press of the key **1** - answer.
+4. In standby mode, the long press of the key **4** - call back.
+5. During a conversation, a short press of **3** or **PTT** is completed.
+
+### 6.10 Audio function (music via radio)
+
+1. Turn on Bluetooth, plug in the phone.
+2. **1** – previous track; **3** – next track; **2** – long/short press – pause/playback.
+
+## 6.11 OD PTT (Odmaster PTT)
+
+1. Turn on Bluetooth (MENU → Bluetooth → BT ON/OFF or long press [MENU]).
+2. Put the phone on.
+3. Once connected, the PF1 side key automatically becomes the OD PTT and returns the previous function after disabling.
+4. Make sure you have Receiver mode (MENU → Bluetooth → BT Mode).
+5. Set OD PTT: OD (OD only) or OD+Analog (OD and similar radios at the same frequency).
+6. Open the Odmaster app and join the group.
+7. Press OD PTT for conversation.
+
+** Step-by-step illustrations of OD PTT settings and operation (pages from the manual):**
+
+ LN PH 0    
+!  LN PH   1st    
+!  2    
+ LN PH 3!    
+ LN PH 4    
+ LN PH 5!    
+! 6.    
+
+### 6.12 Bluetooth programming
+
+(Section with step-by-step illustrations; see the original manual - programming walkie-talkie via Bluetooth connection to the software.) Connect the radio over Bluetooth and use programming software.
+
+ LN PH 0    
+!  LN PH   1st    
+!  2    
+ LN PH 3!    
+ LN PH 4    
+ LN PH 5!    
+
+---
+
+##7. Work on the menu
+
+>> Channel mode is not available: CTCSS/DCS tones, channel width, PTT-ID, BCL, channel name editing.
+
+###7.1 Main use
+
+1. Click [MENU] - Enter the menu.
+2. м/м - moving to points.
+3. [MENU] - item selection.
+4. ./. is the choice of parameter.
+5. [MENU] - confirm and return to the menu; [BACK] - cancel and exit the menu.
+6. [BACK] - exit the menu at any time.
+
+### 7.2 Short teams (shortcuts)
+
+1. Press [MENU].
+2. Enter the item number with a digital keyboard.
+3. [MENU] Enter the point.
+4. Parameter: ./. or numerical shortcode.
+5. [MENU] - save; [BACK] - cancel.
+6. [BACK] Exit.
+
+### 7.31 Radio Setting
+
+| No. | Function | Description |
 |---|---|---|
-| 1 | Squelch LV | Уровень шумоподавителя 1–9 (1 — самый низкий, 9 — самый высокий). По умолчанию 4. |
-| 2 | Step Freq | Шаг частоты: 0,5/2,5/5,0/6,25/10,0/12,5/25,0/50,0 кГц. В канальном режиме не меняется. |
-| 3 | VOX Level | Уровень голосовой активации: Off, 1–5. |
-| 4 | VOX Delay | Задержка VOX: 1,0/2,0/3,0 с. |
-| 5 | TOT | Таймер ограничения передачи: off/30/60/90/120/150/180/210 с. |
-| 6 | Roger Beep | Звуковой сигнал при отпускании PTT. |
-| 7 | Beep | Звук клавиш. |
-| 8 | Power Save | Энергосбережение: Off, 1:1 / 1:2 / 1:3 / 1:4 (работа : сон). |
-| 9 | Keypad Lock | Автоматическая блокировка клавиатуры |
-| 10 | Dual Watch | Режим прослушивания обоих каналов (TDR) A и B |
-| 11 | Voice | Голосовое подтверждение команд |
-| 12 | Backlight | Таймаут длительности подсветки экрана |
-| 13 | Brightness | Яркость экрана (Рекомендуемая настройка: 5, при других значениях при передачи и включенном экране в эфир передается писк) |
-| 14 | Pwr On Disp | Приветсвенный экран при включении (Voltage/Messsage/Picture) |
-| 15 | Display | Режим отображения режима радиостанции - Single (одноканальный), Dual и Classic (двухканальный) | 16 | ANI-Edit | DTMF-идентификатор радиостанции |
-| 17 | Disp Type-A | Отображение информации о запрограммированном канале A (Freq + Number / Name + Number) |
-| 18 | Disp Type-B | Отображение информации о запрограммированном канале B (Freq + Number / Name + Number) |
-| 19 | DTMF DISE | DTMF-сигналы при передаче: OFF/ON. |
-| 20 | PTT Delay | Задержка передачи при отпускании PTT |
-| 21 | Language | Английский / Китайский (English / Chinese). |
-| 22 | Alarm Mode | On Site (только локальный сигнал, фонарик мигает) / TX Alarm (звук 10 с, пауза 2 с, цикл). |
-| 23 | Side Tone (Tail) | Подавление «хвоста»: ON/OFF (метод задаётся CPS). |
-| 24 | Tone Burst (TBST) | Тон репитера: 1000/1450/1750/2100 Гц. Отправка — боковой клавишей (TONE). |
-| 25 | Talk Around | OFF: вне покрытия репитера — «failed to activate relay»; ON: TX = RX, на экране «\ | →\ | ». |
-| 26 | FM Interrupt | OFF: в FM-режиме звонок не прерывает; ON: при звонке FM прерывается на 5 с. |
-| 27 | PF1 S Press | Короткое нажатие PF1: NONE, FM Radio, Lamp, TONE, Alarm, Weather, PTT2, OD PTT. |
-| 28 | PF1 L Press | Долгое нажатие PF1: NONE, FM Radio, Lamp, Cancel Sq, TONE, Alarm, Weather. |
-| 29 | PF2 S Press | Короткое нажатие PF2: аналогично п. 27. |
-| 30 | PF2 L Press | Долгое нажатие PF2: аналогично п. 28. |
-| 31 | Top S Press | Короткое нажатие верхней кнопки: аналогично п. 27. |
-| 32 | Top L Press | Долгое нажатие верхней кнопки: аналогично п. 28. |
-| 33 | Factory R | Сброс: VFO (только частотные настройки), CHL (только каналы), FULL (всё). |
-| 34 | Breath Led | Частота мигания светодиода в режиме ожидания. |
-| 35 | MIC GAIN | Усиление микрофона: 0–9. |
-| 36 | DTMF Speed | Скорость DTMF (по умолчанию 110 мс). |
-| 37 | DCD | OFF: DTMF-сигнализация выкл. ON: включить DTMF-вызов/групповой вызов. |
-| 38 | D-HOLD | Время автосброса DTMF: 5–60 с. |
-| 39 | D-RSP | Ответ DTMF: NULL / RING / REPLY / BOTH. |
-| 40 | 200TX | ON: открыть диапазон 220–260 МГц в режиме VFO. |
-| 41 | 350TX | ON: открыть диапазон 350–390 МГц в режиме VFO. |
-| 42 | 500TX | ON: открыть верх UHF (до 520 МГц) в режиме VFO. |
-| 43 | Menu Color | Цвет текущего пункта меню. |
+| 1st | Squelch LV | The noise reduction level is 1–9 (1 lowest, 9 highest). Default 4. |
+| 2. | Step Freq | Frequency step: 0.5/2.5/5.0/6.25/10.0/12.5/25.0/50.0 kHz. The channel mode doesn't change. |
+| 3 | VOX Level | Voice activation level: Off, 1-5. |
+| 4. | VOX Delay | VOX delay: 1.0/2.0/3.0 s. |
+| 5 | tot | Transmission restriction timer: off/30/60/90/120/150/180/210 s. |
+| 6 | Roger Beep. | Audible signal when releasing PTT. |
+| 7 | Beep. | Keyboard sound. |
+| 8. | Power Save | Energy saving: Off, 1:1 / 1:2 / 1:3 / 1:4 (work: sleep). |
+| 9. | Keypad Lock | Automatic keyboard locking |
+| 10. | Dual Watch | Listen to both channels (TDR) A and B |
+| 11. | Voice | Voice confirmation of commands |
+| 12. | Backlight | Timeout duration of screen illumination |
+| 13 | Brightness | Screen brightness (Recommended setting: 5, with other values when transmitting and the screen on, a squeak is transmitted to the air) |
+| 14. | Pwr On Disp | Welcome screen when enabled (Voltage/Message/Picture) |
+| 15. | display | Display mode radio - Single (single channel), Dual and Classic (dual channel) 
+| 16 | ANI-Edit | DTMF radio identifier |
+| 17. | Disp Type-A | Display information about the programmed channel A (Freq + Number / Name + Number) |
+| 18. | Disp Type-B | Display information about the programmed channel B (Freq + Number / Name + Number) |
+| 19. | DTMF DISE | DTMF signals during transmission: OFF/ON. |
+| 20. | PTT Delay | Transfer delay on PTT release |
+| 21. | Language language | English/Chinese (English/Chinese) |
+| 22. | Alarm Mode | On Site (local signal only, flashing flash) / TX Alarm (sound 10 s, pause 2 s, cycle). |
+| 23. | Side Tone (Tail) | Tail suppression: ON/OFF (method specified by CPS). |
+| 24. | Tone Burst (TBST) | Repiter tone: 1000/1450/1750/2100 Hz. Sending - side key (TONE). |
+| 25. | Talk to me. | OFF: outside the repeater coverage - "failed to activate relay"; ON: TX = RX, on screen | ? | ? |
+| 26. | FM Interrupt | OFF: in FM mode, the call does not interrupt; ON: when calling, the FM is interrupted by 5 seconds. |
+| 27. | PF1 S Press | Short press PF1: NONE, FM Radio, Lamp, TONE, Alarm, Weather, PTT2, OD PTT. |
+| 28. | PF1 L Press | Long press PF1: NONE, FM Radio, Lamp, Cancel Sq, TONE, Alarm, Weather. |
+| 29. | PF2 S Press | Short press PF2: similar to paragraph 27. |
+| 30. | PF2 L Press | Long press PF2: similar to paragraph 28. |
+| 31. | Top S Press | Short press of the top button: similar to paragraph 27. |
+| 32. | Top L Press | Long press of the top button: similar to paragraph 28. |
+| 33. | Factory R | Reset: VFO (frequency settings only), CHL (channels only), FULL (all). |
+| 34 | Breath Led. | Frequency of LED flashing in standby mode. |
+| 35. | MIC GAIN | Microphone amplification: 0-9. |
+| 36. | DTMF Speed | DTMF speed (default 110 ms). |
+| 37 | DCD | OFF: DTMF off. ON: Enable DTMF call/group call. |
+| 38. | D-HOLD | DTMF Auto Reset Time: 5–60 s. |
+| 39. | D-RSP | Answer DTMF: NULL / RING / REPLY / BOTH. |
+| 40. | 200T X | ON: Open the 220-260 MHz band in VFO mode. |
+| 41. | 350T X | ON: Open the 350-390 MHz band in VFO mode. |
+| 42. | 500T X | ON: Open the top of UHF (up to 520 MHz) in VFO mode. |
+| 43. | Menu Color | The color of the current menu item. |
 
-### 7.32 Program Channel (Программирование канала)
+## 7.32 Program Channel Programming
 
-| № | Функция | Описание |
+| No. | Function | Description |
 |---|---|---|
-| 1 | RX Sub-audio | Тон приёма: CTCSS (67,0–254,1), DCS (D023N–D754N), Reverse DCS (D023I–D754I). |
-| 2 | TX Sub-audio | Тон передачи: аналогично. |
-| 3 | Bandwidth | Wide (25 кГц) / Narrow (12,5 кГц). |
-| 4 | TX Power | Low / Middle / High. |
-| 5 | Busy Lock | BCL: OFF — передача разрешена при занятом канале; ON — запрещена. |
-| 6 | Call Code | 8 групп кодов сигнализации (редактируются с ПК). |
-| 7 | PTT-ID | Отправка ANI-ID: OFF / BOT (при нажатии PTT) / EOT (при отпускании) / BOTH. |
-| 8 | Scan Add | ON — канал участвует в сканировании; OFF — не участвует. |
-| 9 | Scramble | Скремблирование голоса (одинаковое у обоих). |
-| 10 | OFFSET | Офсет TX/RX: 0,000–99,998 МГц. |
-| 11 | SET-D | Направление офсета: OFF / Positive / Negative. |
-| 12 | Memory CHL | Сохранение канала (заданные параметры сохранить до записи). |
-| 13 | Delete CHL | Удаление канала. |
-| 14 | Hopping | Скачкообразная перестройка частоты: ON/OFF (защита от помех со стороны группы). |
-| 15 | CH-Name | Наименование канала |
-| 16 | Modulation | Модуляция (AM/FM) |
+| 1st | RX Sub-audio | Reception tone: CTCSS (67.0–254.1), DCS (D023N–D754N), Reverse DCS (D023I–D754I). |
+| 2. | TX Sub-audio | Tone of transmission: similar. |
+| 3 | bandwidth | Wide (25 kHz) / Narrow (12.5 kHz). |
+| 4. | TX Power | Low / Middle / High. |
+| 5 | Busy Lock. | BCL: OFF - Transmission is allowed with a busy channel; ON is prohibited. |
+| 6 | Call code. | 8 groups of alarm codes (edited from PC). |
+| 7 | PTT-ID | Sending ANI-ID: OFF / BOT (when PTT is pressed) / EOT (when released) / BOTH. |
+| 8. | Scan Add | ON is involved in the scan; OFF is not involved. |
+| 9. | Scramble. | Scrambling voice (the same for both). |
+| 10. | Offset | TX/RX offset: 0.000–99.998 MHz. |
+| 11. | SET-D | Offset direction: OFF / Positive / Negative. |
+| 12. | Memory CHL | Save the channel (save the specified parameters before recording). |
+| 13 | Delete CHL | Canal removal. |
+| 14. | Hopping | Frequency hopping: ON/OFF (group interference protection). |
+| 15. | CH-Name | Name of channel |
+| 16 | Modulation | Modulation (AM/FM) |
 
 ### 7.33 Analog Set
 
-| № | Функция | Описание |
+| No. | Function | Description |
 |---|---|---|
-| 1 | Frequency Calibration | Калибровка: UHF / VHF диапазон. |
-| 2 | AM Volume Level | Уровень громкости AM: 1–5. |
+| 1st | Frequency Calibration | Calibration: UHF/VHF range. |
+| 2. | AM Volume Level | AM volume level: 1-5. |
 
 ### 7.34 Radio Information
 
-| № | Функция |
+| No. | Function |
 |---|---|
-| 1 | Versions Info | Radio ID, Radio Alias, версия прошивки, версия железа. |
-| 2 | APRS Info | APRS Call, версия прошивки APRS, версия железа APRS. |
+| 1st | Versions Info | Radio ID, Radio Alias, firmware version, iron version. |
+| 2. | APRS Info | APRS Call, APRS firmware version, APRS iron version. |
 | 3 | User Manual | ... |
 
-### 7.35 Scan (Сканирование)
+### 7.35 Scan (Scan)
 
-| № | Функция | Описание |
+| No. | Function | Description |
 |---|---|---|
-| 1 | Scan Mode | TO / (CO) / SE (по умолчанию CO). |
-| 2 | SEEK DCS | Сканирование частот с DCS/CTCSS/R-DCS. Недоступно в канальном режиме. |
-| 3 | Hang Time | Время удержания при обнаружении сигнала: шаг 0,5 с, по умолчанию 1 с. |
-| 4 | Scan Freq | Быстрый поиск частоты одним касанием: 1) длинное нажатие клавиши 1 — вход; 2) ▲/▼ — выбор канала для сохранения; 3) на экране частота и DCS при передаче; 4) дождитесь завершения; 5) [Menu] — подтвердить/сохранить, клавиша * — переснять. |
-| 5 | Freq Ranger | Диапазон частот сканирования |
-| 6 | Spectrum | Спектроанализатор |
+| 1st | Scan Mode | TO/(CO)/SE (by default CO). |
+| 2. | SEEK DCS | Frequency scanning with DCS/CTCSS/R-DCS. Unavailable in channel mode. |
+| 3 | Hang time. | Retention time upon signal detection: step 0.5 s, default 1 s. |
+| 4. | Scan Freq | Quick frequency search with one touch: 1) long press of key 1 - input; 2) е/е - channel selection for saving; 3) on the screen frequency and DCS during transmission; 4) wait for completion; 5) [Menu] - confirm / save, key * - reshoot. |
+| 5 | Freq Ranger | Scanning frequency range |
+| 6 | Spectrum. | Spectroanalyzer |
 
-### 7.36 Bluetooth
+## 7.36 Bluetooth
 
-> В режиме **Receiver** рация может выступать как bluetooth-колонка для воспроизведения звука/музыки.  
-> В режиме **Emitter** рация подключается к внешним устройствам: гарнитуры, микрофоны, PTT.
+>> In **Receiver* mode, the radio can act as a bluetooth column for playing sound/music.
+>> In **Emitter** mode, the radio is connected to external devices: headsets, microphones, PTT.
 
-| № | Функция | Описание |
+| No. | Function | Description |
 |---|---|---|
-| 1 | BT ON/OFF | Вкл/выкл Bluetooth. |
-| 2 | BT Mode | Receiver (рация — приёмник, подключается к телефону; имя TD-H9 XXXX, не подключаться к суффиксу BLE) / Emitter (рация — источник; спаривание через пункт 4). Совместимые аксессуары: Bluetooth PTT, MIC, гарнитура. |
-| 3 | BT Name | Имя: TD-H9xxxx. |
-| 4 | BT Pairing | Pairable (поиск устройств: PTT, MIC, гарнитура) / Paired (список сопряжённых: PTT, MIC, гарнитура). |
-| 5 | OD PTT | OD (только Odmaster) / OD + Analog (одновременно с аналоговой передачей). |
-| 6 | OD Mode | Local Mode (звук через рацию; по умолчанию) / Forward Mode (пересылка на другие рации/платформы) / Full Mode (оба). |
-| 7 | BT Int MIC | Переключатель усиления Bluetooth-микрофона: OFF/ON. |
-| 8 | BT Int Spk | Переключатель усиления Bluetooth-динамика: OFF/ON. |
-| 9 | BT MIC Gain | Усиление BT-микрофона: 1–5. |
-| 10 | BT Spk Gain | Усиление BT-динамика: 1–5. |
-| 11 | BT Pin Code | PIN-код сопряжения: 0000 / 000000 / 123456. |
-| 12 | BT Reset | ... |
+| 1st | BT ON/OFF | On/off Bluetooth. |
+| 2. | BT Mode | Receiver (radio - receiver, connects to the phone; name TD-H9 XXXX, do not connect to the suffix BLE) / Emitter (radio - source; mating via item 4). Compatible accessories: Bluetooth PTT, MIC, headset. |
+| 3 | BT Name | Name: TD-H9xxx. |
+| 4. | BT Pairing | Pairable (device search: PTT, MIC, headset) / Paired (conjugated list: PTT, MIC, headset). |
+| 5 | OD PTT | OD (Odmaster only) / OD + Analog (simultaneously with analog transmission). |
+| 6 | OD Mode | Local Mode (radio sound; default) / Forward Mode (sending to other walkie-talkie/platforms) / Full Mode (both). |
+| 7 | BT Int MIC | Bluetooth microphone amplification switch: OFF/ON. |
+| 8. | BT Int Spk | Bluetooth speaker amplification switch: OFF/ON. |
+| 9. | BT MIC Gain | BT microphone amplification: 1-5. |
+| 10. | BT Spk Gain | BT dynamic amplification: 1-5. |
+| 11. | BT Pin Code | PIN pairing: 0000 / 000000 / 123456. |
+| 12. | BT Reset | ... |
 
-#### Особенности Bluetooth
+#### Features of Bluetooth
 
-Одновременно радиостанция может держать только одно bluetooth-соединение. Для взаимодействия со смартфоном или ПК необходимо выбрать режим BT Mode: Receiver. Для подключения гарнитуры - BT Mode - Emitter.    
+A radio station can hold only one bluetooth connection. To interact with a smartphone or PC, you need to select BT Mode: Receiver mode. To connect the headset - BT Mode - Emitter.
 
-   
-<img src="pdf_images/TID-MIC.png" width="700"/>  
+<img src="pdf images/TID-MIC.png" width="700"/ >>
 
-При работе с [**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth) ощущается существенная задержка порядка *1~2.5* секунды при нажатии тангенты на передачу и около *1~1.5* секунды при приеме сигнала. При нажатии тангенты сперва открывается аудио bluetooth-канал, только после этого открывается радиочастотный тракт на передачу и загорается красный индикатор. Это следует учитывать.       
+When working with   LN PH 0  , a significant delay of the order of *1~2.5* seconds is felt when pressing the tangent on the transmission and about *1~1.5* seconds when receiving the signal. When pressing the tangent, the audio bluetooth channel opens first, only after that the radio frequency path for transmission opens and the red indicator lights up. That should be taken into account.
 
-<img src="pdf_images/TID-PTT.png" width="400"/>    
+<img src="pdf images/TID-PTT.png" width="400"/ >>
 
-При работе с [**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button) задежрка существенно ниже чем с **TID-MIC** и составляет *0.2~1* секунды, т.е. рация открывается на передачу быстрее. При подключении TID-PTT к смартфону **ODmaster** работает с устройством <img src="pdf_images/Bluetooth.png" width="16"/>**TID-PTTxxxxxx-A** (скорость *38400* baud), при сопряжении через Bluetooth-меню андроида сопрягаться с этим устройством не рекомендуется - **ODMaster** может его не увидеть. Вместо этого существует устройство <img src="pdf_images/Headset.png" width="16"/> **TID-PTTxxxxxx-B**.       
+When working with   LN PH 0  , the delay is significantly lower than with **TID-MIC** and is *0.2~1* seconds, i.e. the radio opens for transmission faster. When connecting TID-PTT to a smartphone, **ODmaster** works with the device <img src="pdf images/Bluetooth.png" width="16"/>**TID-PTTxxxxxxx-A** (speed *38400* baud), when pairing through the Bluetooth menu, it is not recommended to mate with this device - **ODMaster** may not see it. Instead, there is a device <img src="pdf images/Headset.png" width="16"/> **TID-PTTxxxxx-B**.
 
-![QL2](pdf_images/QL2.png)
+ LN PH 0    
 
-При работе с [**QL-2**](https://tidradio.com/products/td-q2l-bluetooth-noise-cancelling-magnetic-mic-for-td-h3-plus-td-h9) ...
+When working with   LN PH 0 
 
-### 7.37 Обновление прошивки
+### 7.37 Firmware Update
 
-1. Войдите: [web.odmaster.net](https://web.odmaster.net/).
-2. Remote Control Program → Upgrade Firmware.
-3. Следуйте шагам на экране.
+1. Enter:   LN PH 0  .
+2. Remote Control Program: Upgrade Firmware
+3. Follow the steps on the screen.
 
-Либо
+Either.
 
-1. Откройте [Firmware](Firmware)
-2. Скачайте драйвера и актуальную версию прошивки
-3. Следуйте инструкциям в архиве
+1. Open   LN PH 0    
+2. Download the drivers and the current version of the firmware
+3. Follow the instructions in the archive
 
-> Важно: обновление APRS прошивки стирает все настройки. Позывной, APRS-конфигурацию, частоты каналов, пути digipeater'ов — всё исчезает!
+>> Important: Update APRS firmware erases all settings. Callsign, APRS configuration, channel frequencies, digipeater paths - everything disappears!
 
-Есть два способа подключить рацию к компьютеру для программирования и обновления прошивки. Первый — порт данных USB-C на боковой стороне корпуса, рядом с разъёмами тангенты K-1. Второй — кабель для программирования CH340, который подключается к тем же разъёмам K-1 и соединяется с компьютером через USB-A.
+There are two ways to connect a walkie-talkie to a computer for programming and firmware updates. The first is a USB-C data port on the side of the case, next to the K-1 tangent connectors. The second is the CH340 programming cable, which connects to the same K-1 connectors and connects to the computer via USB-A.
 
-### 7.38 GNSS (GPS)
+###7.38 GNSS (GPS)
 
-| № | Функция | Описание |
+| No. | Function | Description |
 |---|---|---|
-| 1 | GPS ON/OFF | Вкл/выкл GPS. |
-| 2 | GPS Information | Антенна, долгота, широта, дата, время, высота, курс, скорость, спутники. |
-| 3 | Position | Формат координат: (D) / DM / DMS — Deg, Deg.min, Deg.min.s. |
-| 4 | Time Zone | Часовой пояс UTC-12…UTC+12 (по умолчанию +3). |
-| 5 | Speed Unit | Единицы скорости: (Kmph) / Knot / Mpt. |
-| 6 | Distance Unit | Единицы расстояния: (Km) / Sea / Mile. |
-| 7 | Altitude Unit | Единицы высоты: (M) / Ft. |
-| 8 | Fixed Latitude | Фиксированная широта (пример 44° 35' 04" — ▲/▼ выбор, [#] подтверждение). |
-| 9 | Fixed Longitude | Фиксированная долгота (пример 40° 06' 38"). |
-| 10 | Fixed Altitude | Фиксированная высота (по умолчанию 0). |
+| 1st | GPS ON/OFF | On/off GPS. |
+| 2. | GPS Information | Antenna, longitude, latitude, date, time, altitude, course, speed, satellites. |
+| 3 | Position | (D) / DM / DMS – Deg, Deg.min, Deg.min.s. |
+| 4. | Time zone | Time zone UTC-12...UTC+12 (default +3). |
+| 5 | Speed Unit | Speed units: (Kmph) / Knot / Mpt. |
+| 6 | Distance Unit | Distance units: (Km)/Sea/Mile. |
+| 7 | Altitude Unit | Height units: (M)/Ft. |
+| 8. | Fixed Latitude | Fixed latitude (example 44° 35' 04" - а/а selection, [#] confirmation). |
+| 9. | Fixed Longitude | Fixed longitude (example 40° 06' 38). |
+| 10. | Fixed Altitude | Fixed height (default 0). |
 
-### 7.39 Site Type (Тип позиции)
+## 7.39 Site Type (Position Type)
 
-- **Fix Coordinates** — фиксированные координаты.
-- **GPS Coordinates** — координаты по GPS.
+**Fix Coordinates** are fixed coordinates.
+- **GPS Coordinates** - GPS coordinates.
 
-Фиксированные координаты передаются в случае активации режима передачи маяка через APRS, если включена соответствующая настройка.
-GPS координаты - когда удалось определить местоположение.     
+Fixed coordinates are transmitted in case of activation of the beacon transmission mode via APRS, if the appropriate setting is enabled.
+GPS coordinates - when the location was determined.
 
-Если радиостанция стационарная, можно отключить GPS и станция будет отправлять заданные настройками координаты (пункты меню 7.38.8 Fixed Latitude, 7.38.9 Fixed Longitude и 7.38.10 Fixed Altitude).
+If the radio station is stationary, you can turn off GPS and the station will send the specified coordinates (menu items 7.38.8 Fixed Latitude, 7.38.9 Fixed Longitude and 7.38.10 Fixed Altitude).
 
-### 7.40 APRS
+##7.40 APRS
 
-> При работе с APRS желательно полностью отключать режим энергосбережения, чтобы не пропустить начало пакета.
+>> When working with APRS, it is advisable to completely turn off the energy saving mode so as not to miss the start of the package.
 
-| № | Функция | Описание |
+| No. | Function | Description |
 |---|---|---|
-| 1 | APRS Switch | Вкл/выкл APRS. |
-| 2 | Beacon Set | Настройка маяка: |
-| 2.1 | .. | **Call Sign** - радиолюбителький позывной (до 6 символов, заглавные латиница+цифры; ▲/▼ выбор символа, confirm — ввод, back — удаление, # — сохранить) | 
-| 2.2 | .. | [**SSID**](http://aprs.ru/index.php/SSID) (0–15, по умолчанию 11) |
-| 2.3 | .. | [**SSID Symbol**](https://www.aprs.org/symbols.html) (`/` или `\`) согласно [таблице](Customer%20Programming%20Software/Disasm/APRS_symbols.md) |
-| 2.4 | .. | **Custom Information** - комментарий к APRS-пакету, до 60 англ символов ASCII |
-| 2.5 | .. | [**Icon Settings**](Customer%20Programming%20Software/Disasm/APRS_symbols.md) - просматриваемый справочник согласно [таблице](Customer%20Programming%20Software/Disasm/APRS_symbols.md).  Используйте его, чтобы найти нужный символ, затем введите код в SSID Symbol. |
-| 2.6 | .. | **MIC Start** (On/Off) |
-| 2.7 | .. | **MIC Type** (MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency) |
-| 2.8 | .. | [**Route 1**](Docs/APRS_Digipeater_ru.md): Используйте кнопки ▲/▼ для выбора символа. Нажмите кнопку подтверждения, чтобы выбрать его. Если вы допустили ошибку, нажмите кнопку возврата для удаления |
-| 2.9 | .. | [**Route 1 Count**](Docs/APRS_Digipeater_ru.md): (0–9) |
-| 2.10 | .. | [**Route 2**](Docs/APRS_Digipeater_ru.md): Используйте кнопки ▲/▼ для выбора символа. Нажмите кнопку подтверждения, чтобы выбрать его. Если вы допустили ошибку, нажмите кнопку возврата для удаления |
-| 2.11 | .. | [**Route 2 Count**](Docs/APRS_Digipeater_ru.md): (0–9) |
-| 2.12 | .. | **Report Voltage** -отправлять инф-ию о батарее (по умолчанию ON) |
-| 2.13 | .. | **Report Sats** -отправлять инф-ию о спутниках (по умолчанию ON) |
-| 2.14 | .. | **Report Mileage** -отправлять инф-ию о пробеге (по умолчанию OFF) |
-| 3 | Beacon Type | Настройка передачи маяка: |
-| 3.1 | .. | **PTT Linkage** (маяк при каждом нажатии/отпускании PTT; по умолчанию OFF) |
-| 3.2 | .. | **Timed Beacon** - отправлять инф-ию с заданной периодичностью (по умолчанию ON) |
-| 3.3 | .. | **Timing** — интервал в секундах, например 0090 = каждые 90 с (ввод цифрами + [#]). |
-| 4 | Relay Set | Настройки режима APRS-репитера: |
-| 4.1 | .. | **DIGI Forward CH** - на какой канал ретранслировать пакеты (A / (B) / AB) |
-| 4.2 | .. | **DIGI1 Enable** (по умолчанию OFF) |
-| 4.3 | .. | **DIGI1 Name** (по умолчанию WIDE1), до 6 символов ASCII: заглавные буквы и цифры |
-| 4.4 | .. | **DIGI2 Enable** (по умолчанию OFF) |
-| 4.5 | .. | **DIGI2 Name** (по умолчанию WIDE2), до 6 символов ASCII: заглавные буквы и цифры |
-| 4.6 | .. | **Wait Before Forwarding** - задержка перед ретрансляцией (0–9c). При наличии нескольких ретрансляторов позволяет разнести время передачи и избежать коллизий маяков в эфире |
-| 4.7 | .. | **Remote Password** - пароль удаленного управления репитером через KISS (TNC) (по умолчанию 123456). |
-| 5 | Advanced Set | Расширенные настройки приема/передачи: |
-| 5.1 | .. | **APRS RX CH** - на каком канале принимать APRS (OFF / A / (B)) |
-| 5.2 | .. | **APRS TX CH** - на каком канале передавать APRS (OFF / A / (B)) |
-| 5.3 | .. | **PTT Priority** - приоритет при одновременной передаче голоса/APRS (Talk / (APRS)) |
-| - | .. | **RX Decode Tone** - звуковой сигнал при успешном приеме и декодировании APRS (по умолчанию ON) |
-| - | .. | **TX Tone** - звуковой сигнал при передаче APRS (по умолчанию OFF) |
-| 5.4 | .. | **Beacon Auto Popup** (по умолчанию ON) - выводить экран с информацией о полученном маяке |
-| 6 | Beacon List | Список маяков: до 100 принятых; управление/удаление. |
-| 7 | APRS Reset | Сброс APRS к заводским настройкам. |
+| 1st | APRS Switch | On/off APRS. |
+| 2. | Beacon Set | Lighthouse setting: |
+| 2. 1st | .. | **Call Sign** - Amateur radio call sign (up to 6 characters, capital Latin + digits; итель/итель character selection, confirm - input, back - deletion, # - save) | 
+| 2. 2. | .. | [**SSID**](http://aprs.ru/index.php/SSID) (0–15, default 11) |
+| 2. 3 | .. | [**SSID Symbol**](https://www.aprs.org/symbols.html) (`/` or ``) according to [table](Customer%20Programming%20Software/Disasm/APRS symbols). md) |
+| 2. 4. | .. | **Custom Information** - Commentary to APRS package, up to 60 ASCII characters |
+| 2. 5 | .. | [**Icon Settings**](Customer%20Programming%20Software/Disasm/APRS symbols.md) is the reference book viewed according to [table](Customer%20Programming%20Software/Disasm/APRS symbols.md). Use it to find the desired character, then enter the code into the SSID Symbol. |
+| 2. 6 | .. | **MIC Start** (On/Off) |
+| 2. 7 | .. | **MIC Type** (MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency) |
+| 2. 8. | .. | [**Route 1**] (Docs/APRS Digipeater en.md): Use the а/а button to select the symbol. Press the confirmation button to select it. If you make a mistake, press the return button to delete. |
+| 2. 9. | .. | [**Route 1 Count**(Docs/APRS Digipeater en.md): (0-9) |
+| 2. 10. | .. | [**Route 2**] (Docs/APRS Digipeater en.md): Use the а/а button to select the symbol. Press the confirmation button to select it. If you make a mistake, press the return button to delete. |
+| 2. 11. | .. | [**Route 2 Count**(Docs/APRS Digipeater en.md): (0-9) |
+| 2. 12. | .. | **Report Voltage** - send battery information (on default) |
+| 2. 13 | .. | **Report Sats** - send satellite information (on default) |
+| 2. 14. | .. | **Report Mileage** - send mileage information (OFF default) |
+| 3 | Beacon Type | Beacon transmission setting: |
+| 3. 1st | .. | **PTT Linkage** (beacon at every PTT press/release; OFF default) |
+| 3. 2. | .. | **Timed Beacon** - send information at a given frequency (on default) |
+| 3. 3 | .. | **Timing** is an interval in seconds, e.g. 0090 = every 90 seconds (digit input + [#]). |
+| 4. | Relay Set | Settings of APRS-repiter mode: |
+| 4. 1st | .. | **DIGI Forward CH** - to which channel to relay packets (A/(B)/AB) |
+| 4. 2. | .. | **DIGI1 Enable** (OFF default) |
+| 4. 3 | .. | **DIGI1 Name** (default WIDE1), up to 6 ASCII characters: capital letters and numbers |
+| 4. 4. | .. | **DIGI2 Enable** (OFF default) |
+| 4. 5 | .. | **DIGI2 Name** (default WIDE2), up to 6 ASCII characters: capital letters and numbers |
+| 4. 6 | .. | **Wait Before Forwarding** - Delay before relay (0-9c) In the presence of several repeaters allows you to divide the transmission time and avoid collisions of beacons in the air |
+| 4. 7 | .. | **Remote Password** is the password for remote control of the repeater via KISS (TNC) (default 123456). |
+| 5 | Advanced Set | Advanced reception/transmission settings: |
+| 5. 1st | .. | **APRS RX CH** - on which channel to receive APRS (OFF/A/(B)) |
+| 5. 2. | .. | **APRS TX CH** - on which channel to transmit APRS (OFF/A/(B)) |
+| 5. 3 | .. | **PTT Priority** - Priority for simultaneous voice/APRS (Talk/APRS) |
+| - | .. | **RX Decode Tone** - Audible signal for successful APRS reception and decoding (on default) |
+| - | .. | **TX Tone** - audible signal when transmitting APRS (OFF default) |
+| 5. 4. | .. | **Beacon Auto Popup** (on default) - display the screen with information about the received beacon |
+| 6 | Beacon List | List of beacons: up to 100 accepted; control/removal. |
+| 7 | APRS Reset | Reset APRS to factory settings. |
 
-### 7.41 Подробное описание функций APRS
+##7.41 Detailed description of APRS features
 
-| # | Топик | Описание |
+| # | Topeka | Description |
 |---|---|---|
-| 1 | **Каналы APRS** | Каналы A/B могут быть назначены на APRS или голос; поддерживаются режимы: | 
-| . | .. | - приём+передача на A |
-| . | .. | - приём A / передача B (кроссрепитер) |
-| . | .. | - только приём A |
-| . | .. | - одновременная передача A и B |
-| . | .. | - приём+передача на B |
-| . | .. | - приём B / передача A (кроссрепитер) |
-| . | .. | - только приём B |
-| . | .. | Поддерживается работа вне сети (без интернета и сотовой связи) — рации определяют позиции друг друга напрямую. |
-| 2 | **Bluetooth** | Поддержка KISS TNC поверх Bluetooth; данные могут разбираться и отображаться или загружаться в сеть через Odmaster. |
-| 3 | **APRS Relay (DIGI)** | Полная DIGI-ретрансляция с настраиваемыми именами; включение/отключение удалённо. |
-| 4 | **MIC-E** | Маяки сжимаются и передаются в формате MIC-E — короче время в эфире, меньше коллизий, выше вероятность успешного декодирования. |
-| 5 | **PTT Delay** | Настраиваемая задержка между нажатием PTT и началом передачи (полезно при медленном шумоподавителе удалённой станции). |
-| 6 | **Цифровая ретрансляция APRS** | Два имени ретранслятора: по умолчанию WIDE1 и WIDE2 (до 6 символов, цифры или заглавные буквы). Правило: при приёме валидного маяка, содержащего имя ретранслятора и счётчик переходов > 1, рация пересылает пакет один раз, уменьшая счётчик на 1. При счётчике 0 пакет не пересылается. Каждый переход — полный цикл приём → декод → перекодирование → передача. Счётчик ограничивает бесконечное распространение. [Подробнее...](http://wa8lmf.net/DigiPaths/) |
-| 7 | **Удалённый пароль** | По умолчанию **123456** (6 цифр). |
-| 8 | **Фиксированная станция** | При типе Fix Coordinates для расчёта дистанции/пеленга используются заданные координаты. |
-| 9 | **Карты/просмотр треков** | ... |
+| 1st | ** APRS channels** | A/B channels can be assigned to APRS or voice; modes are supported: | 
+| . | .. | - reception + transmission to A |
+| . | .. | Receiving A/transmitting B (cross-repeater) |
+| . | .. | - Just A. |
+| . | .. | - simultaneous transmission A and B |
+| . | .. | - reception + transmission to B |
+| . | .. | - reception B / transmission A (cross-repiter) |
+| . | .. | - Only B. |
+| . | .. | Work is supported offline (without the Internet and cellular communication) - radios determine each other's positions directly. |
+| 2. | **Bluetooth** | Support for KISS TNC over Bluetooth; data can be parsed and displayed or uploaded to the network via Odmaster. |
+| 3 | **APRS Relay (DIGI) * * | Full DIGI relay with customizable names; on/off remotely. |
+| 4. | **MIC-E** | Beacons are compressed and transmitted in MIC-E format - shorter airtime, fewer collisions, higher probability of successful decoding. |
+| 5 | **PTT Delay** | Customizable delay between pressing PTT and starting transmission (useful with a slow noise suppressor of a remote station). |
+| 6 | **Digital relay of APRS** | Two repeater names: by default WIDE1 and WIDE2 (up to 6 characters, numbers or capital letters). Rule: when receiving a valid beacon containing the repeater name and the transition counter > 1, the radio sends the packet once, reducing the counter by 1. With the counter 0, the packet is not sent. Each transition is a complete cycle of reception → decode → recoding → transfer. The counter limits infinite propagation. [Read more...](http://wa8lmf.net/DigiPaths/) |
+| 7 | ** Deleted password** | By default **123456** (6 digits). |
+| 8. | **Fixed station** | With the Fix Coordinates type, given coordinates are used to calculate the distance/pelling. |
+| 9. | **Maps/view tracks** | ... |
 | . | Odmaster: | - https://web.odmaster.net/login. |
-| . | APRS.fi | - https://aprs.fi/ |
-| . | APRS.to | - https://aprs.to/ |
+| . | APRS.fi. | - https://aprs.fi/ |
+| . | APRS.to. | - https://aprs.to/ |
 | . | APRS Map Info | - https://aprs-map.info/ |
 
-> Передача маяков PTT Linkage и Timed Beacon не могут быть включены одновременно. Если включены оба, Timed Beacon не работает.
+Transmission of PTT Linkage and Timed Beacon beacons cannot be enabled simultaneously. If both are included, the Timed Beacon does not work.
 
-> Полоса пропускания для APRS должна быть Wide!
+The bandwidth for APRS should be Wide!
 
-### 7.42 Удаленное управление репитером APRS
+###7.42 Remote control of APRS repeater
 
-Вы можете отправить управляющий пакет с любой другой радиостанции или смартфона, подключенного к трансиверу, оформив его как стандартное APRS-сообщение (APRS Message), адресованное позывному вашей радиостанции (например, N0CALL-9). В тексте сообщения вводится комбинация [пароль][команда] (например, 123456A1). Если радиостанция успешно примет и декодирует посылку, она изменит режим работы встроенного дигипитера. 
+You can send a control packet from any other radio station or smartphone connected to the transceiver as a standard APRS Message addressed to the call sign of your radio station (for example, N0CALL-9). A combination of [password][command] (e.g., 123456A1) is entered in the message text. If the radio station successfully receives and decodes the package, it will change the operating mode of the built-in digipiter.
 
-Пароль строго должен состоять из 6 цифр. Чтобы трекер выполнил команду, сообщение должно содержать ваш пароль, а затем саму команду (без пробелов)
+The password should strictly consist of 6 digits. For the tracker to execute the command, the message must contain your password and then the command itself (without spaces).
 
-Доступные удаленные команды:
-| Команда | Что делает |
+Available remote commands:
+|Team |What's going on |
 |---|---|
-| A1 | Включить репитер 1 (DIGI 1 — активация функции дигипитера) |
-| A0 | Выключить репитер 1 (DIGI 1) |
-| B1 | Включить репитер 2 (DIGI 2) |
-| B0 | Выключить репитер 2 (DIGI 2) |
-| R0 | Сбросить текущие настройки и перезагрузить устройство с параметрами из энергонезависимой памяти EEPROM |
+|A1|Insert repeater 1 (DIGI 1 - activation of digipiter function)|
+|A0| Turn off repeater 1 (DIGI 1)|
+|B1|Insert repeater 2 (DIGI 2)|
+|B0| Turn off repeater 2 (DIGI 2)|
+|R0|Reset the current settings and restart the device with parameters from non-volatile memory EEPROM|
 
-### 7.43 Ретрансляция APRS-пакетов дигипитером
+### 7.43 Retransmission of APRS packets by digipiter
 
-[APRS-ретрансляция](Docs/APRS_Digipeater_ru.md) — это процесс: приём → декодирование → перекодирование → отправка. При каждой ретрансляции качество сигнала остаётся наилучшим, в отличие от традиционной аналоговой голосовой ретрансляции.
+ LN PH 0  is a process: receiving → decoding → transcoding → sending. With each relay, the signal quality remains the best, unlike traditional analog voice relays.
 
-Благодаря тому, что маяк содержит указанное количество ретрансляций, бесконечной ретрансляции не происходит.
+Due to the fact that the beacon contains a specified number of retransmissions, endless retransmission does not occur.
 
-В режиме работе дигипитера радиостанция при приеме APRS-пакета ищет в его PATH имя установленного дигипитера, и если находит, то пересылает далее в эфир этот пакет, декрементируя SSID на единицу, но только в том случае если SSID больше нуля. 
+In the digipiter mode, the radio station, when receiving an APRS packet, searches for the name of the installed digipiter in its PATH, and if it finds it, then sends this packet further to the air, decrementing the SSID per unit, but only if the SSID is greater than zero.
 
 <img src="images/NNNN-Digi-Demo.gif"/>
 
-### 7.44 APRS Worldwide Частоты
+###7.44 APRS Worldwide Frequency
 
-| Частота | Описание |
+| The frequency | Description |
 |---|---|
 | 144.3900 MHz | North America: United States, Canada, Chili |
 | 144.3900 MHz | Indonesia, Singapore, Malaysia |
-| 144.3900 MHz | Thailand (https://www.qsl.net/rast/text/2mbandplan.htm) | 144.3900 MHz | Mexico, Dominican Republic, Puerto Rico, Trinidad & Tobago, Columbia |
-| 144.8000 MHz | Europe, UK, Ireland, Iceland, **Россия** |
+| 144.3900 MHz | Thailand (https://www.qsl.net/rast/text/2mbandplan.htm) 
+| 144.3900 MHz | Mexico, Dominican Republic, Puerto Rico, Trinidad & Tobago, Columbia |
+| 144.8000 MHz | Europe, UK, Ireland, Iceland,**Russia** |
 | 144.8000 MHz | South Africa, Azores, Costa Rica, Israel, Lebanon, Senegal |
 | 145.1750 MHz | Australia, Tasmania |
 | 144.5750 MHz | New Zealand |
@@ -805,264 +806,264 @@ GPS координаты - когда удалось определить мес
 | 145.5250 MHz | Thailand (OLD) |
 | 145.5700 MHz | Brazil |
 | 433.8000 MHz | Europe (Primary) |
-| 432.5000 MHz | Europe (Secondary) |
+| 432.5 MHz | Europe (Secondary) |
 | 439.1000 MHz | Australia |
 | 430.5125 MHz | Netherlands |
 | 432.5750 MHz | New Zealand |
 
-> Не используйте вышеперечисленные частоты для передачи голоса!
+>> Do not use the above frequencies for voice transmission.
 
-http://aprs.qrz.ru/freq.php    
-https://www.sigidwiki.com/wiki/Automatic_Packet_Reporting_System_(APRS)    
-https://aprs.fi/   
+http://aprs.qrz.ru/freq.php
+https://www.sigidwiki.com/wiki/Automatic Packet Reporting System (APRS)
+https://aprs.fi/
 
-### 7.45 Схожая по функционалу APRS-радиостанция
+### 7.45 Similar to APRS radio
 
-**Существенные минусы реализации APRS на H9**:
-* Отсутствие возможности назначения отправки beacon нажатием боковой клавиши (Send Beacon)
-* Отсутствие возможности заглушить звук на APRS-канале (Mute A/B)
-* Отсутствие возможности работать с APRSDroid, только ODMaster
+**Substantial disadvantages of APRS implementation on H9**:
+* Inability to assign beacon by pressing the side key (Send Beacon)
+Ability to silence the sound on the APRS channel (Mute A/B)
+*Not able to work with APRSDroid, only ODMaster
 
-Схожая по функционалу APRS-радиостанция - **Lanchonlh HG-UV98**:
-* [HG-UV98](https://github.com/dkxce/HG-UV98)
-* [lanchonlh_hg-uv98_ru_manual](https://github.com/dkxce/lanchonlh_hg-uv98_ru_manual)
+A similarly functional APRS radio station - **Lanchonlh HG-UV98**:
+*   LN PH 0    
+ LN PH   1st    
 
-> У HG-UV98 диапазонные полосовые фильтры (BPF) лучше, чем у H9. У H9 лучше избирательность APRS-сигнала.
+>> The HG-UV98 has better bandwidth filters than the H9. The H9 has better APRS selectivity.
 
-> Для корректного взаимодействия с **Lanchonlh HG-UV98** необходимо настроить **APRS RX Level** на UV98.
+>> To properly interact with **Lanchonlh HG-UV98**, you must configure **APRS RX Level** on UV98.
 
-### 7.46 SMS
+## 7.46 SMS
 
-> При работе с SMS необходимо отключить режим Dual Watch (TDR) и желательно убрать режим энергосбережения
+>> When working with SMS, you need to turn off Dual Watch (TDR) mode and it is desirable to remove the power saving mode.
 
-Радиостанция позволяет отправлять и передавать короткие сообщения между аналогичными станциями: **TD-H9** и TD-H3+.    
-Либо передавать и получать сообщения через APRS.
+The radio station allows you to send and transmit short messages between similar stations: **TD-H9** and TD-H3+.
+Send and receive messages via APRS.
 
-> При режиме работы RF обмен сообщениями возможен только между **TD-H9** и TD-H3+. Получатель при этом указывается Radio ID радиостанции (Radio Info -> Radio ID).
-> Radio ID настраивается через CPS на компьютере (DTMF Code -> DTMF Settings -> Local ID).
+>> In RF mode, messaging is only possible between **TD-H9** and TD-H3+. The recipient is indicated by Radio Info (Radio Info -> Radio ID).
+Radio ID is configured via CPS on your computer (DTMF Code -> DTMF Settings -> Local ID).
 
-> При режиме работы APRS обмен сообщениями осуществляется APRS-пакетами Message (:). Получатель и отправитель на всплывающем экране при этом отображается правильно.
-> На экране просмотра входящих SMS в качестве получателя указан отправитель.
-<img src="pdf_images/SMS_INBOX.jpg"/>
+>> In the APRS mode, messaging is carried out by APRS-packets Message (:). The receiver and sender on the pop-up screen is displayed correctly.
+>> On the incoming SMS view screen, the sender is indicated as the recipient.
+<img src="pdf images/SMS INBOX.jpg"/ >>
 
-| Пункт | Наименование | Описание |
+| Item | Name | Description |
 |---|---|---|
-| 1 | SMS ON/OFF | Вкл/Выкл режим приема SMS |
-| 2 | Send SMS | Отправка сообщения получателю. В качестве получателя сообщения указывается радиолюбительский позывной с суффиксом SSID. |
-| 3 | Inbox | Входящие сообщения |
-| 4 | Outbox | Исходящие сообщения |
-| 5 | Draft | Шаблоны сообщений |
-| 6 | SMS Mode | Режим SMS (RF / [APRS](https://www.aprs.org/aprs-messaging.html)) |
-| 7 | RX Filter | Фильтр приема сообщений |
-| 8 | Statisctics | Статистика сообщений (использование памяти) |
+| 1st | SMS ON/OFF | On/off SMS reception mode |
+| 2. | Send SMS | Sending a message to the recipient. Amateur radio call sign with SSID suffix is indicated as the recipient of the message. |
+| 3 | Inbox | Incoming communications |
+| 4. | Outbox | Outgoing communications |
+| 5 | Draft | Communication templates |
+| 6 | SMS Mode | SMS mode (RF/[APRS](https://www.aprs.org/aprs-messaging.html) |
+| 7 | RX Filter | Message filter |
+| 8. | Statisctics | Message statistics (memory use) |
 
-### 7.47 Spectrum 
+##7.47 Spectrum
 
-Радиостанция позволяет просматривать радиочастотный спектр.    
-<img src="images/TIDRADIO H9 - 010.jpg"/>
+The radio station allows you to view the radio frequency spectrum.
+<img src="images/TIDRADIO H9 - 010.jpg"/ >>
 
-| Управление | Описание |
+| Management | Description |
 |---|---|
-| Удержание 7 | Вход в режим анализатора спектра |
-| MENU | Вход в текстовое меню настроек спектрометра |
-| BACK/EXIT | Быстрый выход из режима анализатора спектра |
-| PF1 | Исключение частоты из сканирования (Возможно надо перезайти в режим спектра, либо сбросить пиковые значения **0**) |
-| PF2 | Включение частоты в сканирование |
-| # | Автоматический переход курсора на пик самого сильного сигнала |
-| 2/8 (удержание) | Изменение порога RSSI (Threshold) |
-| ▲/▼ | Навигация по частоте (перемещение курсора) |
-| * | Вкл/Выкл курсора |
-| PTT | Режим монитора (MONI) — мгновенное открытие шумоподавителя для прослушивания частоты под курсором |
-| 0–9 | Ручной ввод центральной частоты |
+| Retention 7 | Entry into spectrum analyzer mode |
+| Menou | Entrance to the text menu of spectrometer settings |
+| BACK/EXIT | Quick exit from spectrum analyzer mode |
+| PF1 | Remove frequency from scanning (Perhaps reset to spectrum mode or reset peak values **0**) |
+| PF2 | Including frequency in the scan |
+| # | Automatic transition of the cursor to the peak of the strongest signal |
+| 2/8 (retention) | Change of the RSSI threshold (Threshold) |
+| /  | Frequency navigation (cursor movement) |
+| * | On/off cursor |
+| PTT | Monitor Mode (MONI) – Instant opening of the noise suppressor to listen to the frequency under the cursor |
+| 0-9 | Manual central frequency input |
 
-<img src="images/spectrum.png"/>    
+<img src="images/spectrum.png"/>
 
-**Меню**:
+- Menu!
 
-| Пункт | Наименование | Описание |
+| Item | Name | Description |
 |---|---|---|
-| 1 | Modulation | Изменение модуляции |
-| 2 | Step Freq | Изменение шага сетки частот сканирования 0.1/0.5/1.0/2.5/5.0/6.25/10.0/12.5/25.0/50/100 kHz |
-| 3 | Threshold | Порог RSSI (минимальный уровень силы сигнала в децибелах (dBm) |
-| 4 | Cursor | Вкл/Выкл курсора | 
-| 5 | Bandwidth | Установка ширины канала (W/N) |
-| 6 | Reset | Сброс настроек спектрометра и очистка вырезанных частот |
+| 1st | Modulation | Modulation change |
+| 2. | Step Freq | Changing the step of the scanning frequency grid 0.1/0.5/1.0/2.5/5.0/6.25/10.0/12.5/25.0/50/100 kHz |
+| 3 | Threshold | RSSI threshold (minimum signal strength in decibels (dBm)) |
+| 4. | Cursor | On/off cursor | 
+| 5 | bandwidth | Channel width setting (W/N) |
+| 6 | Reset | Resetting spectrometer settings and cleaning cut frequencies |
 
-### 7.48 Morse
+##7.48 Morse
 
-Рация умеет передавать и принимать азбуку Морзе. Регулируемая скорость TX, порог RX и частота тона. 
+The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold and tone frequency.
 
-| Пункт | Наименование | Описание |
+| Item | Name | Description |
 |---|---|---|
-| 1 | Morse On/Off | Режим морзе |
-| 2 | Key TX | Ручной режим передачи |
-| 3 | Edit TX | Ввод текста передачи с отправкой |
-| 4 | RX Code | Режим приема кодов морзе |
-| 5 | TX Speed | Скорость передачи для автоматического режима 5/8/12/18 |
-| 6 | RX Threshold | Порог RSSI (минимальный уровень силы сигнала в децибелах (dBm)) |
+| 1st | Morse On/Off | Morse regimen |
+| 2. | Key TXX | Manual transmission mode |
+| 3 | Edit TX | Entering the transmission text with sending |
+| 4. | RX Code | Morse code reception mode |
+| 5 | TXX Speed | Transmission speed for automatic 5/8/12/18 mode |
+| 6 | RX Threshold | RSSI threshold (minimum signal strength in decibels (dBm)) |
 
-> При передачи морзянки субтоны CTCSS или DCS не передаются.
+>> During Morsea transmission, CTCSS or DCS subtones are not transmitted.
 
 ---
 
-## Приложение A. Поиск и устранение неисправностей
+## Appendix A. Finding and troubleshooting
 
-| Проблема | Анализ | Решение |
+| Problem. | Analysis | Decision |
 |---|---|---|
-| Не включается | Неправильно установлен аккумулятор / разряжен / плохой контакт | Переустановить батарею; зарядить или заменить; почистить контакты |
-| Слабый/прерывистый голос при приёме | Низкая громкость / антенна ослаблена или установлена неверно / засорён динамик | Увеличить громкость; выключить и переустановить антенну; почистить динамик |
-| Нет связи с группой | Частота или сигналы не совпадают / слишком далеко | Проверить частоты и сигналы; приблизиться |
-| Слышны чужие голоса/шум | Помехи на частоте / в аналоговом режиме нет сигнализации | Сменить частоту или поднять шумоподавитель; настроить сигнализацию |
-| Никого не слышно (шум) | Большие препятствия / открытая местность / электромагнитные помехи | Перейти на открытую ровную площадку, перезапустить рацию; отойти от источников помех |
-| Постоянная передача | Включён VOX или гарнитура не вставлена до конца | Выключить VOX; проверить гарнитуру |
+| Not included. | Incorrectly installed battery / discharged / poor contact | Reinstall battery; charge or replace; clean contacts |
+| Weak/intermittent voice when receiving | Low volume / antenna weakened or installed incorrectly / clogged speaker | Increase volume; turn off and reinstall the antenna; clean the speaker |
+| No connection to the group. | Frequency or signals do not match / too far | Check frequencies and signals; get closer |
+| Other voices/noise heard | Interference on frequency / in analog mode no alarm | Change the frequency or raise the noise suppressor; adjust the alarm |
+| No one heard (noise) | Large obstacles / open terrain / electromagnetic interference | Go to an open flat area, restart the radio; move away from sources of interference |
+| Continuous transmission | VOX enabled or headset not inserted until the end | Turn off VOX; check the headset |
 
-## Приложение B. Технические характеристики
+## Appendix B. Technical specifications
 
-| Параметр | Значение |
+| Parameter | Meaning. |
 |---|---|
-| Частотный диапазон (любительский, RX & TX) | 136–173,99 и 400–519,99 МГц (TX/RX также 174–245, 240–260, 290–350, 350–400, 470–520, 520–600 МГц; RX 50–76, 65–108 (FM-радио), 108–136 (AM/FM авиа), 220–260, 350–390 МГц) |
-| Каналов памяти | 199 |
-| Выходная мощность RF | до 10 Вт (3 уровня: высокая, средняя, низкая) |
-| Рабочее напряжение | DC 7,4 В ±10 % |
-| Ёмкость аккумулятора | 2400 мА·ч (Li-Ion) |
-| Стабильность частоты | ±2,5 ppm |
-| Рабочая температура | от -20 °C до +50 °C |
-| Режим работы | Симплекс |
-| Импеданс антенны | 50 Ом |
-| Антенный разъём | На рации SMA-Male, на антенне SMA-Female |
-| Разъём гарнитуры | K-Plug (Kenwood 2-pin) |
-| Дисплей | 1,77" цветной ЖК, 3 режима отображения, 18 цветов меню |
-| GPS | Встроенный GPS/GNSS |
-| Bluetooth | Встроенный (для настройки через Odmaster, гарнитуры) |
-| APRS | Встроенная поддержка (KISS TNC, DIGI, MIC-E) |
-| Спектроанализатор | Встроенный |
-| CPU / RAM / Flash | 240 МГц / 120 МБ / 16 МБ |
-| Радиочип / МК | Beken BK4819 / PY32F003 |
-| Модуляция FM | [11K0F3E](Docs/emission-types-radionerds-ru.md) @ 12,5 кГц (Narrow band) / [16K0F3E](Docs/emission-types-radionerds-ru.md) @ 25 кГц (Wide band) |
-| Мощность соседнего канала | 60 дБ @ 12,5 кГц |
-| Ток передачи | ≤ 1500 мА |
-| Чувствительность приёмника | 0,25 мкВ (12 дБ SINAD) |
-| Избирательность по соседнему каналу | ≥ 55 дБ @ 12,5 кГц |
-| Подавление интермодуляции | ≥ 55 дБ @ 12,5 кГц |
-| Паразитное излучение | ≤ -57 дБ @ 12,5 кГц |
-| Выходная мощность звука | 1 Вт @ 16 Ом |
-| Ток приёма | ≤ 380 мА |
-| Искажения звука | ≤ 5 % |
-| Габариты (без антенны) | 140 × 53 × 32 мм |
-| Вес | 190 г |
+| Frequency range (Amateur, RX & TX) | 136–173.99 and 400–519.99 MHz (TX/RX also 174–245, 240–260, 290–350, 350–400, 470–520, 520–600 MHz; RX 50–76, 65–108 (FM radio), 108–136 (AM/FM air), 220–260, 350–390 MHz |
+| Memory channels | 199 |
+| RF power output | up to 10 watts (3 levels: high, medium, low) |
+| Working voltage | DC 7.4 V ±10 per cent |
+| Battery capacity | 2400 mAh (Li-Ion) |
+| Frequency stability | ± 2.5 ppm |
+| Operating temperature | from -20 °C to +50 °C |
+| Mode of work | simplex |
+| Impedance antenna | 50 ohm |
+| antenna connector | On the SMA-Male radio, on the SMA-Female antenna |
+| Headset connector | K-Plug (Kenwood 2-pin) |
+| Display. | 1.77" color LCD, 3 display modes, 18 menu colors |
+| GPS | Built-in GPS/GNSS |
+| Bluetooth | Built-in (for customization through Odmaster, headsets) |
+| APRS | Built-in support (KISS TNC, DIGI, MIC-E) |
+| Spectroanalyzer | Built-in |
+| CPU/RAM/Flash | 240 MHz / 120 MB / 16 MB |
+| Radiochip/MK | Beken BK4819 / PY32F003 |
+| FM modulation | [11K0F3E](Docs/emission-types-radionerds-en.md) @ 12.5 kHz (Narrow band) / [16K0F3E](Docs/emission-types-radionerds-en.md) @ 25 kHz (Wide band) |
+| Power of the adjacent channel | 60 dB @ 12.5 kHz |
+| Transmission current | ≤ 1500 mA |
+| Sensitivity of the receiver | 0.25 μV (12 dB SINAD) |
+| Selectivity on the neighboring channel | ≥ 55 dB @ 12.5 kHz |
+| Suppression of intermodulation | ≥ 55 dB @ 12.5 kHz |
+| Parasite radiation | ≤ -57 dB @ 12.5 kHz |
+| Sound output | 1 Watt @ 16 Ohm |
+| Reception current. | ≤ 380 mA |
+| Sound distortions | ≤ 5% |
+| Dimensions (without antenna) | 140 x 53 x 32 mm |
+| Weight. | 190 |
 
-## Приложение C. Таблица DCS-кодов
+## Appendix C. DCS code table
 
-| № | Код | № | Код | № | Код |
+| No. | Code. | No. | Code. | No. | Code. |
 |---|---|---|---|---|---|
-| 1 | D023N | 2 | D025N | 3 | D026N |
-| 4 | D031N | 5 | D032N | 6 | D036N |
-| 7 | D043N | 8 | D047N | 9 | D051N |
-| 10 | D053N | 11 | D054N | 12 | D065N |
-| 13 | D071N | 14 | D072N | 15 | D073N |
-| 16 | D074N | 17 | D114N | 18 | D115N |
-| 19 | D116N | 20 | D122N | 21 | D125N |
-| 22 | D131N | 23 | D132N | 24 | D134N |
-| 25 | D143N | 26 | D145N | 27 | D152N |
-| 28 | D155N | 29 | D156N | 30 | D162N |
-| 31 | D165N | 32 | D172N | 33 | D174N |
-| 34 | D205N | 35 | D212N | 36 | D223N |
-| 37 | D225N | 38 | D226N | 39 | D243N |
-| 40 | D244N | 41 | D245N | 42 | D246N |
-| 43 | D251N | 44 | D252N | 45 | D255N |
-| 46 | D261N | 47 | D263N | 48 | D265N |
-| 49 | D266N | 50 | D271N | 51 | D274N |
-| 52 | D306N | 53 | D311N | 54 | D315N |
-| 55 | D325N | 56 | D331N | 57 | D332N |
-| 58 | D343N | 59 | D346N | 60 | D351N |
-| 61 | D356N | 62 | D364N | 63 | D365N |
-| 64 | D371N | 65 | D411N | 66 | D412N |
-| 67 | D413N | 68 | D423N | 69 | D431N |
-| 70 | D432N | 71 | D445N | 72 | D446N |
-| 73 | D452N | 74 | D454N | 75 | D455N |
-| 76 | D462N | 77 | D464N | 78 | D465N |
-| 79 | D466N | 80 | D503N | 81 | D506N |
+| 1st | D023N | 2. | D025N | 3 | D026N |
+| 4. | D031N | 5 | D032N | 6 | D036N |
+| 7 | D043N | 8. | D047N | 9. | D051N |
+| 10. | D053N | 11. | D054N | 12. | D065N |
+| 13 | D071N | 14. | D072N | 15. | D073N |
+| 16 | D074N | 17. | D114N | 18. | D115N |
+| 19. | D116N | 20. | D122N | 21. | D125N |
+| 22. | D131N | 23. | D132N | 24. | D134N |
+| 25. | D143N | 26. | D145N | 27. | D152N |
+| 28. | D155N | 29. | D156N | 30. | D162N |
+| 31. | D165N | 32. | D172N | 33. | D174N |
+| 34 | D205N | 35. | D212N | 36. | D223N |
+| 37 | D225N | 38. | D226N | 39. | D243N |
+| 40. | D244N | 41. | D245N | 42. | D246N |
+| 43. | D251N | 44. | D252N | 45. | D255N |
+| 46 | D261N | 47. | D263N | 48. | D265N |
+| 49. | D266N | 50. | D271N | 51. | D274N |
+| 52. | D306N | 53. | D311N | 54. | D315N |
+| 55. | D325N | 56 | D331N | 57 | D332N |
+| 58. | D343N | 59. | D346N | 60. | D351N |
+| 61 61 | D356N | 62. | D364N | 63. | D365N |
+| 64 | D371N | 65 | D411N | 66. | D412N |
+| 67. | D413N | 68. | D423N | 69 | D431N |
+| 70. | D432N | 71. | D445N | 72. | D446N |
+| 73. | D452N | 74 | D454N | 75. | D455N |
+| 76. | D462N | 77. | D464N | 78 | D465N |
+| 79 | D466N | 80. | D503N | 81 | D506N |
 | 82 | D516N | 83 | D523N | 84 | D526N |
-| 85 | D532N | 86 | D546N | 87 | D565N |
-| 88 | D606N | 89 | D612N | 90 | D624N |
+| 85. | D532N | 86 | D546N | 87 | D565N |
+| 88 | D606N | 89 | D612N | 90. | D624N |
 | 91 | D627N | 92 | D631N | 93 | D632N |
-| 94 | D645N | 95 | D654N | 96 | D662N |
-| 97 | D664N | 98 | D703N | 99 | D712N |
-| 100 | D723N | 101 | D731N | 102 | D732N |
+| 94 | D645N | 95. | D654N | 96 | D662N |
+| 97 | D664N | 98 | D703N | 99. | D712N |
+| 100. | D723N | 101 | D731N | 102 | D732N |
 | 103 | D734N | 104 | D743N | 105 | D754N |
 | 106 | D023I | 107 | D025I | 108 | D026I |
-| 109 | D031I | 110 | D032I | 111 | D036I |
+| 109 | D031I | 110. | D032I | 111 | D036I |
 | 112 | D043I | 113 | D047I | 114 | D051I |
 | 115 | D053I | 116 | D054I | 117 | D065I |
 | 118 | D071I | 119 | D072I | 120 | D073I |
 | 121 | D074I | 122 | D114I | 123 | D115I |
-| 124 | D116I | 125 | D122I | 126 | D125I |
+| 124 | D116I | 125. | D122I | 126 | D125I |
 | 127 | D131I | 128 | D132I | 129 | D134I |
-| 130 | D143I | 131 | D145I | 132 | D152I |
+| 130. | D143I | 131 | D145I | 132 | D152I |
 | 133 | D155I | 134 | D156I | 135 | D162I |
 | 136 | D165I | 137 | D172I | 138 | D174I |
 | 139 | D205I | 140 | D212I | 141 | D223I |
 | 142 | D225I | 143 | D226I | 144 | D243I |
 | 145 | D244I | 146 | D245I | 147 | D246I |
-| 148 | D251I | 149 | D252I | 150 | D255I |
+| 148 | D251I | 149 | D252I | 150. | D255I |
 | 151 | D261I | 152 | D263I | 153 | D265I |
 | 154 | D266I | 155 | D271I | 156 | D274I |
 | 157 | D306I | 158 | D311I | 159 | D315I |
 | 160 | D325I | 161 | D331I | 162 | D332I |
 | 163 | D343I | 164 | D346I | 165 | D351I |
 | 166 | D356I | 167 | D364I | 168 | D365I |
-| 169 | D371I | 170 | D411I | 171 | D412I |
+| 169 | D371I | 170. | D411I | 171 | D412I |
 | 172 | D413I | 173 | D423I | 174 | D431I |
 | 175 | D432I | 176 | D445I | 177 | D446I |
-| 178 | D452I | 179 | D454I | 180 | D455I |
+| 178 | D452I | 179 | D454I | 180. | D455I |
 | 181 | D462I | 182 | D464I | 183 | D465I |
 | 184 | D466I | 185 | D503I | 186 | D506I |
 | 187 | D516I | 188 | D523I | 189 | D526I |
 | 190 | D532I | 191 | D546I | 192 | D565I |
 | 193 | D606I | 194 | D612I | 195 | D624I |
 | 196 | D627I | 197 | D631I | 198 | D632I |
-| 199 | D645I | 200 | D654I | 201 | D662I |
+| 199 | D645I | 200. | D654I | 201 | D662I |
 | 202 | D664I | 203 | D703I | 204 | D712I |
 | 205 | D723I | 206 | D731I | 207 | D732I |
 | 208 | D734I | 209 | D743I | 210 | D754I |
 
-## Приложение D. Таблица CTCSS-тонов
+## Appendix D. Table of CTCSS tones
 
-| № | Гц | № | Гц | № | Гц | № | Гц | № | Гц |
+| No. | Hz | No. | Hz | No. | Hz | No. | Hz | No. | Hz |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | 67,0 | 2 | 69,3 | 3 | 71,9 | 4 | 74,4 | 5 | 77,0 |
-| 6 | 79,7 | 7 | 82,5 | 8 | 85,4 | 9 | 88,5 | 10 | 91,5 |
-| 11 | 94,8 | 12 | 97,4 | 13 | 100,0 | 14 | 103,5 | 15 | 107,2 |
-| 16 | 110,9 | 17 | 114,8 | 18 | 118,8 | 19 | 123,0 | 20 | 127,3 |
-| 21 | 131,8 | 22 | 136,5 | 23 | 141,3 | 24 | 146,2 | 25 | 151,4 |
-| 26 | 156,7 | 27 | 159,8 | 28 | 162,2 | 29 | 165,5 | 30 | 167,9 |
-| 31 | 171,3 | 32 | 173,8 | 33 | 177,3 | 34 | 179,9 | 35 | 183,5 |
-| 36 | 186,2 | 37 | 189,9 | 38 | 192,8 | 39 | 196,6 | 40 | 199,5 |
-| 41 | 203,5 | 42 | 206,5 | 43 | 210,7 | 44 | 218,1 | 45 | 225,7 |
-| 46 | 229,1 | 47 | 233,6 | 48 | 241,8 | 49 | 250,3 | 50 | 254,1 |
+| 1st | 67.0 | 2. | 69.3 | 3 | 71.9 | 4. | 74.4 | 5 | 77.0 |
+| 6 | 79.7 | 7 | 82.5 | 8. | 85.4 | 9. | 88.5 | 10. | 91.5 |
+| 11. | 94.8 | 12. | 97.4 | 13 | 100.0 | 14. | 103.5 | 15. | 107.2 |
+| 16 | 110.9 | 17. | 114.8 | 18. | 118.8 | 19. | 123.0 | 20. | 127.3 |
+| 21. | 131.8 | 22. | 136.5 | 23. | 141.3 | 24. | 146.2 | 25. | 151.4 |
+| 26. | 156.7 | 27. | 159.8 | 28. | 162,2 | 29. | 165.5.5 | 30. | 167.9 |
+| 31. | 171.3 | 32. | 173.8 | 33. | 177.3 | 34 | 179.9 | 35. | 183.5 |
+| 36. | 186.2 | 37 | 189.9 | 38. | 192.8 | 39. | 196.6.6 | 40. | 199.5 |
+| 41. | 203.5 | 42. | 206.5 | 43. | 210.7 | 44. | 218.1 | 45. | 225.7 |
+| 46 | 229.1 | 47. | 233.6 | 48. | 241.8 | 49. | 250.3.3 | 50. | 254.1.1 |
 
-## Приложение E. Программное обеспечение
+## Annex E. Software
 
-| Софт | Ссылка |
+| soft | Reference |
 |---|---|
-| Драйвера | [Drivers](Drivers) |
-| Настройка рации на ПК | [TIDRadioCPS](Customer%20Programming%20Software) |
-| Настройка рации на Android | [Odmaster](https://play.google.com/store/apps/details?id=com.tid.walkie) |
-| Альтернативный APRSDroid | [APRSDroid 9M2PJU Mod](https://aprsdroid.hamradio.my/) |
+| Drivers. | [Drivers] (Drivers) |
+| Setting up a PC radio | [TIDRadioCPS](Customer%20Programming%20Software) |
+| Setting up the radio on Android | [Odmaster](https://play.google.com/store/apps/details?id=com.tid.walkie) |
+| Alternative APRSDroid | [APRSDroid 9M2PJU Mod](https://aprsdroid.hamradio.my/) |
 | Android javAPRSSrvr IGate | [javAPRSSrvr IGate](https://www.ae5pl.net/javAPRSSrvrIGate.aspx) |
-| Софт и прошивки | [Firmware](Firmware) |
-| Онлайн-редактор каналов | [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) |
-| APRS софт для ПК | [**Desktop BLE-TCP Bridge Software**](https://github.com/dkxce/tdh9desktop) |
-| APRS софт для Android | [**Android BLE-TCP Bridge Software**](https://github.com/dkxce/tdh9android) |
-| Прочий софт (APRS) | [github.com/dkxce](https://github.com/dkxce?tab=repositories&q=aprs) |
-| Описание формата .td | [DISAMS](Customer%20Programming%20Software/Disasm) |
+| Software and firmware | [Firmware] (Firmware) |
+| Online channel editor | [**TD Editor**](https://dkxce.github.io/temporary/td-h9/td-editor.html) |
+| APRS software for PC | [**Desktop BLE-TCP Bridge Software**](https://github.com/dkxce/tdh9desktop) |
+| APRS software for Android | [**Android BLE-TCP Bridge Software**](https://github.com/dkxce/tdh9android) |
+| Other software (APRS) | [github.com/dkxce](https://github.com/dkxce?tab=repositories&q=aprs) |
+| Description of the .td format | [DISAMS](Customer%20Programming%20Software/Disasm) |
 
-## Приложение F. Каналы и пресеты
+## Appendix F. Channels and presets
 
-* [Presets](Presets)
+*   LN PH 0    
 
 ---
 
-*Перевод выполнен с официального руководства TIDRADIO TD-H9 (Ham Version).     
-Официальный сайт: https://tidradio.com/.     
-Правовая информация и полные иллюстрации — в оригинале мануала.*
+Translated from the official manual TIDRADIO TD-H9 (Ham Version).
+Official website: https://tidradio.com/.
+Legal information and full illustrations in the original manual. *
