@@ -40,6 +40,7 @@
 |---|---|---|
 | teedubyeah TD-H9 Files | [teedubyeah/TDH9](https://github.com/teedubyeah/TDH9) | [teedubyeah](https://github.com/teedubyeah) |
 | Custom firmware by mjwgeek | [Experimental Firmware](https://github.com/mjwgeek/TIDRADIO_TD-H9) | [mjwgeek](https://github.com/mjwgeek) |
+| TD-H9 APRS Smart Beaconing | [tomaszkuehn/TD-H9-aprs-smartbeacon](https://github.com/tomaszkuehn/TD-H9-aprs-smartbeacon) | [tomaszkuehn](https://github.com/tomaszkuehn) |
 
 ---
 
