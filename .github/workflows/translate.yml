@@ -6,43 +6,43 @@ on:
       - main
     paths:
       - 'TD-H9_manual_ru.md'
-  workflow_dispatch:
+  workflow_dispatch: # Позволяет безопасно перезапускать перевод вручную из вкладки Actions
 
 jobs:
   translate_and_convert:
     runs-on: ubuntu-latest
     steps:
-      # 1. Скачиваем репозиторий
+      # 1. Скачиваем код репозитория
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем Pandoc
+      # 2. Устанавливаем Pandoc для конвертации документов
       - name: Install Pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Устанавливаем современную библиотеку перевода
+      # 3. Настраиваем Python и устанавливаем библиотеку перевода
       - name: Set up Python and Translator
         run: |
           pip install deep-translator
 
-      # 4. Профессиональный перевод через Google (1 запрос на весь файл, разметка защищена)
-      - name: Safe Megabatch Translate via Google
+      # 4. Почаночный перевод через Google (до 4000 символов на запрос, разметка защищена)
+      - name: Safe Chunked Translate via Google
         run: |
           cat << 'EOF' > translate_md.py
           import re
+          import time
           from deep_translator import GoogleTranslator
 
-          def translate_large_block(text_to_translate):
-              if not text_to_translate.strip():
-                  return text_to_translate
+          def translate_chunk(text_chunk):
+              if not text_chunk.strip():
+                  return text_chunk
               try:
-                  # Переводим весь блок за один единственный сетевой запрос
-                  return GoogleTranslator(source='ru', target='en').translate(text_to_translate)
+                  return GoogleTranslator(source='ru', target='en').translate(text_chunk)
               except Exception as e:
                   print(f"Ошибка при запросе к Google: {e}")
-                  return text_to_translate
+                  return text_chunk
 
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
               lines = f.readlines()
@@ -51,9 +51,8 @@ jobs:
           translatable_parts = []
           structure = []
 
-          # Шаг 1: Разбираем документ и отделяем то, что нужно переводить
+          # Шаг 1: Разбираем структуру Markdown документа
           for line in lines:
-              # Игнорируем блоки кода ```
               if line.strip().startswith("```"):
                   in_code_block = not in_code_block
                   structure.append(('keep', line))
@@ -62,12 +61,10 @@ jobs:
                   structure.append(('keep', line))
                   continue
 
-              # Игнорируем пустые строки
               if not line.strip():
                   structure.append(('keep', line))
                   continue
 
-              # Разметка таблиц
               if line.strip().startswith("|") or line.strip().startswith("---"):
                   parts = line.split("|")
                   cell_meta = []
@@ -78,7 +75,6 @@ jobs:
                   structure.append(('table', (parts, cell_meta)))
                   continue
 
-              # Разметка ссылок [текст](url)
               links = re.findall(r'(\[[^\]]+\]\([^)]+\))', line)
               if links:
                   link_meta = []
@@ -99,33 +95,54 @@ jobs:
                   structure.append(('link_line', (line.rstrip('\n'), link_meta, len(translatable_parts) - 1)))
                   continue
 
-              # Обычная строка текста
               translatable_parts.append(line.rstrip('\n'))
               structure.append(('text', len(translatable_parts) - 1))
 
-          # Шаг 2: Склеиваем весь переводимый текст в супер-строку через уникальный разделитель
-          # Это заставит Google перевести всё за 1 запрос и спасет от блокировок
+          # Шаг 2: Распределяем элементы по чанкам, не превышая лимит Google в 5000 символов
           delimiter = " [br_ph] "
-          megastring = delimiter.join(translatable_parts)
+          chunks = []
+          current_chunk = []
+          current_length = 0
 
-          print(f"Отправка текста в Google Translate единым запросом...")
-          translated_megastring = translate_large_block(megastring)
-          
-          # Разбираем переведенную супер-строку обратно в массив
-          translated_parts = translated_megastring.split(delimiter)
+          for part in translatable_parts:
+              part_len = len(part) + len(delimiter)
+              if current_length + part_len > 4000:  # Безопасный порог в 4000 символов
+                  chunks.append(current_chunk)
+                  current_chunk = [part]
+                  current_length = len(part)
+              else:
+                  current_chunk.append(part)
+                  current_length += part_len
+          if current_chunk:
+              chunks.append(current_chunk)
 
-          # Если Google случайно удалил пробелы вокруг разделителя, подстрахуемся:
-          if len(translated_parts) != len(translatable_parts):
-              translated_parts = re.split(r'\s*\[br_ph\]\s*', translated_megastring)
+          # Шаг 3: Переводим каждый чанк и склеиваем результаты обратно
+          translated_parts = []
+          print(f"Файл разделен на {len(chunks)} порций для обхода лимитов Google.")
 
-          # Если структуры всё равно разъехались, откатываемся на безопасный поштучный массив
-          if len(translated_parts) != len(translatable_parts):
-              print("Предупреждение: Разделители сместились. Перевод в безопасном режиме...")
-              translated_parts = []
-              for part in translatable_parts:
-                  translated_parts.append(translate_large_block(part))
+          for c_idx, chunk in enumerate(chunks):
+              print(f"Перевод порции {c_idx + 1}/{len(chunks)}...")
+              megastring = delimiter.join(chunk)
+              translated_megastring = translate_chunk(megastring)
+              
+              chunk_translated = translated_megastring.split(delimiter)
+              
+              # Корректируем возможные удаления пробелов парсером Google
+              if len(chunk_translated) != len(chunk):
+                  chunk_translated = re.split(r'\s*\[br_ph\]\s*', translated_megastring)
 
-          # Шаг 3: Собираем файл обратно
+              # Резервный сценарий: если чанк развалился, переводим его элементы поштучно
+              if len(chunk_translated) != len(chunk):
+                  print(f"Предупреждение в порции {c_idx + 1}: расхождение структуры. Перевод элементов по одному...")
+                  chunk_translated = []
+                  for item in chunk:
+                      chunk_translated.append(translate_chunk(item))
+                      time.sleep(0.5)
+
+              translated_parts.extend(chunk_translated)
+              time.sleep(1.0) # Задержка между запросами во избежание блокировок
+
+          # Шаг 4: Реконструкция файла
           final_lines = []
           for item_type, data in structure:
               if item_type == 'keep':
@@ -148,26 +165,29 @@ jobs:
 
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
               f.writelines(final_lines)
-          print("Перевод с оригинальным качеством Google завершен!")
+          print("Перевод с оригинальным качеством Google успешно завершен!")
           EOF
           python translate_md.py
 
-      # 5. Конвертируем в формат .docx
+      # 5. Конвертируем оба файла в формат .docx
       - name: Convert Markdown to DOCX via Pandoc
         run: |
           pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
           if [ -f "TD-H9_manual_ru.en.md" ]; then
             pandoc TD-H9_manual_ru.en.md -o TD-H9_manual_ru.en.docx
+          else
+            echo "Английский MD-файл не найден, конвертация отменена"
           fi
 
-      # 6. Делаем коммит изменений
+      # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
+          # Проверяем наличие файлов перед добавлением, чтобы избежать ошибок Git
           [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: perfect google translate with save formatting" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: perfect chunked google translate and docx convert" && git push)
