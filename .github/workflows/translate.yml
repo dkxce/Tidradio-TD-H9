@@ -22,14 +22,12 @@ jobs:
         with:
           node-version: 24.x
 
-      # 3. Переводим русский Markdown на английский
+      # 3. Переводим русский Markdown на английский с сохранением структуры
       - name: Auto Translate Markdown
-        uses: ikhsan3adi/markdown-translator@v3 # Переключено на стабильную v3
+        uses: rockbenben/md-translator@v2
         with:
+          FILES: TD-H9_manual_ru.md
           LANG: en
-          FILES: |
-            TD-H9_manual_ru.md
-          INCREMENTAL: true # Критично: переводить только измененные строки, чтобы избежать HTTPError
 
       # 4. Устанавливаем Pandoc для конвертации документов
       - name: Install Pandoc
