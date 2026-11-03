@@ -27,8 +27,8 @@ jobs:
         run: |
           pip install google-genai
 
-      # 4. Моментальный перевод ВСЕГО файла одним запросом через Gemini API
-      - name: Full File Translate via Gemini API
+      # 4. Поглавный перевод через Gemini API (порции по ~10 тыс. символов для обхода ограничений)
+      - name: Chunked Gemini AI Translate
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
@@ -44,55 +44,77 @@ jobs:
 
           client = genai.Client(api_key=api_key)
 
-          # Читаем весь русский файл целиком
+          def translate_text_via_gemini(text_block):
+              if not text_block.strip():
+                  return text_block
+              
+              prompt = (
+                  "You are an expert technical translator. Translate the following section of a user manual from Russian to English.\n\n"
+                  "STRICT RULES:\n"
+                  "1. Keep all Markdown formatting exactly as it is: do not touch table structures (| and ---), headers (#), lists, bold (**), or images (![]()).\n"
+                  "2. Do not translate or modify hyperlinks inside brackets like [text](url) - translate ONLY the text inside [ ], keep the URL intact.\n"
+                  "3. Absolutely DO NOT translate or modify anything inside code blocks (```...```). Leave them fully in Russian or technical code format.\n"
+                  "4. Maintain correct radio-engineering terminology (e.g., squelch, CTCSS/DCS, frequency, channels).\n"
+                  "5. Output ONLY the translated Markdown text. Do not add introductory words, explanations, or wrap the final response in additional code blocks."
+              )
+              
+              max_retries = 5
+              for attempt in range(max_retries):
+                  try:
+                      response = client.models.generate_content(
+                          model='gemini-3.8-flash',
+                          contents=[prompt, text_block]
+                      )
+                      res_text = response.text.strip()
+                      # Очистка на случай, если ИИ обернул вывод в блоки кода
+                      if res_text.startswith("```markdown"):
+                          res_text = res_text[11:]
+                      if res_text.endswith("```"):
+                          res_text = res_text[:-3]
+                      return res_text.strip()
+                  except Exception as e:
+                      delay = 5 * (attempt + 1)
+                      print(f"Сервер занят (Попытка {attempt + 1}/{max_retries}). Ожидание {delay} сек... Ошибка: {e}")
+                      time.sleep(delay)
+              return text_block
+
+          # Читаем исходный файл
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
               full_text = f.read()
 
-          # Промпт, обучающий Gemini бережно относиться к синтаксису Markdown
-          prompt = (
-              "You are an expert technical translator. Translate the following user manual from Russian to English.\n\n"
-              "STRICT RULES:\n"
-              "1. Keep all Markdown formatting exactly as it is: do not touch table structures (| and ---), headers (#), lists, bold (**), or images (![]()).\n"
-              "2. Do not translate or modify hyperlinks inside brackets like [text](url) - translate ONLY the text inside [ ], keep the URL intact.\n"
-              "3. Absolutely DO NOT translate or modify anything inside code blocks (```...```). Leave them fully in Russian or technical code format.\n"
-              "4. Maintain correct radio-engineering terminology (e.g., squelch, CTCSS/DCS, frequency, channels).\n"
-              "5. Output ONLY the translated Markdown text. Do not add introductory words, explanations, or wrap the final response in additional code blocks."
-          )
+          # Разумное деление текста на крупные блоки по заголовкам или абзацам (~12,000 символов)
+          paragraphs = full_text.split("\n\n")
+          chunks = []
+          current_chunk = []
+          current_length = 0
 
-          print("Отправка всего файла .md в Gemini API (один запрос)...")
+          for p in paragraphs:
+              if current_length + len(p) > 12000:
+                  chunks.append("\n\n".join(current_chunk))
+                  current_chunk = [p]
+                  current_length = len(p)
+              else:
+                  current_chunk.append(p)
+                  current_length += len(p) + 2
+          if current_chunk:
+              chunks.append("\n\n".join(current_chunk))
 
-          max_retries = 3
-          translated_text = ""
+          print(f"Документ разбит на {len(chunks)} крупных разделов.")
+          translated_chunks = []
 
-          for attempt in range(max_retries):
-              try:
-                  response = client.models.generate_content(
-                      model='gemini-3.8-flash',
-                      contents=[prompt, full_text]
-                  )
-                  translated_text = response.text.strip()
-                  if translated_text:
-                      break
-              except Exception as e:
-                  print(f"Попытка {attempt + 1} не удалась из-за перегрузки сервера. Ожидание...")
-                  time.sleep(5)
+          for idx, chunk in enumerate(chunks):
+              print(f"Перевод раздела {idx + 1}/{len(chunks)}...")
+              translated_block = translate_text_via_gemini(chunk)
+              translated_chunks.append(translated_block)
+              # Безопасная пауза между запросами к бесплатному API
+              time.sleep(5.0)
 
-          if not translated_text:
-              print("Критическая ошибка: не удалось получить ответ от API.")
-              exit(1)
-
-          # Очистка на случай, если модель проигнорировала инструкцию и обернула вывод в ```markdown ... ```
-          if translated_text.startswith("```markdown"):
-              translated_text = translated_text[11:]
-          if translated_text.endswith("```"):
-              translated_text = translated_text[:-3]
-          translated_text = translated_text.strip()
-
-          # Записываем переведенный файл
+          # Склеиваем и сохраняем файл
+          final_markdown = "\n\n".join(translated_chunks)
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
-              f.write(translated_text)
+              f.write(final_markdown)
 
-          print("Файл успешно переведен целиком за один проход!")
+          print("Перевод всего документа успешно завершен!")
           EOF
           python translate_md.py
 
@@ -114,4 +136,4 @@ jobs:
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: instant single-request AI translate and docx convert" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: safe chunked AI translate via Gemini 3.8 and docx convert" && git push)
