@@ -6,39 +6,60 @@ on:
       - main
     paths:
       - 'TD-H9_manual_ru.md'
-  workflow_dispatch:
+  workflow_dispatch: # Позволяет запускать перевод вручную из вкладки Actions
 
 jobs:
   translate_and_convert:
     runs-on: ubuntu-latest
     steps:
-      # 1. Скачиваем репозиторий
+      # 1. Скачиваем код репозитория
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем системные пакеты (Pandoc)
+      # 2. Устанавливаем Pandoc для конвертации документов
       - name: Install Pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и переводчик
-      - name: Set up Python
+      # 3. Настраиваем Python и устанавливаем Argos Translate
+      - name: Set up Python and Install Argos
         run: |
-          pip install deep-translator
+          pip install argostranslate
+          
+          # Скрипт инициализации и скачивания языковой модели RU -> EN
+          python -c "
+          import argostranslate.package
+          import argostranslate.translate
 
-      # 4. Умный перевод через Python (сохраняет таблицы, ссылки и блоки кода)
-      - name: Safe Translate Markdown via Python
+          print('Обновление индекса пакетов Argos...')
+          argostranslate.package.update_package_index()
+          
+          available_packages = argostranslate.package.get_available_packages()
+          package_to_install = next(
+              filter(
+                  lambda x: x.from_code == 'ru' and x.to_code == 'en', available_packages
+              )
+          )
+          
+          print(f'Скачивание и установка модели: {package_to_install}')
+          argostranslate.package.install_from_path(package_to_install.download())
+          print('Модель успешно установлена!')
+          "
+
+      # 4. Безопасный перевод Markdown через Argos Translate (без поломки структуры)
+      - name: Safe Translate Markdown via Argos
         run: |
           cat << 'EOF' > translate_md.py
           import re
-          from deep_translator import GoogleTranslator
+          from argostranslate import translate
 
           def translate_text(text):
               if not text.strip():
                   return text
               try:
-                  return GoogleTranslator(source='ru', target='en').translate(text)
+                  # Локальный перевод без сетевых запросов и ошибок HTTPError
+                  return translate.translate(text, "ru", "en")
               except Exception as e:
                   print(f"Ошибка перевода строки: {e}")
                   return text
@@ -50,6 +71,7 @@ jobs:
           in_code_block = False
 
           for line in lines:
+              # 1. Полностью пропускаем блоки кода ```
               if line.strip().startswith("```"):
                   in_code_block = not in_code_block
                   translated_lines.append(line)
@@ -59,10 +81,17 @@ jobs:
                   translated_lines.append(line)
                   continue
 
+              # 2. Не переводим пустые строки
+              if not line.strip():
+                  translated_lines.append(line)
+                  continue
+
+              # 3. Перевод таблиц (парсим ячейки, не трогая разделители '|')
               if line.strip().startswith("|") or line.strip().startswith("---"):
                   parts = line.split("|")
                   new_parts = []
                   for part in parts:
+                      # Игнорируем технические разделители синтаксиса таблиц (например, :---:)
                       if part.strip() and not set(part.strip()).issubset({'-', ':', ' '}):
                           new_parts.append(f" {translate_text(part.strip())} ")
                       else:
@@ -70,13 +99,16 @@ jobs:
                   translated_lines.append("|".join(new_parts))
                   continue
 
+              # 4. Защита Markdown ссылок [текст](url) от искажения
               links = re.findall(r'(\[[^\]]+\]\([^)]+\))', line)
               if links:
+                  # Временные плейсхолдеры, чтобы Argos не ломал URL-адреса
                   for i, link in enumerate(links):
                       line = line.replace(link, f"__LINK_PLACEHOLDER_{i}__")
                   
                   line = translate_text(line)
                   
+                  # Возвращаем ссылки назад, переводя только текст внутри квадратных скобок
                   for i, link in enumerate(links):
                       text_match = re.search(r'\[([^\]]+)\]', link)
                       url_match = re.search(r'\(([^)]+)\)', link)
@@ -86,34 +118,34 @@ jobs:
                           line = line.replace(f"__LINK_PLACEHOLDER_{i}__", full_link)
                   translated_lines.append(line + "\n")
               else:
+                  # Обычный текст
                   translated_lines.append(translate_text(line) + "\n")
 
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
               f.writelines(translated_lines)
+          print("Локальный перевод через Argos завершен успешно!")
           EOF
           python translate_md.py
 
-      # 5. Конвертируем оба Markdown-файла в формат .docx
+      # 5. Конвертируем оба файла в формат .docx
       - name: Convert Markdown to DOCX via Pandoc
         run: |
-          # Конвертируем русский оригинал
           pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
-          
-          # Проверяем, создался ли английский перевод, и конвертируем его
           if [ -f "TD-H9_manual_ru.en.md" ]; then
             pandoc TD-H9_manual_ru.en.md -o TD-H9_manual_ru.en.docx
           else
             echo "Английский MD-файл не найден, конвертация отменена"
           fi
 
-      # 6. Фиксируем изменения в репозитории
+      # 6. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
+          # Проверяем наличие файлов перед добавлением, чтобы избежать ошибок Git
           [ -f "TD-H9_manual_ru.en.md" ] && git add TD-H9_manual_ru.en.md
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate and convert to docx" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-translate via argos and convert to docx" && git push)
