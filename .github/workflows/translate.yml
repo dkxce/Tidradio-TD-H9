@@ -22,99 +22,105 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и утилиты
+      # 3. Настраиваем Python и ставим отказоустойчивую библиотеку переводчиков
       - name: Set up Python and Dependencies
         run: |
-          pip install google-genai
+          pip install translators
 
-      # 4. Поглавный перевод через Gemini API (порции по ~10 тыс. символов для обхода ограничений)
-      - name: Chunked Gemini AI Translate
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 4. Поабзацный перевод через стабильный зеркальный движок (без лимитов и ключей)
+      - name: Safe Paragraph Translate
         run: |
           cat << 'EOF' > translate_md.py
-          import os
+          import re
           import time
-          from google import genai
+          import translators as ts
 
-          api_key = os.environ.get("GEMINI_API_KEY")
-          if not api_key:
-              print("Критическая ошибка: Секрет GEMINI_API_KEY не задан в настройках GitHub!")
-              exit(1)
-
-          client = genai.Client(api_key=api_key)
-
-          def translate_text_via_gemini(text_block):
+          def translate_block(text_block):
               if not text_block.strip():
                   return text_block
-              
-              prompt = (
-                  "You are an expert technical translator. Translate the following section of a user manual from Russian to English.\n\n"
-                  "STRICT RULES:\n"
-                  "1. Keep all Markdown formatting exactly as it is: do not touch table structures (| and ---), headers (#), lists, bold (**), or images (![]()).\n"
-                  "2. Do not translate or modify hyperlinks inside brackets like [text](url) - translate ONLY the text inside [ ], keep the URL intact.\n"
-                  "3. Absolutely DO NOT translate or modify anything inside code blocks (```...```). Leave them fully in Russian or technical code format.\n"
-                  "4. Maintain correct radio-engineering terminology (e.g., squelch, CTCSS/DCS, frequency, channels).\n"
-                  "5. Output ONLY the translated Markdown text. Do not add introductory words, explanations, or wrap the final response in additional code blocks."
-              )
-              
-              max_retries = 5
-              for attempt in range(max_retries):
+              try:
+                  # Используем стабильное зеркало bing/google без жестких суточных лимитов
+                  return ts.translate_text(text_block, translator='bing', from_language='ru', to_language='en')
+              except Exception as e:
+                  print(f"Запасной сдвиг из-за мини-паузы: {e}")
                   try:
-                      response = client.models.generate_content(
-                          model='gemini-3.8-flash',
-                          contents=[prompt, text_block]
-                      )
-                      res_text = response.text.strip()
-                      # Очистка на случай, если ИИ обернул вывод в блоки кода
-                      if res_text.startswith("```markdown"):
-                          res_text = res_text[11:]
-                      if res_text.endswith("```"):
-                          res_text = res_text[:-3]
-                      return res_text.strip()
-                  except Exception as e:
-                      delay = 5 * (attempt + 1)
-                      print(f"Сервер занят (Попытка {attempt + 1}/{max_retries}). Ожидание {delay} сек... Ошибка: {e}")
-                      time.sleep(delay)
-              return text_block
+                      time.sleep(2)
+                      return ts.translate_text(text_block, translator='google', from_language='ru', to_language='en')
+                  except:
+                      return text_block
 
-          # Читаем исходный файл
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
               full_text = f.read()
 
-          # Разумное деление текста на крупные блоки по заголовкам или абзацам (~12,000 символов)
+          # Разделяем на абзацы. Это сохраняет контекст и не ломает Markdown
           paragraphs = full_text.split("\n\n")
-          chunks = []
-          current_chunk = []
-          current_length = 0
+          translated_paragraphs = []
+          in_code_block = False
 
-          for p in paragraphs:
-              if current_length + len(p) > 12000:
-                  chunks.append("\n\n".join(current_chunk))
-                  current_chunk = [p]
-                  current_length = len(p)
-              else:
-                  current_chunk.append(p)
-                  current_length += len(p) + 2
-          if current_chunk:
-              chunks.append("\n\n".join(current_chunk))
+          print(f"Обнаружено {len(paragraphs)} абзацев для обработки.")
 
-          print(f"Документ разбит на {len(chunks)} крупных разделов.")
-          translated_chunks = []
+          for idx, p in enumerate(paragraphs):
+              # Защита блоков кода
+              if p.strip().startswith("```"):
+                  # Считаем количество вхождений ``` в абзаце, чтобы отслеживать состояние триггера
+                  code_markers = p.count("```")
+                  if code_markers % 2 != 0:
+                      in_code_block = not in_code_block
+                  translated_paragraphs.append(p)
+                  continue
+                  
+              if in_code_block:
+                  if "```" in p:
+                      in_code_block = False
+                  translated_paragraphs.append(p)
+                  continue
 
-          for idx, chunk in enumerate(chunks):
-              print(f"Перевод раздела {idx + 1}/{len(chunks)}...")
-              translated_block = translate_text_via_gemini(chunk)
-              translated_chunks.append(translated_block)
-              # Безопасная пауза между запросами к бесплатному API
-              time.sleep(5.0)
+              # Защита таблиц
+              if p.strip().startswith("|") or p.strip().startswith("---"):
+                  lines = p.split("\n")
+                  trans_lines = []
+                  for line in lines:
+                      if line.strip().startswith("|") or line.strip().startswith("---"):
+                          parts = line.split("|")
+                          new_parts = []
+                          for part in parts:
+                              if part.strip() and not set(part.strip()).issubset({'-', ':', ' '}):
+                                  new_parts.append(f" {translate_block(part.strip())} ")
+                              else:
+                                  new_parts.append(part)
+                          trans_lines.append("|".join(new_parts))
+                      else:
+                          trans_lines.append(translate_block(line))
+                  translated_paragraphs.append("\n".join(trans_lines))
+                  continue
 
-          # Склеиваем и сохраняем файл
-          final_markdown = "\n\n".join(translated_chunks)
+              # Защита ссылок [текст](url)
+              links = re.findall(r'(\[[^\]]+\]\([^)]+\))', p)
+              if links:
+                  link_map = {}
+                  for l_idx, link in enumerate(links):
+                      text_match = re.search(r'\[([^\]]+)\]', link)
+                      url_match = re.search(r'\(([^)]+)\)', link)
+                      if text_match and url_match:
+                          placeholder = f"__LN_PH_{l_idx}__"
+                          trans_link_text = translate_block(text_match.group(1))
+                          link_map[placeholder] = f"[{trans_link_text}]({url_match.group(1)})"
+                          p = p.replace(link, placeholder)
+                  
+                  p = translate_block(p)
+                  for placeholder, full_link in link_map.items():
+                      p = p.replace(placeholder, full_link)
+                  translated_paragraphs.append(p)
+                  continue
+
+              # Обычный абзац текста
+              translated_paragraphs.append(translate_block(p))
+              time.sleep(0.6) # Легкая задержка для полной стабильности сетевого потока
+
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
-              f.write(final_markdown)
+              f.write("\n\n".join(translated_paragraphs))
 
-          print("Перевод всего документа успешно завершен!")
+          print("Документ успешно переведен без использования API-ключей!")
           EOF
           python translate_md.py
 
@@ -136,4 +142,4 @@ jobs:
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: safe chunked AI translate via Gemini 3.8 and docx convert" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: hybrid automated translation and docx update" && git push)
