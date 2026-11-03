@@ -22,49 +22,56 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      # 3. Настраиваем Python и ставим локальный ИИ-переводчик с исправлениями
-      - name: Set up Python and Local AI
+      # 3. Настраиваем Python и устанавливаем Argos Translate
+      - name: Set up Python and Install Argos
         run: |
-          pip install torch transformers sentencepiece sacremoses
+          pip install argostranslate
+          
+          # Скрипт скачивания языковой модели RU -> EN
+          python -c "
+          import argostranslate.package
+          import argostranslate.translate
 
-      # 4. Сверхбыстрый локальный ИИ-перевод (Защищен от зависаний OpenMP)
-      - name: Local AI Paragraph Translate
+          print('Обновление индекса пакетов Argos...')
+          argostranslate.package.update_package_index()
+          
+          available_packages = argostranslate.package.get_available_packages()
+          package_to_install = next(
+              filter(
+                  lambda x: x.from_code == 'ru' and x.to_code == 'en', available_packages
+              )
+          )
+          
+          print(f'Скачивание и установка модели: {package_to_install}')
+          argostranslate.package.install_from_path(package_to_install.download())
+          print('Модель Argos успешно установлена!')
+          "
+
+      # 4. Безопасный перевод Markdown через Argos Translate (без зависаний и поломки структуры)
+      - name: Safe Translate Markdown via Argos
         env:
-          TOKENIZERS_PARALLELISM: "false" # Отключает зависания многопоточности в контейнере
+          # Жесткое ограничение потоков для предотвращения дедлоков внутри контейнера
+          OMP_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+          OPENBLAS_NUM_THREADS: "1"
+          VECLIB_MAXIMUM_THREADS: "1"
+          NUMEXPR_NUM_THREADS: "1"
         run: |
           cat << 'EOF' > translate_md.py
           import re
           import sys
           import os
-          import torch
-          from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+          from argostranslate import translate
 
-          # Гарантия работы в 1 поток для процессора, чтобы избежать дедлока
-          torch.set_num_threads(1)
-          torch.set_num_interop_threads(1)
-
-          print("Инициализация локальной нейросети перевода...")
-          model_name = "Helsinki-NLP/opus-mt-ru-en"
-          try:
-              tokenizer = AutoTokenizer.from_pretrained(model_name)
-              model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
-          except Exception as e:
-              print(f"Ошибка загрузки модели: {e}")
-              sys.exit(1)
-
-          def translate_batch(text_list):
-              if not text_list:
-                  return []
+          print("Инициализация переводчика Argos...")
+          def translate_text(text):
+              if not text.strip():
+                  return text
               try:
-                  # Пакетный перевод (быстрее и стабильнее в 10 раз)
-                  inputs = tokenizer(text_list, return_tensors="pt", padding=True, truncation=True, max_length=512)
-                  with torch.no_grad():
-                      translated_tokens = model.generate(**inputs)
-                  results = tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)
-                  return [r.strip() for r in results]
+                  return translate.translate(text, "ru", "en")
               except Exception as e:
-                  print(f"Ошибка пакетного перевода: {e}")
-                  return text_list
+                  print(f"Ошибка перевода строки: {e}")
+                  return text
 
           print("Чтение файла документа...")
           with open("TD-H9_manual_ru.md", "r", encoding="utf-8") as f:
@@ -75,7 +82,7 @@ jobs:
           payloads = []
           in_code_block = False
 
-          # Разбор структуры Markdown
+          # Шаг 1: Разбираем сложную структуру разметки Markdown
           for p in paragraphs:
               if p.strip().startswith("```"):
                   code_markers = p.count("```")
@@ -89,6 +96,7 @@ jobs:
                   structure.append(('keep', p))
                   continue
 
+              # Разбор таблиц (переводим ячейки, не трогая разделители '|')
               if p.strip().startswith("|") or p.strip().startswith("---"):
                   lines = p.split("\n")
                   table_meta = []
@@ -109,6 +117,7 @@ jobs:
                   structure.append(('table', table_meta))
                   continue
 
+              # Разбор ссылок [текст](url) (переводим только описание внутри [ ])
               links = re.findall(r'(\[[^\]]+\]\([^)]+\))', p)
               if links:
                   link_meta = []
@@ -128,19 +137,21 @@ jobs:
                   structure.append(('link_line', (p, link_meta, len(payloads) - 1)))
                   continue
 
+              # Обычный абзац текста
               payloads.append(p)
               structure.append(('text', len(payloads) - 1))
 
-          print(f"Отправка {len(payloads)} элементов в локальный ИИ...")
-          translated_parts = []
-          batch_size = 16 # Оптимальный размер пачки для стабильности памяти
+          print(f"Извлечено {len(payloads)} текстовых элементов. Начинаем перевод...")
           
-          for i in range(0, len(payloads), batch_size):
-              batch = payloads[i:i+batch_size]
-              translated_parts.extend(translate_batch(batch))
-              print(f"Прогресс локального перевода: {min(i + batch_size, len(payloads))}/{len(payloads)}...")
+          # Шаг 2: Поочередно переводим изолированный чистый текст
+          translated_parts = []
+          for idx, item in enumerate(payloads):
+              translated_parts.append(translate_text(item))
+              if (idx + 1) % 50 == 0 or (idx + 1) == len(payloads):
+                  print(f"Прогресс перевода Argos: {idx + 1}/{len(payloads)}...")
 
-          # Сборка файла обратно
+          # Шаг 3: Собираем Markdown файл обратно
+          print("Реконструкция структуры Markdown документа...")
           final_paragraphs = []
           for item_type, data in structure:
               if item_type == 'keep':
@@ -160,7 +171,8 @@ jobs:
                               else:
                                   row_parts.append(cell_data)
                           table_lines.append("|".join(row_parts))
-                  final_paragraphs.append("\n".join(table_lines))
+                  table_lines_clean = [l for l in table_lines if l.strip()]
+                  final_paragraphs.append("\n".join(table_lines_clean))
               elif item_type == 'link_line':
                   p_template, link_meta, line_payload_idx = data
                   translated_p = translated_parts[line_payload_idx]
@@ -173,11 +185,11 @@ jobs:
           with open("TD-H9_manual_ru.en.md", "w", encoding="utf-8") as f:
               f.write("\n\n".join(final_paragraphs))
 
-          print("Сборка документа завершена!")
+          print("Перевод и сборка успешно завершены!")
           EOF
           python translate_md.py
 
-      # 5. Конвертируем оба файла в формат .docx
+      # 5. Конвертируем оба файла в формат .docx via Pandoc
       - name: Convert Markdown to DOCX via Pandoc
         run: |
           pandoc TD-H9_manual_ru.md -o TD-H9_manual_ru.docx
@@ -195,4 +207,4 @@ jobs:
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: crashproof batch local translate" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: crashproof local argos translate" && git push)
