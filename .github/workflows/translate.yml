@@ -27,10 +27,10 @@ jobs:
         run: |
           pip install google-genai
 
-      # 4. Профессиональный перевод через Gemini API (сохраняет разметку, обходит блокировки IP)
+      # 4. Профессиональный перевод через актуальный Gemini API (сохраняет разметку)
       - name: Translate Markdown via Gemini API
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: \${{ secrets.GEMINI_API_KEY }}
         run: |
           cat << 'EOF' > translate_md.py
           import os
@@ -60,9 +60,9 @@ jobs:
               )
               
               try:
-                  # Использование быстрой и точной модели gemini-2.5-flash
+                  # Изменено на актуальную и поддерживаемую модель gemini-3.8-flash
                   response = client.models.generate_content(
-                      model='gemini-2.5-flash',
+                      model='gemini-3.8-flash',
                       contents=[prompt, text_chunk]
                   )
                   return response.text.strip()
@@ -124,7 +124,7 @@ jobs:
               translatable_parts.append(line.rstrip('\n'))
               structure.append(('text', len(translatable_parts) - 1))
 
-          # Деление на крупные порции (Gemini легко переваривает до 10000+ символов, берем по 6000)
+          # Деление на крупные порции по 6000 символов
           delimiter = " [br_ph] "
           chunks = []
           current_chunk = []
@@ -163,7 +163,7 @@ jobs:
                       time.sleep(2.0)
 
               translated_parts.extend(chunk_translated)
-              time.sleep(2.0) # Задержка во избежание RPM лимитов бесплатного тарифа
+              time.sleep(2.0)
 
           # Реконструкция документа
           final_lines = []
@@ -219,4 +219,4 @@ jobs:
           [ -f "TD-H9_manual_ru.docx" ] && git add TD-H9_manual_ru.docx
           [ -f "TD-H9_manual_ru.en.docx" ] && git add TD-H9_manual_ru.en.docx
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: perfect AI translate via Gemini and docx convert" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: perfect AI translate via Gemini 3.8 and docx convert" && git push)
