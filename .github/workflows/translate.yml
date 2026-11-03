@@ -65,9 +65,9 @@ jobs:
           # МАССИВ ФАЙЛОВ ДЛЯ ОБРАБОТКИ
           # ===========================
           files_to_translate = [
-              "TD-H9_manual.ru.md"
-              "Docs/APRS_Digipeater_ru.md"
-              "Docs/VSWR-antennas.md"
+              "TD-H9_manual.ru.md",
+              "Docs/APRS_Digipeater_ru.md",
+              "Docs/VSWR-antennas.md",
               "Docs/emission-types-radionerds-ru.md"
           ]
 
@@ -99,7 +99,7 @@ jobs:
               # Вычисляем имя выходного файла
               if "_ru.md" in file_name:
                   out_name = file_name.replace("_ru.md", ".en.md")
-              elif ".ru.md" in file_name:
+              elif "-ru.md" in file_name:
                   out_name = file_name.replace("-ru.md", ".en.md")
               elif ".ru.md" in file_name:
                   out_name = file_name.replace(".ru.md", ".en.md")
@@ -163,14 +163,20 @@ jobs:
           EOF
           python translate_html_tree.py
 
-      # 6. Динамическая конвертация всех Markdown-файлов в DOCX (с рекурсивным поиском по путям)
+      # 6. Динамическая конвертация всех Markdown-файлов в DOCX (с поиском во всех подпапках)
       - name: Convert Markdown to DOCX via Pandoc
         run: |
-          # find находит файлы в любых подпапках и запускает pandoc прямо внутри их родных директорий
-          find . -type f -name "*.ru.md" | while read -r f; do
+          # Конвертируем все русские мануалы
+          find . -type f -name "*_ru.md" -o -name "*.ru.md" -o -name "*-ru.md" | while read -r f; do
               pandoc "$f" -o "${f%.md}.docx"
           done
           
+          # Конвертируем также одиночный файл без суффикса языка
+          if [ -f "Docs/VSWR-antennas.md" ]; then
+              pandoc Docs/VSWR-antennas.md -o Docs/VSWR-antennas.docx
+          fi
+          
+          # Конвертируем все созданные переводы .en.md в их родных папках
           find . -type f -name "*.en.md" | while read -r f; do
               pandoc "$f" -o "${f%.md}.docx"
           done
@@ -178,10 +184,11 @@ jobs:
       # 7. Фиксируем изменения и отправляем файлы обратно в репозиторий
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@://github.com"
+          # Исправлен почтовый адрес бота для прохождения валидации со стороны Git
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Находим и индексируем новые файлы по всему дереву репозитория
-          git add "**.en.md" "**.docx" 2>/dev/null || true
+          # Находим и индексируем новые файлы по всему дереву репозитория рекурсивно
+          git add "**.en.md" "**.docx" 2>/dev/null || True
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: autotranslate" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: autotranslate array and preserve paths" && git push)
