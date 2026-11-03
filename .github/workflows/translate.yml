@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'TD-H9_manual_ru.md'
+      - 'TD-H9_manual.ru.md'
   workflow_dispatch:
 
 jobs:
@@ -41,10 +41,9 @@ jobs:
           print('Модель Argos успешно установлена!')
           "
 
-      # 5. Перевод массива файлов через HTML-дерево (BeautifulSoup)
+      # 5. Перевод массива файлов через HTML-дерево с сохранением путей директорий
       - name: HTML Tree Translate and Markdown Reconstruction
         env:
-          # Жесткое ограничение потоков CTranslate2 во избежание зависания контейнера
           OMP_NUM_THREADS: "1"
           MKL_NUM_THREADS: "1"
           OPENBLAS_NUM_THREADS: "1"
@@ -59,16 +58,14 @@ jobs:
           from transliterate import slugify
           import argostranslate.translate
 
-          # =========================================================================
+          # ===========================
           # МАССИВ ФАЙЛОВ ДЛЯ ОБРАБОТКИ
-          # Сюда можно дописывать любые новые .md файлы для автоматического перевода
-          # =========================================================================
+          # ===========================
           files_to_translate = [
-              "TD-H9_manual_ru.md"
+              "TD-H9_manual.ru.md"
           ]
 
           def translate_text(text):
-              """Безопасный локальный перевод строки через Argos"""
               clean_text = text.strip()
               if not clean_text or clean_text.isdigit() or len(clean_text) < 2:
                   return text
@@ -78,38 +75,40 @@ jobs:
                   return text
 
           def make_slug(text):
-              """Создает безопасный латинский ID (slug) для заголовков"""
               slug = slugify(text.lower())
               if not slug:
                   slug = text.lower().replace(" ", "-")
               slug = re.sub(r'[^a-z0-9-_]', '', slug)
               return slug
 
-          # Основной цикл обработки массива файлов
           for input_path in files_to_translate:
               if not os.path.exists(input_path):
                   print(f"Предупреждение: Файл {input_path} не найден, пропускаем.")
                   continue
 
-              # Генерация имени выходного файла (заменяет _ru.md на _en.md или добавляет .en.md)
-              if "_ru.md" in input_path:
-                  output_path = input_path.replace("_ru.md", ".en.md")
-              else:
-                  output_path = input_path.replace(".md", ".en.md")
+              # Разделяем путь на директорию и имя файла
+              file_dir = os.path.dirname(input_path)
+              file_name = os.path.basename(input_path)
 
-              print(f"\n Начинаем обработку файла: {input_path} -> {output_path}")
-              
-              # Карта для сопоставления старых русских якорей и новых латинских slug-якорей
+              # Вычисляем имя выходного файла
+              if "_ru.md" in file_name:
+                  out_name = file_name.replace("_ru.md", ".en.md")
+              else:
+                  out_name = file_name.replace(".md", ".en.md")
+
+              # Собираем полный выходной путь, сохраняя исходную папку
+              output_path = os.path.join(file_dir, out_name) if file_dir else out_name
+
+              print(f"\n Обработка: {input_path} -> {output_path}")
               anchor_mapping = {}
 
               with open(input_path, "r", encoding="utf-8") as f:
                   md_content = f.read()
 
-              # Конвертация в HTML дерево с поддержкой таблиц и блоков кода
               html_content = markdown.markdown(md_content, extensions=['tables', 'fenced_code'])
               soup = BeautifulSoup(html_content, "html.parser")
 
-              print(f"[{input_path}] Шаг 1: Разбор заголовков и создание карты якорей...")
+              # Шаг 1: Якоря
               for heading in soup.find_all(re.compile(r'^h[1-6]$')):
                   orig_text = heading.get_text()
                   orig_slug = orig_text.lower().replace(" ", "-")
@@ -126,11 +125,10 @@ jobs:
                   anchor_tag = soup.new_tag("a", attrs={"name": new_slug})
                   heading.append(anchor_tag)
 
-              print(f"[{input_path}] Шаг 2: Перевод контента, таблиц и обновление внутренних ссылок...")
+              # Шаг 2: Контент
               for tag in soup.find_all(True):
                   if tag.name in ['code', 'pre']:
-                      continue  # Изолируем код
-                  
+                      continue
                   if tag.name == 'a' and tag.has_attr('href'):
                       href = tag['href'].lower()
                       if href.startswith('#') and href in anchor_mapping:
@@ -141,39 +139,30 @@ jobs:
                           if tag.name not in ['code', 'pre'] and child.parent.name not in ['code', 'pre']:
                               child.replace_with(translate_text(child))
 
-              print(f"[{input_path}] Шаг 3: Конвертация HTML обратно в Markdown...")
+              # Шаг 3: Сборка
               translated_html = str(soup)
-              translated_md = mdify(
-                  translated_html,
-                  heading_style="ATX",
-                  strip=['script', 'style']
-              )
+              translated_md = mdify(translated_html, heading_style="ATX", strip=['script', 'style'])
               translated_md = re.sub(r'\n{3,}', '\n\n', translated_md)
 
               with open(output_path, "w", encoding="utf-8") as f:
                   f.write(translated_md)
 
-              print(f"Успешно завершен перевод файла: {output_path}")
+              print(f"Успешно сохранен в ту же папку: {output_path}")
 
           print("\nВсе файлы из массива успешно обработаны!")
           EOF
           python translate_html_tree.py
 
-      # 6. Динамическая конвертация всех Markdown-файлов в DOCX через Pandoc
+      # 6. Динамическая конвертация всех Markdown-файлов в DOCX (с рекурсивным поиском по путям)
       - name: Convert Markdown to DOCX via Pandoc
         run: |
-          # Конвертируем все русские файлы разметки, которые есть в репозитории
-          for f in *manual_ru.md; do
-            if [ -f "$f" ]; then
+          # find находит файлы в любых подпапках и запускает pandoc прямо внутри их родных директорий
+          find . -type f -name "*manual_ru.md" | while read -r f; do
               pandoc "$f" -o "${f%.md}.docx"
-            fi
           done
           
-          # Конвертируем все созданные английские переводы
-          for f in *.en.md; do
-            if [ -f "$f" ]; then
+          find . -type f -name "*.en.md" | while read -r f; do
               pandoc "$f" -o "${f%.md}.docx"
-            fi
           done
 
       # 7. Фиксируем изменения и отправляем файлы обратно в репозиторий
@@ -182,7 +171,7 @@ jobs:
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Индексируем любые измененные или новые .md и .docx файлы
-          git add *.en.md *.docx 2>/dev/null || true
+          # Находим и индексируем новые файлы по всему дереву репозитория
+          git add "**.en.md" "**.docx" 2>/dev/null || true
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: array-based html translate with working anchors" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: tree-based translate preserving directory paths" && git push)
