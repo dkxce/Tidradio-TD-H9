@@ -17,7 +17,7 @@
   + [1.3 Service (briefly)](#13-обслуживание-кратко)
 * [2. Battery battery](#2-аккумуляторная-батарея)
   + [Charging.](#21-зарядка)
-  + [Charger and precautions](#2223-зарядное-устройство-и-меры-предосторожности)
+  + [Charger and precautionary measures](#2223-зарядное-устройство-и-меры-предосторожности)
   + [How to charge](#24-как-заряжать)
   + [2.5 LED RAM indicator](#25-светодиодный-индикатор-зу)
   + [Battery storage](#26-хранение-аккумулятора)
@@ -71,7 +71,7 @@
   + [7.46 SMS](#746-sms)
   + [7.47 Spectrum](#747-spectrum)
   + [7.48 Morse](#748-morse)
-* [Annex A. Failure detection and repair](#приложение-a-поиск-и-устранение-неисправностей)
+* [Annex A. Fault detection and repair](#приложение-a-поиск-и-устранение-неисправностей)
 * [Annex B: Technical specifications](#приложение-b-технические-характеристики)
 * [Annex C: Table of DCS codes](#приложение-c-таблица-dcs-кодов)
 * [Annex D. Table of CTCSS tones](#приложение-d-таблица-ctcss-тонов)
@@ -92,11 +92,11 @@ Your portable radio station contains a low-power transmitter. When you press tan
 
 **FCC Warning (Part 15.21)**The manufacturer is not responsible for any changes or modifications not expressly approved by the party responsible for conformity. Such changes may nullify the user's right to operate the equipment.
 
-**Compliance with the FCC (Part 15)**This equipment has been tested and found to comply with the Class B digital device restrictions under Part 15 of the FCC Regulations. These restrictions are intended to provide reasonable protection against harmful interference in living quarters. The equipment generates and can emit radio frequency energy. There is no guarantee that interference will not occur in a particular installation. Check interference is made by turning off and on the device (see the list of measures: change the orientation / location of the antenna, increase the distance between the devices, connect the device to another outlet, contact the seller or specialist).
+**Compliance with FCC requirements (Part 15)**This equipment has been tested and found to comply with the Class B digital device restrictions under Part 15 of the FCC Regulations. These restrictions are intended to provide reasonable protection against harmful interference in living quarters. The equipment generates and can emit radio frequency energy. There is no guarantee that interference will not occur in a particular installation. Check interference is made by turning off and on the device (see the list of measures: change the orientation / location of the antenna, increase the distance between the devices, connect the device to another outlet, contact the seller or specialist).
 
-**Warning!**Modification of the device for receiving signals of cellular radio phones is prohibited by the FCC rules and federal law.
+**WARNING!**Modification of the device for receiving signals of cellular radio phones is prohibited by the rules of the FCC and federal law.
 
-**EU compliance.**The product complies with the requirements of Directive 2014/53/EU. NOTE: European users must have a valid amateur license to transmit at frequencies and power levels. Non-compliance may be illegal and may result in prosecution.
+**EU compliance.**The product meets the requirements of Directive 2014/53/EU. NOTE: European users must have a valid amateur license to transmit at frequencies and power levels. Non-compliance may be illegal and may result in prosecution.
 
 **Compliance with RF exposure standards.**The device conforms to: FCC 47 CFR §§ 1.1307, 1.1310 and 2.1093; ANSI/IEEE C95.1:2005; Canada RSS102 Issue 5 (March 2015); IEEE C95.1:2005 Edition.
 
@@ -157,13 +157,13 @@ Your portable radio station contains a low-power transmitter. When you press tan
 
 The lithium-ion battery is not charged from the factory – charge it before use. To reach full capacity, the first 2-3 cycles of discharge / charge may not give full capacity.
 
-### Charger and precautions
+### Charger and precautionary measures
 
 Only use the brand name. Do not close the contacts of the battery, do not throw it into the fire, do not remove the case. Charge at a temperature of 5–40 °C. Turn off the radio before charging. Do not charge a fully charged battery.
 
 ### How to charge
 
-1. Connect the adapter to the socket, then to the DC connector on the back side of the ZU (the indicator flashes orange).
+1. Connect the adapter to the socket, then to the DC connector on the back of the ROM (the indicator flashes orange).
 2. Install the battery or walkie-talkie in the ZU (the indicator is red - charging is underway).
 3. Full charging is 2-5 hours; when the green lights up, the charging is completed. Remove the device.
 
@@ -186,16 +186,16 @@ When charging the radio**switched on**The green indicator will not light up - th
 1. Turn off the radio.
 2. Connect the USB-C cable to the battery connector, the second end to the network ROM.
 3. Full charge of the empty battery is 4 hours; the battery indicator on the screen shows the process.
-4. It is recommended to charge when the radio is turned off. Remove the radio from charging within 6 hours after charging; do not store it connected to the RAM.
+4. It is recommended to charge when the radio is turned off. Remove the radio from charging within 6 hours after charging; do not store connected to the RAM.
 
 ---
 
 ## Installation of accessories
 
-* **Antenna:**Clockwise, roll against the clockwise (behind the base).
+* **Antenna:**Clockwise, roll against the clockwise (for the base).
 * **Belt clamping:**two screws on the back side above the battery - unscrew, clamp, twist back.
 * **Battery:**The walkie-talkie is off; combine the guides, move up until you click. Removal - the lock button at the bottom of the battery.
-* **Headset:**open the rubber plug and insert the plug into the MIC/SP double connector.
+* **Headset:**Open the rubber plug and insert the plug into the MIC/SP double connector.
 
 ---
 
@@ -217,10 +217,10 @@ When charging the radio**switched on**The green indicator will not light up - th
 | 6. | **Bluetooth key**Long press on/off Bluetooth. |
 | 7. | **Menou**A short tap to enter the menu. |
 | 8. | **A/B**Switching the A/B bands. |
-| 9. | **Speaker.** |
+| 9. | **Dynamic.** |
 | 10. | **Microphone.** |
 | 11. | **DTMF/keyboard locking**Long press on / off the keyboard lock. |
-| 12. | **PTT**- Tangenta: Hold to talk; let go - reception. |
+| 12. | **PTT**- Tangenta: hold to speak; let go - reception. |
 | 13. | **PF1 is a customizable side key 1.**: |
 | - | - Short press: MENU → Radio Setting → item 27 (options: NONE, FM Radio, Lamp, TONE, Alarm, Weather, PTT2, OD PTT). |
 | - | - Long press: MENU → Radio Setting → item 28 (NONE, FM Radio, Lamp, Cancel Sq, TONE, Alarm, Weather). |
@@ -230,7 +230,7 @@ When charging the radio**switched on**The green indicator will not light up - th
 | 15. | **MIC/SP connector**- external headset. |
 | 16. | **USB-C port**- programming. |
 | 17. | **Indicator:**Red is transmission; green is reception. |
-| 18. | **The Weather Orange Key**Entering NOAA weather mode. |
+| 18. | **The Weather Orange Key**Enter NOAA weather mode. |
 | 19. | **USB-C charging connector**battery. |
 
 ### 4.2 LCD display. Badges
@@ -273,11 +273,11 @@ Badges in order of table from the manual:
 | **Menou** | Enter the menu, select an item, confirm the parameter. |
 | **▲** | Pressing: step up the channel/frequency; hold more than 2 seconds: fast moving up; in scan mode: moving the scan up. |
 | **▼** | Pressing: step down the channel/frequency; hold more than 2 seconds: rapid downward movement; in scan mode: moving the scan down. |
-| **VFO/MR** | switch between frequency (VFO) and channel (MR) modes. Frequency storage is possible only in VFO mode. |
+| **VFO/MR** | switching between frequency (VFO) and channel (MR) modes. Frequency storage is possible only in VFO mode. |
 | **BACK** | exit from menus and functions. |
 | **A/B** | switching between the top (A) and bottom (B) display; the selected one becomes active for reception and transmission. Memory storage works from display A. |
-| **Digital keyboard** | input of information/choices; when transferring, the digital keys send the corresponding DTMF codes. |
-| **# (DTMF/blocking)** | Short press: activate the DTMF set; hold more than 2 seconds: lock/unlock the keyboard. |
+| **Digital keyboard** | input of information/choices; when transferring digital keys send the corresponding DTMF codes. |
+| **# (DTMF/blocking)** | Short press: activation of the DTMF set; retention of more than 2 seconds: lock/unlock the keyboard. |
 
 ### Additional key combinations and inclusions
 
@@ -311,7 +311,7 @@ Badges in order of table from the manual:
 | --- | --- |
 | Menu, 1 | Squelch Level - The noise level |
 | Menu, 2. | Power - transmission power |
-| Menu, 3 | Scan Mode - Scan Mode |
+| Menu, 3. | Scan Mode - Scan Mode |
 | Menu, 4 | Freq Step - the step of setting the frequency |
 | Menu, 5. | Backlight - setting up the display backlight |
 | Menu, 6 | Voice prompt - voice confirmation of commands |
@@ -349,9 +349,9 @@ Press and hold![](pdf_images/p021_IM119_45x27.jpg)More than 2 seconds allows you
 
 ## 5. Basic operations
 
-### inclusion
+### Inclusion
 
-Turn the power/volume handle clockwise before clicking. After ~1 sec, a double beep, a message/savers display, then a frequency or channel. When the voice prompts are turned on, a mode will be announced. Turn off - counterclockwise to click.
+Turn the power/volume handle clockwise before clicking. After ~1 sec, a double beep, a message/savers display, then a frequency or channel. When the voice prompts are turned on, a mode will be announced. Turn off - counterclockwise before the click.
 
 ### 5.2 Loudness
 
@@ -379,7 +379,7 @@ Example: 432,56250 MHz input on display A:
 
 ### Channel mode (MR)
 
-Depends on the programmed channels. Navigation - keys / or encoder. In MR mode, the channel number CH-XXX is displayed.
+It depends on the programmed channels. Navigation - keys / or encoder. In MR mode, the channel number CH-XXX is displayed.
 
 ---
 
@@ -388,7 +388,7 @@ Depends on the programmed channels. Navigation - keys / or encoder. In MR mode, 
 ### Frequency scanning
 
 1. In frequency mode, hold the key.**[3 SCAN]**more than 2 seconds - the scan will begin with a given step.
-2. Stop-key**[V/M]**.
+2. Stop - key**[V/M]**.
 3. Settings: MENU → Scan → No. 1.
 
 ### Scanning of channels
@@ -403,13 +403,13 @@ Standby: MENU → Scan → “SEEK DCS” – the choice of CTCSS or DCS scannin
 
 ### 6.4 Manual channel programming
 
-199 memory channels, each storing: frequency of reception, group signal (tones), channel width, ANI/PTT-ID, six-character channel name. Conservation: MENU → Program Channel → item 12 (Memory CHL).
+199 memory channels, each stores: frequency of reception, group signal (tones), channel width, ANI/PTT-ID, six-character channel name. Conservation: MENU → Program Channel → item 12 (Memory CHL).
 
 **Modes:**VFO is frequency; MR is channel. To save, switch to VFO with VFO/MR keys.
 
 **Example 1. Channel 31 with CTCSS tone 123.0 Hz (RX 432.55000 MHz):**1. Press [VFO/MR] - VFO mode.
 2. [Menu] → Program Channel → [1] [3] [Menu] – delete previous channel data (e.g. 31) → OK.
-3. [Back] → [2] [Menu] → ALTER → CTCSS → 123.0 [Menu] [Back] — select the TX tone.
+3. [Back] → [2] [Menu] → ALTER → CTCSS → 123.0 [Menu] [Back] – choose TX tone.
 4. Enter the RX frequency (43255000).
 5. [Menu] → Program Channel → [1] [2] – Enter channel number (31) → [Back] – RX added.
 6. Press [VFO/MR] - Return to MR mode.
@@ -424,14 +424,14 @@ Assign the Alarm function to the side key [PF1] or [PF2] in advance, then press 
 
 ### 6.6 FM radio
 
-> When you turn on the listening mode FM-radio bluetooth module is turned off.
+> When you turn on the listening mode of FM radio bluetooth module is turned off.
 
-Assign the FM Radio function to [PF1]/[PF2] in advance. The range is 87-108 MHz.
+Assign FM Radio to [PF1]/[PF2] in advance. The range is 87-108 MHz.
 1. Press [PF1]/[PF2] to turn on the radio (or menu, then 8).
 2. The choice of frequency - keys . / . or input.
 3. Pressing again is the exit.
 
-Note: when the signal disappears, the radio automatically returns to FM mode; when the call is switched to reception mode (configured through the menu - FM Interrupt).
+Note: when the signal disappears, the radio automatically returns to FM mode; when the call is switched to reception mode (configured via the menu - FM Interrupt).
 
 ### 6.7 NOAA weather
 
@@ -456,7 +456,7 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 
 ### 6.10 Audio function (music via radio)
 
-1. Turn on Bluetooth, plug in your phone.
+1. Turn on Bluetooth, plug in the phone.
 2. keyboard**1**- previous track;**3**- next track;**2**Long / short press - pause / playback.
 
 ### 6.11 OD PTT (Odmaster PTT)
@@ -522,22 +522,22 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 | 2 | Step Freq | Frequency step: 0.5/2.5/5.0/6.25/10.0/12.5/25.0/50.0 kHz. The channel mode doesn't change. |
 | 3 | VOX Level | Voice activation level: Off, 1-5. |
 | 4 | VOX Delay | VOX delay: 1.0/2.0/3.0 s. |
-| 5 | TOTT | Transmission restriction timer: off/30/60/90/120/150/180/210 s. |
-| 6 | Roger Beep. | Sound signal when releasing PTT. |
+| 5 | tot | Transmission restriction timer: off/30/60/90/120/150/180/210 s. |
+| 6 | Roger Beep. | Audible signal when releasing PTT. |
 | 7 | Beep. | Keyboard sound. |
 | 8 | Power Save | Energy saving: Off, 1:1 / 1:2 / 1:3 / 1:4 (work: sleep). |
 | 9 | Keypad Lock | Automatic keyboard locking |
 | 10 | Dual Watch | Listen to both channels (TDR) A and B |
 | 11 | Voice | Voice confirmation of commands |
 | 12 | Backlight | Timeout duration of screen illumination |
-| 13 | Brightness | Screen brightness (Recommended setting: 5, with other values when transmitting and the screen is turned on, a squeak is transmitted to the air) |
+| 13 | Brightness | Screen brightness (Recommended setting: 5, with other values when transmitting and the screen on, a squeak is transmitted to the air) |
 | 14 | Pwr On Disp | Welcome screen when enabled (Voltage/Message/Picture) |
 | 15 | display | Display mode radio - Single (single channel), Dual and Classic (dual channel) |
 | 16 | ANI-Edit | DTMF radio identifier |
 | 17 | Disp Type-A | Display information about the programmed channel A (Freq + Number / Name + Number) |
 | 18 | Disp Type-B | Display information about the programmed channel B (Freq + Number / Name + Number) |
 | 19 | DTMF DISE | DTMF signals during transmission: OFF/ON. |
-| 20 | PTT Delay | Delayed transmission when releasing PTT |
+| 20 | PTT Delay | Transfer delay on PTT release |
 | 21 | Language language | English/Chinese (English/Chinese) |
 | 22 | Alarm Mode | On Site (local signal only, flashing flash) / TX Alarm (sound 10 s, pause 2 s, cycle). |
 | 23 | Side Tone (Tail) | Tail suppression: ON/OFF (method specified by CPS). |
@@ -551,7 +551,7 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 | 31 | Top S Press | Short press of the top button: similar to paragraph 27. |
 | 32 | Top L Press | Long press of the top button: similar to paragraph 28. |
 | 33 | Factory R | Reset: VFO (frequency settings only), CHL (channels only), FULL (all). |
-| 34 | Breath Led. | The frequency of LED flashing in standby mode. |
+| 34 | Breath Led. | Frequency of LED flashing in standby mode. |
 | 35 | MIC GAIN | Microphone amplification: 0-9. |
 | 36 | DTMF Speed | DTMF speed (default 110 ms). |
 | 37 | DCD | OFF: DTMF off. ON: Enable DTMF call/group call. |
@@ -604,8 +604,8 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 | --- | --- | --- |
 | 1 | Scan Mode | TO/(CO)/SE (by default CO). |
 | 2 | SEEK DCS | Frequency scanning with DCS/CTCSS/R-DCS. Unavailable in channel mode. |
-| 3 | Hang time. | Retention time when the signal is detected: step 0.5 s, by default 1 s. |
-| 4 | Scan Freq | Quick frequency search with one touch: 1) long press of key 1 - input; 2) е / е - channel selection for saving; 3) on the screen frequency and DCS during transmission; 4) wait for completion; 5) [Menu] - confirm / save, key \* - reshoot. |
+| 3 | Hang time. | Retention time upon signal detection: step 0.5 s, default 1 s. |
+| 4 | Scan Freq | Quick frequency search with one touch: 1) long press of key 1 - input; 2) е/е - channel selection for saving; 3) on the screen frequency and DCS during transmission; 4) wait for completion; 5) [Menu] - confirm / save, key \* - reshoot. |
 | 5 | Freq Ranger | Scanning frequency range |
 | 6 | Spectrum. | Spectroanalyzer |
 
@@ -617,7 +617,7 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 | № | Function | Description |
 | --- | --- | --- |
 | 1 | BT ON/OFF | On/off Bluetooth. |
-| 2 | BT Mode | Receiver (radio - receiver, connects to the phone; name TD-H9 XXXX, do not connect to the suffix BLE) / Emitter (radio - source; mating through paragraph 4). Compatible accessories: Bluetooth PTT, MIC, headset. |
+| 2 | BT Mode | Receiver (radio - receiver, connects to the phone; name TD-H9 XXXX, do not connect to the suffix BLE) / Emitter (radio - source; mating via item 4). Compatible accessories: Bluetooth PTT, MIC, headset. |
 | 3 | BT Name | Name: TD-H9xxx. |
 | 4 | BT Pairing | Pairable (device search: PTT, MIC, headset) / Paired (conjugated list: PTT, MIC, headset). |
 | 5 | OD PTT | OD (Odmaster only) / OD + Analog (simultaneously with analog transmission). |
@@ -635,11 +635,11 @@ A radio station can hold only one bluetooth connection. To interact with a smart
 
 ![](pdf_images/TID-MIC.png)
 
-When working with[**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth)There is a significant delay in order.*1~2. 5*seconds when pressing the tangent on the transmission and about*1~1. 5*Seconds when receiving the signal. When pressing the tangent, the audio bluetooth channel opens first, only after that the radio frequency path for transmission opens and the red indicator lights up. That should be taken into account.
+When working with[**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth)There is a significant delay in order.*1~2. 5*seconds when pressing the tangent on the transmission and about*1~1. 5*seconds at the signal. When pressing the tangent, the audio bluetooth channel opens first, only after that the radio frequency path for transmission opens and the red indicator lights up. That should be taken into account.
 
 ![](pdf_images/TID-PTT.png)
 
-When working with[**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button)slack**TID-MIC**forms*0.2~1*Seconds, so the radio opens faster. When connecting TID-PTT to a smartphone**ODmaster**works with the device![](pdf_images/Bluetooth.png)**TID-PTTxxxxxx-A**(speed)*38400*baud), when pairing through the Bluetooth menu of the android, it is not recommended to mate with this device -**ODMaster**Maybe you can't see him. Instead, there is a device.![](pdf_images/Headset.png) **TID-PTTxxxxxxx-B**.
+When working with[**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button)slack**TID-MIC**form*0.2~1*Seconds, so the radio opens faster. When connecting TID-PTT to a smartphone**ODmaster**works with the device![](pdf_images/Bluetooth.png)**TID-PTTxxxxxx-A**(speed)*38400*baud), when pairing through the Bluetooth menu of the android, it is not recommended to mate with this device -**ODMaster**Maybe you can't see him. Instead, there is a device.![](pdf_images/Headset.png) **TID-PTTxxxxxxx-B**.
 
 ![QL2](pdf_images/QL2.png)
 
@@ -694,7 +694,7 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | --- | --- | --- |
 | 1 | APRS Switch | On/off APRS. |
 | 2 | Beacon Set | Lighthouse setting: |
-| 2. 1st | .. | **Call Sign**Amateur radio call sign (up to 6 characters, capital Latin + digits; итель/итель character selection, confirm - input, back - deletion, # - save) |
+| 2. 1st | .. | **Call Sign**- Amateur radio call sign (up to 6 characters, capital Latin + digits; итель/итель character selection, confirm - input, back - deletion, # - save) |
 | 2. 2. | .. | [**SSID**](http://aprs.ru/index.php/SSID)(0-15, default 11) |
 | 2. 3 | .. | [**SSID Symbol**](https://www.aprs.org/symbols.html) (`/`or`\`according[table](Customer%20Programming%20Software/Disasm/APRS_symbols.md) |
 | 2. 4. | .. | **Custom Information**Commentary on the APRS package, up to 60 ASCII characters |
@@ -703,15 +703,15 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 2. 7 | .. | **MIC Type**(MO: Off Duty / M1: En Route / M2: In Service / M3: Returning / M4: Committed / M5: Special / M6: Priority / M7: Emergency) |
 | 2. 8. | .. | [**Route 1**](Docs/APRS_Digipeater_ru.md): Use the а/а button to select the symbol. Press the confirmation button to select it. If you make a mistake, press the return button to delete. |
 | 2. 9. | .. | [**Route 1 Count**](Docs/APRS_Digipeater_ru.md): (0-9) |
-| 2. 10 | .. | [**Route 2**](Docs/APRS_Digipeater_ru.md): Use the а/а button to select the symbol. Press the confirmation button to select it. If you make a mistake, press the return button to delete. |
+| 2. 10. | .. | [**Route 2**](Docs/APRS_Digipeater_ru.md): Use the а/а button to select the symbol. Press the confirmation button to select it. If you make a mistake, press the return button to delete. |
 | 2. 11. | .. | [**Route 2 Count**](Docs/APRS_Digipeater_ru.md): (0-9) |
 | 2. 12. | .. | **Report Voltage**Send information about the battery (on default) |
 | 2. 13 | .. | **Report Sats**Send satellite information (on default) |
 | 2. 14. | .. | **Report Mileage**Send mileage information (OFF default) |
-| 3 | Beacon Type | Setting up beacon transmission: |
-| 3. 1st | .. | **PTT Linkage**(Beacon at each PTT press/release; OFF default) |
+| 3 | Beacon Type | Beacon transmission setting: |
+| 3. 1st | .. | **PTT Linkage**(Beacon at each PTT press/release; default OFF) |
 | 3. 2. | .. | **Timed Beacon**- send information at a given frequency (on default) |
-| 3. 3 | .. | **Timing.**- the interval in seconds, for example 0090 = every 90 seconds (input digits + [#]). |
+| 3. 3 | .. | **Timing.**an interval in seconds, e.g. 0090 = every 90 seconds (digit input + [#]). |
 | 4 | Relay Set | Settings of APRS-repiter mode: |
 | 4. 1st | .. | **DIGI Forward CH**To which channel to relay packets (A/(B)/AB) |
 | 4. 2. | .. | **DIGI1 Enable**(OFF default) |
@@ -719,9 +719,9 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 4. 4. | .. | **DIGI2 Enable**(OFF default) |
 | 4. 5 | .. | **DIGI2 Name**(default WIDE2), up to 6 ASCII characters: capital letters and numbers |
 | 4. 6 | .. | **Wait Before Forwarding**Delay before retransmission (0-9c). In the presence of several repeaters allows you to divide the transmission time and avoid collisions of beacons in the air |
-| 4. 7 | .. | **Remote Password**Remote Repetitor Control Password via KISS (TNC) (default 123456) |
+| 4. 7 | .. | **Remote Password**Remote repeater control password via KISS (TNC) (default 123456). |
 | 5 | Advanced Set | Advanced reception/transmission settings: |
-| 5. 1st | .. | **APRS RX CH**On which channel to receive APRS (OFF/A/(B)) |
+| 5. 1st | .. | **APRS RX CH**On which channel to take APRS (OFF/A/(B)) |
 | 5. 2. | .. | **APRS TX CH**On which channel to transmit APRS (OFF/A/(B)) |
 | 5. 3 | .. | **PTT Priority**Priority for simultaneous voice/APRS (Talk/APRS) |
 | - | .. | **RX Decode Tone**Audible signal with successful reception and decoding of APRS (on default) |
@@ -737,7 +737,7 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 1 | **APRS Channels** | A/B channels can be assigned to APRS or voice; modes are supported: |
 | . | .. | - reception + transmission to A |
 | . | .. | Receiving A/transmitting B (cross-repeater) |
-| . | .. | - Just take A. |
+| . | .. | - Just A. |
 | . | .. | - simultaneous transmission A and B |
 | . | .. | - reception + transmission to B |
 | . | .. | - reception B / transmission A (cross-repiter) |
@@ -747,10 +747,10 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 3 | **APRS Relay (DIGI)** | Full DIGI relay with customizable names; on/off remotely. |
 | 4 | **MIC-E** | Beacons are compressed and transmitted in MIC-E format - shorter airtime, fewer collisions, higher probability of successful decoding. |
 | 5 | **PTT Delay** | Customizable delay between pressing PTT and starting transmission (useful with a slow noise suppressor of a remote station). |
-| 6 | **APRS Digital Relay** | Two repeater names: by default, WIDE1 and WIDE2 (up to 6 characters, numbers or capital letters). Rule: when receiving a valid beacon containing the repeater name and the transition counter > 1, the radio sends the packet once, reducing the counter by 1. At 0 the packet is not sent. Each transition is a complete cycle of reception → decode → recoding → transfer. The counter limits infinite propagation.[Details...](http://wa8lmf.net/DigiPaths/) |
-| 7 | **Deleted password** | By default.**123456**(6 digits). |
-| 8 | **Fixed station** | In the Fix Coordinates type, given coordinates are used to calculate the distance/pelling. |
-| 9 | **Maps/view tracks** | ... |
+| 6 | **APRS Digital Relay** | Two repeater names: by default WIDE1 and WIDE2 (up to 6 characters, numbers or capital letters). Rule: when receiving a valid beacon containing the repeater name and the transition counter > 1, the radio sends the packet once, reducing the counter by 1. With the counter 0, the packet is not sent. Each transition is a complete cycle of reception → decode → recoding → transfer. The counter limits infinite propagation.[Details...](http://wa8lmf.net/DigiPaths/) |
+| 7 | **Deleted password** | By default.**123456**6 digits. |
+| 8 | **Fixed station** | With the Fix Coordinates type, given coordinates are used to calculate the distance/pelling. |
+| 9 | **Maps/track viewing** | ... |
 | . | Odmaster: | - https://web.odmaster.net/login. |
 | . | APRS.fi. | - https://aprs.fi/ |
 | . | APRS.to. | - https://aprs.to/ |
@@ -779,7 +779,7 @@ Available remote commands:
 
 [APRS relay](Docs/APRS_Digipeater_ru.md)It is a process: reception → decoding → recoding → sending. With each relay, the signal quality remains the best, unlike traditional analog voice relays.
 
-Due to the fact that the lighthouse contains a specified number of relays, endless relaying does not occur.
+Due to the fact that the beacon contains a specified number of retransmissions, endless retransmission does not occur.
 
 In the digipiter mode, the radio station, when receiving an APRS packet, searches for the name of the installed digipiter in its PATH, and if it finds it, then sends this packet further to the air, decrementing the SSID per unit, but only if the SSID is greater than zero.
 
@@ -818,7 +818,7 @@ https://aprs.fi/
 ### 7.45 Similar to APRS radio
 
 **Significant disadvantages of APRS implementation on H9**:
-\* Inability to assign beacon sending by pressing the side key (Send Beacon)
+\* Inability to assign beacon by pressing the side key (Send Beacon)
 Ability to silence the sound on the APRS channel (Mute A/B)
 \*Not able to work with APRSDroid, only ODMaster
 
@@ -838,7 +838,7 @@ The radio station allows you to send and transmit short messages between similar
 Send and receive messages via APRS.
 
 > In RF mode, messaging is only possible between**TD-H9**and TD-H3+. The recipient is indicated by Radio Info (Radio Info -> Radio ID).
-> Radio ID is configured via CPS on your computer (DTMF Code -> DTMF Settings -> Local ID).
+> Radio ID is configured via CPS (DTMF Code -> DTMF Settings -> Local ID).
 >
 > In the APRS mode, messaging is carried out by APRS-packets Message (:). The receiver and sender on the pop-up screen is displayed correctly.
 > On the incoming SMS view screen, the sender is indicated as the recipient.![](pdf_images/SMS_INBOX.jpg)
@@ -861,16 +861,16 @@ The radio station allows you to view the radio frequency spectrum.
 
 | Management | Description |
 | --- | --- |
-| Retention 7 | Enter spectrum analyzer mode |
+| Retention 7 | Entry into spectrum analyzer mode |
 | Menou | Entrance to the text menu of spectrometer settings |
 | BACK/EXIT | Quick exit from spectrum analyzer mode |
-| PF1 | Exclusion of frequency from scanning (Perhaps you need to reset to spectrum mode, or reset peak values)**0**) |
+| PF1 | Remove frequency from scanning (Perhaps you need to reset to spectrum mode, or reset peak values)**0**) |
 | PF2 | Including frequency in the scan |
 | # | Automatic transition of the cursor to the peak of the strongest signal |
 | 2/8 (retention) | Change of the RSSI threshold (Threshold) |
 | / | Frequency navigation (cursor movement) |
 | \* | On/off cursor |
-| PTT | Monitor Mode (MONI) – Instantly opens the noise suppressor to listen to the frequency under the cursor |
+| PTT | Monitor Mode (MONI) – Instant opening of the noise suppressor to listen to the frequency under the cursor |
 | 0-9 | Manual central frequency input |
 
 ![](images/spectrum.png)
@@ -895,7 +895,7 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | 1 | Morse On/Off | Morse regimen |
 | 2 | Key TXX | Manual transmission mode |
 | 3 | Edit TX | Entering the transmission text with sending |
-| 4 | RX Code | Morse code acceptance mode |
+| 4 | RX Code | Morse code reception mode |
 | 5 | TXX Speed | Transmission speed for automatic 5/8/12/18 mode |
 | 6 | RX Threshold | RSSI threshold (minimum signal strength in decibels (dBm)) |
 
@@ -903,7 +903,7 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 
 ---
 
-## Annex A. Failure detection and repair
+## Annex A. Fault detection and repair
 
 | Problem. | Analysis | Decision |
 | --- | --- | --- |
@@ -920,15 +920,15 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | --- | --- |
 | Frequency range (Amateur, RX & TX) | 136–173.99 and 400–519.99 MHz (TX/RX also 174–245, 240–260, 290–350, 350–400, 470–520, 520–600 MHz; RX 50–76, 65–108 (FM radio), 108–136 (AM/FM air), 220–260, 350–390 MHz |
 | Memory channels | 199 |
-| RF power output | up to 10 W (3 levels: high, medium, low) |
-| Working voltage | DC 7.4 V ± 10% |
+| RF power output | up to 10 watts (3 levels: high, medium, low) |
+| Working voltage | DC 7.4 V ±10 per cent |
 | Battery capacity | 2400 mAh (Li-Ion) |
 | Frequency stability | ± 2.5 ppm |
-| Operating temperature | -20 °C to +50 °C |
+| Operating temperature | from -20 °C to +50 °C |
 | Mode of work | simplex |
 | Impedance antenna | 50 ohm |
 | antenna connector | On the SMA-Male radio, on the SMA-Female antenna |
-| Headset jack | K-Plug (Kenwood 2-pin) |
+| Headset connector | K-Plug (Kenwood 2-pin) |
 | Display. | 1.77" color LCD, 3 display modes, 18 menu colors |
 | GPS | Built-in GPS/GNSS |
 | Bluetooth | Built-in (for customization through Odmaster, headsets) |
@@ -940,12 +940,12 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | Power of the adjacent channel | 60 dB @ 12.5 kHz |
 | Transmission current | ≤ 1500 mA |
 | Sensitivity of the receiver | 0.25 μV (12 dB SINAD) |
-| Selectivity on the adjacent channel | ≥ 55 dB @ 12.5 kHz |
+| Selectivity on the neighboring channel | ≥ 55 dB @ 12.5 kHz |
 | Suppression of intermodulation | ≥ 55 dB @ 12.5 kHz |
 | Parasite radiation | ≤ -57 dB @ 12.5 kHz |
 | Sound output | 1 Watt @ 16 Ohm |
 | Reception current. | ≤ 380 mA |
-| Sound distortion | ≤ 5% |
+| Sound distortions | ≤ 5% |
 | Dimensions (without antenna) | 140 x 53 x 32 mm |
 | Weight. | 190 |
 
@@ -1037,7 +1037,7 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | 31 | 171.3 | 32 | 173.8 | 33 | 177.3 | 34 | 179.9 | 35 | 183.5 |
 | 36 | 186.2 | 37 | 189.9 | 38 | 192.8 | 39 | 196.6.6 | 40 | 199.5 |
 | 41 | 203.5 | 42 | 206.5 | 43 | 210.7 | 44 | 218.1 | 45 | 225.7 |
-| 46 | 229.1 | 47 | 233.6 | 48 | 241.8 | 49 | 250.3 | 50 | 254.1 |
+| 46 | 229.1 | 47 | 233.6 | 48 | 241.8 | 49 | 250.3.3 | 50 | 254.1.1 |
 
 ## Annex E. Software
 
