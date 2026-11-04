@@ -28,7 +28,7 @@
 |...|...|...|...|
 |---|---|---|---|
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
-| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) | Binary KISS / AGW(PE) / APRS-IS |
+| **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
 
 #### Real data from TNC Software
 <img src="pdf_images/tnc.jpg" width="400"/>     
