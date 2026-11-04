@@ -179,7 +179,7 @@ Substantive work area:`CPS_START=16`, `CPS_END=7984`, `CPS_LEN=8000`.
 
 ## 4. Common coding formats (used again)
 
-![](images/Dump001.png)
+<img src="images/Dump001.png"/>
 
 ### 4.1 Frequency - packed BCD, 8 digits, little-endian pairs
 

@@ -2,7 +2,7 @@
 
 **Firmware 1.0.33**- Translation of the official user manual ([Ham Version, 71 pages.](Original%20Manuals/H9_Ham_Version_User_Manual.pdf)), modified and supplemented (v5).
 
-![TIDRADIO TD-H9 radio](pdf_images/p001_IM8_633x452.jpg)
+<img src="pdf_images/p001_IM8_633x452.jpg" alt="TIDRADIO TD-H9 radio" />
 
 ## Relevant references to the manual
 
@@ -147,11 +147,11 @@ Your portable radio station contains a low-power transmitter. When you press tan
 
 > BP-9 7.4V DC Li-ion 2400 mAh 17.76 Wh
 
-![](images/TIDRADIO H9 - 008.png)
+<img src="images/TIDRADIO" alt="" />
 
 > Charger: 5V 1A
 
-![](images/TIDRADIO H9 - 015.jpg)
+<img src="images/TIDRADIO" alt="" />
 
 ### Charging.
 
@@ -201,7 +201,7 @@ When charging the radio**switched on**The green indicator will not light up - th
 
 ## 4. Radio station review
 
-![Location of buttons and controls](pdf_images/p016_IM75_2821x1375.jpg)
+<img src="pdf_images/p016_IM75_2821x1375.jpg" alt="Location of buttons and controls" />
 
 ### Buttons and controls
 
@@ -235,28 +235,28 @@ When charging the radio**switched on**The green indicator will not light up - th
 
 ### 4.2 LCD display. Badges
 
-![](pdf_images/p018_IM80_1280x1228.jpg)
+<img src="pdf_images/p018_IM80_1280x1228.jpg" alt="" />
 
 Badges in order of table from the manual:
 | # | Symbol | Description
 |---|---|---|
-|1. |![icon](pdf_images/p018_IM81_30x23.jpg)Signal strength indicator (4 levels). |
-|2. |![icon](pdf_images/p018_IM82_11x19.jpg)| High transmission power /![icon](pdf_images/p018_IM83_4x7.jpg)Low transmission power. |
-|3. |![icon](pdf_images/p018_IM84_15x19.jpg)| Voice/keyboard sound (not shown if both are off). |
-|4. |![icon](pdf_images/p018_IM85_39x18.jpg)Current tone: DCS or![icon](pdf_images/p018_IM86_16x7.jpg)CTCSS. |
-|5. |![icon](pdf_images/p019_IM89_13x14.jpg)Offset "up" (TX above RX) - access to the repeater in VFO mode. |
-|6. |![icon](pdf_images/p019_IM90_20x5.jpg)Offset "down" (TX below RX). |
-|7. |![icon](pdf_images/p019_IM91_48x38.jpg)| Dual watch is enabled. |
-|8. |![icon](pdf_images/p019_IM93_19x19.jpg)Keyboard locked; hold on![icon](pdf_images/p019_IM99_38x19.jpg)to unlock. |
+|1. |<img src="pdf_images/p018_IM81_30x23.jpg" alt="icon" />Signal strength indicator (4 levels). |
+|2. |<img src="pdf_images/p018_IM82_11x19.jpg" alt="icon" />| High transmission power /<img src="pdf_images/p018_IM83_4x7.jpg" alt="icon" />Low transmission power. |
+|3. |<img src="pdf_images/p018_IM84_15x19.jpg" alt="icon" />| Voice/keyboard sound (not shown if both are off). |
+|4. |<img src="pdf_images/p018_IM85_39x18.jpg" alt="icon" />Current tone: DCS or<img src="pdf_images/p018_IM86_16x7.jpg" alt="icon" />CTCSS. |
+|5. |<img src="pdf_images/p019_IM89_13x14.jpg" alt="icon" />Offset "up" (TX above RX) - access to the repeater in VFO mode. |
+|6. |<img src="pdf_images/p019_IM90_20x5.jpg" alt="icon" />Offset "down" (TX below RX). |
+|7. |<img src="pdf_images/p019_IM91_48x38.jpg" alt="icon" />| Dual watch is enabled. |
+|8. |<img src="pdf_images/p019_IM93_19x19.jpg" alt="icon" />Keyboard locked; hold on<img src="pdf_images/p019_IM99_38x19.jpg" alt="icon" />to unlock. |
 |9. |[S] |Energy saving included. |
 |10. |[N] | Channel in narrowband mode. |
 |11. |[W] | Broadband channel. |
-|12. |![icon](pdf_images/p019_IM101_16x10.jpg)Battery level; when discharged![icon](pdf_images/p019_IM102_16x10.jpg)flashing![](pdf_images/p019_IM103_53x84.jpg)(transfer impossible). |
-|13. |![icon](pdf_images/p019_IM104_13x13.jpg)| OD signal. |
-|14. |![icon](pdf_images/p019_IM105_13x13.jpg)| OD sign. |
-|15. |![icon](pdf_images/p019_IM106_7x12.jpg)|Bluetooth on, not connected (white icon) |
-|16. |![icon](pdf_images/p019_IM107_7x12.jpg)|Bluetooth connected (blue icon). |
-|17. |![icon](pdf_images/p019_IM108_235x80.jpg)| Volume indicator. |
+|12. |<img src="pdf_images/p019_IM101_16x10.jpg" alt="icon" />Battery level; when discharged<img src="pdf_images/p019_IM102_16x10.jpg" alt="icon" />flashing<img src="pdf_images/p019_IM103_53x84.jpg" alt="" />(transfer impossible). |
+|13. |<img src="pdf_images/p019_IM104_13x13.jpg" alt="icon" />| OD signal. |
+|14. |<img src="pdf_images/p019_IM105_13x13.jpg" alt="icon" />| OD sign. |
+|15. |<img src="pdf_images/p019_IM106_7x12.jpg" alt="icon" />|Bluetooth on, not connected (white icon) |
+|16. |<img src="pdf_images/p019_IM107_7x12.jpg" alt="icon" />|Bluetooth connected (blue icon). |
+|17. |<img src="pdf_images/p019_IM108_235x80.jpg" alt="icon" />| Volume indicator. |
 
 ### LED indicators
 
@@ -320,7 +320,7 @@ Badges in order of table from the manual:
 | Menu, 9 | Dual Watch (TDR) - Double listening mode |
 | Menu, 0 | Bandwidth - bandwidth |
 
-![](pdf_images/shortcuts001.png)
+<img src="pdf_images/shortcuts001.png" alt="" />
 
 **Headset mode (Bluetooth calls):**
 
@@ -342,10 +342,10 @@ Badges in order of table from the manual:
 
 With these keys, you can enter information or select the settings on the radio.  
 In Transfer Mode (TX), press the digital keys to send the corresponding DTMF code.  
-![](pdf_images/p021_IM118_2412x550.jpg)
+<img src="pdf_images/p021_IM118_2412x550.jpg" alt="" />
 
-Press.![](pdf_images/p021_IM119_45x27.jpg)to activate the tone dial function (DTMF).  
-Press and hold![](pdf_images/p021_IM119_45x27.jpg)More than 2 seconds allows you to lock or unlock the keyboard.
+Press.<img src="pdf_images/p021_IM119_45x27.jpg" alt="" />to activate the tone dial function (DTMF).  
+Press and hold<img src="pdf_images/p021_IM119_45x27.jpg" alt="" />More than 2 seconds allows you to lock or unlock the keyboard.
 
 ## 5. Basic operations
 
@@ -471,24 +471,24 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 
 **Step-by-step illustrations of OD PTT setup and operation (pages from the manual):**
 
-![Step 1](pdf_images/p029_IM141_1495x946.jpg)
-![Step 2](pdf_images/p030_IM144_1495x961.jpg)
-![Step 3](pdf_images/p031_IM147_1495x965.jpg)
-![Step 4](pdf_images/p032_IM150_1495x951.jpg)
-![Step 5](pdf_images/p033_IM153_1495x964.jpg)
-![Step 6](pdf_images/p034_IM156_1495x959.jpg)
-![Step 7](pdf_images/p035_IM159_1495x959.jpg)
+<img src="pdf_images/p029_IM141_1495x946.jpg" alt="Step 1" />
+<img src="pdf_images/p030_IM144_1495x961.jpg" alt="Step 2" />
+<img src="pdf_images/p031_IM147_1495x965.jpg" alt="Step 3" />
+<img src="pdf_images/p032_IM150_1495x951.jpg" alt="Step 4" />
+<img src="pdf_images/p033_IM153_1495x964.jpg" alt="Step 5" />
+<img src="pdf_images/p034_IM156_1495x959.jpg" alt="Step 6" />
+<img src="pdf_images/p035_IM159_1495x959.jpg" alt="Step 7" />
 
 ### 6.12 Bluetooth programming
 
 (Section with step-by-step illustrations; see the original manual - programming walkie-talkie via Bluetooth connection to the software.) Connect the radio over Bluetooth and use programming software.
 
-![Illustration 1](pdf_images/p036_IM162_1011x606.jpg)
-![Illustration 2](pdf_images/p037_IM165_1011x606.jpg)
-![Illustration 3](pdf_images/p038_IM168_1073x710.jpg)
-![Illustration 4](pdf_images/p039_IM171_880x679.jpg)
-![Illustration 5](pdf_images/p040_IM174_1156x239.jpg)
-![Illustration 6](pdf_images/p040_IM175_1035x634.jpg)
+<img src="pdf_images/p036_IM162_1011x606.jpg" alt="Illustration 1" />
+<img src="pdf_images/p037_IM165_1011x606.jpg" alt="Illustration 2" />
+<img src="pdf_images/p038_IM168_1073x710.jpg" alt="Illustration 3" />
+<img src="pdf_images/p039_IM171_880x679.jpg" alt="Illustration 4" />
+<img src="pdf_images/p040_IM174_1156x239.jpg" alt="Illustration 5" />
+<img src="pdf_images/p040_IM175_1035x634.jpg" alt="Illustration 6" />
 
 ---
 
@@ -633,15 +633,15 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 
 A radio station can hold only one bluetooth connection. To interact with a smartphone or PC, you need to select BT Mode: Receiver mode. To connect the headset - BT Mode - Emitter.
 
-![](pdf_images/TID-MIC.png)
+<img src="pdf_images/TID-MIC.png" alt="" />
 
 When working with[**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth)There is a significant delay in order.*1~2. 5*seconds when pressing the tangent on the transmission and about*1~1. 5*seconds at the signal. When pressing the tangent, the audio bluetooth channel opens first, only after that the radio frequency path for transmission opens and the red indicator lights up. That should be taken into account.
 
-![](pdf_images/TID-PTT.png)
+<img src="pdf_images/TID-PTT.png" alt="" />
 
-When working with[**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button)slack**TID-MIC**form*0.2~1*Seconds, so the radio opens faster. When connecting TID-PTT to a smartphone**ODmaster**works with the device![](pdf_images/Bluetooth.png)**TID-PTTxxxxxx-A**(speed)*38400*baud), when pairing through the Bluetooth menu of the android, it is not recommended to mate with this device -**ODMaster**Maybe you can't see him. Instead, there is a device.![](pdf_images/Headset.png) **TID-PTTxxxxxxx-B**.
+When working with[**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button)slack**TID-MIC**form*0.2~1*Seconds, so the radio opens faster. When connecting TID-PTT to a smartphone**ODmaster**works with the device<img src="pdf_images/Bluetooth.png" alt="" />**TID-PTTxxxxxx-A**(speed)*38400*baud), when pairing through the Bluetooth menu of the android, it is not recommended to mate with this device -**ODMaster**Maybe you can't see him. Instead, there is a device.<img src="pdf_images/Headset.png" alt="" /> **TID-PTTxxxxxxx-B**.
 
-![QL2](pdf_images/QL2.png)
+<img src="pdf_images/QL2.png" alt="QL2" />
 
 When working with[**QL-2**](https://tidradio.com/products/td-q2l-bluetooth-noise-cancelling-magnetic-mic-for-td-h3-plus-td-h9)...
 
@@ -783,7 +783,7 @@ Due to the fact that the beacon contains a specified number of retransmissions, 
 
 In the digipiter mode, the radio station, when receiving an APRS packet, searches for the name of the installed digipiter in its PATH, and if it finds it, then sends this packet further to the air, decrementing the SSID per unit, but only if the SSID is greater than zero.
 
-![](images/NNNN-Digi-Demo.gif)
+<img src="images/NNNN-Digi-Demo.gif" alt="" />
 
 ### 7.44 APRS Worldwide Frequency
 
@@ -841,7 +841,7 @@ Send and receive messages via APRS.
 > Radio ID is configured via CPS (DTMF Code -> DTMF Settings -> Local ID).
 >
 > In the APRS mode, messaging is carried out by APRS-packets Message (:). The receiver and sender on the pop-up screen is displayed correctly.
-> On the incoming SMS view screen, the sender is indicated as the recipient.![](pdf_images/SMS_INBOX.jpg)
+> On the incoming SMS view screen, the sender is indicated as the recipient.<img src="pdf_images/SMS_INBOX.jpg" alt="" />
 
 | Item | Name | Description |
 | --- | --- | --- |
@@ -857,7 +857,7 @@ Send and receive messages via APRS.
 ### 7.47 Spectrum
 
 The radio station allows you to view the radio frequency spectrum.  
-![](images/TIDRADIO H9 - 010.jpg)
+<img src="images/TIDRADIO" alt="" />
 
 | Management | Description |
 | --- | --- |
@@ -873,7 +873,7 @@ The radio station allows you to view the radio frequency spectrum.
 | PTT | Monitor Mode (MONI) – Instant opening of the noise suppressor to listen to the frequency under the cursor |
 | 0-9 | Manual central frequency input |
 
-![](images/spectrum.png)
+<img src="images/spectrum.png" alt="" />
 
 **menu**:
 

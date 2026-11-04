@@ -1,6 +1,6 @@
 # APRS icon table (symbols)
 
-![](aprs_icons/all.png)
+<img src="aprs_icons/all.png" alt="" />
 
 > Numbering --**zero**and coincides with the value of the icon byte in .td (for example,`0x1B=27`= Motorcycle.
 
