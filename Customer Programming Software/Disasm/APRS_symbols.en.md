@@ -1,4 +1,4 @@
-# APRS icon table (symbols)
+# Table of APRS icons (symbols)
 
 <img src="aprs_icons/all.png" alt="" />
 
@@ -111,7 +111,7 @@
 | 1 | `\"` | 02 |  |  |
 | 2 | `\ #` | 03 | Digi (green star) |  |
 | 3 | `\$` | 04 | Bank or ATM (green box) |  |
-| 4 | `\%` | 05 | Power Plant. |  |
+| 4 | `\%` | 05 | Power Plant |  |
 | 5 | `\ &` | 06 | I=IGate R=RX T=1hopTX 2=2hopTX |  |
 | 6 | `\’` | 07 | Crash (& incident sites) |  |
 | 7 | `\(` | 08 | cloudy |  |
@@ -143,7 +143,7 @@
 | 33 | `\B` | 34 | Blowing Snow |  |
 | 34 | `\C` | 35 | Coast Guard |  |
 | 35 | `\D` | 36 | Drizzle |  |
-| 36 | `\E` | 37 | Smoke (and other vis codes) |  |
+| 36 | `\E` | 37 | Smoke (& other vis codes) |  |
 | 37 | `\F` | 38 | Freezing Rain |  |
 | 38 | `\G` | 39 | Snow Shower |  |
 | 39 | `\H` | 40 | Haze |  |
@@ -177,7 +177,7 @@
 | 67 | `\d` | 68 | DX Spot (from callsign prefix) |  |
 | 68 | `\e` | 69 | Sleet |  |
 | 69 | `\f` | 70 | Funnel Cloud |  |
-| 70 | `\g` | 71 | Gale Flags. |  |
+| 70 | `\g` | 71 | Gale Flags |  |
 | 71 | `\h` | 72 | Store or Hamfest |  |
 | 72 | `\ i` | 73 | Box or Points of Interest |  |
 | 73 | `\j` | 74 | Work Zone (steam shovel) |  |
