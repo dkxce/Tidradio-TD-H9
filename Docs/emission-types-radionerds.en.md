@@ -41,7 +41,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | Pulse radiation (see note below): |  |
 | sequence of unmodulated pulses | P |
 | Pulse sequence: |  |
-| - modulated by amplitude | K |
+| - amplitude modulated | K |
 | Modulated in width/duration | L |
 | - modulated by position/phase | M |
 | - with angular modulation of the carrier during the pulse period | Q |
@@ -51,7 +51,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 
 **Note.**If frequency modulation "F" is specified, phase modulation "G" is also considered acceptable. Radiations in which the main carrier is modulated directly by a signal encoded in a quantized form (e.g., pulse code modulation) should be designated as related to amplitude or angular modulation.
 
-## The nature of the modulating signal (sixth character)
+## Nature of the modulating signal (sixth character)
 
 | Code. | Description |
 | --- | --- |
@@ -130,7 +130,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | 10K0F1D | RD-LAP, 9.6 kbps data, narrowband channel |
 | 10K0F1D | Motorola Widepulse ASTRO data simulcast |
 | 10K0F1D | Motorola Widepulse ASTRO, simulcast control channel |
-| 10K0F1E | Motorola Widepulse ASTRO, voice simulcast |
+| 10K0F1E\* | Motorola Widepulse ASTRO, voice simulcast |
 | **11K0F3D** | **Narrowband FM 12.5 kHz APRS** |
 | **11K0F3E** | **Narrowband FM 12.5 kHz Voice** |
 | **11K0F3G** | **Narrowband FM 12.5 kHz Voice + APRS** |
@@ -167,7 +167,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | 100KP0N | Oceanographic radar CODAR (KV, scan ~1 s) - 12-14 MHz |
 | 170KP0N | CODAR oceanographic radar above 24 MHz |
 | 200KF8E | Broadcasting World Cup with additional subcarrier (SCA) |
-| 250KF3E | Television broadcast sound (analog NTSC) |
+| 250KF3E | Television sound (analog NTSC) |
 | 300KG7W | EDGE |
 | 300KGXW | GSM cellular |
 | 1M25F9W | CDMA cellular |
