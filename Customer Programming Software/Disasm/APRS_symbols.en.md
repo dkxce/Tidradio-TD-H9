@@ -35,7 +35,7 @@
 | 24 | `/9` | 25 | 9 Circle | <img src="aprs_icons/primary_024.png"/> |
 | 25 | `/:` | 26 | Fire. | <img src="aprs_icons/primary_025.png"/> |
 | 26 | `/;` | 27 | Campground (Portable ops) | <img src="aprs_icons/primary_026.png"/> |
-| 27 | `/<` | 28 | Motorcycle | <img src="aprs_icons/primary_027.png"/> |
+| 27 | `/<` | 28 | motorcycle | <img src="aprs_icons/primary_027.png"/> |
 | 28 | `/=` | 29 | Railroad Engine | <img src="aprs_icons/primary_028.png"/> |
 | 29 | `/>` | 30 | Car | <img src="aprs_icons/primary_029.png"/> |
 | 30 | `/?` | 31 | File Server | <img src="aprs_icons/primary_030.png"/> |

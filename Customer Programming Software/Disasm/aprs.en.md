@@ -9,7 +9,7 @@ Below is the field table. Displacements are given in two ways:
 -**Abs.**absolute address relative to the beginning of the entire dump (65536 bytes);
 -**Related**shift relative to the beginning of the APRS block`0x307C`).
 
-Both hex.
+Both are hex.
 
 ## General map
 

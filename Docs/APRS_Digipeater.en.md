@@ -54,7 +54,7 @@ The new N-paradigm also defines several non-conventional WIDE hop aliases:
 
 * **`SAR`**Search and Rescue (Search and Rescue) Used in incident management to flag traffic that needs to be prioritized. Not all networks support it; check with your local emergency coordinator.
 * **`TEMP1-1`, `TEMP2-1`**Temporary deployment aliases for portable digi at events. Configured exactly like WIDE, but held separately so as not to conflict with the permanent infrastructure.
-* **`ECHO`**One-hop alias to check the connection. Pass the beacon with the path`ECHO`- and only your local digi should repeat you back; useful to confirm that you reach the local station.
+* **`ECHO`**One-hop alias to check the connection. Hand over the path beacon`ECHO`- and only your local digi should repeat you back; useful to confirm that you reach the local station.
 * **Country/regional aliases**Some national networks use aliases with a country letter (e.g.`GATE`, `NOGATE`) for traffic that should or should not pass through certain points of the gateway.
 
 Most operators will never have to go outside.`WIDE1-1,WIDE2-1`mobile`WIDE2-2`For fixed home stations.
@@ -73,7 +73,7 @@ You can get to iGate in this form:
 TA4OHN-9>APRS,TA1FILL-1*,TA1WIDE-3*,WIDE2*
 ```
 
-This track means that it was repeated first.`TA1FILL-1`(Local fill-in digi, spent slot)`WIDE1-1`then`TA1WIDE-3`(wide-area station that consumed the first hop)`WIDE2-1`), and then it was picked up by iGate. Reading the track in reverse order is the quickest way to know which digi is hearing you and which is not.
+This track means that it was repeated first.`TA1FILL-1`(Local fill-in digi, spent slot)`WIDE1-1`then`TA1WIDE-3`(wide-area station that used up the first hop)`WIDE2-1`), and then it was picked up by iGate. Reading the track in reverse order is the quickest way to know which digi is hearing you and which is not.
 
 ## Launching your own Digipeater
 
@@ -88,7 +88,7 @@ Work 24/7 with backup power and you’ll be part of APRS’ public infrastructur
 
 ## Where Digipeater Transfers the Relay to the Internet
 
-The work of digipeater ends on air; delivery of packages to the global network is a task**iGate**. Many stations combine both roles on the same Pi - Direwolf and aprx are happy to do both at the same time. However, the separation of roles is important: pure digi without iGate still adds value to the local radio network, and pure iGate without digi still adds value to the global Internet broadcast. Details in the accompanying[Guide to setting up iGate](/guides/aprs-igate-setup)How the internet works, and how it works,[explanation of the APRS-IS network](/guides/aprs-is-network-explained).
+The work of digipeater ends on air; delivery of packages to the global network is a task**iGate**. Many stations combine both roles on the same Pi - Direwolf and aprx are happy to do both at the same time. However, the separation of roles is important: pure digi without iGate still adds value to the local radio network, and pure iGate without digi still adds value to the global Internet broadcast. Details in the accompanying[Guide to setting up iGate](/guides/aprs-igate-setup)How the internet works, and how it works,[Explaining the APRS-IS network](/guides/aprs-is-network-explained).
 
 ## Where to Read Next
 
