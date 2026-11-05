@@ -1,15 +1,15 @@
-# Description of the APRS configuration in`. t`file
+# Description of APRS configuration in`. t`file
 
 > [Main description](README.md)
 
 The APRS data area is located in the EEPROM image.`.td`(c)`0x307C`along`0x3113`inclusive.  
 Block size:**152 bytes**(0x307C-0x3113). Right after.[GNSS](gnss.md)-configurations.
 
-Below is the field table. Displacements are given in two ways:
+Below is the field table. Displacements are given in two forms:
 -**Abs.**absolute address relative to the beginning of the entire dump (65536 bytes);
 -**Related**shift relative to the beginning of the APRS block`0x307C`).
 
-Both hex.
+Both are hex.
 
 ## General map
 
@@ -31,7 +31,7 @@ Both hex.
 | `0x3095` | `0x0019` | 12437 | 40 | ASCII | **Comments**Beacon package (up to 40 simv.; set: English letters, numbers, space,`: . , - ? ! @`) |
 | `0x30BD` | `0x0041` | 12477 | 25 | — | *reserve/unknown* |
 | `0x30D6` | `0x005A` | 12502 | 1 | uint8 | **Icon Main Symbol**index 0.93 (see para.[`APRS_symbols.md`](APRS_symbols.md)) |
-| `0x30D7` | `0x005B` | 12503 | 1 | bit | **MIC-E Start.**(0 - Off, 1 - On) |
+| `0x30D7` | `0x005B` | 12503 | 1 | bit | **MIC-E Start**(0 - Off, 1 - On) |
 | `0x30D8` | `0x005C` | 12504 | 1 | uint8 | **MIC-E Type**(0..7): 0 Off Duty, 1 En Route, 2 In Service, 3 Returning, 4 Committed, 5 Special, 6 Priority, 7 Emergency |
 | `0x30D9` | `0x005D` | 12505 | 8 | ASCII | **Route-1: Name**for example`WIDE1`) |
 | `0x30E1` | `0x0065` | 12513 | 1 | uint8 | **Route-1: Count**(SSID, e.g. 1)`WIDE1-1`) |
@@ -76,7 +76,7 @@ End of block:`0x3114` = `12564`.
 
 ## Notes.
 
-* “Unknown” areas (`0x3085–0x3094`, `0x30BD–0x30D5`, `0x3111–0x3112`) in the tested files filled with zeros - probably reserved.
+* "Unknown" areas (`0x3085–0x3094`, `0x30BD–0x30D5`, `0x3111–0x3112`) in the tested files filled with zeros - probably reserved.
 * `Report Volt/Sats/Mile`Single bits; the remaining bits of the corresponding bytes are not touched.
 * `Time Interval`- 16-bit little-endian.
 

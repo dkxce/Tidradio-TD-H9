@@ -13,9 +13,9 @@ The designation of radiation consists of seven symbols as follows:
 * The sixth character**character**(a) modulating (their) main carrier;
 * the seventh character**type of information transmitted**.
 
-## Strip width required - the first four characters
+## Strip width required - the first four symbols
 
-The required bandwidth is expressed in three digits and one letter. The letter occupies the position of the decimal point and denotes the unit of measurement of the width of the band. The first character cannot be zero, K, M, or G, but must be a non-zero digit or the letter H. The required bandwidth shall be rounded to three significant figures. The rounded value should correspond to the following syntax:
+The required bandwidth is expressed in three digits and one letter. The letter occupies the position of the decimal point and denotes the unit of measurement of the width of the band. The first character cannot be zero, K, M, or G; it must be a non-zero digit or the letter H. The required bandwidth shall be rounded to three significant figures. The rounded value should correspond to the following syntax:
 
 * from 0.00100 to 999 Hz – expressed in Hz (letter H);
 * from 1.00 to 999 kHz – expressed in kHz (letter K);
@@ -33,7 +33,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | Single-band, with a reduced or variable carrier | R |
 | Single-band, with a depressed carrier | J |
 | - with independent side stripes | B |
-| - with a partially suppressed (residual) side strip | C |
+| with a partially suppressed (residual) side band | C |
 | Radiation in which the main carrier is modulated at an angle: |  |
 | Frequency modulation (FM) | F |
 | phase modulation (FM) | G |
@@ -41,7 +41,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | Pulse radiation (see note below): |  |
 | sequence of unmodulated pulses | P |
 | Pulse sequence: |  |
-| - amplitude modulated | K |
+| - modulated by amplitude | K |
 | Modulated in width/duration | L |
 | - modulated by position/phase | M |
 | - with angular modulation of the carrier during the pulse period | Q |
@@ -51,7 +51,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 
 **Note.**If frequency modulation "F" is specified, phase modulation "G" is also considered acceptable. Radiations in which the main carrier is modulated directly by a signal encoded in a quantized form (e.g., pulse code modulation) should be designated as related to amplitude or angular modulation.
 
-## Nature of the modulating signal (sixth character)
+## The nature of the modulating signal (sixth character)
 
 | Code. | Description |
 | --- | --- |
@@ -69,14 +69,14 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 
 | Code. | Description |
 | --- | --- |
-| N | No information is transmitted. |
+| N | Information is not transmitted |
 | A | Telegraphy for auditory reception (for example, Morse code) |
 | B | Telegraphy for automatic reception (for example, RTTY, radioteletype) |
 | C | facsimile |
 | D | Data, telemetry, telecontrol |
 | E | Telephony (including sound radio broadcasting) |
 | F | Television (video) |
-| G | A combination of two or more of the above types |
+| G | Combination of two or more of the above types |
 | W | Cases not covered above: combination of two or more types not mentioned above |
 | X | Cases not covered above |
 
@@ -130,11 +130,11 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | 10K0F1D | RD-LAP, 9.6 kbps data, narrowband channel |
 | 10K0F1D | Motorola Widepulse ASTRO data simulcast |
 | 10K0F1D | Motorola Widepulse ASTRO, simulcast control channel |
-| 10K0F1E\* | Motorola Widepulse ASTRO, voice simulcast |
+| 10K0F1E | Motorola Widepulse ASTRO, voice of simulcast |
 | **11K0F3D** | **Narrowband FM 12.5 kHz APRS** |
 | **11K0F3E** | **Narrowband FM 12.5 kHz Voice** |
 | **11K0F3G** | **Narrowband FM 12.5 kHz Voice + APRS** |
-| 11K2F2D | FM, 2.5 kHz deviation, AFSK in 12.5 kHz channel (packages 1.2 kbps, FFSK, sirens) |
+| 11K2F2D | FM, 2.5 kHz deviation, AFSK in 12.5 kHz channel (packages of 1.2 kbps, FFSK, sirens) |
 | 11K2F3D | FM, 2.5 kHz deviation, DTMF and other tone signals (Whelen sirens, Knox-Box®) |
 | 11K2F3E | FM, deviation of 2.5 kHz, analog voice, narrowband 12.5 kHz |
 | 11K2F9W | Previously incorrectly used as a universal narrowband designation |
@@ -143,7 +143,7 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | 13K6F3E | Analog voice with FM, deviation of 3.8 kHz (900 MHz) |
 | 13K6W7W | Motorola iDEN (900 MHz) |
 | 14K0F1D | Motorola, 3600 baht trunking control channel (NPSPAC) |
-| 16K0F1D | Motorola, trunking control channel 3600 baud |
+| 16K0F1D | Motorola, trunking control channel 3600 bod |
 | 16K0F2D | World Cup, deviation 4 kHz, AFSK (fire detectors 72 MHz) |
 | 16K0F3E\* | 4 kHz deviation, analog voice (NPSPAC) |
 | **16K0F3D** | **Wideband FM 25 kHz APRS** |
@@ -151,14 +151,14 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | **16K0F3G** | **Wideband FM 25 kHz Voice + APRS** |
 | 16K8F1E\* | Encrypted Quantized Voice (Motorola DVP, DES, DES-XL, NPSPAC) |
 | 17K7D7D7D | Motorola HPD – “Astro 25”, HAI, 700/800 MHz, 25 kHz channel |
-| 20K0D1E | Tetra down. PowerTrunk 4/TDMA part (voice) |
-| 20K0D1W | Tetra down. PowerTrunk 4/TDMA (mixed modes) |
+| 20K0D1E | TETRA down. PowerTrunk 4/TDMA (voice) |
+| 20K0D1W | TETRA down. PowerTrunk 4/TDMA (mixed modes) |
 | 20K0F1D | RD-LAP, 19.2 kbps, broadband channel |
 | 20K0F1E | Encrypted Quantized Voice (Motorola DVP/DES/DES-XL – NOT P25) |
 | 20K0F3E | FM, 5 kHz deviation, analog voice, 25 kHz broadband |
 | 20K0G7W | Motorola iDEN (800 MHz) |
 | 20K0W7W | Motorola iDEN (800 MHz) |
-| 20K1D1D1D | Tetra down. PowerTrunk 4/TDMA part (data) |
+| 20K1D1D1D | TETRA down. PowerTrunk 4/TDMA part (data) |
 | 21K0D1W | Standard TETRA ETS 300 392 |
 | 30K0DXW | Cellular TDMA (North America) |
 | 40K0F8W | cellular AMPS |
@@ -183,4 +183,4 @@ The required bandwidth is expressed in three digits and one letter. The letter o
 | 10M0D7D | LTE security services, 10 MHz band |
 | 10M0G7D | LTE security services, 10 MHz band |
 
-\* - lines marked "\*" have footnotes on the source page that were not preserved when the text was extracted; symbols are transmitted as in the original.
+\* - lines marked "\*" have footnotes on the source page that were not preserved when the text was extracted; the symbols are transmitted as in the original.
