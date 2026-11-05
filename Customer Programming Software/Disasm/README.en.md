@@ -8,21 +8,21 @@ The full format description below`.td`TIDRadio**TD-CPS Programming Software**usi
 
 ## 1. The nature of the file
 
-`.td` — **raw dump EEPROM-image radio**size**65,536 bytes (0x10000)**No compression or encryption.
+`.td` — **raw dump EEPROM radio image**size**65,536 bytes (0x10000)**No compression or encryption.
 
 * Size source:`Settings.EEROM_SPACE = 65536u` (`Settings.cs:2053`).
 * Empty/unused byte =`0xFF`.
 * Reading/write--`File.ReadAllBytes` / `File.WriteAllBytes` (`MainForm.cs:1930,1979,1995`).
-* Formed`MainForm.DataToByte()` (`MainForm.cs:2388`):`0xFF`, then weaves the blocks in order:`Channels → GeneralSet → A/B → FM → DTMF → GNSS/APRS`.
+* Formed`MainForm.DataToByte()` (`MainForm.cs:2388`): fill`0xFF`, then weaves the blocks in order:`Channels → GeneralSet → A/B → FM → DTMF → GNSS/APRS`.
 * Image analysis.`MainForm.ByteToData()` (`MainForm.cs:2410`), reads the same blocks.
 
 ### Which blocks are woven (`DataToByte`, `MainForm.cs:2388-2408`)
 
-| Order. | The challenge | Block. |
+| Order. | A challenge | Block. |
 | --- | --- | --- |
 | 1 | `ChannelForm.data.ToEerom(0)` → `CPS_CHANNEL_START` | Channels + names + indexes |
 | 2 | `GeneralSetForm.ToEerom(array)` | General settings |
-| 3 | `A_B_ChannelForm.ToEerom(array)` | VFO A/B + shift |
+| 3 | `A_B_ChannelForm.ToEerom(array)` | VFO A/B + shift shift |
 | 4 | `FMForm.ToEerom(array)` | FM channels/settings |
 | 5 | `DTMFCodeForm.ToEerom(array)` | DTMF codes |
 | 6 | `Array.Copy(GnssAprsRawData, ..., 12292, ...)` | GNSS/APRS (if any) |
@@ -31,7 +31,7 @@ The full format description below`.td`TIDRadio**TD-CPS Programming Software**usi
 
 ## 2. File header - marker`. t`(bytes 0-7)
 
-It is important not to mix two things:**filemarker`.td`** и **device ID**. These are different 8-byte values stored in different locations.
+It is important not to mix the two things:**filemarker`.td`** и **device ID**. These are different 8-byte values stored in different locations.
 
 ### 2.1 Marker`. t`- one for all models
 
@@ -53,7 +53,7 @@ When saved in bytes 0-7 file is written**global** `Settings.CUR_MODEL` (`Setting
 
 ### Device firmware identifier - NOT in`. t`
 
-For reference: per-model 8-byte identifiers from`OpenGD77Form.GetSupportedVersions()` (`OpenGD77Form.cs:615-637`is`VersionIdentifier` **radio**It is readable from hardware via USB rather than the file header. In`.td`They don't figure:
+For reference: per-model 8-byte identifiers from`OpenGD77Form.GetSupportedVersions()` (`OpenGD77Form.cs:615-637`that`VersionIdentifier` **radio**It is read from hardware via USB, not the file header. In`.td`They don't figure:
 
 | Model | DisplayName | Regime. | VersionIdentifier (hex) | ASCII |
 | --- | --- | --- | --- | --- |
@@ -78,7 +78,7 @@ For reference: per-model 8-byte identifiers from`OpenGD77Form.GetSupportedVersio
 
 ### Model capabilities (`Settings.cs:570-651`)
 
-| Series | GNSS | GNSS-Station Type | APRS | MidPower | TopKey | KeyCode2=GNSS | Thai | PY32 | BLE-ONLY |
+| Series | GNSS | GNSS-Station Type | APRS | MidPower | TopKey | KeyCode2=GNSS | Thai | PY32 | BLE-Only. |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | H3Plus | – | – | – | – | – | – | – | – | – |
 | H4 | + | + | + | – | + | + | + | + | – |
@@ -89,7 +89,7 @@ For reference: per-model 8-byte identifiers from`OpenGD77Form.GetSupportedVersio
 
 ---
 
-## 3. General offset map of 64 KB
+## 3. General map of displacements in 64 KB
 
 Source:`DMR/CpsAddrCfg.cs`.
 
@@ -115,7 +115,7 @@ Source:`DMR/CpsAddrCfg.cs`.
 | 7168 | 0x1C00 | bootMsg1 | 16 |
 | 7184 | 0 x1C10 | bootMsg2 | 16 |
 | 7200 | 0x1C20 | bootMsg3 | 16 |
-| 7968 | 0x1F20 | micGain | 1 |
+| 7968 | 0x1F20 | micgain | 1 |
 | 7976 | 0x1F28 | languageSelect | 1 |
 | 7977 | 0x1F29 | displayStyle | 1 |
 | 7978 | 0x1F2A | menuColor | 1 |
@@ -126,7 +126,7 @@ Source:`DMR/CpsAddrCfg.cs`.
 | 12390 | 0x3066 | [**GNSS configuration**](gnss.md) | 21 |
 | 12390 | 0x3066 | GPS On/Off (0 - Off, 1 - On) | 1 |
 | 12391 | 0x3067 | GPS Position Type (0 - Deg, 1 - Deg.min, 2 - Deg.min.sec) | 1 |
-| 12392 | 0x3068 | GPS Time Zone (0(UTC-12)..24(UTC+12) | 1 |
+| 12392 | 0x3068 | GPS Time Zone (0(UTC-12)...24(UTC+12) | 1 |
 | 12393 | 0x3069 | Speed Unit (0 - Km/h, 1 - Knot, 2 - m/s) | 1 |
 | 12394 | 0x306A | Dist Unit (0 - Km/h, 1 - Sea mile, 2 - Mile) | 1 |
 | 12395 | 0x306B | Alt Unit (0 - Meters, 1 - Ft) | 1 |
@@ -145,7 +145,7 @@ Source:`DMR/CpsAddrCfg.cs`.
 | 12421 | 0x3085 | *RESERVED* | 16 |
 | 12437 | 0x3095 | Commentary on the Beacon package, up to 40 characters | 40 |
 | 12477 | 0x30BD | *RESERVED* | 25 |
-| 12502 | 0x30D6 | Icon Main Symbol according to[table](APRS_symbols.md), numbering from zero | 1 |
+| 12502 | 0x30D6 | Icon Main Symbol according to[table](APRS_symbols.md)numbering from zero | 1 |
 | 12503 | 0x30D7 | MIC-E Start (0 - Off, 1 - On) | 1 |
 | 12504 | 0x30D8 | MIC-E Type (0..7) | 1 |
 | 12505 | 0x30D9 | Route-1: Name (WIDE1) | 8 |
@@ -226,7 +226,7 @@ Source:`DMR/ChannelForm.cs:197-220`.
 **`flags1`**(conservation mask)`&0xE4`): bits 7-6`PttId`(0..3), bit 5`FreqHop`bit 2`BusyLock`.
 **`flags2`**mask`&0x3B`): bits 5-4`PowerLevel`(0=L,1=M,2=H), bit 3`ChBand`(0=Wide,1=Narrow), bits 1–0`FreqOffset`(0=off,1=-,2=+).**`reserved`**: bits 1-0 =`RxModel`(0=FM, 1=AM).
 
-Names are not included in this block (see § 5.2).
+Names are not included in this block (see paragraph 5.2).
 
 ### 5.2 Names of channels`ChannelNameOne`8 bytes × 199 (shift 3392 / 0x0D40)
 
@@ -236,7 +236,7 @@ Names are not included in this block (see § 5.2).
 
 Bit card "Channel Validen", 199 channels (bits 0.198).`chIndex`the channel is valid if the RX frequency is vaporized and`> 0`. Work through`BitArray`.
 
-### 5.4 Scan index (shift 6432 / 0x1920) - 25 bytes
+### 5.4 Scan index (shift 6432 / 0x1920) – 25 bytes
 
 Bit card "channel in the scan list", the same 199 bits.
 
@@ -253,7 +253,7 @@ Bit card "channel in the scan list", the same 199 bits.
 
 ## 6. General settings block`GeneralSet`(address 3216 / 0x0C90)
 
-Source:`DMR/GeneralSetForm.cs:69-158`, `Settings.ADDR_GENERAL_SET=3216`, `Settings.SPACE_GENERAL_SET=Marshal.SizeOf(GeneralSet)=93`(Logical; actually the fields are scattered).
+Source:`DMR/GeneralSetForm.cs:69-158`, `Settings.ADDR_GENERAL_SET=3216`, `Settings.SPACE_GENERAL_SET=Marshal.SizeOf(GeneralSet)=93`(Logic; actually, the fields are scattered).
 
 | Abs. bias. | +off from 3216 | Field. | Type/size | Coding |
 | --- | --- | --- | --- | --- |
@@ -391,7 +391,7 @@ Source:`DMR/FMForm.cs:526-595`.
 - `num = round(freq_MHz × 10)`(0.1 MHz step, range 76-108).
 -`buffer[0]` = `(десятки<<4)|единицы`, `buffer[1]` = `(сотни<<4)|тысячи` (`EncodeFrequency`).
 - Example:`107.5` → `1075` → `buffer[0]=0x75, buffer[1]=0x10, buffer[2]=0, buffer[3]=0`.
-- Decoding:`(b1>>4)*1000 + (b1&F)*100 + (b0>>4)*10 + (b0&F)`Divided by 10. Out 76-108 → 76.0.
+- Decoding:`(b1>>4)*1000 + (b1&F)*100 + (b0>>4)*10 + (b0&F)`Divide by 10. Out 76-108 → 76.0.
 
 ---
 
@@ -418,7 +418,7 @@ Key feature:**This CPS DOES NOT decrypt or edit GNSS/APRS fields individually.**
 * Removal/discharge`GnssAprsRawData = null` (`MainForm.cs:2869`).
 * When working with the radio, the entire region is read / written separately n`ReadDataNewProtocol`/`WriteDataNewProtocol`(range to 12564 or 12411), the default value is`0xFF` (`OpenGD77Form.cs:1932-1957, 2008-2020`).
 
-**Inquest:**internal byte layout of GNSS/APRS settings in`MainForm.cs`Undefined – these bytes are taken “as is” from the device (the format is inherited from the OpenGD77/GD77 codebug) and stored in the`.td`unchanged.
+**Inquest:**internal byte layout of GNSS/APRS settings in`MainForm.cs`Undetermined – these bytes are taken “as is” from the device (the format is inherited from the OpenGD77/GD77 codebug) and stored in the device.`.td`unchanged.
 
 ### Known map of the region (from`DMR/CpsAddrCfg.cs:181-211`)
 
@@ -459,7 +459,7 @@ num2 = HasGNSS() ? (HasAPRS()   ? 12564     // APRS-модели
 
 ### 10.4 Where GNSS/APRS settings could live
 
-* In the interface, the mention of GNSS is limited to the keymark`KeyCode2IsGNSS()`= GNSS menu for H4/H9/638`GeneralSetForm.cs:1762-1764`). The very form of editing GNSS/APRS fields in this build is absent.
+* In the interface, the mention of GNSS is limited by the keymark`KeyCode2IsGNSS()`= GNSS menu for H4/H9/638`GeneralSetForm.cs:1762-1764`). The very form of editing GNSS/APRS fields in this build is absent.
 * GNSS/APRS settings**non-serialize**any of the structures (§§ 5-9). In`.td`They are present only as a copy of the data read from the radio.
 
 > **Comment on completeness of documentation:**Since the internal fields of GNSS (12390, 21 bytes) and APRS (12412, 152 bytes) are not understood anywhere in the disassembled code, their exact byte semantics (for example, callsign / beacon / sending intervals fields) for this project cannot be restored - the code stores their byte-in-bytes. To describe these fields by name, you need OpenGD77 anchors (the GD77 firmware source), not this CPS.
@@ -481,7 +481,7 @@ num2 = HasGNSS() ? (HasAPRS()   ? 12564     // APRS-модели
 1. **Field.`name`(string) channel is not included in 16 bytes**Names are placed in a separate name block.
 2. **`ToEerom`Ignoring channels`chGroupIndex`**- puts one group from the beginning; grouping - at the level`MainForm`along`CPS_*`addresses.
 3. **Code discrepancies:** `CPS_FM_SETTINGS_START=6516`claimed, but actually used 3234/3238.`.g77`/`.dat`open with the same code as the`.td`(raw EEPROM)
-4. `.td`Retains a size of 65,536 bytes; when reading a short buffer`ByteToData`Copy only available boundaries (protection by length).
+4. `.td`Retains the size of 65,536 bytes; when reading a short buffer`ByteToData`Copy only available boundaries (protection by length).
 
 ---
 
@@ -499,5 +499,5 @@ num2 = HasGNSS() ? (HasAPRS()   ? 12564     // APRS-модели
 
 1. [**TDRadioCodeplug**](TDRadioCodeplug.cs)Class for working with .td file.
 2. [**TidRadioTool**](TDRadioTool/bin)- console utility
-3. [**TD Editor**](td-editor.html)- HTML channel editor[online](https://dkxce.github.io/temporary/td-h9/td-editor.html)
+3. [**TD-editor**](td-editor.html)- HTML channel editor[online](https://dkxce.github.io/temporary/td-h9/td-editor.html)
 4. [**TD-APRS-Editor**](td-editor-aprs.html)- aprs-html channel editor[online](https://dkxce.github.io/temporary/td-h9/td-editor-aprs.html)
