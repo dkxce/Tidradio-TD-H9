@@ -45,6 +45,10 @@
 | Custom firmware by mjwgeek | [Experimental Firmware](https://github.com/mjwgeek/TIDRADIO_TD-H9) | [mjwgeek](https://github.com/mjwgeek) |
 | TD-H9 APRS Smart Beaconing | [tomaszkuehn/TD-H9-aprs-smartbeacon](https://github.com/tomaszkuehn/TD-H9-aprs-smartbeacon) | [tomaszkuehn](https://github.com/tomaszkuehn) |
 | H9 Toolbox | [melidosian/h9toolbox](https://github.com/melidosian/h9toolbox) | [melidosian](https://github.com/melidosian) |
+
+### Specifications
+|Resources (Ресурсы)|Link (Ссылка)|Author (Автор)|
+|---|---|---|
 | BLE-KISS-API | [hessu/aprs-specs](https://github.com/hessu/aprs-specs/blob/master/BLE-KISS-API.md) | [hessu](https://github.com/hessu) |
 
 ---
