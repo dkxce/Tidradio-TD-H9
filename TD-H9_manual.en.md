@@ -190,7 +190,7 @@ When charging the radio**switched on**The green indicator will not light up - th
 
 ---
 
-## Installation of accessories
+## 3. Installation of accessories
 
 * **Antenna:**Clockwise, roll against the clockwise (behind the base).
 * **Belt clamping:**two screws on the back side above the battery - unscrew, clamp, twist back.
@@ -349,7 +349,7 @@ In Transfer Mode (TX), press the digital keys to send the corresponding DTMF cod
 
 ## 5. Basic operations
 
-### inclusion
+### Inclusion
 
 Turn the power/volume handle clockwise before clicking. After ~1 sec, a double beep, a message/savers display, then a frequency or channel. When the voice prompts are turned on, a mode will be announced. Turn off - counterclockwise to click.
 

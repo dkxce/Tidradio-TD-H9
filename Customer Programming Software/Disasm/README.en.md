@@ -76,7 +76,7 @@ For reference: per-model 8-byte identifiers from`OpenGD77Form.GetSupportedVersio
 | 638UV | 638UV | GMRS | `5444363338555647` | `TD638UVG` |
 | 638UV | 638UV | Ham Ham Ham | `5444363338555648` | `TD638UVH` |
 
-### Model capabilities`Settings.cs:570-651`)
+### Model capabilities (`Settings.cs:570-651`)
 
 | Series | GNSS | GNSS-Station Type | APRS | MidPower | TopKey | KeyCode2=GNSS | Thai | PY32 | BLE-ONLY |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -89,7 +89,7 @@ For reference: per-model 8-byte identifiers from`OpenGD77Form.GetSupportedVersio
 
 ---
 
-## General offset map of 64 KB
+## 3. General offset map of 64 KB
 
 Source:`DMR/CpsAddrCfg.cs`.
 
@@ -206,7 +206,7 @@ Substantive work area:`CPS_START=16`, `CPS_END=7984`, `CPS_LEN=8000`.
 
 ---
 
-## Channel block (16/0x10 displacement)
+## 5. Channel block (16/0x10 displacement)
 
 ### 5.1 Channel data`Channel One`- 16 bytes x 199
 
@@ -240,7 +240,7 @@ Bit card "Channel Validen", 199 channels (bits 0.198).`chIndex`the channel is va
 
 Bit card "channel in the scan list", the same 199 bits.
 
-### How the block is constructed (see para.`ChannelForm.ToEerom(0)`60,000
+### How the block is constructed (see para.`ChannelForm.ToEerom(0)`60,000 array
 
 | Section | Inward displacement. | Abs. EEPROM. | Size |
 | --- | --- | --- | --- |
@@ -251,7 +251,7 @@ Bit card "channel in the scan list", the same 199 bits.
 
 ---
 
-## General settings block`GeneralSet`(address 3216 / 0x0C90)
+## 6. General settings block`GeneralSet`(address 3216 / 0x0C90)
 
 Source:`DMR/GeneralSetForm.cs:69-158`, `Settings.ADDR_GENERAL_SET=3216`, `Settings.SPACE_GENERAL_SET=Marshal.SizeOf(GeneralSet)=93`(Logical; actually the fields are scattered).
 
@@ -349,7 +349,7 @@ Source:`DMR/DTMFCodeForm.cs:18-136`. Each byte = one DTMF number (0–9,A,B,C,D,
 
 ---
 
-## Block VFO A/B (shifts 6480 and 6496)
+## 8. Block VFO A/B (shifts 6480 and 6496)
 
 Source:`DMR/A_B_ChannelForm.cs:71-122`. Structure`VfoData`16 bytes.
 
@@ -395,9 +395,9 @@ Source:`DMR/FMForm.cs:526-595`.
 
 ---
 
-## 10. GNSS/APRS region (shifts 12292/0x3004 and beyond)
+## 10. GNSS/APRS region (shifts 12292 / 0x3004 and beyond)
 
-### 10.1 Nature of the block: “pass-through”
+### 10.1 Nature of the block: "pass-through"
 
 Key feature:**This CPS DOES NOT decrypt or edit GNSS/APRS fields individually.**Disassembled code has no structure or form to build it. The Domain`12292..12564`It is copied as an opaque byte buffer:
 
@@ -466,7 +466,7 @@ num2 = HasGNSS() ? (HasAPRS()   ? 12564     // APRS-модели
 
 ---
 
-## 11. Related constants of models`Settings.cs`)
+## 11. Related constants of models (`Settings.cs`)
 
 * `SUPER_PWD = "DT8168"`(140).
 * `CUR_MODE = 2`(2097)`CUR_CH_GROUP = 0`, `CUR_ZONE_GROUP = 0`, `CUR_ZONE = 0`.

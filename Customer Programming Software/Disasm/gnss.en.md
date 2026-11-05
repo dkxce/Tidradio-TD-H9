@@ -29,7 +29,7 @@ Right after him.`0x307C`) the block begins[APRS](aprs.md).
 | `0x307A` | 1 | — | **RESERVED** | — |
 | `0x307B` | 1 | uint8 | **GNSS-station type** | 0 - Fix, 1 - GPS |
 
-## Rules.
+## Rules
 
 * **Lon/Lat**- unsigned 32-bit**big-endian**, one unit -**×1e-6**degree`градусы = raw / 1e6`).
 * **Alt**- iconic 32-bit**big-endian**(two's complement), one**×1e-6**metre`метры = raw / 1e6`).

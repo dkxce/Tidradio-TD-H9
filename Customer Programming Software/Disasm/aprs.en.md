@@ -74,7 +74,7 @@ End of block:`0x3114` = `12564`.
 * **Icon**byte`0x30D6`= index in the symbol table (from 0). Table --[APRS symbols. md](APRS_symbols.md). Result symbol = table()`/`or`\`) + index symbol.
 * **Comments**: 40 bytes of ASCII, line to first`0x00`. Acceptable symbols: English letters, numbers, space,`: . , - ? ! @`.
 
-## Notes.
+## Notes
 
 * "Unknown" areas (`0x3085–0x3094`, `0x30BD–0x30D5`, `0x3111–0x3112`) in the tested files filled with zeros - probably reserved.
 * `Report Volt/Sats/Mile`Single bits; the remaining bits of the corresponding bytes are not touched.

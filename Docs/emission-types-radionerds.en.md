@@ -13,7 +13,7 @@ The designation of radiation consists of seven symbols as follows:
 * The sixth character**character**(a) modulating (their) main carrier;
 * the seventh character**type of information transmitted**.
 
-## Strip width required - the first four symbols
+## Strip width required – the first four symbols
 
 The required bandwidth is expressed in three digits and one letter. The letter occupies the position of the decimal point and denotes the unit of measurement of the width of the band. The first character cannot be zero, K, M, or G; it must be a non-zero digit or the letter H. The required bandwidth shall be rounded to three significant figures. The rounded value should correspond to the following syntax:
 
