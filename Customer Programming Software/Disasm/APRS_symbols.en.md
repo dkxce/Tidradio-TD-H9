@@ -1,9 +1,5 @@
 # APRS icon table (symbols)
 
-```
-
-```
-
 > Numbering --**zero**and coincides with the value of the icon byte in .td (for example,`0x1B=27`= Motorcycle.
 
 ## Primary Symbol Table
@@ -37,7 +33,7 @@
 | 24 | `/9` | 25 | 9 Circle |  |
 | 25 | `/:` | 26 | Fire. |  |
 | 26 | `/;` | 27 | Campground (Portable ops) |  |
-| 27 | `/<` | 28 | Motorcycle |  |
+| 27 | `/<` | 28 | motorcycle |  |
 | 28 | `/=` | 29 | Railroad Engine |  |
 | 29 | `/>` | 30 | Car |  |
 | 30 | `/?` | 31 | File Server |  |

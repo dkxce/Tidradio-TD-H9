@@ -31,7 +31,7 @@ The full format description below`.td`TIDRadio**TD-CPS Programming Software**usi
 
 ## 2. File header - marker`. t`(bytes 0-7)
 
-It is important not to mix the two things:**filemarker`.td`** и **device ID**. These are different 8-byte values stored in different locations.
+It is important not to mix two things:**filemarker`.td`** и **device ID**. These are different 8-byte values stored in different locations.
 
 ### 2.1 Marker`. t`- one for all models
 
@@ -179,10 +179,6 @@ Substantive work area:`CPS_START=16`, `CPS_END=7984`, `CPS_LEN=8000`.
 
 ## 4. Common coding formats (used again)
 
-```
-
-```
-
 ### 4.1 Frequency - packed BCD, 8 digits, little-endian pairs
 
 4 bytes, 2 numbers per byte. Meaning in**Hz**as an 8-digit whole (`000.00000`MHz.
@@ -255,7 +251,7 @@ Bit card "channel in the scan list", the same 199 bits.
 
 ## General settings block`GeneralSet`(address 3216 / 0x0C90)
 
-Source:`DMR/GeneralSetForm.cs:69-158`, `Settings.ADDR_GENERAL_SET=3216`, `Settings.SPACE_GENERAL_SET=Marshal.SizeOf(GeneralSet)=93`(Logic; actually, the fields are scattered).
+Source:`DMR/GeneralSetForm.cs:69-158`, `Settings.ADDR_GENERAL_SET=3216`, `Settings.SPACE_GENERAL_SET=Marshal.SizeOf(GeneralSet)=93`(Indeed, the fields are scattered.)
 
 | Abs. bias. | +off from 3216 | Field. | Type/size | Coding |
 | --- | --- | --- | --- | --- |

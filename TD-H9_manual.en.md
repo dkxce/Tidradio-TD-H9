@@ -86,7 +86,7 @@ Thank you for purchasing the TD-H9 radio. It is a multifunctional amateur (ham) 
 
 ### 1.1 Safety information for amateur radios
 
-Your portable radio station contains a low-power transmitter. When you press tangents (talk buttons), it emits radio frequency signals. The device is designed to work with a filling factor of not more than 50%. In August 1996, the FCC adopted recommendations on the effects of RF radiation with safety levels for portable wireless devices.
+Your portable radio station contains a low-power transmitter. When you press tangents (talk buttons), it emits radio frequency signals. The device is designed to work with a filling factor of not more than 50%. In August 1996, the FCC adopted recommendations on exposure to RF radiation with safety levels for portable wireless devices.
 
 **FCC Warning (Part 15.21)**The manufacturer is not responsible for any changes or modifications not expressly approved by the party responsible for conformity. Such changes may nullify the user's right to operate the equipment.
 
@@ -94,7 +94,7 @@ Your portable radio station contains a low-power transmitter. When you press tan
 
 **WARNING!**Modification of the device for receiving signals of cellular radio phones is prohibited by the rules of the FCC and federal law.
 
-**EU compliance.**The product complies with the requirements of Directive 2014/53/EU. NOTE: European users must have a valid amateur license to transmit at frequencies and power levels. Non-compliance may be illegal and may result in prosecution.
+**EU compliance.**The product meets the requirements of Directive 2014/53/EU. NOTE: European users must have a valid amateur license to transmit at frequencies and power levels. Non-compliance may be illegal and may result in prosecution.
 
 **Compliance with RF exposure standards.**The device conforms to: FCC 47 CFR §§ 1.1307, 1.1310 and 2.1093; ANSI/IEEE C95.1:2005; Canada RSS102 Issue 5 (March 2015); IEEE C95.1:2005 Edition.
 
@@ -246,7 +246,7 @@ Badges in order of table from the manual:
 |14. || OD sign. |
 |15. ||Bluetooth on, not connected (white icon) |
 |16. ||Bluetooth connected (blue icon). |
-|17. |Volume indicator. |
+|17. || Volume indicator. |
 
 ### LED indicators
 
@@ -310,10 +310,6 @@ Badges in order of table from the manual:
 | Menu, 9 | Dual Watch (TDR) - Double listening mode |
 | Menu, 0 | Bandwidth - bandwidth |
 
-```
-
-```
-
 **Headset mode (Bluetooth calls):**
 
 | Action. | Function |
@@ -334,10 +330,6 @@ Badges in order of table from the manual:
 
 With these keys, you can enter information or select the settings on the radio.  
 In Transfer Mode (TX), press the digital keys to send the corresponding DTMF code.
-
-```
-
-```
 
 Press.to activate the tone dial function (DTMF).  
 Press and holdMore than 2 seconds allows you to lock or unlock the keyboard.
@@ -360,11 +352,11 @@ Two modes:**VFO (frequency)**- for experimentation and rapid programming in the 
 
 * **Channel mode:**Select a channel, hold [PTT] and speak (red indicator). Reception - automatically when releasing PTT (green indicator).
 * **Frequency mode:**Press [V/M], enter frequency (within range), hold [PTT].
-* Keep the microphone at a distance of 2.5-5 cm from the mouth.
+* Keep the microphone 2.5-5 cm away from your mouth.
 
 ### 5.5 Frequency mode (VFO)
 
-Moving the frequency with the keys ках/ках (with the step specified in the settings) or direct frequency input from the digital keyboard with an accuracy of kilohertz.
+Moving in frequency with keys ках / ках (with a step specified in the settings) or direct frequency input from the digital keyboard with an accuracy of kilohertz.
 
 Example: 432,56250 MHz input on display A:
 1. In standby mode, switch to frequency mode (VFO).
@@ -374,7 +366,7 @@ Example: 432,56250 MHz input on display A:
 
 ### Channel mode (MR)
 
-Depends on the programmed channels. Navigation - keys / or encoder. In MR mode, the channel number CH-XXX is displayed.
+It depends on the programmed channels. Navigation - keys / or encoder. In MR mode, the channel number CH-XXX is displayed.
 
 ---
 
@@ -451,7 +443,7 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 
 ### 6.10 Audio function (music via radio)
 
-1. Turn on Bluetooth, plug in your phone.
+1. Turn on Bluetooth, plug in the phone.
 2. keyboard**1**- previous track;**3**- next track;**2**Long / short press - pause / playback.
 
 ### 6.11 OD PTT (Odmaster PTT)
@@ -466,23 +458,9 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 
 **Step-by-step illustrations of OD PTT setup and operation (pages from the manual):**
 
-
-
-
-
-
-
-
 ### 6.12 Bluetooth programming
 
 (Section with step-by-step illustrations; see the original manual - programming walkie-talkie via Bluetooth connection to the software.) Connect the radio over Bluetooth and use programming software.
-
-
-
-
-
-
-
 
 ---
 
@@ -522,7 +500,7 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 | 8 | Power Save | Energy saving: Off, 1:1 / 1:2 / 1:3 / 1:4 (work: sleep). |
 | 9 | Keypad Lock | Automatic keyboard locking |
 | 10 | Dual Watch | Listen to both channels (TDR) A and B |
-| 11 | Voice | Voice confirmation of teams |
+| 11 | Voice | Voice confirmation of commands |
 | 12 | Backlight | Timeout duration of screen illumination |
 | 13 | Brightness | Screen brightness (Recommended setting: 5, with other values when transmitting and the screen on, a squeak is transmitted to the air) |
 | 14 | Pwr On Disp | Welcome screen when enabled (Voltage/Message/Picture) |
@@ -545,7 +523,7 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 | 31 | Top S Press | Short press of the top button: similar to paragraph 27. |
 | 32 | Top L Press | Long press of the top button: similar to paragraph 28. |
 | 33 | Factory R | Reset: VFO (frequency settings only), CHL (channels only), FULL (all). |
-| 34 | Breath Led. | The frequency of LED flashing in standby mode. |
+| 34 | Breath Led. | Frequency of LED flashing in standby mode. |
 | 35 | MIC GAIN | Microphone amplification: 0-9. |
 | 36 | DTMF Speed | DTMF speed (default 110 ms). |
 | 37 | DCD | OFF: DTMF off. ON: Enable DTMF call/group call. |
@@ -628,10 +606,6 @@ Assign the TONE function to [PF1]/[PF2] in advance and select the tone frequency
 A radio station can hold only one bluetooth connection. To interact with a smartphone or PC, you need to select BT Mode: Receiver mode. To connect the headset - BT Mode - Emitter.
 
 When working with[**TID-MIC**](https://tidradio.com/products/tidradio-handheld-wireless-microphone-with-bluetooth)There is a significant delay in order.*1~2. 5*seconds when pressing the tangent on the transmission and about*1~1. 5*seconds at the signal. When pressing the tangent, the audio bluetooth channel opens first, only after that the radio frequency path for transmission opens and the red indicator lights up. That should be taken into account.
-
-```
-
-```
 
 When working with[**TID-PTT**](https://tidradio.com/products/tidradio-wireless-ptt-button)slack**TID-MIC**form*0.2~1*Seconds, so the radio opens faster. When connecting TID-PTT to a smartphone**ODmaster**works with the device**TID-PTTxxxxxx-A**(speed)*38400*baud), when pairing through the Bluetooth menu of the android, it is not recommended to mate with this device -**ODMaster**Maybe you can't see him. Instead, there is a device. **TID-PTTxxxxxxx-B**.
 
@@ -740,7 +714,7 @@ If the radio station is stationary, you can turn off GPS and the station will se
 | 4 | **MIC-E** | Beacons are compressed and transmitted in MIC-E format - shorter airtime, fewer collisions, higher probability of successful decoding. |
 | 5 | **PTT Delay** | Customizable delay between pressing PTT and starting transmission (useful with a slow noise suppressor of a remote station). |
 | 6 | **APRS Digital Relay** | Two repeater names: by default WIDE1 and WIDE2 (up to 6 characters, numbers or capital letters). Rule: when receiving a valid beacon containing the repeater name and the transition counter > 1, the radio sends the packet once, reducing the counter by 1. With the counter 0, the packet is not sent. Each transition is a complete cycle of reception → decode → recoding → transfer. The counter limits infinite propagation.[Details...](http://wa8lmf.net/DigiPaths/) |
-| 7 | **Deleted password** | By default.**123456**(6 digits). |
+| 7 | **Deleted password** | By default.**123456**6 digits. |
 | 8 | **Fixed station** | With the Fix Coordinates type, given coordinates are used to calculate the distance/pelling. |
 | 9 | **Maps/track viewing** | ... |
 | . | Odmaster: | - https://web.odmaster.net/login. |
@@ -853,7 +827,7 @@ The radio station allows you to view the radio frequency spectrum.
 | Retention 7 | Entry into spectrum analyzer mode |
 | Menou | Entrance to the text menu of spectrometer settings |
 | BACK/EXIT | Quick exit from spectrum analyzer mode |
-| PF1 | Exclusion of frequency from scanning (Perhaps you need to reset to spectrum mode, or reset peak values)**0**) |
+| PF1 | Remove frequency from scanning (Perhaps you need to reset to spectrum mode, or reset peak values)**0**) |
 | PF2 | Including frequency in the scan |
 | # | Automatic transition of the cursor to the peak of the strongest signal |
 | 2/8 (retention) | Change of the RSSI threshold (Threshold) |
@@ -861,10 +835,6 @@ The radio station allows you to view the radio frequency spectrum.
 | \* | On/off cursor |
 | PTT | Monitor Mode (MONI) – Instant opening of the noise suppressor to listen to the frequency under the cursor |
 | 0-9 | Manual central frequency input |
-
-```
-
-```
 
 **menu**:
 
@@ -886,7 +856,7 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | 1 | Morse On/Off | Morse regimen |
 | 2 | Key TXX | Manual transmission mode |
 | 3 | Edit TX | Entering the transmission text with sending |
-| 4 | RX Code | Morse code acceptance mode |
+| 4 | RX Code | Morse code reception mode |
 | 5 | TXX Speed | Transmission speed for automatic 5/8/12/18 mode |
 | 6 | RX Threshold | RSSI threshold (minimum signal strength in decibels (dBm)) |
 
@@ -899,7 +869,7 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | Problem. | Analysis | Decision |
 | --- | --- | --- |
 | Not included. | Incorrectly installed battery / discharged / poor contact | Reinstall battery; charge or replace; clean contacts |
-| Weak/intermittent voice when taken | Low volume / antenna weakened or installed incorrectly / clogged speaker | Increase volume; turn off and reinstall the antenna; clean the speaker |
+| Weak/intermittent voice when receiving | Low volume / antenna weakened or installed incorrectly / clogged speaker | Increase volume; turn off and reinstall the antenna; clean the speaker |
 | No connection to the group. | Frequency or signals do not match / too far | Check frequencies and signals; get closer |
 | Other voices/noise heard | Interference on frequency / in analog mode no alarm | Change the frequency or raise the noise suppressor; adjust the alarm |
 | No one heard (noise) | Large obstacles / open terrain / electromagnetic interference | Go to an open flat area, restart the radio; move away from sources of interference |
@@ -909,9 +879,9 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 
 | Parameter | Meaning. |
 | --- | --- |
-| Frequency Range (Amateur, RX & TX) | 136–173.99 and 400–519.99 MHz (TX/RX also 174–245, 240–260, 290–350, 350–400, 470–520, 520–600 MHz; RX 50–76, 65–108 (FM radio), 108–136 (AM/FM air), 220–260, 350–390 MHz |
+| Frequency range (Amateur, RX & TX) | 136–173.99 and 400–519.99 MHz (TX/RX also 174–245, 240–260, 290–350, 350–400, 470–520, 520–600 MHz; RX 50–76, 65–108 (FM radio), 108–136 (AM/FM air), 220–260, 350–390 MHz |
 | Memory channels | 199 |
-| RF power output | up to 10 W (3 levels: high, medium, low) |
+| RF power output | up to 10 watts (3 levels: high, medium, low) |
 | Working voltage | DC 7.4 V ±10 per cent |
 | Battery capacity | 2400 mAh (Li-Ion) |
 | Frequency stability | ± 2.5 ppm |
@@ -936,7 +906,7 @@ The radio can transmit and receive Morse code. Adjustable TX speed, RX threshold
 | Parasite radiation | ≤ -57 dB @ 12.5 kHz |
 | Sound output | 1 Watt @ 16 Ohm |
 | Reception current. | ≤ 380 mA |
-| Sound distortion | ≤ 5% |
+| Sound distortions | ≤ 5% |
 | Dimensions (without antenna) | 140 x 53 x 32 mm |
 | Weight. | 190 |
 
