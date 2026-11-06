@@ -1,12 +1,14 @@
 # Tidradio TD-H9 Documentation, Specification, Manual, Disasm, APRS
 
 ## Resources (Основные ресурсы)
+
 |...|...|
 |---|---|
 | **Repositiry** (Репозиторий) | [dkxce/Tidradio-TD-H9](https://github.com/dkxce/Tidradio-TD-H9) |
 | **Media** (Изображения) | [Tidradio TD-H9 Images](radio_images.md) |
 
 ### Manuals (Инструкции)
+
 | Manual (Инструкция) | Localization (Язык) | Format (Формат) | Link (Ссылка) | Description (Описание) |
 |---|---|---|---|---|
 | Original | EN | PDF | [Original Manuals](Original%20Manuals) | *origin vendor manual* |
@@ -17,6 +19,7 @@
 | Описание формата .td | RU | .md | [Disasm](Customer%20Programming%20Software/Disasm)  | *source* |
 
 ## Channel Software (Настройка каналов)
+
 |...|...|...|
 |---|---|---|
 | **CPS** (PC Channels Software) | [CPS](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Customer%20Programming%20Software) | Customer Programming Software |
@@ -25,10 +28,17 @@
 | **CSV Editor** (Online Software) | [CSV Editor](https://dkxce.github.io/Tidradio-TD-H9/Customer%20Programming%20Software/Disasm/universal-radio-editor.html) | (Универсальный редактор каналов) | 
 
 ## APRS Software (ПО APRS)
+
 |...|...|...|...|
 |---|---|---|---|
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
 | **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
+
+## Other Software
+
+|...|...|...|
+|---|---|---|
+| **TD-H9 Sound Router** (Bluetooth audio bridge) | [dkxce/tdh9ptt](https://github.com/dkxce/tdh9ptt)  | [Releases](https://github.com/dkxce/tdh9ptt/releases) | 
 
 #### Real data from TNC Software
 <img src="pdf_images/tnc.jpg" width="400"/>     
