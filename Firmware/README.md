@@ -6,3 +6,6 @@
 
 ### Firmware Soft
 1. [Online H9 Flasher](https://www.raw.gr/utils/H9test/H9-flasher.html)
+
+### Unbrick
+1. [dkxce/tdh9unbrick](https://github.com/dkxce/tdh9unbrick)
