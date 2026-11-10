@@ -47,6 +47,7 @@
 |...|...|
 |---|---|
 | **Firmwares** (Прошивки) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) |
+| **Unbricker** (Раскирпичиватель) | [tdh9unbrick](https://github.com/dkxce/tdh9unbrick) |
 
 ### Alternative Resources
 |Resources (Ресурсы)|Link (Ссылка)|Author (Автор)|
