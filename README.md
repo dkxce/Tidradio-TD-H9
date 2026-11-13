@@ -34,6 +34,13 @@
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
 | **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate / Proxy / AIS |
 
+## Radio Widgets (Applications) Software
+
+|...|...|...|
+|---|---|---|
+| **Tidradio TD-H9 Custom Apps** (Radio Widgets) | [dkxce/tdh9apps](https://github.com/dkxce/tdh9apps)  | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
+| **H9 Toolbox** | [site](https://h9toolbox.com/)  | [github](https://github.com/melidosian/h9toolbox) | 
+
 ## Other Software
 
 |...|...|...|
