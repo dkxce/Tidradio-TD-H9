@@ -41,7 +41,15 @@
 | **Tidradio TD-H9 Custom Apps** (Radio Widgets) | [dkxce/tdh9apps](https://github.com/dkxce/tdh9apps)  | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
 | **H9 Toolbox** | [site](https://h9toolbox.com/)  | [github](https://github.com/melidosian/h9toolbox) | 
 
-## Other Software
+#### Widgets Screens
+
+<img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_fixed_lat.png"/> <img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_map.png"/> <img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_menu.png"/>       
+<img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_navto.png"/> <img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_point.png"/> <img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_points.png"/>       
+<img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_radar.png"/> <img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_settings.png"/> <img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/scripts/render_tracker_screens/screen_step_dist.png"/>  
+
+#### Widget Photos
+
+<img src="https://raw.githubusercontent.com/dkxce/tdh9apps/refs/heads/main/dkxcepics/realtimetracking.jpg" width="300"/>
 
 |...|...|...|
 |---|---|---|
