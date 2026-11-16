@@ -38,7 +38,7 @@
 
 |...|...|...|
 |---|---|---|
-| **Tidradio TD-H9 Custom Apps** (Radio Widgets) | [dkxce/tdh9apps](https://github.com/dkxce/tdh9apps)  | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
+| **Tidradio TD-H9 Custom Apps** (Radio Widgets) | [dkxce/tdh9apps]([https://github.com/dkxce/tdh9apps](https://github.com/dkxce/tdh9apps/blob/main/APPLICATIONS.md))  | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
 | **H9 Toolbox** | [site](https://h9toolbox.com/)  | [github](https://github.com/melidosian/h9toolbox) | 
 
 #### Widgets Screens
