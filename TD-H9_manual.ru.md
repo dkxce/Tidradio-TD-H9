@@ -129,7 +129,7 @@
 - Антенный разъём на рации SMA-Male, на антенне SMA-Female.
 - Поддержка приёма NOAA-погоды (США и Канада).
 - GPS, Bluetooth (настройка через Odmaster, гарнитуры), APRS.
-- CPU 240 МГц, RAM 120 МБ, flash 16 МБ, радичип Beken BK4819, МК PY32F003.
+- MAIN CPU 240 МГц JieLi AC695X, flash 16 МБ, радиочип Beken BK4819, CPU PY32F003.
 - Габариты: 140×53×32 мм, вес 190 г.
 
 ### 1.3 Обслуживание (кратко)
@@ -935,13 +935,15 @@ https://aprs.fi/
 | Импеданс антенны | 50 Ом |
 | Антенный разъём | На рации SMA-Male, на антенне SMA-Female |
 | Разъём гарнитуры | K-Plug (Kenwood 2-pin) |
-| Дисплей | 1,77" цветной ЖК, 3 режима отображения, 18 цветов меню |
+| Дисплей | 1,77" цветной ЖК, 3 режима отображения, 18 цветов меню, 160 × 128 16bit RGB565 |
 | GPS | Встроенный GPS/GNSS |
 | Bluetooth | Встроенный (для настройки через Odmaster, гарнитуры) |
 | APRS | Встроенная поддержка (KISS TNC, DIGI, MIC-E) |
 | Спектроанализатор | Встроенный |
-| CPU / RAM / Flash | 240 МГц / 120 МБ / 16 МБ |
-| Радиочип / МК | Beken BK4819 / PY32F003 |
+| CPU (Primary) | JieLi AC695X 240 МГц (pi32v2)  |
+| CPU (Secondary) | МК PY32F003 32 МГц |
+| Radio Chip / МК | Beken BK4819 |
+| Flash | GigaDevice 25Q128ESIG (SPI NOR) 16 МБ |
 | Модуляция FM | [11K0F3E](Docs/emission-types-radionerds-ru.md) @ 12,5 кГц (Narrow band) / [16K0F3E](Docs/emission-types-radionerds-ru.md) @ 25 кГц (Wide band) |
 | Мощность соседнего канала | 60 дБ @ 12,5 кГц |
 | Ток передачи | ≤ 1500 мА |
