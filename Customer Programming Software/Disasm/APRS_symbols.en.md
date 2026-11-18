@@ -1,4 +1,4 @@
-# APRS icon table (symbols)
+# Table of APRS icons (symbols)
 
 <img src="aprs_icons/all.png"/>
 
@@ -35,7 +35,7 @@
 | 24 | `/9` | 25 | 9 Circle | <img src="aprs_icons/primary_024.png"/> |
 | 25 | `/:` | 26 | Fire. | <img src="aprs_icons/primary_025.png"/> |
 | 26 | `/;` | 27 | Campground (Portable ops) | <img src="aprs_icons/primary_026.png"/> |
-| 27 | `/<` | 28 | Motorcycle | <img src="aprs_icons/primary_027.png"/> |
+| 27 | `/<` | 28 | motorcycle | <img src="aprs_icons/primary_027.png"/> |
 | 28 | `/=` | 29 | Railroad Engine | <img src="aprs_icons/primary_028.png"/> |
 | 29 | `/>` | 30 | Car | <img src="aprs_icons/primary_029.png"/> |
 | 30 | `/?` | 31 | File Server | <img src="aprs_icons/primary_030.png"/> |
@@ -111,7 +111,7 @@
 | 1 | `\"` | 02 |  | <img src="aprs_icons/secondary_001.png"/> |
 | 2 | `\ #` | 03 | Digi (green star) | <img src="aprs_icons/secondary_002.png"/> |
 | 3 | `\$` | 04 | Bank or ATM (green box) | <img src="aprs_icons/secondary_003.png"/> |
-| 4 | `\%` | 05 | Power Plant. | <img src="aprs_icons/secondary_004.png"/> |
+| 4 | `\%` | 05 | Power Plant | <img src="aprs_icons/secondary_004.png"/> |
 | 5 | `\ &` | 06 | I=IGate R=RX T=1hopTX 2=2hopTX | <img src="aprs_icons/secondary_005.png"/> |
 | 6 | `\’` | 07 | Crash (& incident sites) | <img src="aprs_icons/secondary_006.png"/> |
 | 7 | `\(` | 08 | cloudy | <img src="aprs_icons/secondary_007.png"/> |
@@ -143,7 +143,7 @@
 | 33 | `\B` | 34 | Blowing Snow | <img src="aprs_icons/secondary_033.png"/> |
 | 34 | `\C` | 35 | Coast Guard | <img src="aprs_icons/secondary_034.png"/> |
 | 35 | `\D` | 36 | Drizzle | <img src="aprs_icons/secondary_035.png"/> |
-| 36 | `\E` | 37 | Smoke (and other vis codes) | <img src="aprs_icons/secondary_036.png"/> |
+| 36 | `\E` | 37 | Smoke (& other vis codes) | <img src="aprs_icons/secondary_036.png"/> |
 | 37 | `\F` | 38 | Freezing Rain | <img src="aprs_icons/secondary_037.png"/> |
 | 38 | `\G` | 39 | Snow Shower | <img src="aprs_icons/secondary_038.png"/> |
 | 39 | `\H` | 40 | Haze | <img src="aprs_icons/secondary_039.png"/> |
@@ -177,7 +177,7 @@
 | 67 | `\d` | 68 | DX Spot (from callsign prefix) | <img src="aprs_icons/secondary_067.png"/> |
 | 68 | `\e` | 69 | Sleet | <img src="aprs_icons/secondary_068.png"/> |
 | 69 | `\f` | 70 | Funnel Cloud | <img src="aprs_icons/secondary_069.png"/> |
-| 70 | `\g` | 71 | Gale Flags. | <img src="aprs_icons/secondary_070.png"/> |
+| 70 | `\g` | 71 | Gale Flags | <img src="aprs_icons/secondary_070.png"/> |
 | 71 | `\h` | 72 | Store or Hamfest | <img src="aprs_icons/secondary_071.png"/> |
 | 72 | `\ i` | 73 | Box or Points of Interest | <img src="aprs_icons/secondary_072.png"/> |
 | 73 | `\j` | 74 | Work Zone (steam shovel) | <img src="aprs_icons/secondary_073.png"/> |
