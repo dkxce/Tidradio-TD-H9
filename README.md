@@ -34,15 +34,21 @@
 | **TDH9KISS** (PC TNC Software) | [dkxce/tdh9desktop](https://github.com/dkxce/tdh9desktop) | [Releases](https://github.com/dkxce/tdh9desktop/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate |
 | **TDH9RadioBridge** (Android TNC Software) | [dkxce/tdh9android](https://github.com/dkxce/tdh9android) | [Releases](https://github.com/dkxce/tdh9android/releases) | Binary KISS / AGW(PE) / APRS-IS / IGate / Proxy / AIS |
 
-## Radio Widgets (Applications) Software
+## Radio Applications (Widgets) Software
 
 |...|...|...|
 |---|---|---|
 | **Tidradio TD-H9 Custom Apps** (Radio Widgets) | [dkxce/tdh9apps](https://github.com/dkxce/tdh9apps/blob/main/APPLICATIONS.md)  | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
-| **Tidradio TD-H9 Games** (Radio Widgets) | [dkxce/tdh9apps](https://github.com/dkxce/tdh9apps/blob/main/GAMES.md) | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
 | **H9 Toolbox** | [site](https://h9toolbox.com/)  | [github](https://github.com/melidosian/h9toolbox) | 
 
-#### Widgets Screens
+## Radio Games (Widgets) Software
+
+|...|...|...|
+|---|---|---|
+| **Tidradio TD-H9 Games** (Radio Widgets) | [dkxce/tdh9apps](https://github.com/dkxce/tdh9apps/blob/main/GAMES.md) | [Releases](https://github.com/dkxce/tdh9apps/releases) | 
+| **H9 Toolbox** | [site](https://h9toolbox.com/)  | [github](https://github.com/melidosian/h9toolbox) |  
+
+#### Applications and Games Screens
 
 <img src="https://github.com/dkxce/tdh9apps/blob/main/scripts/render_lock_screens/screen_radio_lock_locked.png"/> <img src="https://github.com/dkxce/tdh9apps/blob/main/scripts/render_lock_screens/screen_radio_lock_menu.png"/> <img src="https://github.com/dkxce/tdh9apps/raw/main/scripts/render_lock_screens/screen_new_passw.png"/>     
 <img src="https://github.com/dkxce/tdh9apps/blob/main/scripts/render_tracksvr_screens/screen_menu.png"/> <img src="https://github.com/dkxce/tdh9apps/raw/main/scripts/render_tracksvr_screens/screen_point.png"/> <img src="https://github.com/dkxce/tdh9apps/raw/main/scripts/render_tracksvr_screens/screen_points.png"/>    
