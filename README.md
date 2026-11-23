@@ -80,6 +80,7 @@
 |...|...|
 |---|---|
 | **Firmwares** (Прошивки) | [Firmware](https://github.com/dkxce/Tidradio-TD-H9/tree/main/Firmware) |
+| **Кастомные от dkxce** | [tdh9apps](https://github.com/dkxce/tdh9apps/tree/main/custom_firmware) |
 | **Unbricker** (Раскирпичиватель) | [tdh9unbrick](https://github.com/dkxce/tdh9unbrick) |
 
 ### Alternative Resources
