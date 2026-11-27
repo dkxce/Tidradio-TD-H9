@@ -647,7 +647,7 @@ When working with[**TID-PTT**](https://tidradio.com/products/tidradio-wireless-p
 
 ![QL2](pdf_images/QL2.png)
 
-When working with[**QL-2**](https://tidradio.com/products/td-q2l-bluetooth-noise-cancelling-magnetic-mic-for-td-h3-plus-td-h9)...
+When working with[**QL-2**](https://tidradio.com/products/td-q2l-bluetooth-noise-cancelling-magnetic-mic-for-td-h3-plus-td-h9)slack is also significantly lower than with**TID-MIC**form*0.2~1*Seconds, it's much more comfortable to work. The sound is transmitted well in both directions. The headset is small, compact and light, the buttons are quite rigid by chance you can not press, the fixation of the mount is good. The only drawback - with a locked keyboard, you can change channels from the tangent.
 
 ### 7.37 Firmware update
 
